@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="size" label="Size" description="The size of the progress bar. Valid values are x-small, small, medium, and large. The default value is medium." type="String" role="inputOnly"/>
+            <property name="value" label="Value" description="The percentage value of the progress bar." type="String" role="inputOnly"/>
+            <property name="variant" label="Variant" description="The variant changes the appearance of the progress bar. Accepted variants include base or circular. This value defaults to base." type="String" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

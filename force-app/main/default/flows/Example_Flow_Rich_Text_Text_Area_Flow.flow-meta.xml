@@ -3,7 +3,7 @@
     <apiVersion>52.0</apiVersion>
     <description>This is an example flow that demonstrates some basic configuration options for your rich text and text area custom components.</description>
     <interviewLabel>Example Flow Rich Text / Text Area Flow {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Example Flow Rich Text / Text Area Flow</label>
+    <label>Example Flow Component Hyphen8</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

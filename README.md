@@ -19,7 +19,7 @@ This package comes with an example inactive flow associated with it, this flow i
 - Extended to provide the ability to display a Character count and a character count error message
 
 ### input parameters
-- Value - The HTML content in the rich text editor
+- Value - The HTML content in the rich text editorgi
 - Label - The label of the rich text editor
 - Help Text - The help text that appears in a popover
 - Required - If present, the textarea field must be filled out before the form can be submitted

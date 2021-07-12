@@ -1,5 +1,5 @@
 {
-  "serverMaxRevisionCounter": 3154,
+  "serverMaxRevisionCounter": 3573,
   "sourceMembers": {
     "LightningComponentBundle__flowLWCTextArea": {
       "serverRevisionCounter": 1390,
@@ -56,26 +56,26 @@
       "isNameObsolete": false
     },
     "LightningComponentBundle__customRichTextComponent": {
-      "serverRevisionCounter": 2520,
-      "lastRetrievedFromServer": 2520,
+      "serverRevisionCounter": 3219,
+      "lastRetrievedFromServer": 3219,
       "memberType": "LightningComponentBundle",
       "isNameObsolete": false
     },
     "LightningComponentResource__customRichTextComponent/customRichTextComponent.html": {
-      "serverRevisionCounter": 2521,
-      "lastRetrievedFromServer": 2521,
+      "serverRevisionCounter": 3220,
+      "lastRetrievedFromServer": 3220,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     },
     "LightningComponentResource__customRichTextComponent/customRichTextComponent.js": {
-      "serverRevisionCounter": 2522,
-      "lastRetrievedFromServer": 2522,
+      "serverRevisionCounter": 3221,
+      "lastRetrievedFromServer": 3221,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     },
     "LightningComponentResource__customRichTextComponent/customRichTextComponent.js-meta.xml": {
-      "serverRevisionCounter": 2523,
-      "lastRetrievedFromServer": 2523,
+      "serverRevisionCounter": 3222,
+      "lastRetrievedFromServer": 3222,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     },
@@ -98,33 +98,57 @@
       "isNameObsolete": false
     },
     "LightningComponentBundle__customTextAreaComponent": {
-      "serverRevisionCounter": 2418,
-      "lastRetrievedFromServer": 2418,
+      "serverRevisionCounter": 3211,
+      "lastRetrievedFromServer": 3211,
       "memberType": "LightningComponentBundle",
       "isNameObsolete": false
     },
     "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js-meta.xml": {
-      "serverRevisionCounter": 2419,
-      "lastRetrievedFromServer": 2419,
+      "serverRevisionCounter": 3212,
+      "lastRetrievedFromServer": 3212,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     },
     "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js": {
-      "serverRevisionCounter": 2420,
-      "lastRetrievedFromServer": 2420,
+      "serverRevisionCounter": 3213,
+      "lastRetrievedFromServer": 3213,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     },
     "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.html": {
-      "serverRevisionCounter": 2421,
-      "lastRetrievedFromServer": 2421,
+      "serverRevisionCounter": 3214,
+      "lastRetrievedFromServer": 3214,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     },
     "Flow__Example_Flow_Rich_Text_Text_Area_Flow": {
-      "serverRevisionCounter": 3154,
-      "lastRetrievedFromServer": 3154,
+      "serverRevisionCounter": 3569,
+      "lastRetrievedFromServer": 3569,
       "memberType": "Flow",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customProgressBar": {
+      "serverRevisionCounter": 3570,
+      "lastRetrievedFromServer": 3570,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.html": {
+      "serverRevisionCounter": 3571,
+      "lastRetrievedFromServer": 3571,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.js-meta.xml": {
+      "serverRevisionCounter": 3572,
+      "lastRetrievedFromServer": 3572,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.js": {
+      "serverRevisionCounter": 3573,
+      "lastRetrievedFromServer": 3573,
+      "memberType": "LightningComponentResource",
       "isNameObsolete": false
     }
   }
