@@ -1,0 +1,13 @@
+{
+  "orgName": "Hyphen8 Labs",
+  "edition": "Enterprise",
+  "features": [],
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<!--
+  @description       : 
+  @author            : daniel@hyphen8.com
+  @last modified on  : 12/07/2021
+  @last modified by  : daniel@hyphen8.com
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   06/07/2021   daniel@hyphen8.com   Initial Version
+-->
+<template>
+
+    
+    <lightning-input-rich-text
+        class="customRichText"
+        disabled={disabled}
+        label={label}
+        label-visible={labelVisible}
+        placeholder={placeholder}
+        read-only={readOnly}
+        required={required}
+        formats={customFormats}
+        field-level-help={fieldLevelHelp}
+        message-when-bad-input={errorMessage}
+        value={value}
+        valid={valid}
+        onfocus={handleChangeValidation}
+        onblur={handleChangeValidation}
+        oninput={handleChangeValidation}
+        onkeyup={handleChangeValidation}
+        onchange={handleChangeValidation}>
+    </lightning-input-rich-text>
+
+    <template if:true={displayCharacterCount}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-1">
+                <span class="slds-float_left"><lightning-formatted-text value={labels.characterLabelText}></lightning-formatted-text> {currentCharacterCount} / {maxCharacterCount}</span>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={displayWordCount}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-1">
+                <span class="slds-float_left"><lightning-formatted-text value={labels.wordCountLabelText}></lightning-formatted-text> {currentWordCount} / {maxWordCount}</span>
+            </div>
+        </div>
+    </template> 
+    
+</template>

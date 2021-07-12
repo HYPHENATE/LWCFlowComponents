@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CharacterCountText</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CharacterCountText</shortDescription>
+        <value>Character Count:</value>
+    </labels>
+    <labels>
+        <fullName>WordCountText</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>WordCountText</shortDescription>
+        <value>Word Count:</value>
+    </labels>
+</CustomLabels>

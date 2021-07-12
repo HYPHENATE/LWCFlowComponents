@@ -1,0 +1,131 @@
+{
+  "serverMaxRevisionCounter": 3154,
+  "sourceMembers": {
+    "LightningComponentBundle__flowLWCTextArea": {
+      "serverRevisionCounter": 1390,
+      "lastRetrievedFromServer": 1390,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": true
+    },
+    "LightningComponentResource__flowLWCTextArea/flowLWCTextArea.js": {
+      "serverRevisionCounter": 368,
+      "lastRetrievedFromServer": 368,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__flowLWCTextArea/flowLWCTextArea.html": {
+      "serverRevisionCounter": 369,
+      "lastRetrievedFromServer": 369,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__flowLWCTextArea/flowLWCTextArea.js-meta.xml": {
+      "serverRevisionCounter": 370,
+      "lastRetrievedFromServer": 370,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "Flow__DEMO_TEXT_AREA_FLOW": {
+      "serverRevisionCounter": 1392,
+      "lastRetrievedFromServer": 1392,
+      "memberType": "Flow",
+      "isNameObsolete": true
+    },
+    "LightningComponentBundle__dynamicInputElement": {
+      "serverRevisionCounter": 1391,
+      "lastRetrievedFromServer": 1391,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": true
+    },
+    "LightningComponentResource__dynamicInputElement/dynamicInputElement.js-meta.xml": {
+      "serverRevisionCounter": 560,
+      "lastRetrievedFromServer": 560,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__dynamicInputElement/dynamicInputElement.html": {
+      "serverRevisionCounter": 561,
+      "lastRetrievedFromServer": 561,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__dynamicInputElement/dynamicInputElement.js": {
+      "serverRevisionCounter": 562,
+      "lastRetrievedFromServer": 562,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customRichTextComponent": {
+      "serverRevisionCounter": 2520,
+      "lastRetrievedFromServer": 2520,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.html": {
+      "serverRevisionCounter": 2521,
+      "lastRetrievedFromServer": 2521,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.js": {
+      "serverRevisionCounter": 2522,
+      "lastRetrievedFromServer": 2522,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.js-meta.xml": {
+      "serverRevisionCounter": 2523,
+      "lastRetrievedFromServer": 2523,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "CustomLabel__CharacterCountText": {
+      "serverRevisionCounter": 1104,
+      "lastRetrievedFromServer": 1104,
+      "memberType": "CustomLabel",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/labels.js": {
+      "serverRevisionCounter": 1286,
+      "lastRetrievedFromServer": 1286,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "CustomLabel__WordCountText": {
+      "serverRevisionCounter": 1284,
+      "lastRetrievedFromServer": 1284,
+      "memberType": "CustomLabel",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customTextAreaComponent": {
+      "serverRevisionCounter": 2418,
+      "lastRetrievedFromServer": 2418,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js-meta.xml": {
+      "serverRevisionCounter": 2419,
+      "lastRetrievedFromServer": 2419,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js": {
+      "serverRevisionCounter": 2420,
+      "lastRetrievedFromServer": 2420,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.html": {
+      "serverRevisionCounter": 2421,
+      "lastRetrievedFromServer": 2421,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "Flow__Example_Flow_Rich_Text_Text_Area_Flow": {
+      "serverRevisionCounter": 3154,
+      "lastRetrievedFromServer": 3154,
+      "memberType": "Flow",
+      "isNameObsolete": false
+    }
+  }
+}

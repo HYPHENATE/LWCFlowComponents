@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="value" label="Value" description="The content in the text area." type="String"/>
+            <property name="label" label="Label" description="The label of the Text Area." type="String" role="inputOnly"/>
+            <property name="fieldLevelHelp" label="Help Text" description="The help text that appears in a popover." type="String" role="inputOnly"/>
+            <property name="required" label="Required" description="If present, the textarea field must be filled out before the form can be submitted." type="String" role="inputOnly"/>
+            <property name="readOnly" label="Read Only" description="If present, the textarea field is read-only and cannot be edited." type="String" role="inputOnly"/>
+            <property name="disabled" label="Disabled" description="If present, the textarea field is disabled and users cannot interact with it." type="String" role="inputOnly"/>
+            <property name="variant" label="Variant" description="The variant changes the appearance of the textarea. Accepted variants include standard, label-hidden, label-inline, and label-stacked. This value defaults to standard. Use label-hidden to hide the label but make it available to assistive technology. Use label-inline to horizontally align the label and textarea. Use label-stacked to place the label above the textarea." type="String" role="inputOnly"/>
+            <property name="placeholder" label="Placeholder" description="Text that is displayed when the field is empty, to prompt the user for a valid entry." type="String" role="inputOnly"/>
+            <property name="maxCharacterCount" label="Max Character Count" description="Maximum number of characters allowed" type="String" role="inputOnly"/>
+            <property name="maxCharacterCountMessage" label="Max Character Count Message" description="Maximum number of characters allowed error message" type="String" role="inputOnly"/>
+            <property name="maxWordCount" label="Max Word Count" description="Maximum number of words allowed" type="String" role="inputOnly"/>
+            <property name="maxWordCountMessage" label="Max Word Count Message" description="Maximum number of words allowed error message" type="String" role="inputOnly"/>
+            <property name="displayCharacterCount" label="Display Character Count" description="Confirm that you want to apply and display the character count on page" type="Boolean" role="inputOnly"/>
+            <property name="displayWordCount" label="Display Word Count" description="Confirm that you want to apply and display the word count on page" type="Boolean" role="inputOnly"/>
+            <property name="requireFieldMessage" label="Required field message" description="Provide a message when a field is required but not completed" type="String" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
