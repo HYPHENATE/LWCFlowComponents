@@ -5,8 +5,8 @@ This package comes with an example inactive flow associated with it, this flow i
 
 ## Installation
 
-- Production (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SalGAAS)
-- Sandbox (https://test.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SalGAAS)
+- Production (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SamOAAS)
+- Sandbox (https://test.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SamOAAS)
 
 ## Custom Labels
 - WordCountText - Used for outputting text at the beginning of the word counter
