@@ -5,8 +5,8 @@ This package comes with an example inactive flow associated with it, this flow i
 
 ## Installation
 
-- Production (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SalGAAS)
-- Sandbox (https://test.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SalGAAS)
+- Production (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SamOAAS )
+- Sandbox (https://test.salesforce.com/packaging/installPackage.apexp?p0=04t67000000SamOAAS )
 
 ## Custom Labels
 - WordCountText - Used for outputting text at the beginning of the word counter
@@ -65,6 +65,22 @@ This package comes with an example inactive flow associated with it, this flow i
 
 ### output parameters
 - Value - The content in the text area
+
+## customProgressBar
+- size - The size of the progress bar. Valid values are x-small, small, medium, and large. The default value is medium.
+- value - The percentage value of the progress bar.
+- variant - The variant changes the appearance of the progress bar. Accepted variants include base or circular. This value defaults to base.
+
+### output parameters
+none
+
+## customPrintButton
+- buttonLabel - Default label for button
+- buttonAssistiveText - Default assistive text for button
+- buttonFloat - Populate this with slds-float_left, slds-float_right or leave blank to position the button on screen.
+
+### output parameters
+none
 
 
 ## IMPORTNT

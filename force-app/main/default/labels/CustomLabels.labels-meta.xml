@@ -4,7 +4,7 @@
         <fullName>CharacterCountText</fullName>
         <categories>CustomFlowComponents</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>CharacterCountText</shortDescription>
         <value>Character Count:</value>
     </labels>
@@ -12,7 +12,7 @@
         <fullName>WordCountText</fullName>
         <categories>CustomFlowComponents</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>WordCountText</shortDescription>
         <value>Word Count:</value>
     </labels>

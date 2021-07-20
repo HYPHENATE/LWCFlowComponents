@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>assignCurrentProgressValue</name>
+        <label>assignCurrentProgressValue</label>
+        <locationX>613</locationX>
+        <locationY>189</locationY>
+        <assignmentItems>
+            <assignToReference>progressComplete</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>checkValues</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Example_Text_Area_Output_Screen</targetReference>
+        </connector>
+    </assignments>
     <description>This is an example flow that demonstrates some basic configuration options for your rich text and text area custom components.</description>
+    <formulas>
+        <name>checkValues</name>
+        <dataType>Number</dataType>
+        <expression>IF({!exampleRichTextCharacterCount} == null, 0, 25) +
+IF({!exampleTextAreaCharacterCount} == null, 0, 25) +
+IF({!exampleTextAreaWordCount} == null, 0, 25) +
+IF({!richTextWordCount} == null, 0, 25)</expression>
+        <scale>0</scale>
+    </formulas>
     <interviewLabel>Example Flow Rich Text / Text Area Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Example Flow Component Hyphen8</label>
     <processMetadataValues>
@@ -26,11 +51,57 @@
     <screens>
         <name>Example_Text_Area_Output_Screen</name>
         <label>Example Text Area Output Screen</label>
-        <locationX>685</locationX>
-        <locationY>68</locationY>
+        <locationX>769</locationX>
+        <locationY>70</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <fields>
+            <name>printcuttom</name>
+            <extensionName>c:customPrintButton</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>buttonAssistiveText</name>
+                <value>
+                    <stringValue>This is a print button</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>buttonFloat</name>
+                <value>
+                    <stringValue>slds-float_right</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>buttonLabel</name>
+                <value>
+                    <stringValue>Print</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>progressBarComplete</name>
+            <extensionName>c:customProgressBar</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>size</name>
+                <value>
+                    <stringValue>medium</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>progressComplete</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
         <fields>
             <name>TextAreaOutputCharacterCount</name>
             <extensionName>c:customTextAreaComponent</extensionName>
@@ -201,14 +272,40 @@
     <screens>
         <name>Text_Area_Example_Input_Screen</name>
         <label>Example Text Area Input Screen</label>
-        <locationX>491</locationX>
-        <locationY>68</locationY>
+        <locationX>479</locationX>
+        <locationY>72</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Example_Text_Area_Output_Screen</targetReference>
+            <targetReference>assignCurrentProgressValue</targetReference>
         </connector>
+        <fields>
+            <name>ExampleProgressBar</name>
+            <extensionName>c:customProgressBar</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>size</name>
+                <value>
+                    <stringValue>large</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>progressComplete</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>variant</name>
+                <value>
+                    <stringValue>circular</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
         <fields>
             <name>CustomTextAreaExampleInput</name>
             <extensionName>c:customTextAreaComponent</extensionName>
@@ -289,6 +386,12 @@
                 <name>variant</name>
                 <value>
                     <stringValue>label-stacked</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>wordCharacterCountFont</name>
+                <value>
+                    <stringValue>slds-text-body_regular</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -378,6 +481,12 @@
                 <name>variant</name>
                 <value>
                     <stringValue>label-stacked</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>wordCharacterCountFont</name>
+                <value>
+                    <stringValue>slds-text-body_small</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -475,6 +584,12 @@
                     <stringValue>font,size,bold,italic,underline,strike,list</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>wordCharacterCountFont</name>
+                <value>
+                    <stringValue>slds-text-heading_large</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -564,6 +679,12 @@
                     <elementReference>richTextWordCount</elementReference>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>wordCharacterCountFont</name>
+                <value>
+                    <stringValue>slds-text-heading_medium</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -602,6 +723,17 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>progressComplete</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
     </variables>
     <variables>
         <name>richTextWordCount</name>

@@ -30,9 +30,9 @@
   "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc": {
     "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc",
     "isDirectory": true,
-    "modifiedTime": 1626103346296,
-    "changeTime": 1626103346296,
-    "contentHash": "a38198316584dd39f42709d7a30c3c93d232434e",
+    "modifiedTime": 1626109194345,
+    "changeTime": 1626109194345,
+    "contentHash": "159d2324e68b67a2c0a46ad4967f86c06a01989e",
     "state": "u",
     "package": "force-app",
     "deferContentHash": true
@@ -215,5 +215,37 @@
     "package": "force-app",
     "metadataType": "LightningComponentBundle",
     "deferContentHash": true
+  },
+  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\preventNavigation": {
+    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\preventNavigation",
+    "isDirectory": true,
+    "modifiedTime": 1626109357775,
+    "changeTime": 1626109357775,
+    "contentHash": "96eb84f5890eb8ae880aaafb4f0bf22bf6b053b3",
+    "state": "u",
+    "package": "force-app",
+    "deferContentHash": true
+  },
+  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\preventNavigation\\preventNavigation.js": {
+    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\preventNavigation\\preventNavigation.js",
+    "size": 696,
+    "modifiedTime": 1626110635561,
+    "changeTime": 1626110635561,
+    "contentHash": "4bb22c08da2eb9d7a7712232883149233bf66740",
+    "state": "u",
+    "package": "force-app",
+    "metadataType": "LightningComponentBundle",
+    "deferContentHash": true
+  },
+  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\preventNavigation\\preventNavigation.js-meta.xml": {
+    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\preventNavigation\\preventNavigation.js-meta.xml",
+    "size": 283,
+    "modifiedTime": 1626109212471,
+    "changeTime": 1626109212471,
+    "contentHash": "84017bc1c9c8cc21ab707b8480a2f7f762979652",
+    "isMetadataFile": true,
+    "state": "u",
+    "package": "force-app",
+    "metadataType": "LightningComponentBundle"
   }
 }

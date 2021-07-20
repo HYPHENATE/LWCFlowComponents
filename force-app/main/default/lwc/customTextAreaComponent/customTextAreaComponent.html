@@ -1,7 +1,7 @@
 <!--
   @description       : custom text area component with word / character counter
   @author            : daniel@hyphen8.com
-  @last modified on  : 12/07/2021
+  @last modified on  : 19/07/2021
   @last modified by  : daniel@hyphen8.com
   Modifications Log 
   Ver   Date         Author               Modification
@@ -30,7 +30,7 @@
     <template if:true={displayCharacterCount}>
         <div class="slds-grid">
             <div class="slds-col slds-size_1-of-1">
-                <span class="slds-float_left"><lightning-formatted-text value={labels.characterLabelText}></lightning-formatted-text> {currentCharacterCount} / {maxCharacterCount}</span>
+                <span class="slds-float_left"><lightning-formatted-text class={wordCharacterCountFont} value={labels.characterLabelText}></lightning-formatted-text>&nbsp;&nbsp;<span class={wordCharacterCountFont}> {currentCharacterCount} / {maxCharacterCount}</span></span>
             </div>
         </div>
     </template>
@@ -38,7 +38,7 @@
     <template if:true={displayWordCount}>
         <div class="slds-grid">
             <div class="slds-col slds-size_1-of-1">
-                <span class="slds-float_left"><lightning-formatted-text value={labels.wordCountLabelText}></lightning-formatted-text> {currentWordCount} / {maxWordCount}</span>
+                <span class="slds-float_left"><lightning-formatted-text class={wordCharacterCountFont} value={labels.wordCountLabelText}></lightning-formatted-text>&nbsp;&nbsp;<span class={wordCharacterCountFont}></span>{currentWordCount} / {maxWordCount}</span></span>
             </div>
         </div>
     </template> 

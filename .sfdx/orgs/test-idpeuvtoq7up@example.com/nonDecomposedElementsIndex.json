@@ -1,0 +1,12 @@
+{
+  "CustomLabels__CharacterCountText": {
+    "fullName": "CharacterCountText",
+    "type": "CustomLabels",
+    "metadataFilePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml"
+  },
+  "CustomLabels__WordCountText": {
+    "fullName": "WordCountText",
+    "type": "CustomLabels",
+    "metadataFilePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml"
+  }
+}

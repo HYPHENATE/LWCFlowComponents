@@ -1,5 +1,5 @@
 {
-  "serverMaxRevisionCounter": 3573,
+  "serverMaxRevisionCounter": 3861,
   "sourceMembers": {
     "LightningComponentBundle__flowLWCTextArea": {
       "serverRevisionCounter": 1390,
@@ -122,8 +122,8 @@
       "isNameObsolete": false
     },
     "Flow__Example_Flow_Rich_Text_Text_Area_Flow": {
-      "serverRevisionCounter": 3569,
-      "lastRetrievedFromServer": 3569,
+      "serverRevisionCounter": 3861,
+      "lastRetrievedFromServer": 3861,
       "memberType": "Flow",
       "isNameObsolete": false
     },
@@ -148,6 +148,30 @@
     "LightningComponentResource__customProgressBar/customProgressBar.js": {
       "serverRevisionCounter": 3573,
       "lastRetrievedFromServer": 3573,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__preventNavigation": {
+      "serverRevisionCounter": 3749,
+      "lastRetrievedFromServer": 3749,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__preventNavigation/preventNavigation.html": {
+      "serverRevisionCounter": 3583,
+      "lastRetrievedFromServer": 3583,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__preventNavigation/preventNavigation.js-meta.xml": {
+      "serverRevisionCounter": 3750,
+      "lastRetrievedFromServer": 3750,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__preventNavigation/preventNavigation.js": {
+      "serverRevisionCounter": 3751,
+      "lastRetrievedFromServer": 3751,
       "memberType": "LightningComponentResource",
       "isNameObsolete": false
     }

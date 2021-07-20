@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>   
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="value" label="Value" type="String" description="Specifies the value of the selected radio button." />
+            <property name="label" label="Label" type="String" description="Text label for the radio group." role="inputOnly"/>
+            <property name="required" label="Required" type="String" description="If present, a radio button must be selected before the form can be submitted." role="inputOnly"/>
+            <property name="disabled" label="Disabled" type="String" description="If present, the radio group is disabled and users cannot interact with it." role="inputOnly"/>            
+            <property name="radioType" label="Type" type="String" description="The style of the radio group. Options are radio or button. The default is radio." role="inputOnly"/>
+            <property name="variant" label="Variant" type="String" description="The variant changes the appearance of the radio group.
+                                                                Accepted variants include standard, label-hidden, label-inline, and label-stacked.
+                                                                This value defaults to standard.
+                                                                Use label-hidden to hide the label but make it available to assistive technology.
+                                                                Use label-inline to horizontally align the label and radio group.
+                                                                Use label-stacked to place the label above the radio group." 
+            role="inputOnly"/>
+            <property name="objectAPIName" label="Object API Name"  type="String" description="SObject API Name that the field picklist is on" role="inputOnly" />
+            <property name="fieldAPIName" label="Field API Name"  type="String" description="The picklist field API Name" role="inputOnly" />
+            <property name="recordTypeDeveloperName" label="RecordType Developer Name"  type="String" description="If recordtypes are in use on this object please provide the developer Name to ensure the correct picklist values are returned" role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
+
+</LightningComponentBundle>

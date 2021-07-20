@@ -31,6 +31,7 @@ export default class CustomTextAreaComponent extends LightningElement {
     @api displayCharacterCount = false;
     @api displayWordCount = false;
     @api requireFieldMessage;
+    @api wordCharacterCountFont;
 
     labels = {
         characterLabelText,

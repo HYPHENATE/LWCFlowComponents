@@ -1,0 +1,143 @@
+{
+  "serverMaxRevisionCounter": 2154,
+  "sourceMembers": {
+    "LightningComponentBundle__customPrintButton": {
+      "serverRevisionCounter": 707,
+      "lastRetrievedFromServer": 707,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customProgressBar": {
+      "serverRevisionCounter": 7,
+      "lastRetrievedFromServer": 7,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customRichTextComponent": {
+      "serverRevisionCounter": 695,
+      "lastRetrievedFromServer": 695,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customTextAreaComponent": {
+      "serverRevisionCounter": 691,
+      "lastRetrievedFromServer": 691,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.js": {
+      "serverRevisionCounter": 696,
+      "lastRetrievedFromServer": 696,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.js-meta.xml": {
+      "serverRevisionCounter": 697,
+      "lastRetrievedFromServer": 697,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.html": {
+      "serverRevisionCounter": 698,
+      "lastRetrievedFromServer": 698,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customPrintButton/customPrintButton.js-meta.xml": {
+      "serverRevisionCounter": 710,
+      "lastRetrievedFromServer": 710,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customPrintButton/customPrintButton.html": {
+      "serverRevisionCounter": 708,
+      "lastRetrievedFromServer": 708,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customPrintButton/customPrintButton.js": {
+      "serverRevisionCounter": 709,
+      "lastRetrievedFromServer": 709,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.html": {
+      "serverRevisionCounter": 692,
+      "lastRetrievedFromServer": 692,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js-meta.xml": {
+      "serverRevisionCounter": 693,
+      "lastRetrievedFromServer": 693,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js": {
+      "serverRevisionCounter": 694,
+      "lastRetrievedFromServer": 694,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.html": {
+      "serverRevisionCounter": 8,
+      "lastRetrievedFromServer": 8,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.js-meta.xml": {
+      "serverRevisionCounter": 9,
+      "lastRetrievedFromServer": 9,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.js": {
+      "serverRevisionCounter": 10,
+      "lastRetrievedFromServer": 10,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "CustomLabel__CharacterCountText": {
+      "serverRevisionCounter": 689,
+      "lastRetrievedFromServer": 689,
+      "memberType": "CustomLabel",
+      "isNameObsolete": false
+    },
+    "CustomLabel__WordCountText": {
+      "serverRevisionCounter": 690,
+      "lastRetrievedFromServer": 690,
+      "memberType": "CustomLabel",
+      "isNameObsolete": false
+    },
+    "Flow__Example_Flow_Rich_Text_Text_Area_Flow": {
+      "serverRevisionCounter": 2154,
+      "lastRetrievedFromServer": 680,
+      "memberType": "Flow",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customRadioGroupComponent": {
+      "serverRevisionCounter": 1721,
+      "lastRetrievedFromServer": 1721,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRadioGroupComponent/customRadioGroupComponent.js-meta.xml": {
+      "serverRevisionCounter": 1722,
+      "lastRetrievedFromServer": 1722,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRadioGroupComponent/customRadioGroupComponent.html": {
+      "serverRevisionCounter": 1723,
+      "lastRetrievedFromServer": 1723,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRadioGroupComponent/customRadioGroupComponent.js": {
+      "serverRevisionCounter": 1724,
+      "lastRetrievedFromServer": 1724,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    }
+  }
+}

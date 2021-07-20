@@ -33,6 +33,7 @@ export default class CustomRichTextComponent extends LightningElement {
     @api displayCharacterCount = false;
     @api displayWordCount = false;
     @api requireFieldMessage;
+    @api wordCharacterCountFont;
 
     errorMessage;
     valid;
