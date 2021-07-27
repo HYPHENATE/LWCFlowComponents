@@ -1,14 +1,15 @@
 <!--
   @description       : 
   @author            : daniel@hyphen8.com
-  @last modified on  : 07-20-2021
-  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  @last modified on  : 27/07/2021
+  @last modified by  : daniel@hyphen8.com
   Modifications Log 
   Ver   Date         Author               Modification
   1.0   20/07/2021   daniel@hyphen8.com   Initial Version
 -->
 <template>
     <lightning-radio-group 
+                class="customRadioGroup"
                 value={value}
                 label={label}
                 options={options} 
@@ -16,7 +17,9 @@
                 disabled={disabled}
                 type={radioType}
                 variant={variant}
+                validity={isValid}
                 message-when-value-missing={requiredFieldMissingValue}
+                onchange={handleRadioChange}
                 >
     </lightning-radio-group>
 </template>

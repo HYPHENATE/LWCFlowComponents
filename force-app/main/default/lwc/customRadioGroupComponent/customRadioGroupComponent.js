@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : daniel@hyphen8.com
- * @last modified on  : 20/07/2021
+ * @last modified on  : 27/07/2021
  * @last modified by  : daniel@hyphen8.com
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -9,6 +9,7 @@
 **/
 import { LightningElement, api, wire} from 'lwc';
 import {getObjectInfo, getPicklistValues} from 'lightning/uiObjectInfoApi';
+import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 
 export default class CustomRadioGroupComponent extends LightningElement {
     
@@ -22,11 +23,18 @@ export default class CustomRadioGroupComponent extends LightningElement {
     @api value = '';
     @api objectAPIName;
     @api fieldAPIName;
-    @api recordTypeDeveloperName;
+    @api recordTypeId;
+    isValid = true;
+    get chosenRecordType(){
+        if (this.recordTypeId){
+            return this.recordTypeId;
+        }else {
+            return this.objectMeta.defaultRecordTypeId;
+        }
+    }
 
     fieldObject;
     objectMeta;
-
     options;
 
     @wire(getObjectInfo, { objectApiName: '$objectAPIName' })
@@ -35,18 +43,17 @@ export default class CustomRadioGroupComponent extends LightningElement {
             this.objectMeta = data;
             console.log(data);
         } else if(error){
-            console.log(error);
+            console.error(error);
         }
     };
 
-    //TODO improve to pass in record type and detect if record type is blank - use default
-    @wire(getPicklistValues, { recordTypeId: '$objectMeta.defaultRecordTypeId', fieldApiName: '$fieldObject' })
+    @wire(getPicklistValues, { recordTypeId: '$chosenRecordType', fieldApiName: '$fieldObject' })
     pickListData({ error, data }) {
         if(data){
             this.options = data.values;
             console.log(data);
         } else if(error){
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -67,19 +74,51 @@ export default class CustomRadioGroupComponent extends LightningElement {
     // flow will automatically run this when you press next or previous on screen to ensure the content is valid
     @api validate() {
         let validInput = this.validateInput();
+        //this.setCustomValidityMessage(this.requiredFieldMissingValue);
         return { isValid: validInput.isValid, errorMessage: validInput.errorMessage};
     }
 
     // method that performs the actual validation on the field on screen
     validateInput(){
-        let valid = true;
         let customErrorMessage = '';
         
-        //TODO logic for checking valid
+        //Logic for checking valid
+        if(!this.value && this.required)
+        {
+            this.isValid = false;
+            customErrorMessage = requiredFieldMissingValue;
+        }
 
-        return {isValid: valid, errorMessage: customErrorMessage};
+        return {isValid: this.isValid, errorMessage: customErrorMessage};
     }
 
-    //TODO onchange for setting value to pass back to Flow
+    // simple method for setting custom validation message on the field
+    setCustomValidityMessage(message){
+        //TODO fix this - it's not reporting the error back to the component
+        var radioGroup = this.template.querySelector(".customRadioGroup");
+        radioGroup.setCustomValidity(message);
+        radioGroup.reportValidity();
+    }
+
+    //Onchange for setting value to pass back to Flow
+    handleRadioChange(event){
+        console.log('WE HAVE GOT ' + event.detail.value);
+        this.value = event.detail.value;
+        this.dispatchEvent(new FlowAttributeChangeEvent('value', event.detail.value));
+    }
+
+    // handleGetRecordTypeIdFromName(){
+
+    //     const recordTypeInfo =  this.objectMeta.recordTypeInfos;
+
+    //     console.log('recordtypeInfo ' + JSON.stringify(recordTypeInfo));
+
+    //     this.recordTypeId = Object.keys(recordTypeInfo).find(rt => {
+    //                                                             console.log(recordTypeInfo[rt].name);
+    //                                                             return recordTypeInfo[rt].name === this.recordTypeDeveloperName;
+    //                                                         });
+    // }
+
+    //TODO - Exclude values from the list or set your own values to display
     
 }

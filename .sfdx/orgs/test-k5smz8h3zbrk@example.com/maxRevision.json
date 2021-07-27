@@ -1,0 +1,161 @@
+{
+  "serverMaxRevisionCounter": 2056,
+  "sourceMembers": {
+    "LightningComponentBundle__customPrintButton": {
+      "serverRevisionCounter": 3,
+      "lastRetrievedFromServer": 3,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customProgressBar": {
+      "serverRevisionCounter": 7,
+      "lastRetrievedFromServer": 7,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customRadioGroupComponent": {
+      "serverRevisionCounter": 2053,
+      "lastRetrievedFromServer": 2053,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customRichTextComponent": {
+      "serverRevisionCounter": 15,
+      "lastRetrievedFromServer": 15,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentBundle__customTextAreaComponent": {
+      "serverRevisionCounter": 19,
+      "lastRetrievedFromServer": 19,
+      "memberType": "LightningComponentBundle",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.html": {
+      "serverRevisionCounter": 16,
+      "lastRetrievedFromServer": 16,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.js-meta.xml": {
+      "serverRevisionCounter": 17,
+      "lastRetrievedFromServer": 17,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRichTextComponent/customRichTextComponent.js": {
+      "serverRevisionCounter": 18,
+      "lastRetrievedFromServer": 18,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customPrintButton/customPrintButton.html": {
+      "serverRevisionCounter": 4,
+      "lastRetrievedFromServer": 4,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customPrintButton/customPrintButton.js-meta.xml": {
+      "serverRevisionCounter": 5,
+      "lastRetrievedFromServer": 5,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customPrintButton/customPrintButton.js": {
+      "serverRevisionCounter": 6,
+      "lastRetrievedFromServer": 6,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.html": {
+      "serverRevisionCounter": 20,
+      "lastRetrievedFromServer": 20,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js": {
+      "serverRevisionCounter": 21,
+      "lastRetrievedFromServer": 21,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customTextAreaComponent/customTextAreaComponent.js-meta.xml": {
+      "serverRevisionCounter": 22,
+      "lastRetrievedFromServer": 22,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.html": {
+      "serverRevisionCounter": 8,
+      "lastRetrievedFromServer": 8,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.js": {
+      "serverRevisionCounter": 9,
+      "lastRetrievedFromServer": 9,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customProgressBar/customProgressBar.js-meta.xml": {
+      "serverRevisionCounter": 10,
+      "lastRetrievedFromServer": 10,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRadioGroupComponent/customRadioGroupComponent.js": {
+      "serverRevisionCounter": 2054,
+      "lastRetrievedFromServer": 2054,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRadioGroupComponent/customRadioGroupComponent.html": {
+      "serverRevisionCounter": 2055,
+      "lastRetrievedFromServer": 2055,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "LightningComponentResource__customRadioGroupComponent/customRadioGroupComponent.js-meta.xml": {
+      "serverRevisionCounter": 2056,
+      "lastRetrievedFromServer": 2056,
+      "memberType": "LightningComponentResource",
+      "isNameObsolete": false
+    },
+    "CustomLabel__CharacterCountText": {
+      "serverRevisionCounter": 1,
+      "lastRetrievedFromServer": 1,
+      "memberType": "CustomLabel",
+      "isNameObsolete": false
+    },
+    "CustomLabel__WordCountText": {
+      "serverRevisionCounter": 2,
+      "lastRetrievedFromServer": 2,
+      "memberType": "CustomLabel",
+      "isNameObsolete": false
+    },
+    "Flow__Example_Flow_Rich_Text_Text_Area_Flow": {
+      "serverRevisionCounter": 2048,
+      "lastRetrievedFromServer": 23,
+      "memberType": "Flow",
+      "isNameObsolete": false
+    },
+    "Profile__Admin": {
+      "serverRevisionCounter": 601,
+      "lastRetrievedFromServer": null,
+      "memberType": "Profile",
+      "isNameObsolete": false
+    },
+    "Profile__Trial Customer Portal User": {
+      "serverRevisionCounter": 602,
+      "lastRetrievedFromServer": null,
+      "memberType": "Profile",
+      "isNameObsolete": false
+    },
+    "RecordType__Account.DemoRecordType": {
+      "serverRevisionCounter": 1089,
+      "lastRetrievedFromServer": null,
+      "memberType": "RecordType",
+      "isNameObsolete": false
+    }
+  }
+}
