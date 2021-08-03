@@ -266,6 +266,68 @@ IF({!richTextWordCount} == null, 0, 25)</expression>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
+        <fields>
+            <name>RadioButtonRead</name>
+            <extensionName>c:customRadioGroupComponent</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldAPIName</name>
+                <value>
+                    <stringValue>Type</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Read Only Radios</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectAPIName</name>
+                <value>
+                    <stringValue>Account</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>radioType</name>
+                <value>
+                    <stringValue>button</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>RadioButtons</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>variant</name>
+                <value>
+                    <stringValue>label-stacked</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordTypeId</name>
+                <value>
+                    <stringValue>0120C000000IQaDQAW</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -563,7 +625,7 @@ IF({!richTextWordCount} == null, 0, 25)</expression>
             <inputParameters>
                 <name>required</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -664,7 +726,7 @@ IF({!richTextWordCount} == null, 0, 25)</expression>
             <inputParameters>
                 <name>required</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -689,6 +751,77 @@ IF({!richTextWordCount} == null, 0, 25)</expression>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>richTextWordCount</assignToReference>
+                <name>value</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>RadioGroup</name>
+            <extensionName>c:customRadioGroupComponent</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldAPIName</name>
+                <value>
+                    <stringValue>Type</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Radio Group</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectAPIName</name>
+                <value>
+                    <stringValue>Account</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>radioType</name>
+                <value>
+                    <stringValue>button</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>RadioButtons</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>requiredFieldMissingValue</name>
+                <value>
+                    <stringValue>Missing Values Here</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>variant</name>
+                <value>
+                    <stringValue>label-stacked</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordTypeId</name>
+                <value>
+                    <stringValue>0120C000000IQaDQAW</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>RadioButtons</assignToReference>
                 <name>value</name>
             </outputParameters>
         </fields>
@@ -734,6 +867,13 @@ IF({!richTextWordCount} == null, 0, 25)</expression>
         <value>
             <numberValue>0.0</numberValue>
         </value>
+    </variables>
+    <variables>
+        <name>RadioButtons</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>richTextWordCount</name>
