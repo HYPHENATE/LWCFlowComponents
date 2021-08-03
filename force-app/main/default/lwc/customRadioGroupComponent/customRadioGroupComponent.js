@@ -1,8 +1,8 @@
 /**
  * @description       : 
  * @author            : daniel@hyphen8.com
- * @last modified on  : 27/07/2021
- * @last modified by  : daniel@hyphen8.com
+ * @last modified on  : 08-03-2021
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author               Modification
  * 1.0   20/07/2021   daniel@hyphen8.com   Initial Version
@@ -13,6 +13,10 @@ import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 
 export default class CustomRadioGroupComponent extends LightningElement {
     
+    //TODO:  Pass in own List of values (Custom) to display as radio / button options
+    //TODO:  Include a ',' in one of the pick list values (Thanks DC!!)
+    //TODO:  Update flow  to query Record Type Id based on the Record Type dev Name
+
     @api label;
     @api required;
     @api disabled;
@@ -73,6 +77,7 @@ export default class CustomRadioGroupComponent extends LightningElement {
     // default flow validation method
     // flow will automatically run this when you press next or previous on screen to ensure the content is valid
     @api validate() {
+        console.log('run validation');
         let validInput = this.validateInput();
         //this.setCustomValidityMessage(this.requiredFieldMissingValue);
         return { isValid: validInput.isValid, errorMessage: validInput.errorMessage};
@@ -83,10 +88,13 @@ export default class CustomRadioGroupComponent extends LightningElement {
         let customErrorMessage = '';
         
         //Logic for checking valid
-        if(!this.value && this.required)
-        {
+        if(!this.value && this.required) {
             this.isValid = false;
-            customErrorMessage = requiredFieldMissingValue;
+            customErrorMessage = this.requiredFieldMissingValue;
+            this.setCustomValidityMessage(customErrorMessage);
+        } else {
+            this.isValid = true;
+            this.setCustomValidityMessage('');
         }
 
         return {isValid: this.isValid, errorMessage: customErrorMessage};
@@ -96,29 +104,16 @@ export default class CustomRadioGroupComponent extends LightningElement {
     setCustomValidityMessage(message){
         //TODO fix this - it's not reporting the error back to the component
         var radioGroup = this.template.querySelector(".customRadioGroup");
+        console.log(message);
         radioGroup.setCustomValidity(message);
         radioGroup.reportValidity();
     }
 
     //Onchange for setting value to pass back to Flow
     handleRadioChange(event){
-        console.log('WE HAVE GOT ' + event.detail.value);
         this.value = event.detail.value;
         this.dispatchEvent(new FlowAttributeChangeEvent('value', event.detail.value));
+        this.validateInput();
     }
-
-    // handleGetRecordTypeIdFromName(){
-
-    //     const recordTypeInfo =  this.objectMeta.recordTypeInfos;
-
-    //     console.log('recordtypeInfo ' + JSON.stringify(recordTypeInfo));
-
-    //     this.recordTypeId = Object.keys(recordTypeInfo).find(rt => {
-    //                                                             console.log(recordTypeInfo[rt].name);
-    //                                                             return recordTypeInfo[rt].name === this.recordTypeDeveloperName;
-    //                                                         });
-    // }
-
-    //TODO - Exclude values from the list or set your own values to display
     
 }
