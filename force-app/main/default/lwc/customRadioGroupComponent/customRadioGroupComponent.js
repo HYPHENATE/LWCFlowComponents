@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : daniel@hyphen8.com
- * @last modified on  : 08-03-2021
+ * @last modified on  : 08-10-2021
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -13,8 +13,11 @@ import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 
 export default class CustomRadioGroupComponent extends LightningElement {
     
-    //TODO:  Pass in own List of values (Custom) to display as radio / button options
-    //TODO:  Include a ',' in one of the pick list values (Thanks DC!!)
+    //TODO:  Pass in own List of values (Custom) to display as radio / button options - DONE
+    //TODO:  Include a ',' in one of the pick list values (Thanks DC!!) - DONE
+    //TODO:  Work out if we need to process Wire service or passed in values
+    //TODO:  Pass in TWO lists - One for Labels and one for Values for pick lists
+    //TODO:  Display one set of values to the user, but store DIFFERENT values in the back end
     //TODO:  Update flow  to query Record Type Id based on the Record Type dev Name
 
     @api label;
@@ -23,6 +26,8 @@ export default class CustomRadioGroupComponent extends LightningElement {
     @api radioType;
     @api variant;
     @api requiredFieldMissingValue;
+    @api pickListValues;
+    @api seperatorValue;
 
     @api value = '';
     @api objectAPIName;
@@ -40,6 +45,7 @@ export default class CustomRadioGroupComponent extends LightningElement {
     fieldObject;
     objectMeta;
     options;
+    pickListValuesArray;
 
     @wire(getObjectInfo, { objectApiName: '$objectAPIName' })
     objectMetadata({ error, data }) {
@@ -51,7 +57,22 @@ export default class CustomRadioGroupComponent extends LightningElement {
         }
     };
 
-    @wire(getPicklistValues, { recordTypeId: '$chosenRecordType', fieldApiName: '$fieldObject' })
+    processPickListValuesToArray() {
+        if(this.pickListValues) {
+            let finalFieldArray = [];
+            let fieldArray = this.pickListValues.split(this.seperatorValue);
+            console.log('Seperator Value = '+ this.seperatorValue);
+            fieldArray.forEach(element => {
+                let trimmedElement = element.trim();
+                if(trimmedElement.length>0) {
+                    finalFieldArray.push(trimmedElement);
+                }
+            });
+            this.pickListValuesArray = finalFieldArray;
+        }
+    }
+
+    /*@wire(getPicklistValues, { recordTypeId: '$chosenRecordType', fieldApiName: '$fieldObject' })
     pickListData({ error, data }) {
         if(data){
             this.options = data.values;
@@ -59,7 +80,7 @@ export default class CustomRadioGroupComponent extends LightningElement {
         } else if(error){
             console.error(error);
         }
-    };
+    }; */
 
     
     
@@ -71,6 +92,17 @@ export default class CustomRadioGroupComponent extends LightningElement {
         objfiedAPIName.objectApiName = this.objectAPIName;
         this.fieldObject = objfiedAPIName;
         console.log('object > ' + JSON.stringify(this.fieldObject));
+        console.log('items');
+        console.log(this.pickListValues);
+        //pickListValues = Industry,Test,Account
+        this.processPickListValuesToArray();
+        //pickListValuesArray = [Industry, Test, Account];
+        this.options = this.pickListValuesArray.map(item => {
+            return {label: item, value: item};
+        });
+
+        //options = [{label: Industry, value: Industry}, {label: Test, value: Test}, {label: Account, value: Account}];
+        
     }
 
 

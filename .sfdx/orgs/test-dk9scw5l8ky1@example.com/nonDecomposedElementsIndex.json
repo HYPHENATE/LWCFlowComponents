@@ -1,0 +1,12 @@
+{
+  "CustomLabels__CharacterCountText": {
+    "fullName": "CharacterCountText",
+    "type": "CustomLabels",
+    "metadataFilePath": "c:\\Users\\chris\\OneDrive\\Documents\\VS Code\\CodeKata 100821\\LWCFlowComponents\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml"
+  },
+  "CustomLabels__WordCountText": {
+    "fullName": "WordCountText",
+    "type": "CustomLabels",
+    "metadataFilePath": "c:\\Users\\chris\\OneDrive\\Documents\\VS Code\\CodeKata 100821\\LWCFlowComponents\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml"
+  }
+}

@@ -23,6 +23,8 @@
             <property name="objectAPIName" label="Object API Name"  type="String" description="SObject API Name that the field picklist is on" role="inputOnly" />
             <property name="fieldAPIName" label="Field API Name"  type="String" description="The picklist field API Name" role="inputOnly" />
             <property name="recordTypeId" label="RecordType Id"  type="String" description="If recordtypes are in use on this object please provide the Record Type Id to ensure the correct picklist values are returned" role="inputOnly" />
+            <property name="pickListValues" type="String" description="Comma separated list of pick list values" role="inputOnly" />
+            <property name="seperatorValue" type="String" description="Seperator for picklist values" role="inputOnly" default=";"/>
         </targetConfig>
     </targetConfigs>
 
