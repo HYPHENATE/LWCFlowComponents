@@ -1,8 +1,8 @@
 /**
  * @description       : 
  * @author            : daniel@hyphen8.com
- * @last modified on  : 08-10-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 17/08/2021
+ * @last modified by  : daniel@hyphen8.com
  * Modifications Log 
  * Ver   Date         Author               Modification
  * 1.0   20/07/2021   daniel@hyphen8.com   Initial Version
@@ -15,20 +15,19 @@ export default class CustomRadioGroupComponent extends LightningElement {
     
     //TODO:  Pass in own List of values (Custom) to display as radio / button options - DONE
     //TODO:  Include a ',' in one of the pick list values (Thanks DC!!) - DONE
-    //TODO:  Work out if we need to process Wire service or passed in values
-    //TODO:  Pass in TWO lists - One for Labels and one for Values for pick lists
-    //TODO:  Display one set of values to the user, but store DIFFERENT values in the back end
-    //TODO:  Update flow  to query Record Type Id based on the Record Type dev Name
-
+    //TODO:  Work out if we need to process Wire service or passed in values - DONE
+    //TODO:  Pass in TWO lists - One for Labels and one for Values for pick lists - DONE (APEX DEFINED)
+    //TODO:  Display one set of values to the user, but store DIFFERENT values in the back end - DONE
+    //TODO:  Update flow to query Record Type Id based on the Record Type dev Name - DONE
+   
     @api label;
     @api required;
     @api disabled;
     @api radioType;
     @api variant;
     @api requiredFieldMissingValue;
-    @api pickListValues;
-    @api seperatorValue;
-
+    @api apexDefinedCustomList;
+    @api customListOrNative;
     @api value = '';
     @api objectAPIName;
     @api fieldAPIName;
@@ -57,52 +56,30 @@ export default class CustomRadioGroupComponent extends LightningElement {
         }
     };
 
-    processPickListValuesToArray() {
-        if(this.pickListValues) {
-            let finalFieldArray = [];
-            let fieldArray = this.pickListValues.split(this.seperatorValue);
-            console.log('Seperator Value = '+ this.seperatorValue);
-            fieldArray.forEach(element => {
-                let trimmedElement = element.trim();
-                if(trimmedElement.length>0) {
-                    finalFieldArray.push(trimmedElement);
-                }
-            });
-            this.pickListValuesArray = finalFieldArray;
-        }
-    }
-
-    /*@wire(getPicklistValues, { recordTypeId: '$chosenRecordType', fieldApiName: '$fieldObject' })
+    @wire(getPicklistValues, { recordTypeId: '$chosenRecordType', fieldApiName: '$fieldObject' })
     pickListData({ error, data }) {
         if(data){
-            this.options = data.values;
-            console.log(data);
+            if(this.customListOrNative === 'Salesforce'){
+                this.options = data.values;
+                console.log(data);
+            }
         } else if(error){
             console.error(error);
         }
-    }; */
+    };
 
     
     
 
     connectedCallback(){
-        console.log('my options are > ' + this.options);
         let objfiedAPIName = {};
         objfiedAPIName.fieldApiName = this.fieldAPIName;
         objfiedAPIName.objectApiName = this.objectAPIName;
-        this.fieldObject = objfiedAPIName;
-        console.log('object > ' + JSON.stringify(this.fieldObject));
-        console.log('items');
-        console.log(this.pickListValues);
-        //pickListValues = Industry,Test,Account
-        this.processPickListValuesToArray();
-        //pickListValuesArray = [Industry, Test, Account];
-        this.options = this.pickListValuesArray.map(item => {
-            return {label: item, value: item};
-        });
+        this.fieldObject = objfiedAPIName;        
+        if(this.customListOrNative === 'Custom'){
+            this.options = this.apexDefinedCustomList;
 
-        //options = [{label: Industry, value: Industry}, {label: Test, value: Test}, {label: Account, value: Account}];
-        
+        }        
     }
 
 

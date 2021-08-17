@@ -23,8 +23,8 @@
             <property name="objectAPIName" label="Object API Name"  type="String" description="SObject API Name that the field picklist is on" role="inputOnly" />
             <property name="fieldAPIName" label="Field API Name"  type="String" description="The picklist field API Name" role="inputOnly" />
             <property name="recordTypeId" label="RecordType Id"  type="String" description="If recordtypes are in use on this object please provide the Record Type Id to ensure the correct picklist values are returned" role="inputOnly" />
-            <property name="pickListValues" type="String" description="Comma separated list of pick list values" role="inputOnly" />
-            <property name="seperatorValue" type="String" description="Seperator for picklist values" role="inputOnly" default=";"/>
+            <property name="customListOrNative" type="String" description="Confirm if you want to use a custom list of value or values from a salesforce field (Salesforce, Custom)" role="inputOnly"></property>
+            <property name="apexDefinedCustomList" type="apex://customRadioGroupValues[]" description="Custom apex defined list of value to display on screen used with Custom option" role="inputOnly"></property>
         </targetConfig>
     </targetConfigs>
 
