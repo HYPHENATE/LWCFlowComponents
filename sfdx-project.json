@@ -4,8 +4,8 @@
             "path": "force-app",
             "default": true,
             "package": "Hyphen8LabsFlowComponents",
-            "versionName": "v1.0.0",
-            "versionNumber": "1.0.0.NEXT"
+            "versionName": "v1.1.0",
+            "versionNumber": "1.1.0.NEXT"
         }
     ],
     "namespace": "",
@@ -13,6 +13,8 @@
     "sourceApiVersion": "52.0",
     "packageAliases": {
         "Hyphen8LabsFlowComponents": "0Ho67000000TN5qCAG",
-        "Hyphen8LabsFlowComponents@1.0.0-1": "04t67000000SalGAAS"
+        "Hyphen8LabsFlowComponents@1.0.0-1": "04t67000000SalGAAS",
+        "Hyphen8LabsFlowComponents@1.1.0-1": "04t67000000xoEUAAY",
+        "Hyphen8LabsFlowComponents@1.1.0-2": "04t67000000xoEZAAY"
     }
 }

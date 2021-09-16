@@ -26,7 +26,7 @@
     <screens>
         <name>Example_Text_Area_Output_Screen</name>
         <label>Example Text Area Output Screen</label>
-        <locationX>685</locationX>
+        <locationX>686</locationX>
         <locationY>68</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -195,6 +195,38 @@
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
+        <fields>
+            <name>exampleTimeOutput</name>
+            <extensionName>c:customTimeComponent</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>timeValue</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Example Time Output</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -209,6 +241,32 @@
         <connector>
             <targetReference>Example_Text_Area_Output_Screen</targetReference>
         </connector>
+        <fields>
+            <name>customPrintButtonDemo</name>
+            <extensionName>c:customPrintButton</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>buttonAssistiveText</name>
+                <value>
+                    <stringValue>Print Page</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>buttonFloat</name>
+                <value>
+                    <stringValue>slds-float_right</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>buttonLabel</name>
+                <value>
+                    <stringValue>Print</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
         <fields>
             <name>CustomTextAreaExampleInput</name>
             <extensionName>c:customTextAreaComponent</extensionName>
@@ -571,6 +629,59 @@
                 <name>value</name>
             </outputParameters>
         </fields>
+        <fields>
+            <name>exampleTimeInput</name>
+            <extensionName>c:customTimeComponent</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <stringValue>false</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Example Time Input field</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>timeValue</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>requiredMessage</name>
+                <value>
+                    <stringValue>A value needs to be selected in this field to progress</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>maxValue</name>
+                <value>
+                    <stringValue>17:30:00.000Z</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minValue</name>
+                <value>
+                    <stringValue>09:00:00.000Z</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>timeValue</assignToReference>
+                <name>value</name>
+            </outputParameters>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -605,6 +716,13 @@
     </variables>
     <variables>
         <name>richTextWordCount</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>timeValue</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
