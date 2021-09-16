@@ -1,0 +1,21 @@
+<!--
+  @description       : custom time input output flow
+  @author            : daniel@hyphen8.com
+  @last modified on  : 16/09/2021
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+
+    <lightning-input    class="timeComponent"
+                        type="time" 
+                        name="timeInput" 
+                        label={label} 
+                        value={value} 
+                        required={required} 
+                        disabled={disabled}
+                        min={minValue} 
+                        max={maxValue}
+                        onchange={handleChangeValidation}>
+    </lightning-input>
+    
+</template>

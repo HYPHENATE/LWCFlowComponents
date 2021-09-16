@@ -1,0 +1,22 @@
+<!--
+  @description       : simple custom print button for use within a flow component
+  @author            : daniel@hyphen8.com
+  @last modified on  : 16/09/2021
+  @last modified by  : daniel@hyphen8.com
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   19/07/2021   daniel@hyphen8.com   Initial Version
+-->
+<template>
+    
+    <div class="slds-clearfix">
+
+        <div class={buttonFloat}>
+
+                <lightning-button-icon class="slds-m-around_small" icon-name="utility:print" label={buttonLabel} alternative-text={buttonAssistiveText} title={buttonLabel} onclick={handlePrintRequest}></lightning-button-icon>
+
+        </div>
+        
+    </div>
+
+</template>
