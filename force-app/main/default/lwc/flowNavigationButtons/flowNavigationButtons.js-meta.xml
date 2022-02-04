@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Navigation Buttons</masterLabel>
+    <description>This component </description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property label="Buttons JSON" name="inputList" type="String" role="inputOnly" required="true" default='[{"label" : "default","value" : "default"}]'/>
+            <property label="Columns Count" name="numberOfColumns" type="Integer" role="inputOnly" required="true" default="2" min="1" max="12"/>
+            <property label="Output Value" name="outputValue" type="String" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
