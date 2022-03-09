@@ -14,7 +14,6 @@ export default class FlowNavigationButtons extends LightningElement
     connectedCallback()
     {
         this.columnClass = "slds-col slds-size_1-of-"+this.numberOfColumns.toString();
-
         // Leaving in the try/catch. Will allow admins to see logs for any errors that occur
         // when parsing the JSON and creating the buttons
         try
@@ -22,8 +21,9 @@ export default class FlowNavigationButtons extends LightningElement
             let inputButtonList = JSON.parse(this.inputList);
             inputButtonList.forEach(function(button)
             {
-                    this.buttonList.push(button);
-            }, this);
+                button.onclick = function(){this.handleClick(button.value)};
+                this.buttonList.push(button);
+            }, this)
         }
         catch (error)
         {
@@ -31,11 +31,11 @@ export default class FlowNavigationButtons extends LightningElement
         }
     }
 
-    handleClick(event)
+    handleClick(outputValue)
     {
-        this.outputValue = event.target.value;
         //Skipping a check on if next is available, the LWC is designed for it's output
         //to be used by a following flow element
+        this.outputValue = outputValue;
         const navigateNextEvent = new FlowNavigationNextEvent();
         this.dispatchEvent(navigateNextEvent);
     }
