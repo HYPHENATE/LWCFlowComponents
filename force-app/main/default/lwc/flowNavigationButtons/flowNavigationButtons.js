@@ -21,6 +21,8 @@ export default class FlowNavigationButtons extends LightningElement
             let inputButtonList = JSON.parse(this.inputList);
             inputButtonList.forEach(function(button)
             {
+                // Passing a function to the button object, which is then referenced by the HTML button
+                // This is done because standard HTML buttons don't seem to properly pass values in event.detail
                 button.onclick = function(){this.handleClick(button.value)};
                 this.buttonList.push(button);
             }, this)
@@ -33,8 +35,8 @@ export default class FlowNavigationButtons extends LightningElement
 
     handleClick(outputValue)
     {
-        //Skipping a check on if next is available, the LWC is designed for it's output
-        //to be used by a following flow element
+        // Skipping a check on if next is available, the LWC is designed for it's output
+        // to be used by a following flow element
         this.outputValue = outputValue;
         const navigateNextEvent = new FlowNavigationNextEvent();
         this.dispatchEvent(navigateNextEvent);
