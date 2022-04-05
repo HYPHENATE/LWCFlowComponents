@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : Daniel Trusler - Hyphen8
+  @group             : 
+  @last modified on  : 02-04-2022
+  @last modified by  : Daniel Trusler - Hyphen8
+-->
+<template>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <template for:each={buttonList} for:item="button">
+            <div class={columnClass} key={button.value}>
+                <div class="slds-align_absolute-center" style="height:5rem">
+                    <!-- Can't make a lightning-button stretch to fill the whole width, so using html button -->
+                    <button onclick={handleClick} value ={button.value} class="slds-button slds-button_brand slds-button_stretch"><label>{button.label}</label></button>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,6 +1,6 @@
 {
-  "d:\\Development\\flowInputComponent-1\\force-app": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app",
     "isDirectory": true,
     "modifiedTime": 1625556473275,
     "changeTime": 1625556473275,
@@ -9,36 +9,35 @@
     "isArtifactRoot": true,
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main",
     "isDirectory": true,
-    "modifiedTime": 1625556473275,
-    "changeTime": 1625556473275,
+    "modifiedTime": 1631712199559,
+    "changeTime": 1631712199559,
     "contentHash": "7505d64a54e061b7acd54ccd58b49dc43500b635",
-    "state": "u",
+    "state": "n",
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default",
     "isDirectory": true,
-    "modifiedTime": 1625594269758,
-    "changeTime": 1625594269758,
+    "modifiedTime": 1631712199560,
+    "changeTime": 1631712199560,
     "contentHash": "00afbc0382059ca7041a151fb3ea4c1b696a4af0",
-    "state": "u",
+    "state": "n",
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc",
     "isDirectory": true,
-    "modifiedTime": 1626103346296,
-    "changeTime": 1626103346296,
+    "modifiedTime": 1631712199563,
+    "changeTime": 1631712199563,
     "contentHash": "a38198316584dd39f42709d7a30c3c93d232434e",
-    "state": "u",
-    "package": "force-app",
-    "deferContentHash": true
+    "state": "n",
+    "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1",
+  "d:\\Accelerators\\LWCFlowComponents": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents",
     "isDirectory": true,
     "modifiedTime": 1625556473276,
     "changeTime": 1625556473276,
@@ -46,174 +45,174 @@
     "state": "u",
     "isWorkspace": true
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\flows": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\flows",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\flows": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\flows",
     "isDirectory": true,
-    "modifiedTime": 1625595602306,
-    "changeTime": 1625595602306,
+    "modifiedTime": 1631712199559,
+    "changeTime": 1631712199559,
     "contentHash": "5adabd5c7f5630d78dd3fe03d45c689d8592f36a",
-    "state": "u",
+    "state": "n",
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent",
     "isDirectory": true,
-    "modifiedTime": 1625593122350,
-    "changeTime": 1625593122350,
+    "modifiedTime": 1631712199562,
+    "changeTime": 1631712199562,
     "contentHash": "6728622e4a2905f08ee51e1bb7cf4439b98992a8",
-    "state": "u",
-    "package": "force-app",
-    "deferContentHash": true
+    "state": "n",
+    "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.html": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.html",
-    "size": 1746,
-    "modifiedTime": 1626103601236,
-    "changeTime": 1626103601236,
-    "contentHash": "3cd91926d10b968326b8302cd365aed4d696b137",
-    "state": "u",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.html": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.html",
+    "size": 1794,
+    "modifiedTime": 1631712199562,
+    "changeTime": 1631712199562,
+    "contentHash": "ae07211c9fa2718c51c08c4d4b32ceda214ef094",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js",
-    "size": 6188,
-    "modifiedTime": 1626103598319,
-    "changeTime": 1626103598319,
-    "contentHash": "4c3e772cbf6f61749aa653500c47846a10d9f565",
-    "state": "u",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js",
+    "size": 6374,
+    "modifiedTime": 1631712199562,
+    "changeTime": 1631712199562,
+    "contentHash": "a3e9597069b5ff54f410adaaad1a95b404264860",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js-meta.xml": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js-meta.xml",
-    "size": 3240,
-    "modifiedTime": 1625679072699,
-    "changeTime": 1625679072699,
-    "contentHash": "460b36e13ab4deda58eb8be87ba2915af4f9da46",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js-meta.xml": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customRichTextComponent\\customRichTextComponent.js-meta.xml",
+    "size": 3267,
+    "modifiedTime": 1631712199562,
+    "changeTime": 1631712199562,
+    "contentHash": "864b8258f43fa739ac3c620b8d95ffcebb7fac03",
     "isMetadataFile": true,
-    "state": "u",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent",
     "isDirectory": true,
-    "modifiedTime": 1625593258185,
-    "changeTime": 1625593258185,
+    "modifiedTime": 1631712199563,
+    "changeTime": 1631712199563,
     "contentHash": "3c0e8774bbf11a592b2d6cb13485199359915c8c",
-    "state": "u",
+    "state": "n",
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.html": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.html",
-    "size": 1612,
-    "modifiedTime": 1626103567833,
-    "changeTime": 1626103567833,
-    "contentHash": "840158197b443a21daae5e8eb9fe2ab6080b55b5",
-    "state": "u",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.html": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.html",
+    "size": 1657,
+    "modifiedTime": 1631712199563,
+    "changeTime": 1631712199563,
+    "contentHash": "d0de5e2c2181e9a449185259028e651cee381f33",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js",
-    "size": 5847,
-    "modifiedTime": 1626103579748,
-    "changeTime": 1626103579748,
-    "contentHash": "df634089e163742a22940b862b6d17eddb95cdd2",
-    "state": "u",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js",
+    "size": 6019,
+    "modifiedTime": 1631712199563,
+    "changeTime": 1631712199563,
+    "contentHash": "f07f9a0e371d5ff8a794f3bf9682f709bad77617",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js-meta.xml": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js-meta.xml",
-    "size": 3226,
-    "modifiedTime": 1625679056934,
-    "changeTime": 1625679056934,
-    "contentHash": "05b0248ab3bb60d0fd413169174cbfc4c8ce337d",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js-meta.xml": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customTextAreaComponent\\customTextAreaComponent.js-meta.xml",
+    "size": 3252,
+    "modifiedTime": 1631712199563,
+    "changeTime": 1631712199563,
+    "contentHash": "83bf06282ac2b4e479e50361dcaffb18d11b5260",
     "isMetadataFile": true,
-    "state": "u",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\labels": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\labels",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\labels": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\labels",
     "isDirectory": true,
-    "modifiedTime": 1625594269759,
-    "changeTime": 1625594269759,
+    "modifiedTime": 1631712199560,
+    "changeTime": 1631712199560,
     "contentHash": "c3835cc038e1e9f66a66938c26f39887d32c77d8",
-    "state": "u",
+    "state": "n",
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml",
-    "size": 711,
-    "modifiedTime": 1625594269759,
-    "changeTime": 1625594269759,
-    "contentHash": "d78e4cc913b20f67a07921ce253188ad330b1369",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\labels\\CustomLabels.labels-meta.xml",
+    "size": 730,
+    "modifiedTime": 1631712199560,
+    "changeTime": 1631712199560,
+    "contentHash": "e1edbd983bb328d01e283e5a4ebb299e069b3a73",
     "isMetadataFile": true,
-    "state": "u",
+    "state": "n",
     "package": "force-app",
     "metadataType": "CustomLabels"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\flows\\Example_Flow_Rich_Text_Text_Area_Flow.flow-meta.xml": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\flows\\Example_Flow_Rich_Text_Text_Area_Flow.flow-meta.xml",
-    "size": 23257,
-    "modifiedTime": 1626104043925,
-    "changeTime": 1626104043925,
-    "contentHash": "8a0c6fdbec80f530ee9620a45d38d3b48b8933cf",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\flows\\Example_Flow_Rich_Text_Text_Area_Flow.flow-meta.xml": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\flows\\Example_Flow_Rich_Text_Text_Area_Flow.flow-meta.xml",
+    "size": 23870,
+    "modifiedTime": 1631712199560,
+    "changeTime": 1631712199560,
+    "contentHash": "24093a6008b33bce66e1694bf3f1221767356b21",
     "isMetadataFile": true,
-    "state": "u",
+    "state": "n",
     "package": "force-app",
     "metadataType": "Flow"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar",
     "isDirectory": true,
-    "modifiedTime": 1626103346307,
-    "changeTime": 1626103346307,
+    "modifiedTime": 1631712199561,
+    "changeTime": 1631712199561,
     "contentHash": "d7d70194bc2e1f25a7d8d9a258f1850ad08301ef",
-    "state": "u",
+    "state": "n",
     "package": "force-app"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.html": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.html",
-    "size": 522,
-    "modifiedTime": 1626103974371,
-    "changeTime": 1626103974371,
-    "contentHash": "808e5edd264a762d0cb01f2b358ecbc3e5f5b79f",
-    "state": "u",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.html": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.html",
+    "size": 539,
+    "modifiedTime": 1631712199561,
+    "changeTime": 1631712199561,
+    "contentHash": "05a0c6e18d8515d887465b8bc8522f09614b24d7",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js",
-    "size": 486,
-    "modifiedTime": 1626103553705,
-    "changeTime": 1626103553705,
-    "contentHash": "8cce89a2659e19e8fdc63a586d786714fe401114",
-    "state": "u",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js",
+    "size": 503,
+    "modifiedTime": 1631712199561,
+    "changeTime": 1631712199561,
+    "contentHash": "1cf607051fe798b6ea74c33311c67e057eb84193",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
   },
-  "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js-meta.xml": {
-    "sourcePath": "d:\\Development\\flowInputComponent-1\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js-meta.xml",
-    "size": 975,
-    "modifiedTime": 1626103481837,
-    "changeTime": 1626103481837,
-    "contentHash": "479971c42b5692d1c6679cdd80e82af7e39f03b9",
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js-meta.xml": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\main\\default\\lwc\\customProgressBar\\customProgressBar.js-meta.xml",
+    "size": 989,
+    "modifiedTime": 1631712199561,
+    "changeTime": 1631712199561,
+    "contentHash": "5f391cae2c8ef76d7227341681ba0a9493fd2eff",
     "isMetadataFile": true,
-    "state": "u",
+    "state": "n",
     "package": "force-app",
-    "metadataType": "LightningComponentBundle",
-    "deferContentHash": true
+    "metadataType": "LightningComponentBundle"
+  },
+  "d:\\Accelerators\\LWCFlowComponents\\force-app\\": {
+    "sourcePath": "d:\\Accelerators\\LWCFlowComponents\\force-app\\",
+    "isDirectory": true,
+    "modifiedTime": 1631712199559,
+    "changeTime": 1631712199559,
+    "contentHash": "b28b7af69320201d1cf206ebf28373980add1451",
+    "state": "n",
+    "isArtifactRoot": true,
+    "package": "force-app"
   }
 }
