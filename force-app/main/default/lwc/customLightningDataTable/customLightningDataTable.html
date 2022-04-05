@@ -1,0 +1,58 @@
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : 
+  @author            : daniel@hyphen8.com
+  @last modified on  : 05/04/2022
+  @last modified by  : daniel@hyphen8.com
+  Modifications Log
+  Ver   Date         Author               Modification
+  1.0   01/04/2022   daniel@hyphen8.com   Initial Version
+-->
+<template>
+
+    <lightning-card>
+      <div class="slds-p-horizontal_small">
+        <template if:false={allowEdit}>
+          <lightning-datatable 
+                  key-field="Id"
+                  data={data}
+                  columns={columns}
+                  hide-checkbox-column
+                  row-number-offset={offSet}
+                  show-row-number-column
+                  suppress-bottom-bar>
+              </lightning-datatable> 
+        </template>
+        <template if:true={allowEdit}>
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <template for:each={columns} for:item="column">
+                  <th key={column.label} class="" scope="col">
+                    <div class="slds-truncate" title={column.label}>{column.label}</div>
+                  </th>
+                </template>
+                <th class="" scope="col">
+                  <div class="slds-truncate slds-align_absolute-center" title="Actions">Actions</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={editData} for:item="record">
+                <c-custom-lightning-data-table-row key={record.id} record-id={record.id} row-data={record} onrowdeleted={handleRowDelete} onrowupdated={handleRowUpdate}></c-custom-lightning-data-table-row>
+              </template>
+            </tbody>
+          </table>
+          <div class="slds-clearfix">
+            <div class="slds-float_right">
+              <template if:true={displayRowAddButton}>
+                <lightning-button variant="base" label="Add Row" title="Add Row" icon-name="utility:add" onclick={addRow}></lightning-button>
+              </template>
+            </div>
+          </div>
+          
+        </template>
+      </div>
+    </lightning-card>
+    
+</template>

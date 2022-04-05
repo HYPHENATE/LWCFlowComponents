@@ -1,0 +1,56 @@
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : 
+  @author            : daniel@hyphen8.com
+  @last modified on  : 05/04/2022
+  @last modified by  : daniel@hyphen8.com
+  Modifications Log
+  Ver   Date         Author               Modification
+  1.0   04/04/2022   daniel@hyphen8.com   Initial Version
+-->
+<template>
+
+    
+    <template for:each={rowData.fields} for:item="field">
+        <td key={field.fieldType} class="" scope="col">
+            <template if:true={field.isCheckbox}>
+              <lightning-input type="checkbox" checked={field.value} required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} variant="label-hidden" onchange={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isPicklist}>
+              <lightning-combobox required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} options={field.picklistOptions}  onchange={fieldChange} variant="label-hidden"></lightning-combobox>
+            </template>
+            <template if:true={field.isNumber}>
+              <lightning-input type="number" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isCurrency}>
+              <lightning-input type="number" formatter="currency" step="0.01" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isDate}>
+              <lightning-input type="date" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isText}>
+              <lightning-input type="text" maxlength={field.length} required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isEmail}>
+              <lightning-input type="email" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isPhone}>
+              <lightning-input type="tel" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isURL}>
+              <lightning-input type="url" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            <template if:true={field.isPercent}>
+              <lightning-input type="number" formatter="percent" step="0.01" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
+            </template>
+            
+
+        </td>
+    </template>
+    <td class="" scope="col">
+        <div class="slds-align_absolute-center">
+            <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" title="Delete" variant="bare" onclick={deleteRow}></lightning-button-icon>
+        </div>
+    </td>
+    
+</template>

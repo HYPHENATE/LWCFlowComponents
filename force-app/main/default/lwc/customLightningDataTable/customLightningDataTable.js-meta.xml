@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <propertyType name="T" extends="SObject" label="Object API Name" description="Select the api name of the SObject this component is going to be looking for" />
+            <property name="sObjectAPIName" label="sObjectAPIName" description="The API Name of the object data is stored in." type="String" role="inputOnly"/>
+            <property name="fieldSetAPIName" label="fieldSetAPIName" description="FieldSet on the entered object that confirms the fields to display." type="String" role="inputOnly"/>
+            <property name="parentFieldAPIName" label="parentFieldAPIName" description="API for the Parent lookup field." type="String" role="inputOnly"/>
+            <property name="parentRecordId" label="parentRecordId" description="The ID for the parent record." type="String" role="inputOnly"/>
+            <property name="allowAddRow" label="allowAddRow" description="Confirm if new rows can be added." type="Boolean" role="inputOnly"/>
+            <property name="allowEdit" label="allowEdit" description="Confirm if rows can be edited." type="Boolean" role="inputOnly"/>
+            <property name="maxRows" label="maxRows" description="Confirm what the maximum number of rows allowed is." type="Integer" role="inputOnly"/>
+            <property name="minRows" label="minRows" description="Confirm what the min number of rows allowed is and validate against it" type="Integer" role="inputOnly"/>
+            <property name="startingRowCount" label="startingRowCount" description="Confirm what the default row count on edit should be." type="Integer" role="inputOnly"/>
+            <property name="whereClause" label="whereClause" description="SOQL WHERE Clause." type="String" role="inputOnly"/>
+            <property name="defaultFieldValues" label="defaultFieldValues" description="Project a JSON entry to set default fields when new records being created." type="String" role="inputOnly"/>
+            <property name="newRecords" label="new Records for Insert" type="{T[]}" role="outputOnly"/>
+            <property name="existingRecords" label="exisiting Records for Update" type="{T[]}" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
