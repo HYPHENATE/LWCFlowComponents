@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : daniel@hyphen8.com
- * @last modified on  : 05/04/2022
+ * @last modified on  : 06/04/2022
  * @last modified by  : daniel@hyphen8.com
  * Modifications Log
  * Ver   Date         Author               Modification
@@ -134,28 +134,34 @@ export default class CustomLightningDataTable extends LightningElement {
                 }
                 var recordId = element.Id;
                 const arrayOfObj = Object.entries(element).map((e) => ( { key: e[0], value: e[1] } ));
+
                 let individualrecord = [];
-                arrayOfObj.map(element=> {
-                    if(element.key != 'Id' && element.key != 'attributes') {
-                        var fieldConfig = fieldData.find(field => field.fieldAPIName === element.key);
-                        let pickListValues = this.getPickListValues(fieldConfig.picklistOptions);
-                        individualrecord = [...individualrecord, {
-                                        value:element.value, 
-                                        fieldAPIName:fieldConfig.fieldAPIName, 
-                                        fieldType:this.getType(fieldConfig.fieldType), 
-                                        required:fieldConfig.required, 
-                                        isPicklist:fieldConfig.isPicklist,
-                                        isCheckbox:fieldConfig.isCheckbox,
-                                        isText:fieldConfig.isText,
-                                        isNumber:fieldConfig.isNumber,
-                                        isDate:fieldConfig.isDate,
-                                        isEmail:fieldConfig.isEmail,
-                                        isPhone:fieldConfig.isPhone,
-                                        isURL:fieldConfig.isURL,
-                                        isPercent:fieldConfig.isPercent,
-                                        isCurrency:fieldConfig.isCurrency,
-                                        picklistOptions:pickListValues,}];
+
+                fieldData.forEach(element=> {
+                    let pickListValues = this.getPickListValues(element.picklistOptions);
+                    var fieldValue = arrayOfObj.find(field => field.key === element.fieldAPIName);
+                    let value;
+                    if(fieldValue == undefined){
+                        value = '';
+                    } else {
+                        value = fieldValue.value;
                     }
+                    individualrecord = [...individualrecord, {
+                        value:value, 
+                        fieldAPIName:element.fieldAPIName, 
+                        fieldType:this.getType(element.fieldType), 
+                        required:element.required, 
+                        isPicklist:element.isPicklist,
+                        isCheckbox:element.isCheckbox,
+                        isText:element.isText,
+                        isNumber:element.isNumber,
+                        isDate:element.isDate,
+                        isEmail:element.isEmail,
+                        isPhone:element.isPhone,
+                        isURL:element.isURL,
+                        isPercent:element.isPercent,
+                        isCurrency:element.isCurrency,
+                        picklistOptions:pickListValues,}];
                 });
                 editItems = [...editItems, {id: recordId, fields: individualrecord}];
             });

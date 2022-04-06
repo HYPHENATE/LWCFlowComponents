@@ -1520,11 +1520,7 @@ declare module 'lightning/analyticsWaveApi' {
      *
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_analytics_limits
      *
-<<<<<<< HEAD
      * @param licenseType The Tableau CRM license types. Valid values are `EinsteinAnalytics` or `Sonic`.
-=======
-     * @param licenseType The response includes dataflow jobs with this license type. Valid values are `EinsteinAnalytics` or `Sonic`.
->>>>>>> b0f85fbeae3fb05e41f342e3926b7f7f06077739
      * @param types The types of limits used in Tableau CRM.
      *              Valid values are `BatchTransformationHours`, `DatasetQueries`, `DatasetRowCount`,
      *              `MaxDailyRowsHighOutputCon`, `MaxDailyRowsLowOutputCon`, `MaxDailyRowsMedOutputCon`,
