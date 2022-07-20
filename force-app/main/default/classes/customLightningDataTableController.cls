@@ -34,11 +34,14 @@ public with sharing class customLightningDataTableController {
                 if(!(String.isEmpty(parentIDField) && String.isEmpty(parentId)))
                 {
                     query += ' WHERE ' + parentIDField + '=\'' + parentId + '\'';
+                    if(!(String.isEmpty(whereClause)))
+                    {
+                        query += ' AND ' + whereClause;
+                    }
                 }
-
-                if(!(String.isEmpty(whereClause)))
+                else if (!(String.isEmpty(whereClause)))
                 {
-                    query += ' AND ' + whereClause;
+                    query += ' WHERE ' + whereClause;
                 }
                             
                 List<SObject> lstRecords = Database.query(query);
