@@ -123,6 +123,7 @@ export default class CustomLightningDataTable extends LightningElement {
                         isURL:element.isURL,
                         isPercent:element.isPercent,
                         isCurrency:element.isCurrency,
+                        isCalculated:element.isCalculated,
                         picklistOptions:pickListValues,
                 }];
             });
@@ -161,6 +162,7 @@ export default class CustomLightningDataTable extends LightningElement {
                         isURL:element.isURL,
                         isPercent:element.isPercent,
                         isCurrency:element.isCurrency,
+                        isCalculated:element.isCalculated,
                         picklistOptions:pickListValues,}];
                 });
                 editItems = [...editItems, {id: recordId, fields: individualrecord}];
@@ -236,6 +238,8 @@ export default class CustomLightningDataTable extends LightningElement {
                 return 'text';
             case 'picklist':
                 return 'combobox';
+            case 'double':
+                return 'number';
             case 'currency':
                 return 'number';
         }

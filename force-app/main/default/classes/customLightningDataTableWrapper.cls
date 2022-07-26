@@ -34,6 +34,7 @@ public with sharing class customLightningDataTableWrapper {
         @AuraEnabled public boolean isURL;
         @AuraEnabled public boolean isPercent;
         @AuraEnabled public boolean isCurrency;
+        @AuraEnabled public boolean isCalculated;
         @AuraEnabled public List<String> picklistOptions;
     }
 }
