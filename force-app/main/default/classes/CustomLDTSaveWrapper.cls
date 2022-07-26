@@ -17,5 +17,6 @@ public class CustomLDTSaveWrapper {
         @AuraEnabled public string value;
         @AuraEnabled public string fieldAPIName;
         @AuraEnabled public string fieldType;
+        @AuraEnabled public boolean isCalculated;
     }
 }
