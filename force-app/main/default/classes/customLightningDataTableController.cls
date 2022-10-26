@@ -34,11 +34,14 @@ public with sharing class customLightningDataTableController {
                 if(!(String.isEmpty(parentIDField) && String.isEmpty(parentId)))
                 {
                     query += ' WHERE ' + parentIDField + '=\'' + parentId + '\'';
+                    if(!(String.isEmpty(whereClause)))
+                    {
+                        query += ' AND ' + whereClause;
+                    }
                 }
-
-                if(!(String.isEmpty(whereClause)))
+                else if (!(String.isEmpty(whereClause)))
                 {
-                    query += ' AND ' + whereClause;
+                    query += ' WHERE ' + whereClause;
                 }
                             
                 List<SObject> lstRecords = Database.query(query);
@@ -82,6 +85,7 @@ public with sharing class customLightningDataTableController {
             fieldWrapper.isURL = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'url') ? true:false;
             fieldWrapper.isPicklist = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'picklist' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'multipicklist') ? true:false;
             fieldWrapper.isPercent = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'percent') ? true:false;
+            fieldWrapper.isCalculated = currentFieldDetal.isCalculated();
             fieldDetails.add(fieldWrapper);
         }
 
@@ -131,7 +135,7 @@ public with sharing class customLightningDataTableController {
 
                 List<CustomLDTSaveWrapper.field> fields = data.fields;
                 for(CustomLDTSaveWrapper.field field:fields){
-                    if(field.value != ''){
+                    if(field.value != '' && !field.isCalculated){
                         if(field.fieldType == 'date'){
                             sObj.put(field.fieldAPIName, date.valueOf(field.value));
                         } else if(field.fieldType == 'checkbox'){
