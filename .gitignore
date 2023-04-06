@@ -1,0 +1,33 @@
+.DS_Store                # Cruft from MacOS Finder
+Thumbs.db                # Cruft from Windows Explorer
+
+.project                 # I think this is Eclipse but not certain
+.settings                # Ditto
+salesforce.schema        # Eclipse
+Referenced Packages      # Eclipse
+
+build.properties         # Force.com Migration Tool
+
+/IlluminatedCloud        # Illuminated Cloud
+.idea/                   # IntelliJ IDEA (Illuminated Cloud)
+
+venv/                    # Python
+*.pyc                    # Python
+
+.*.swp                   # Vim
+
+*.sublime-project        # Sublime Text (used with MavensMate)
+*.sublime-workspace      # Sublime Text (used with MavensMate)
+
+.sfdx/                   # SFDX
+.sf/
+
+.vscode/                 # Visual Studio Code
+
+.cci/                    # CumulusCI
+
+node_modules/            # Node.js (LWC, Prettier)
+coverage/                # LWC coverage information
+.localdevserver/         # SFDX/LWC dev
+
+.pmdCache                # pmd cache file

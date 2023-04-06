@@ -1,11 +1,8 @@
 /**
- * @description       : 
+ * @description       : js for custom lightning data table
  * @author            : daniel@hyphen8.com
- * @last modified on  : 06/04/2022
+ * @last modified on  : 06-04-2023
  * @last modified by  : daniel@hyphen8.com
- * Modifications Log
- * Ver   Date         Author               Modification
- * 1.0   01/04/2022   daniel@hyphen8.com   Initial Version
 **/
 import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -23,6 +20,7 @@ export default class CustomLightningDataTable extends LightningElement {
     @api parentRecordId;
     @api allowAddRow = false;
     @api allowEdit = false;
+    @api allowRowDeletion = false;
     @api maxRows;
     @api startingRowCount;
     @api whereClause;
@@ -123,7 +121,6 @@ export default class CustomLightningDataTable extends LightningElement {
                         isURL:element.isURL,
                         isPercent:element.isPercent,
                         isCurrency:element.isCurrency,
-                        isCalculated:element.isCalculated,
                         picklistOptions:pickListValues,
                 }];
             });
@@ -162,7 +159,6 @@ export default class CustomLightningDataTable extends LightningElement {
                         isURL:element.isURL,
                         isPercent:element.isPercent,
                         isCurrency:element.isCurrency,
-                        isCalculated:element.isCalculated,
                         picklistOptions:pickListValues,}];
                 });
                 editItems = [...editItems, {id: recordId, fields: individualrecord}];
@@ -238,8 +234,6 @@ export default class CustomLightningDataTable extends LightningElement {
                 return 'text';
             case 'picklist':
                 return 'combobox';
-            case 'double':
-                return 'number';
             case 'currency':
                 return 'number';
         }

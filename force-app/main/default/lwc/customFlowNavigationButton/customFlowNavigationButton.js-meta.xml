@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>   
+    <targetConfigs>
+        <targetConfig targets='lightning__FlowScreen'>
+              <property name='buttonLabel' type='String' label='Label' description='Label to be displayed on the button'/>  
+              <property name='variant' type='String' label='Button Variant' description='Following SLDS Standards accepted values brand,base,neutral,brand-outline,destructive,destructive-text,inverse,success'/>  
+              <property name='flowAction' type='String' label='FLOW Action' description='On click where do we go in the flow NEXT or PREVIOUS or FINISH'/>            
+              <property name='position' type='String' label='Button position' description='Float the button on the LEFT or on the RIGHT leave blank for anywhere'/>            
+              <property name='buttonPressed' type='Boolean' label='Confirmation Button Pressed' description='Confirms that the button has been pressed'/>
+              <property name='stetchButton' type='Boolean' label='Stretch button to fill available space' description='Forces the button to fill the entire space available'/>            
+        </targetConfig>
+  </targetConfigs>
+</LightningComponentBundle>

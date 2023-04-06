@@ -1,11 +1,8 @@
 /**
  * @description       : custom data table controller class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 05/04/2022
+ * @last modified on  : 06-04-2023
  * @last modified by  : daniel@hyphen8.com
- * Modifications Log
- * Ver   Date         Author               Modification
- * 1.0   01/04/2022   daniel@hyphen8.com   Initial Version
 **/
 @SuppressWarnings('PMD')
 public with sharing class customLightningDataTableController {
@@ -34,14 +31,11 @@ public with sharing class customLightningDataTableController {
                 if(!(String.isEmpty(parentIDField) && String.isEmpty(parentId)))
                 {
                     query += ' WHERE ' + parentIDField + '=\'' + parentId + '\'';
-                    if(!(String.isEmpty(whereClause)))
-                    {
-                        query += ' AND ' + whereClause;
-                    }
                 }
-                else if (!(String.isEmpty(whereClause)))
+
+                if(!(String.isEmpty(whereClause)))
                 {
-                    query += ' WHERE ' + whereClause;
+                    query += ' AND ' + whereClause;
                 }
                             
                 List<SObject> lstRecords = Database.query(query);
@@ -74,6 +68,7 @@ public with sharing class customLightningDataTableController {
             fieldWrapper.picklistOptions = getPickListValues(currentFieldDetal);
             fieldWrapper.length = currentFieldDetal.getLength();
             fieldWrapper.scale = currentFieldDetal.getScale();
+            system.debug('current field scale > ' + currentFieldDetal.getScale());
             fieldWrapper.required = field.required;
             fieldWrapper.isCheckbox = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'boolean') ? true:false;
             fieldWrapper.isText = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'string' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'text' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'textarea') ? true:false;
@@ -85,7 +80,29 @@ public with sharing class customLightningDataTableController {
             fieldWrapper.isURL = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'url') ? true:false;
             fieldWrapper.isPicklist = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'picklist' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'multipicklist') ? true:false;
             fieldWrapper.isPercent = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'percent') ? true:false;
-            fieldWrapper.isCalculated = currentFieldDetal.isCalculated();
+            if(string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'currency' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'double' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'percent'){
+                if(currentFieldDetal.getScale() == 0){
+                    fieldWrapper.stepScale = 0;
+                } else {
+                    String stepValue = '0.';
+                    for(Integer i = 1; i <= currentFieldDetal.getScale(); i++){
+                        if(i == 1){
+                            if(i == currentFieldDetal.getScale()){
+                                stepValue = stepValue + '1';
+                            } else {
+                                stepValue = stepValue + '0';
+                            }
+                        } else {
+                            if(i == currentFieldDetal.getScale()){
+                                stepValue = stepValue + '1';
+                            } else {
+                                stepValue = stepValue + '0';
+                            }
+                        }
+                    }
+                    fieldWrapper.stepScale = Decimal.valueOf(stepValue);
+                }
+            }
             fieldDetails.add(fieldWrapper);
         }
 
@@ -135,7 +152,7 @@ public with sharing class customLightningDataTableController {
 
                 List<CustomLDTSaveWrapper.field> fields = data.fields;
                 for(CustomLDTSaveWrapper.field field:fields){
-                    if(field.value != '' && !field.isCalculated){
+                    if(field.value != ''){
                         if(field.fieldType == 'date'){
                             sObj.put(field.fieldAPIName, date.valueOf(field.value));
                         } else if(field.fieldType == 'checkbox'){

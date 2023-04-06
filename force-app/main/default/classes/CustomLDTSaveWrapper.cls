@@ -1,11 +1,8 @@
 /**
  * @description       : save wrapper class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 05/04/2022
+ * @last modified on  : 06-04-2023
  * @last modified by  : daniel@hyphen8.com
- * Modifications Log
- * Ver   Date         Author               Modification
- * 1.0   04/04/2022   daniel@hyphen8.com   Initial Version
 **/
 @SuppressWarnings('PMD')
 public class CustomLDTSaveWrapper {

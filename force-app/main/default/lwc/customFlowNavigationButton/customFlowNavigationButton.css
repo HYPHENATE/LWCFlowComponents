@@ -1,0 +1,8 @@
+.floatRight {
+    float:right;
+    margin-left:5px;
+}
+.floatLeft {
+    float:left;
+    margin-right:5px;
+}

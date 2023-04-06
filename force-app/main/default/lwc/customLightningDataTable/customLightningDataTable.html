@@ -1,12 +1,9 @@
 <!-- sldsValidatorIgnore -->
 <!--
-  @description       : 
+  @description       : top level custom lightning data table
   @author            : daniel@hyphen8.com
-  @last modified on  : 05/04/2022
+  @last modified on  : 06-04-2023
   @last modified by  : daniel@hyphen8.com
-  Modifications Log
-  Ver   Date         Author               Modification
-  1.0   01/04/2022   daniel@hyphen8.com   Initial Version
 -->
 <template>
 
@@ -32,14 +29,16 @@
                     <div class="slds-truncate" title={column.label}>{column.label}</div>
                   </th>
                 </template>
-                <th class="" scope="col">
-                  <div class="slds-truncate slds-align_absolute-center" title="Actions">Actions</div>
-                </th>
+                <template if:true={allowRowDeletion}>
+                  <th class="" scope="col">
+                    <div class="slds-truncate slds-align_absolute-center" title="Actions">Actions</div>
+                  </th>
+                </template>
               </tr>
             </thead>
             <tbody>
               <template for:each={editData} for:item="record">
-                <c-custom-lightning-data-table-row key={record.id} record-id={record.id} row-data={record} onrowdeleted={handleRowDelete} onrowupdated={handleRowUpdate}></c-custom-lightning-data-table-row>
+                <c-custom-lightning-data-table-row key={record.id} record-id={record.id} row-delete-enabled={allowRowDeletion} row-data={record} onrowdeleted={handleRowDelete} onrowupdated={handleRowUpdate}></c-custom-lightning-data-table-row>
               </template>
             </tbody>
           </table>

@@ -1,11 +1,8 @@
 /**
- * @description       : 
+ * @description       : js for row level data table items
  * @author            : daniel@hyphen8.com
- * @last modified on  : 04/04/2022
+ * @last modified on  : 06-04-2023
  * @last modified by  : daniel@hyphen8.com
- * Modifications Log
- * Ver   Date         Author               Modification
- * 1.0   04/04/2022   daniel@hyphen8.com   Initial Version
 **/
 import { LightningElement, api, track } from 'lwc';
 
@@ -22,6 +19,7 @@ export default class CustomLightningDataTableRow extends LightningElement {
         this.currentData = value;
     }
     @api recordId;
+    @api rowDeleteEnabled;
 
 
     // function that tracks changes and commits at field level to ensure that master editData is kept up to

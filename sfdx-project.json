@@ -1,25 +1,26 @@
 {
-    "packageDirectories": [
-        {
-            "path": "force-app",
-            "default": true,
-            "package": "Hyphen8LabsFlowComponents",
-            "versionName": "v1.3.1",
-            "versionNumber": "1.3.1.NEXT"
-        }
-    ],
-    "namespace": "",
-    "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "52.0",
-    "packageAliases": {
-        "Hyphen8LabsFlowComponents": "0Ho67000000TN5qCAG",
-        "Hyphen8LabsFlowComponents@1.0.0-1": "04t67000000SalGAAS",
-        "Hyphen8LabsFlowComponents@1.1.0-1": "04t67000000xoEUAAY",
-        "Hyphen8LabsFlowComponents@1.1.0-2": "04t67000000xoEZAAY",
-        "Hyphen8LabsFlowComponents@1.1.0-3": "04t67000000xoorAAA",
-        "Hyphen8LabsFlowComponents@1.1.0-4": "04t67000000xoowAAA",
-        "Hyphen8LabsFlowComponents@1.2.0-1": "04t67000000xop1AAA",
-        "Hyphen8LabsFlowComponents@1.3.0-1": "04t67000000xop6AAA",
-        "Hyphen8LabsFlowComponents@1.3.1-1": "04t67000000xopGAAQ"
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "Hyphen8LabsFlowComponents",
+      "versionName": "v1.6.0",
+      "versionNumber": "1.6.0.NEXT"
     }
+  ],
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "52.0",
+  "packageAliases": {
+    "Hyphen8LabsFlowComponents": "0Ho67000000TN5qCAG",
+    "Hyphen8LabsFlowComponents@1.0.0-1": "04t67000000SalGAAS",
+    "Hyphen8LabsFlowComponents@1.1.0-1": "04t67000000xoEUAAY",
+    "Hyphen8LabsFlowComponents@1.1.0-2": "04t67000000xoEZAAY",
+    "Hyphen8LabsFlowComponents@1.1.0-3": "04t67000000xoorAAA",
+    "Hyphen8LabsFlowComponents@1.1.0-4": "04t67000000xoowAAA",
+    "Hyphen8LabsFlowComponents@1.2.0-1": "04t67000000xop1AAA",
+    "Hyphen8LabsFlowComponents@1.3.0-1": "04t67000000xop6AAA",
+    "Hyphen8LabsFlowComponents@1.3.1-1": "04t67000000xopGAAQ",
+    "Hyphen8LabsFlowComponents@1.6.0-1": "04t67000000MdOGAA0"
+  }
 }
