@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>H8 Lightning Input (Text)</masterLabel>
+    <description>Custom implementation of lightning-input with a type of Text</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="label" label="Field Label" type="String" role="inputOnly"/>
+            <property name="placeholder" label="Field Placeholder" type="String" role="inputOnly"/>
+            <property name="value" label="Field Value" type="String" />
+            <property name="fieldLevelHelp" label="Field Level Help" type="String" role="inputOnly"/>
+            <property name="required" label="Required" type="Boolean" role="inputOnly" default="false"/>
+            <property name="disabled" label="Disabled" type="Boolean" role="inputOnly" default="false"/>
+            <property name="readOnly" label="Read Only" type="Boolean" role="inputOnly" default="false"/>
+            <property name="maxLength" label="Maximum Character Length" type="Integer" role="inputOnly" default="255"/>
+            <property name="minLength" label="Minimum Character Length" type="Integer" role="inputOnly" default="0"/>
+            <property name="messageWhenValueMissing" label="Required value missing message" type="String" role="inputOnly"/>
+            <property name="messageWhenTooLong" label="Message when too many characters provided" type="String" role="inputOnly"/>
+            <property name="messageWhenTooShort" label="Message when not enought characters provided" type="String" role="inputOnly"/>
+            <property name="showCharacterCount" label="Display the character count" type="Boolean" role="inputOnly" default="false"/>
+            <property name="variant" label="UI Variant" type="String" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
