@@ -1,0 +1,29 @@
+<!--
+  @description       : Html for lightning-input date field
+  @author            : daniel@hyphen8.com
+  @last modified on  : 13/08/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    <lightning-input class="customLightningInputDate"
+                        type="date"
+                        label={inputLabel}
+                        value={value}
+                        placeholder={placeholder}
+                        min={min}
+                        max={max}
+                        read-only={readOnly}
+                        disabled={disabled}
+                        field-level-help={fieldLevelHelp}
+                        variant={variant}
+                        message-when-bad-input={messageWhenBadInput}
+                        message-when-range-overflow={messageWhenRangeOverflow}
+                        message-when-range-underflow={messageWhenRangeUnderflow}
+                        message-when-value-missing={messageWhenValueMissing}
+                        onfocus={handleChangeValidation}
+                        onblur={handleChangeValidation}
+                        oninput={handleChangeValidation}
+                        onkeyup={handleChangeValidation}
+                        onchange={handleChangeValidation}>
+    </lightning-input>
+</template>

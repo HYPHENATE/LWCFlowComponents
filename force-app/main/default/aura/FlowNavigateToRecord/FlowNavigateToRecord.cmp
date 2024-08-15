@@ -1,0 +1,9 @@
+<!--
+  @description       : html for aura component for use in flow to redirect to a new record
+  @author            : daniel@hyphen8.com
+  @last modified on  : 01/02/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions">
+    <aura:attribute name="recordId" type="String" />
+</aura:component>

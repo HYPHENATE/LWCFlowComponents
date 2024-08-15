@@ -1,0 +1,35 @@
+<!--
+  @description       : html for lightning-input type text
+  @author            : daniel@hyphen8.com
+  @last modified on  : 13/08/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    <lightning-input class="customLightningInputText"
+                        type="text"
+                        label={inputLabel}
+                        value={value}
+                        placeholder={placeholder}
+                        min-length={minLength}
+                        max-length={maxLength}
+                        read-only={readOnly}
+                        disabled={disabled}
+                        field-level-help={fieldLevelHelp}
+                        variant={variant}
+                        message-when-value-missing={messageWhenValueMissing}
+                        message-when-too-long={messageWhenValueTooLong}
+                        message-when-too-short={messageWhenValueTooShort}
+                        onfocus={handleChangeValidation}
+                        onblur={handleChangeValidation}
+                        oninput={handleChangeValidation}
+                        onkeyup={handleChangeValidation}
+                        onchange={handleChangeValidation}>
+    </lightning-input>
+    <template if:true={showCharacterCount}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-1">
+                <span class="slds-float_right">{characterCount} / {maxLength}</span>
+            </div>
+        </div>
+    </template>
+</template>

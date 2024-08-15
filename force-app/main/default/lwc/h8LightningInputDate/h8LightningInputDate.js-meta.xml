@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>    
+    <masterLabel>H8 Lightning Input (Date)</masterLabel>
+    <description>Custom implementation of lightning-input with a type of Date</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="label" label="Field Label" type="String" role="inputOnly"/>
+            <property name="placeholder" label="Field Placeholder" type="String" role="inputOnly"/>
+            <property name="value" label="Field Value" type="Date" />
+            <property name="fieldLevelHelp" label="Field Level Help" type="String" role="inputOnly"/>
+            <property name="required" label="Required" type="Boolean" role="inputOnly" default="false"/>
+            <property name="disabled" label="Disabled" type="Boolean" role="inputOnly" default="false"/>
+            <property name="readOnly" label="Read Only" type="Boolean" role="inputOnly" default="false"/>
+            <property name="max" label="Maximum Date" type="Date" role="inputOnly"/>
+            <property name="min" label="Minimum Date" type="Date" role="inputOnly"/>
+            <property name="messageWhenValueMissing" label="Required value missing message" type="String" role="inputOnly"/>
+            <property name="messageWhenRangeOverflow" label="Message when date provided is over the minimum date" type="String" role="inputOnly"/>
+            <property name="messageWhenRangeUnderflow" label="Message when date provided is under the minimum date" type="String" role="inputOnly"/>
+            <property name="messageWhenBadInput" label="Message value provided is not a date" type="String" role="inputOnly"/>
+            <property name="variant" label="UI Variant" type="String" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

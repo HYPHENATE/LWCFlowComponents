@@ -20,7 +20,10 @@ venv/                    # Python
 *.sublime-workspace      # Sublime Text (used with MavensMate)
 
 .sfdx/                   # SFDX
+.sfdx
+.sfdx\
 .sf/
+.sf
 
 .vscode/                 # Visual Studio Code
 

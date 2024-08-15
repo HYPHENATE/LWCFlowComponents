@@ -1,0 +1,42 @@
+<!--
+  @description       : html to output vertical tabs based on metadata configuration
+  @author            : daniel@hyphen8.com
+  @last modified on  : 14/08/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    
+    <template if:true={isLoading}>
+        <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+            <lightning-spinner
+                alternative-text="Loading..." variant="brand">
+            </lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+        <div class="slds-vertical-tabs">
+            <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+                <template for:each={sections} for:item="section">
+                    <c-h8-flow-form-render-item key={section.id} section={section} active-section={activeSectionId} onsectionselected={handleChangeSection}></c-h8-flow-form-render-item>
+                </template>
+            </ul>
+            <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+                <div class="slds-text-longform">
+                    <template if:true={loadFlow}>
+                        <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                            <lightning-spinner
+                                alternative-text="Loading..." variant="brand">
+                            </lightning-spinner>
+                        </div>
+                    </template>
+                    <template if:false={loadFlow}>
+                        <lightning-flow flow-api-name={flowAPIName} 
+                                        flow-input-variables={inputVariables}
+                                        onstatuschange={handleStatusChange}>
+                        </lightning-flow>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>
