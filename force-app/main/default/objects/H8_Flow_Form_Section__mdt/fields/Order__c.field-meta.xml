@@ -3,7 +3,7 @@
     <fullName>Order__c</fullName>
     <defaultValue>1</defaultValue>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>This is the order that the section should appear in</inlineHelpText>
     <label>Order</label>
     <precision>18</precision>
