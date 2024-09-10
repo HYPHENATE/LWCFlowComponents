@@ -1,7 +1,7 @@
 /**
  * @description       : custom rich text area component with word / character counter
  * @author            : daniel@hyphen8.com
- * @last modified on  : 12/07/2021
+ * @last modified on  : 10-09-2024
  * @last modified by  : daniel@hyphen8.com
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -33,6 +33,8 @@ export default class CustomRichTextComponent extends LightningElement {
     @api displayCharacterCount = false;
     @api displayWordCount = false;
     @api requireFieldMessage;
+    @api textAreaHeight;
+
 
     errorMessage;
     valid;
@@ -51,6 +53,12 @@ export default class CustomRichTextComponent extends LightningElement {
     renderedCallback() {
         this.currentWordCount = this.wordCount();
         this.currentCharacterCount = this.characterCount();
+        this.resize();
+    }
+
+    resize(){
+        var css = this.template.host.style;
+        css.setProperty('--txt-size', this.textAreaHeight);
     }
 
     // default flow validation method

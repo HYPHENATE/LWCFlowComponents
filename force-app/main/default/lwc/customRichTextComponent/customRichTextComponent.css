@@ -1,0 +1,3 @@
+:host {
+    --sds-c-textarea-sizing-min-height: var(--txt-size);
+}

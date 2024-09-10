@@ -349,6 +349,12 @@
                     <stringValue>label-stacked</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>200px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -436,6 +442,12 @@
                 <name>variant</name>
                 <value>
                     <stringValue>label-stacked</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>20rem</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -533,6 +545,12 @@
                     <stringValue>font,size,bold,italic,underline,strike,list</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>200px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -620,6 +638,12 @@
                 <name>value</name>
                 <value>
                     <elementReference>richTextWordCount</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>200px</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
