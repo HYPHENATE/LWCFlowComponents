@@ -71,6 +71,12 @@
                     <stringValue>label-stacked</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>250px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -115,6 +121,12 @@
                     <stringValue>label-stacked</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>250px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -145,6 +157,12 @@
                 <name>value</name>
                 <value>
                     <elementReference>exampleRichTextCharacterCount</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>250px</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -189,6 +207,12 @@
                 <name>value</name>
                 <value>
                     <elementReference>richTextWordCount</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>250px</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -349,6 +373,12 @@
                     <stringValue>label-stacked</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>200px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -436,6 +466,12 @@
                 <name>variant</name>
                 <value>
                     <stringValue>label-stacked</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>200px</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -533,6 +569,12 @@
                     <stringValue>font,size,bold,italic,underline,strike,list</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>225px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -622,6 +664,12 @@
                     <elementReference>richTextWordCount</elementReference>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>textAreaHeight</name>
+                <value>
+                    <stringValue>225px</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
@@ -636,7 +684,7 @@
             <inputParameters>
                 <name>disabled</name>
                 <value>
-                    <stringValue>false</stringValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>

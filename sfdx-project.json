@@ -4,8 +4,8 @@
       "path": "force-app",
       "default": true,
       "package": "Hyphen8LabsFlowComponents",
-      "versionName": "v1.7.0",
-      "versionNumber": "1.7.0.NEXT",
+      "versionName": "v1.7.4",
+      "versionNumber": "1.7.4.NEXT",
       "dependencies": [
         {
           "package": "Hyphen8 Apex Tools"
@@ -15,7 +15,7 @@
   ],
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "52.0",
+  "sourceApiVersion": "60.0",
   "packageAliases": {
     "Hyphen8 Apex Tools": "04tQB000000M5dlYAC",
     "Hyphen8LabsFlowComponents": "0Ho67000000TN5qCAG",
@@ -28,6 +28,10 @@
     "Hyphen8LabsFlowComponents@1.3.0-1": "04t67000000xop6AAA",
     "Hyphen8LabsFlowComponents@1.3.1-1": "04t67000000xopGAAQ",
     "Hyphen8LabsFlowComponents@1.6.0-1": "04t67000000MdOGAA0",
-    "Hyphen8LabsFlowComponents@1.7.0-1": "04tQB000000RCbNYAW"
+    "Hyphen8LabsFlowComponents@1.7.0-1": "04tQB000000RCbNYAW",
+    "Hyphen8LabsFlowComponents@1.7.1-1": "04tQB000000RLDFYA4",
+    "Hyphen8LabsFlowComponents@1.7.2-1": "04tQB000000RMCXYA4",
+    "Hyphen8LabsFlowComponents@1.7.3-1": "04tQB000000Tu8TYAS",
+    "Hyphen8LabsFlowComponents@1.7.4-1": "04tQB000000VPerYAG"
   }
 }

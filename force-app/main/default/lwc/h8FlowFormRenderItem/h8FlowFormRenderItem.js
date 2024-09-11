@@ -1,7 +1,7 @@
 /**
  * @description       : js for individual item
  * @author            : daniel@hyphen8.com
- * @last modified on  : 14/08/2024
+ * @last modified on  : 05/09/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -21,6 +21,7 @@ export default class H8FlowFormRenderItem extends LightningElement {
 
     // onclick function to tell the parent component that the user wants to view that section
     handleOnSectionSelection(event){
+        event.preventDefault();
         this.dispatchEventFunction('sectionselected', {detail: {sectionId: this.section.id, flowName: this.section.flow}});
     }
 

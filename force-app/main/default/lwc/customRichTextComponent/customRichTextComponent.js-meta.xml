@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>52.0</apiVersion>
+    <apiVersion>60.0</apiVersion>
     <isExposed>true</isExposed>
+    <description>Custom implementation of lightning-input-rich-text component with word and character counter</description>
+    <masterLabel>Custom Rich Text Input/Output</masterLabel>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
@@ -23,6 +25,7 @@
             <property name="displayCharacterCount" label="Display Character Count" description="Confirm that you want to apply and display the character count on page" type="Boolean" role="inputOnly"/>
             <property name="displayWordCount" label="Display Word Count" description="Confirm that you want to apply and display the word count on page" type="Boolean" role="inputOnly"/>
             <property name="requireFieldMessage" label="Required field message" description="Provide a message when a field is required but not completed" type="String" role="inputOnly"/>
+            <property name="textAreaHeight" label="Input box minimum height" description="Define the minimum height of the input box supports px, em or rem sizes but you must include them so 300px/30em/30rem are all valid" type="String" role="inputOnly"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
