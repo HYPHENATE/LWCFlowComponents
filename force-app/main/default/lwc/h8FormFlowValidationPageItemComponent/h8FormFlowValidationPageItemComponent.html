@@ -1,0 +1,31 @@
+<!--
+  @description       : html for outputting page errors
+  @author            : daniel@hyphen8.com
+  @last modified on  : 02/10/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    
+    <template if:true={displayPage}>
+        <div class="slds-var-m-around_small">
+            <div class="slds-text-heading_small">
+                <lightning-icon class="slds-var-m-right_small" icon-name='utility:forward' size="x-small" alternative-text='Page' title='Page'></lightning-icon>
+                {page.pageName}
+            </div>
+            <template for:each={page.errors} for:item="error">
+                <div class="slds-var-m-left_large" key={error.questionName}>
+                    <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text='Missing information' title='Missing information'></lightning-icon>
+                    {error.questionName}
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:false={displayPage}>
+        <template for:each={page.errors} for:item="error">
+            <div class="slds-var-m-left_medium" key={error.questionName}>
+                <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text='Missing information' title='Missing information'></lightning-icon>
+                {error.questionName}
+            </div>
+        </template>
+    </template>
+</template>

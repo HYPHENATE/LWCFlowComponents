@@ -1,7 +1,7 @@
 /**
  * @description       : Meta driven form flow controller
  * @author            : daniel@hyphen8.com
- * @last modified on  : 14/08/2024
+ * @last modified on  : 02/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormController {
@@ -58,6 +58,7 @@ public with sharing class H8FlowFormController {
                     gen.writeStringField('icon', section.Icon_Name__c != null ? section.Icon_Name__c : '');
                     gen.writeBooleanField('hasIcon', section.Icon_Name__c != null);
                     gen.writeStringField('flow', section.Flow_API_Name__c);
+                    gen.writeBooleanField('hasValidationError', false);
                     gen.writeIdField('id', section.Id);
                 gen.writeEndObject();
             }

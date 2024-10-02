@@ -1,0 +1,24 @@
+<!--
+  @description       : Sample Description
+  @author            : daniel@hyphen8.com
+  @last modified on  : 02/10/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    
+    <template if:true={hasValidationErrors}>
+      <lightning-card class="slds-var-m-top_medium">
+        <div class="slds-box" style="padding: 2px 2px 2px 2px;border: 5px solid #cd0000;background-color: #ffffff;box-sizing: border-box;">
+          <div class="slds-var-m-around_medium">
+            <div class="slds-text-heading_medium slds-var-m-bottom_medium">You must complete the following fields</div>
+            <template for:each={validationErrors} for:item="error">   
+              <div class="slds-var-m-left_medium" key={error.questionName}>
+                <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text='Missing information' title='Missing information'></lightning-icon>
+                  {error.questionName}
+              </div>
+            </template>
+          </div>
+        </div>
+      </lightning-card>
+    </template>
+</template>
