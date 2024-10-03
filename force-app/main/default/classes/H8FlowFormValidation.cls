@@ -1,14 +1,13 @@
 /**
  * @description       : master form flow validation class for validating an entire form submission looking for errors
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 03-10-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormValidation {
     
     private static H8_Flow_Form__mdt formDetails;
-    //TODO CHANGE TO A SET
-    private static List<String> validationFields = new List<String>();
+    private static Set<String> validationFields = new Set<String>();
     private static SObject currentRecord;
     private static Map<String, Map<String, List<H8_Flow_Form_Section_Validation__mdt>>> mapOfValidations = new Map<String, Map<String, List<H8_Flow_Form_Section_Validation__mdt>>>();
     private static Map<String, Map<String, List<String>>> validationErrors = new Map<String, Map<String, List<String>>>();

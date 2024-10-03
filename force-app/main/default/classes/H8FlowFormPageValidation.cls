@@ -1,13 +1,13 @@
 /**
  * @description       : Apex controller for display page level validation errors within a flow
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 03-10-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormPageValidation {
 
     private static H8_Flow_Form__mdt formDetails;
-    private static List<String> validationFields = new List<String>();
+    private static Set<String> validationFields = new Set<String>();
     private static SObject currentRecord;
     private static List<H8_Flow_Form_Section_Validation__mdt> pageValidations = new List<H8_Flow_Form_Section_Validation__mdt>();
     private static Map<String, Object> validationValue = new Map<String, Object>();

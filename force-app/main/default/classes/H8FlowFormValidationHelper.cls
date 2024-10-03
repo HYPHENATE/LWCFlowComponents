@@ -1,7 +1,7 @@
 /**
  * @description       : flow form validations helper class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 03-10-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormValidationHelper {
@@ -18,12 +18,8 @@ public with sharing class H8FlowFormValidationHelper {
                             (SELECT MasterLabel, Order__c,
                                 (SELECT MasterLabel, CustomErrorMessage__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
                                     FROM H8_Flow_Form_Section_Validations__r)
-                                        FROM H8_Flow_Form_Sections__r
-                                        ORDER BY Order__c ASC)
-                                            FROM H8_Flow_Form__mdt
-                                                WHERE DeveloperName=:formAPIName
-                                                    WITH SECURITY_ENFORCED
-                                                    LIMIT 1];
+                                        FROM H8_Flow_Form_Sections__r ORDER BY Order__c ASC)
+                                            FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
     }
 
     /**
@@ -37,13 +33,8 @@ public with sharing class H8FlowFormValidationHelper {
                             (SELECT MasterLabel, Order__c,
                                 (SELECT MasterLabel, CustomErrorMessage__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
                                     FROM H8_Flow_Form_Section_Validations__r)
-                                        FROM H8_Flow_Form_Sections__r 
-                                        WHERE MasterLabel=:sectionName
-                                        ORDER BY Order__c ASC)
-                                            FROM H8_Flow_Form__mdt
-                                                WHERE DeveloperName=:formAPIName
-                                                    WITH SECURITY_ENFORCED
-                                                    LIMIT 1];
+                                        FROM H8_Flow_Form_Sections__r WHERE MasterLabel=:sectionName ORDER BY Order__c ASC)
+                                            FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
     }
 
     /**
@@ -57,12 +48,8 @@ public with sharing class H8FlowFormValidationHelper {
                             (SELECT MasterLabel, Order__c,
                                 (SELECT MasterLabel, CustomErrorMessage__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
                                     FROM H8_Flow_Form_Section_Validations__r WHERE Page__c=:pageName)
-                                        FROM H8_Flow_Form_Sections__r
-                                        ORDER BY Order__c ASC)
-                                            FROM H8_Flow_Form__mdt
-                                                WHERE DeveloperName=:formAPIName
-                                                    WITH SECURITY_ENFORCED
-                                                    LIMIT 1];
+                                        FROM H8_Flow_Form_Sections__r ORDER BY Order__c ASC)
+                                            FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
     }
 
     /**
@@ -75,7 +62,7 @@ public with sharing class H8FlowFormValidationHelper {
 
     //TODO UPDATE List<String> soqlFields to be a Set
     //Suppress SOQLInjection
-    public static SObject getProcessingRecord(String recordId, String primaryObjectAPIName, List<String> soqlFields){
+    public static SObject getProcessingRecord(String recordId, String primaryObjectAPIName, Set<String> soqlFields){
         soqlFields.add('Id');
         String validationFieldOutput = String.join(soqlFields, ',');
         String validationQuery = 'SELECT ' + validationFieldOutput + ' FROM ' + primaryObjectAPIName + ' WHERE Id=:recordId';
@@ -91,20 +78,10 @@ public with sharing class H8FlowFormValidationHelper {
     public static Object getFieldValue(SObject currentRecord, String fieldAPIName){
         if(fieldAPIName.contains('.')){
             List<String> listOfFieldValues = fieldAPIName.split('\\.');
-            String lookupFieldName = getParentLookupFieldAPIName(listOfFieldValues[0]);
-            SObject parentObject = currentRecord.getSObject(lookupFieldName);
+            SObject parentObject = currentRecord.getSObject(listOfFieldValues[0]);
             return parentObject.get(listOfFieldValues[1]);
         } else {
             return currentRecord.get(fieldAPIName);
         }
-    }
-
-    /**
-    * @description          method to get the parent lookup field
-    * @param                fieldString 
-    * @return               String 
-    **/
-    private static String getParentLookupFieldAPIName(String fieldString){
-        return fieldString.contains('__r') ? fieldString.replace('__r','__c') : fieldString;
     }
 }
