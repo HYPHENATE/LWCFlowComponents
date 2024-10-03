@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>This component works with custom metadata attached to the flow form component and will output an entire sections validation errors once the review component has been accessed.</description>
+    <masterLabel>Flow Form Section Validations</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" label="Master RecordId" type="String" role="inputOnly"/>
+            <property name="formName" label="Form API Name" type="String" role="inputOnly"/>
+            <property name="parentObjectAPIName" label="Parent Object API Name" type="String" role="inputOnly"/>
+            <property name="sectionName" label="Form Section Name" type="String" role="inputOnly"/>
+            <property name="helpText" label="Help Text" type="String" role="inputOnly" required="true" default="You must complete the following fields"/>
+            <property name="affectTextLabel" label="Affect Fields/Question Text" type="String" role="inputOnly" required="true" default="Question(s) affected:"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

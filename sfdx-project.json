@@ -4,8 +4,8 @@
       "path": "force-app",
       "default": true,
       "package": "Hyphen8LabsFlowComponents",
-      "versionName": "v1.7.4",
-      "versionNumber": "1.7.4.NEXT",
+      "versionName": "v1.7.5",
+      "versionNumber": "1.7.5.NEXT",
       "dependencies": [
         {
           "package": "Hyphen8 Apex Tools"
@@ -32,6 +32,7 @@
     "Hyphen8LabsFlowComponents@1.7.1-1": "04tQB000000RLDFYA4",
     "Hyphen8LabsFlowComponents@1.7.2-1": "04tQB000000RMCXYA4",
     "Hyphen8LabsFlowComponents@1.7.3-1": "04tQB000000Tu8TYAS",
-    "Hyphen8LabsFlowComponents@1.7.4-1": "04tQB000000VPerYAG"
+    "Hyphen8LabsFlowComponents@1.7.4-1": "04tQB000000VPerYAG",
+    "Hyphen8LabsFlowComponents@1.7.5-1": "04tQB000000dfOHYAY"
   }
 }

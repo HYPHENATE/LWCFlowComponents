@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Form Validations</masterLabel>
+    <description>This component works with custom metadata attached to the flow form component, ideally you should place this component on a review page. It will then trigger an entire form validation and update the flow form component to display where there are errors</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" label="Master RecordId" type="String" role="inputOnly"/>
+            <property name="formName" label="Form API Name" type="String" role="inputOnly"/>
+            <property name="parentObjectAPIName" label="Parent Object API Name" type="String" role="inputOnly"/>
+            <property name="cardTitle" label="Card Title" type="String" role="inputOnly" required="true" default="Review.. before you submit"/>
+            <property name="nextButtonLabel" label="Next Button Label" type="String" role="inputOnly" required="true" default="Review Sumbission"/>
+            <property name="completeFieldsText" label="Complete Fields Text" type="String" role="inputOnly" required="true" default="You must complete the following fields"/>
+            <property name="invalidCardDescription" label="Invalid Submission Next Steps Description" type="String" role="inputOnly" required="true" default="We have picked up that some of your answers are not valid. Before you can submit the form you will have to complete the required fields."/>
+            <property name="validCardDescription" label="Valid Submission Next Steps Description" type="String" role="inputOnly" required="true" default="If you have done all these feel free to submit... good luck"/>
+            <property name="affectTextLabel" label="Affect Fields/Question Text" type="String" role="inputOnly" required="true" default="Question(s) affected:"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

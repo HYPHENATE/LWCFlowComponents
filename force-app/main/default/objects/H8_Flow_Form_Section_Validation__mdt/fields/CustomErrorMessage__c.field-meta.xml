@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomErrorMessage__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>You can populate a custom error message here, the default will not display an error other than saying this field is required but you might want to include a custom error message like - This field is required as we use this within the decision making process</inlineHelpText>
+    <label>Custom Error Message</label>
+    <required>false</required>
+    <type>TextArea</type>
+</CustomField>

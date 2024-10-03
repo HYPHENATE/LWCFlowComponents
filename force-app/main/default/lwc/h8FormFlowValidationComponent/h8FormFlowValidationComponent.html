@@ -1,0 +1,58 @@
+<!--
+  @description       : html for core validation component for validation and entire form
+  @author            : daniel@hyphen8.com
+  @last modified on  : 03/10/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    
+    <template if:true={isLoaded}>
+        <div class="slds-align_absolute-center" style="height:5rem">
+            <lightning-spinner
+                alternative-text="Loading..." variant="brand">
+            </lightning-spinner>
+        </div>
+    </template>
+    
+    <template if:false={isLoaded}>
+        
+        <template if:true={hasErrors}>
+            <lightning-card title={cardTitle} class="slds-var-m-top_medium">
+                <div class="slds-text-heading_small slds-var-m-bottom_small">
+                    <lightning-formatted-rich-text value={invalidCardDescription}></lightning-formatted-rich-text>
+                </div>  
+                <div class="slds-box validation-box">
+                    <div class="slds-var-m-around_medium">
+                        <div class="slds-text-heading_medium slds-var-m-bottom_medium">
+                            {completeFieldsText}
+                        </div>
+                        
+                        <template for:each={sections} for:item="section">   
+                            <div key={section.sectionName} class="slds-var-m-bottom_small">
+                                <div class="slds-text-heading_medium slds-var-m-bottom_small">{section.sectionName}</div>
+                                <template for:each={section.pages} for:item="page">
+                                    <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
+                                </template>
+                            </div> 
+                        </template>
+                    </div>
+                </div>
+            </lightning-card>
+        </template>
+        
+        <template if:true={isValid}>
+            <lightning-card title={cardTitle} class="slds-var-m-top_medium">
+                <div class="slds-text-heading_small slds-var-m-bottom_small">
+                    <lightning-formatted-rich-text value={validCardDescription}></lightning-formatted-rich-text>
+                </div>
+                <div slot="footer">
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <lightning-button label={nextButtonLabel} variant="brand" onclick={handleNext}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </lightning-card>
+        </template>
+    </template>
+</template>

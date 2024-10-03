@@ -1,7 +1,7 @@
 /**
  * @description       : controller for flow stage nabigation
  * @author            : daniel@hyphen8.com
- * @last modified on  : 13/08/2024
+ * @last modified on  : 03/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 ({
@@ -24,11 +24,11 @@
                   }
                   else if (status === "INCOMPLETE") {
                      // Show offline error
-                     console.log("No response from server, or client is offline.")
+                     console.error("No response from server, or client is offline.")
                    }
                    else if (status === "ERROR") {
                       // Show error message
-                      console.log("Error: " + errorMessage);
+                      console.error("Error: " + errorMessage);
                    }
                }
             );
