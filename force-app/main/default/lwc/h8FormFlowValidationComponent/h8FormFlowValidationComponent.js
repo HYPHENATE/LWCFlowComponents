@@ -1,7 +1,7 @@
 /**
  * @description       : Sample Description
  * @author            : daniel@hyphen8.com
- * @last modified on  : 02/10/2024
+ * @last modified on  : 03/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -13,8 +13,12 @@ export default class H8FormFlowValidationComponent extends LightningElement {
     @api recordId;
     @api formName;
     @api parentObjectAPIName;
-    @api displayTitleIcon;
-    @api displayText;
+    @api cardTitle;
+    @api nextButtonLabel;
+    @api completeFieldsText;
+    @api invalidCardDescription
+    @api validCardDescription;
+    @api affectTextLabel;
     isLoading = true;
     sections;
     hasErrors;
@@ -32,17 +36,11 @@ export default class H8FormFlowValidationComponent extends LightningElement {
         })
         .then((results) => {
             let parsedResults = JSON.parse(results);
-            console.log(JSON.stringify(parsedResults));
             this.sections = parsedResults.sections;
             this.hasErrors = parsedResults.hasErrors;
             this.isValid = parsedResults.isValid;
             this.isLoading = false;
-            if(this.isValid){
-                let item = sessionStorage.getItem('formProcessing');
-                if(item){
-                    sessionStorage.removeItem('formProcessing');
-                }
-            } else {
+            if(this.hasErrors){
                 sessionStorage.setItem('formProcessing', JSON.stringify({ formName: this.formName, recordId: this.recordId, parentObjectAPIName: this.parentObjectAPIName}));
             }
         })

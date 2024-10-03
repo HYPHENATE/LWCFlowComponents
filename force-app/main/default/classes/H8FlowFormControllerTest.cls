@@ -1,7 +1,7 @@
 /**
  * @description       : H8FlowFormController test class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 14/08/2024
+ * @last modified on  : 03/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -38,8 +38,6 @@ public class H8FlowFormControllerTest {
             .addChildren('H8_Flow_Form_Sections__r', childList)
             .getListMockMetaData();
 
-        System.debug(testRecords);
-        System.debug(childList);
         H8FlowFormController.formTest = testRecords[0];
         H8FlowFormController.formSectionsTest = childList;
 

@@ -1,7 +1,7 @@
 /**
  * @description       : custom data table controller class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 06-04-2023
+ * @last modified on  : 03/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 @SuppressWarnings('PMD')
@@ -68,7 +68,6 @@ public with sharing class customLightningDataTableController {
             fieldWrapper.picklistOptions = getPickListValues(currentFieldDetal);
             fieldWrapper.length = currentFieldDetal.getLength();
             fieldWrapper.scale = currentFieldDetal.getScale();
-            system.debug('current field scale > ' + currentFieldDetal.getScale());
             fieldWrapper.required = field.required;
             fieldWrapper.isCheckbox = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'boolean') ? true:false;
             fieldWrapper.isText = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'string' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'text' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'textarea') ? true:false;

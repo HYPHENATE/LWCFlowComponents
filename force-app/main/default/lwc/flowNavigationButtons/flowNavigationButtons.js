@@ -1,3 +1,9 @@
+/**
+ * @description       : Sample Description
+ * @author            : daniel@hyphen8.com
+ * @last modified on  : 03/10/2024
+ * @last modified by  : daniel@hyphen8.com
+**/
 import { LightningElement, api } from 'lwc';
 
 import { FlowNavigationNextEvent } from 'lightning/flowSupport';
@@ -29,7 +35,7 @@ export default class FlowNavigationButtons extends LightningElement
         }
         catch (error)
         {
-            console.log(error);
+            console.error(error);
         }
     }
 

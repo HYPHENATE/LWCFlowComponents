@@ -1,7 +1,7 @@
 /**
  * @description       : Meta driven form flow controller
  * @author            : daniel@hyphen8.com
- * @last modified on  : 02/10/2024
+ * @last modified on  : 03/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormController {
@@ -51,7 +51,6 @@ public with sharing class H8FlowFormController {
             gen.writeFieldName('sections');
             gen.writeStartArray();
             List<H8_Flow_Form_Section__mdt> formSections = Test.isRunningTest() ? formSectionsTest : form.H8_Flow_Form_Sections__r;
-            System.debug(formSections);
             for(H8_Flow_Form_Section__mdt section:formSections){
                 gen.writeStartObject();
                     gen.writeStringField('label', section.MasterLabel);

@@ -6,42 +6,43 @@
 **/
 import { LightningElement, api } from 'lwc';
 
-import validatePage from '@salesforce/apex/H8FlowFormPageValidation.validatePage';
+import getSectionValidation from '@salesforce/apex/H8FlowFormSectionValidation.validatePage';
 
-export default class H8FlowFormPageValidationComponent extends LightningElement {
+export default class H8FormFlowValidationSectionComponent extends LightningElement {
     @api recordId;
     @api formName;
     @api parentObjectAPIName;
-    @api pageName;
+    @api sectionName;
     @api helpText;
     @api affectTextLabel;
-
-    hasValidationErrors = false;
-    validationErrors;
+    hasValidationErrors;
+    pages;
 
     connectedCallback(){
         const item = sessionStorage.getItem('formProcessing');
         if (item) {
-            this.handleValidatePage();
+            this.handleGetSectionValidation();
         }
     }
 
-    handleValidatePage() {
-        validatePage({
+    handleGetSectionValidation() {
+        getSectionValidation({
             recordId: this.recordId,
             formName: this.formName,
             parentObjectAPIName:this.parentObjectAPIName,
-            pageName:this.pageName
+            sectionName:this.sectionName
         })
         .then((results) => {
             let parsedResults = JSON.parse(results);
             if(parsedResults.success){
-                this.hasValidationErrors = parsedResults.hasValidationErrors;
-                this.validationErrors = parsedResults.errors;
+                this.hasValidationErrors = parsedResults.hasErrors;
+                this.pages = parsedResults.pages;
             }
+            
+        
         })
         .catch((error) => {
-            console.error('error handleValidatePage > ' + JSON.stringify(error));
+            console.error('error handleGetSectionValidation > ' + JSON.stringify(error));
         });
     }
 }

@@ -1,12 +1,13 @@
 /**
  * @description       : master form flow validation class for validating an entire form submission looking for errors
  * @author            : daniel@hyphen8.com
- * @last modified on  : 02/10/2024
+ * @last modified on  : 03/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormValidation {
     
     private static H8_Flow_Form__mdt formDetails;
+    //TODO CHANGE TO A SET
     private static List<String> validationFields = new List<String>();
     private static SObject currentRecord;
     private static Map<String, Map<String, List<H8_Flow_Form_Section_Validation__mdt>>> mapOfValidations = new Map<String, Map<String, List<H8_Flow_Form_Section_Validation__mdt>>>();
@@ -86,23 +87,21 @@ public with sharing class H8FlowFormValidation {
                 for(H8_Flow_Form_Section_Validation__mdt validation:validations){
                     Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
                     Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
-                    Boolean hasError = (null == fieldValue || (null != expectedValue && expectedValue != fieldValue));
-                    
-                    generateError(hasError, sectionName, validation);
+                    if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
+                        generateError(sectionName, validation);
+                    }
                 } 
             }
         }
     }
 
-    private static void generateError(Boolean hasError, String sectionName, H8_Flow_Form_Section_Validation__mdt validation){
-        if(hasError){
-            String pageName = null != validation.Page__c ? validation.Page__c : 'NOPAGESCONFIGURED';
-            Map<String, List<String>> pageErrors = validationErrors.containsKey(sectionName) ? validationErrors.get(sectionName) : new Map<String, List<String>>();
-            List<String> currentErrors = pageErrors.containsKey(pageName) ? pageErrors.get(pageName) : new List<String>();
-            currentErrors.add(validation.QuestionName__c);
-            pageErrors.put(pageName, currentErrors);
-            validationErrors.put(sectionName, pageErrors);
-        }
+    private static void generateError(String sectionName, H8_Flow_Form_Section_Validation__mdt validation){
+        String pageName = null != validation.Page__c ? validation.Page__c : 'NOPAGESCONFIGURED';
+        Map<String, List<String>> pageErrors = validationErrors.containsKey(sectionName) ? validationErrors.get(sectionName) : new Map<String, List<String>>();
+        List<String> currentErrors = pageErrors.containsKey(pageName) ? pageErrors.get(pageName) : new List<String>();
+        currentErrors.add(validation.QuestionName__c);
+        pageErrors.put(pageName, currentErrors);
+        validationErrors.put(sectionName, pageErrors);
     }
 
     /**

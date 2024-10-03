@@ -1,24 +1,37 @@
 <!--
-  @description       : Sample Description
+  @description       : html to render current page validations
   @author            : daniel@hyphen8.com
-  @last modified on  : 02/10/2024
+  @last modified on  : 03/10/2024
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
-    
-    <template if:true={hasValidationErrors}>
-      <lightning-card class="slds-var-m-top_medium">
-        <div class="slds-box" style="padding: 2px 2px 2px 2px;border: 5px solid #cd0000;background-color: #ffffff;box-sizing: border-box;">
-          <div class="slds-var-m-around_medium">
-            <div class="slds-text-heading_medium slds-var-m-bottom_medium">You must complete the following fields</div>
-            <template for:each={validationErrors} for:item="error">   
-              <div class="slds-var-m-left_medium" key={error.questionName}>
-                <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text='Missing information' title='Missing information'></lightning-icon>
-                  {error.questionName}
+  <template if:true={hasValidationErrors}>
+    <lightning-card class="slds-var-m-top_medium">
+      <div class="slds-box validation-box">
+        <div class="slds-var-m-around_medium">
+          <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-12">
+              <div class="slds-clearfix">
+                <div class="slds-float_right">
+                  <lightning-icon class="slds-var-m-right_small" icon-name='utility:forward' size="x-small" alternative-text='Page' title='Page'></lightning-icon>
+                </div>
               </div>
-            </template>
+            </div>
+            <div class="slds-col slds-size_11-of-12">
+              <div class="slds-text-heading_small">
+                {affectTextLabel}
+              </div>
+              <template for:each={validationErrors} for:item="error">
+                <div key={error.questionName}>
+                    <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text={affectTextLabel} title={affectTextLabel}></lightning-icon>
+                    <strong>{error.questionName}</strong>
+                </div>
+              </template>
+            </div>
           </div>
         </div>
-      </lightning-card>
-    </template>
+      </div>
+    </lightning-card>
+  </template>
 </template>

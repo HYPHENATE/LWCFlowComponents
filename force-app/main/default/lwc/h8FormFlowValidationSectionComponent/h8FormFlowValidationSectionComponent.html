@@ -1,0 +1,20 @@
+<!--
+  @description       : html to output an entire sections validation errors
+  @author            : daniel@hyphen8.com
+  @last modified on  : 03/10/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    <template if:true={hasValidationErrors}>
+        <lightning-card class="slds-var-m-top_medium">
+            <div class="slds-box validation-box">
+                <div class="slds-var-m-around_medium">
+                <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
+                <template for:each={pages} for:item="page">
+                    <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
+                </template>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+</template>

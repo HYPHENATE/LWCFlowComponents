@@ -1,7 +1,7 @@
 <!--
-  @description       : Sample Description
+  @description       : html for core validation component for validation and entire form
   @author            : daniel@hyphen8.com
-  @last modified on  : 02/10/2024
+  @last modified on  : 03/10/2024
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -17,19 +17,21 @@
     <template if:false={isLoaded}>
         
         <template if:true={hasErrors}>
-            <lightning-card title="Review.. before you submit" class="slds-var-m-top_medium">
+            <lightning-card title={cardTitle} class="slds-var-m-top_medium">
                 <div class="slds-text-heading_small slds-var-m-bottom_small">
-                    We have picked up that some of your answers are not valid. Before you can submit the form you will have to complete the required fields.
+                    <lightning-formatted-rich-text value={invalidCardDescription}></lightning-formatted-rich-text>
                 </div>  
-                <div class="slds-box" style="padding: 2px 2px 2px 2px;border: 5px solid #cd0000;background-color: #ffffff;box-sizing: border-box;">
+                <div class="slds-box validation-box">
                     <div class="slds-var-m-around_medium">
-                        <div class="slds-text-heading_medium slds-var-m-bottom_medium">You must complete the following fields</div>
+                        <div class="slds-text-heading_medium slds-var-m-bottom_medium">
+                            {completeFieldsText}
+                        </div>
                         
                         <template for:each={sections} for:item="section">   
                             <div key={section.sectionName} class="slds-var-m-bottom_small">
                                 <div class="slds-text-heading_medium slds-var-m-bottom_small">{section.sectionName}</div>
                                 <template for:each={section.pages} for:item="page">
-                                    <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page}></c-h8-form-flow-validation-page-item-component>
+                                    <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
                                 </template>
                             </div> 
                         </template>
@@ -39,20 +41,14 @@
         </template>
         
         <template if:true={isValid}>
-            <lightning-card title="Review... before you submit" class="slds-var-m-top_medium">
+            <lightning-card title={cardTitle} class="slds-var-m-top_medium">
                 <div class="slds-text-heading_small slds-var-m-bottom_small">
-                    Make sure that:
-                    <ol>
-                        <li>You have checked all your answers are up to date</li>
-                        <li>That any uploaded document is the right one</li>
-                        <li>That you have given as much clear and consice details as you can</li>
-                    </ol>
-                    If you have done all these feel free to submit... good luck
+                    <lightning-formatted-rich-text value={validCardDescription}></lightning-formatted-rich-text>
                 </div>
                 <div slot="footer">
                     <div class="slds-clearfix">
                         <div class="slds-float_right">
-                            <lightning-button label="Review Submission" variant="brand" onclick={handleNext}></lightning-button>
+                            <lightning-button label={nextButtonLabel} variant="brand" onclick={handleNext}></lightning-button>
                         </div>
                     </div>
                 </div>
