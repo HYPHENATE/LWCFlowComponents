@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ShareType__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>If using this flow for linking with an experience cloud you should select All Users</inlineHelpText>
+    <label>ShareType</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AllUsers</fullName>
+                <default>true</default>
+                <label>AllUsers</label>
+            </value>
+            <value>
+                <fullName>InternalUsers</fullName>
+                <default>false</default>
+                <label>InternalUsers</label>
+            </value>
+            <value>
+                <fullName>SharedUsers</fullName>
+                <default>false</default>
+                <label>SharedUsers</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

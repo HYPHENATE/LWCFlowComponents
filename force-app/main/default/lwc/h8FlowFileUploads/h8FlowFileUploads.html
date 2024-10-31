@@ -1,76 +1,77 @@
 <!--
   @description       : html for file upload
   @author            : daniel@hyphen8.com
-  @last modified on  : 08/10/2024
+  @last modified on  : 31/10/2024
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
+    
     <template if:true={isLoading}>
         <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
             <lightning-spinner
-                alternative-text="Loading..." variant="brand">
+                alternative-text={loadingSpinnerLabel} variant="brand">
             </lightning-spinner>
         </div>
     </template>
+    
     <template if:false={isLoading}>
+    
         <lightning-layout multiple-rows="true">
-            <lightning-layout-item size="12">
-                <span class="slds-required" if:true={required}>*</span>
-                <span class="slds-form-element__label">{fileUploadLabel}</span>
-                <lightning-helptext if:true={helpText} content={helpText}></lightning-helptext>
-                <lightning-file-upload
-                    name="uploadFile"
-                    accept={acceptedFormats}
-                    record-id={recordId}
-                    onuploadfinished={handleUpload}
-                    multiple={allowMultiple}
-                    disabled={disabled}>
-                </lightning-file-upload>
-            </lightning-layout-item>
-            <lightning-layout-item class="slds-form-element__label" size="12">
-                <span class="slds-form-element__label">{uploadedlabel}</span>
-            </lightning-layout-item>
-            <lightning-layout-item size="12">
-                <lightning-layout multiple-rows="true">
-                    <template for:each={objFiles} for:item="objFile">
-                        <div key={objFile.contentVersionId} class="slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_xx-small">
-                            <lightning-layout class="slds-grid_vertical-align-center slds-var-p-top_xx-small slds-var-p-bottom_xx-small slds-var-p-left_xx-small slds-var-p-right_small" style="border: 1px solid #d8dde6; border-radius:4px; background-color:#FAFAFA;">
-                                <lightning-layout-item size="11">
-                                    <div class="slds-media slds-media_center slds-has-flexi-truncate">
-                                        <div class="slds-media__figure">
-                                            <span class="slds-avatar slds-avatar_medium">
-                                                <lightning-icon 
-                                                    icon-name={objFile.filetype}
-                                                    size="medium"
-                                                    title="Icon">
-                                                </lightning-icon>
-                                            </span>
-                                        </div>
-                                        <lightning-tile
-                                            label={objFile.name}
-                                            onclick={openFile}
-                                            data-docid={objFile.documentId}
-                                            class="slds-media__body">
-                                        </lightning-tile>
-                                    </div>
-                                </lightning-layout-item>
-                                <lightning-layout-item size="1" class="slds-text-align_right">
-                                    <!-- sldsValidatorIgnoreNextLine -->
-                                    <lightning-button-icon
-                                        icon-name="utility:close"
-                                        title="Delete File"
-                                        aria-hidden="true"
-                                        onclick={deleteDocument}
-                                        data-documentid={objFile.documentId}
-                                        data-contentversionid={objFile.contentVersionId}
-                                        variant="bare">
-                                    </lightning-button-icon>
-                                </lightning-layout-item>
-                            </lightning-layout>
-                        </div>
-                    </template>
-                </lightning-layout>
-            </lightning-layout-item>
+            <template if:true={showUploadButton}>
+                <lightning-layout-item size="12">
+                    <span class="slds-required" if:true={required}>*</span>
+                    <span class="slds-form-element__label">{fileUploadLabel}</span>
+                    <lightning-helptext if:true={helpText} content={helpText}></lightning-helptext>
+                    <lightning-file-upload
+                        name="uploadFile"
+                        accept={acceptedFormats}
+                        onuploadfinished={handleUpload}
+                        multiple={allowMultipleFiles}
+                        disabled={disabled}>
+                    </lightning-file-upload>
+                </lightning-layout-item>
+            </template>
+
+            <template if:true={uploadProcessing}>
+                <lightning-layout-item class="slds-form-element__label" size="12">
+                    <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                        <lightning-spinner
+                            alternative-text={loadingSpinnerLabel}  variant="brand">
+                        </lightning-spinner>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        
+            <template if:true={hasUploadedFiles}>
+                <lightning-layout-item class="slds-form-element__label" size="12">
+                    <span class="slds-form-element__label">{uploadedlabel}</span>
+                </lightning-layout-item>
+                <template if:false={uploadProcessing}>
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows="true">
+                            <template for:each={existingFiles} for:item="objFile">
+                                <div key={objFile.contentVersionId} class="slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_xx-small">
+                                    <lightning-layout class="slds-grid_vertical-align-center slds-var-p-top_xx-small slds-var-p-bottom_xx-small slds-var-p-left_xx-small slds-var-p-right_small" style="border: 1px solid #d8dde6; border-radius:4px; background-color:#FAFAFA;">
+                                        <lightning-layout-item size="11">
+                                            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                <c-h8-flow-file-upload-icon file-extension={objFile.fileExtension}></c-h8-flow-file-upload-icon>
+                                                <c-h8-flow-file-upload-tile obj-file={objFile}></c-h8-flow-file-upload-tile>
+                                            </div>
+                                        </lightning-layout-item>
+                                        
+                                        <lightning-layout-item size="1">
+                                            <template if:false={disableFileDelete}>
+                                                <c-h8-flow-file-upload-delete-file obj-file={objFile} ondeletefile={handleOnDeleteFile}></c-h8-flow-file-upload-delete-file>
+                                            </template>
+                                        </lightning-layout-item>
+
+                                    </lightning-layout>
+                                </div>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+            </template>
         </lightning-layout>
     </template>
 </template>

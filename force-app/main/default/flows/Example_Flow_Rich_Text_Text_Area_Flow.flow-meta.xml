@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>Assign_Page_1</name>
+        <label>Assign Page 1</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <assignmentItems>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Page_1</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Text_Area_Example_Input_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Page_2</name>
+        <label>Assign Page 2</label>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
+        <assignmentItems>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Page_2</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Example_Text_Area_Output_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Page_3</name>
+        <label>Assign Page 3</label>
+        <locationX>176</locationX>
+        <locationY>566</locationY>
+        <assignmentItems>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Page_3</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Example_File_Upload_Component</targetReference>
+        </connector>
+    </assignments>
     <description>This is an example flow that demonstrates some basic configuration options for your rich text and text area custom components.</description>
+    <environments>Default</environments>
     <interviewLabel>Example Flow Rich Text / Text Area Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Example Flow Component Hyphen8</label>
     <processMetadataValues>
@@ -13,7 +62,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -24,13 +73,127 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <screens>
-        <name>Example_Text_Area_Output_Screen</name>
-        <label>Example Text Area Output Screen</label>
-        <locationX>686</locationX>
-        <locationY>68</locationY>
+        <name>Example_File_Upload_Component</name>
+        <label>Example File Upload Component</label>
+        <locationX>176</locationX>
+        <locationY>674</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <fields>
+            <name>Page3Nav</name>
+            <extensionName>c:FlowStageNavigation</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>stages</name>
+                <value>
+                    <elementReference>$Flow.ActiveStages</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>BasicFileUploadConfiguration</name>
+            <extensionName>c:h8FlowFileUploads</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>acceptedFormats</name>
+                <value>
+                    <stringValue>.pdf</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>allowMultipleFiles</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>disableFileDelete</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fileUploadLabel</name>
+                <value>
+                    <stringValue>Upload Files</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>helpText</name>
+                <value>
+                    <stringValue>Some sample help text</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>requiredValidationMessage</name>
+                <value>
+                    <stringValue>You have to upload at least 1 file</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>showUploadButton</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>uploadedlabel</name>
+                <value>
+                    <stringValue>Files you have already uploaded</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Example_Text_Area_Output_Screen</name>
+        <label>Example Text Area Output Screen</label>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Assign_Page_3</targetReference>
+        </connector>
+        <fields>
+            <name>Page2Nav</name>
+            <extensionName>c:FlowStageNavigation</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>stages</name>
+                <value>
+                    <elementReference>$Flow.ActiveStages</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+        </fields>
         <fields>
             <name>TextAreaOutputCharacterCount</name>
             <extensionName>c:customTextAreaComponent</extensionName>
@@ -75,6 +238,18 @@
                 <name>textAreaHeight</name>
                 <value>
                     <stringValue>250px</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>displayCharacterCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>displayWordCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -127,6 +302,18 @@
                     <stringValue>250px</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>displayCharacterCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>displayWordCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -163,6 +350,30 @@
                 <name>textAreaHeight</name>
                 <value>
                     <stringValue>250px</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>readOnly</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>displayCharacterCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>displayWordCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -215,6 +426,18 @@
                     <stringValue>250px</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>displayCharacterCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>displayWordCount</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -257,14 +480,33 @@
     <screens>
         <name>Text_Area_Example_Input_Screen</name>
         <label>Example Text Area Input Screen</label>
-        <locationX>491</locationX>
-        <locationY>68</locationY>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Example_Text_Area_Output_Screen</targetReference>
+            <targetReference>Assign_Page_2</targetReference>
         </connector>
+        <fields>
+            <name>Page1Nav</name>
+            <extensionName>c:FlowStageNavigation</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>stages</name>
+                <value>
+                    <elementReference>$Flow.ActiveStages</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+        </fields>
         <fields>
             <name>customPrintButtonDemo</name>
             <extensionName>c:customPrintButton</extensionName>
@@ -731,13 +973,31 @@
             </outputParameters>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
+    <stages>
+        <name>Page_1</name>
+        <isActive>true</isActive>
+        <label>Page 1</label>
+        <stageOrder>10</stageOrder>
+    </stages>
+    <stages>
+        <name>Page_2</name>
+        <isActive>true</isActive>
+        <label>Page 2</label>
+        <stageOrder>20</stageOrder>
+    </stages>
+    <stages>
+        <name>Page_3</name>
+        <isActive>true</isActive>
+        <label>Page 3</label>
+        <stageOrder>30</stageOrder>
+    </stages>
     <start>
         <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>Text_Area_Example_Input_Screen</targetReference>
+            <targetReference>Assign_Page_1</targetReference>
         </connector>
     </start>
     <status>Draft</status>

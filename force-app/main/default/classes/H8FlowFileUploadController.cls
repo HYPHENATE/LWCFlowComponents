@@ -1,211 +1,171 @@
 /**
  * @description       : flow file upload controller
- *                      has to run without shared to support guest user access
+ *                      has to run without shared to support guest user access or temp permission issues
  * @author            : daniel@hyphen8.com
- * @last modified on  : 08/10/2024
+ * @last modified on  : 31/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public without sharing class H8FlowFileUploadController {
-    
+
+    private static H8_File_Upload_Configuration__mdt configurationRecord;
+    public static H8_File_Upload_Configuration__mdt testConfigurationRecord;
+    private static List<ContentVersion> contentVersions = new List<ContentVersion>();
+    private static Set<Id> contentDocumentIdSet = new Set<Id>();
+
     /**
-    * @description          encryption security to protect files being uploaded
-    * @return               String 
-    **/
-    @AuraEnabled(cacheable = true)
-    public static String getKey(){
-        Blob key = Crypto.generateAesKey(256);
-        String encodedKey = EncodingUtil.base64Encode(key);
-        return encodedKey;
-    }
-        
-    /**
-    * @description          encryption security to protect files being uploaded
+    * @description          method to update file data based on meta data configuration if available and for creation of content document links
+    * @param                contentDocumentIds 
+    * @param                configuration 
     * @param                recordId 
-    * @param                encodedKey 
-    * @return               String 
     **/
-    @AuraEnabled(cacheable = true)
-    public static String encrypt(String recordId, String encodedKey){
-        Blob key = EncodingUtil.base64Decode(encodedKey);
-        Blob value = Crypto.encryptWithManagedIV('AES256', key, Blob.valueOf(recordId));
-        String encodedValue = EncodingUtil.base64Encode(value);
-        return encodedValue;
+    @SuppressWarnings('PMD.ApexCRUDViolation')
+    @AuraEnabled 
+    public static void updateFileData(List<String> contentDocumentIds, String configuration, String recordId){
+        getConfiguration(configuration);
+        getContentDocumentIds(contentDocumentIds);
+        if(null != recordId){    
+            contentDocumentCreation(recordId);
+        }
+
+        if(null != configurationRecord){
+            fileValuesSet();
+        }
     }
     
     /**
-    * @description          aura method to create contentVersions
-    * @param                fileNames 
-    * @param                encodedRecordId 
-    * @param                fileType
-    * @return               List<objFiles> 
+    * @description          method to generate content document links
+    * @param                recordId 
     **/
-    @AuraEnabled 
-    public static List<objFiles> createContentVersions(List<String> fileNames, String encodedRecordId, String fileType){
-        List<ContentVersion> versions = new List<ContentVersion>();
-        for(String fileName : fileNames){
-            Integer startOfExtension = fileName.lastIndexOf('.');
-            ContentVersion version = new ContentVersion(
-                Title = fileName.Substring(0,startOfExtension),
-                PathOnClient = '/'+fileName,
-                VersionData = Blob.valueOf(' '),
-                IsMajorVersion = FALSE
-                // Guest_Record_fileupload__c = encodedRecordId
-            );
-            versions.add(version);
-        }
-    
-        List<Database.SaveResult> results = Database.insert(versions);
-    
-        List<Id> versionIds = new List<Id>();
-        for(Database.SaveResult result : results){
-            versionIds.add(result.getId());
-        }
-    
-        Boolean isStandardUser = UserInfo.getUserType() == 'Standard';
-        List<objFiles> objFiles = new List<objFiles>();
-        for(ContentVersion version : [SELECT Id, ContentDocumentId, ContentDocument.Title, ContentDocument.FileExtension FROM ContentVersion WHERE Id IN :versionIds ORDER BY Id]){
-            objFiles objFile = new objFiles();
-            objFile.name = version.ContentDocument.Title +'.'+ version.ContentDocument.FileExtension;
-            objFile.contentVersionId = version.Id;
-
-            if(isStandardUser){
-                objFile.documentId = version.ContentDocumentId;
+    @SuppressWarnings('PMD.ApexCRUDViolation')
+    private static void contentDocumentCreation(String recordId){
+        List<ContentDocumentLink> contentDocumentLinks = new List<ContentDocumentLink>();
+        for(Id contentDocumentId:contentDocumentIdSet){
+            ContentDocumentLink contentDocumentLink = new ContentDocumentLink();
+            contentDocumentLink.ContentDocumentId = contentDocumentId;
+            contentDocumentLink.LinkedEntityId = recordId;
+            if(null != configurationRecord){
+                contentDocumentLink.Visibility = configurationRecord.ShareType__c;
             }
-            
-            objFiles.add(objFile);
+            contentDocumentLinks.add(contentDocumentLink);
         }
+        insert contentDocumentLinks;
+    }
 
-        return objFiles;
-    }
-    
     /**
-    * @description              aura method to append data to content versions already created
-    * @param                    versionId 
-    * @param                    base64Data 
+    * @description          method to set field values or rename file
     **/
-    @AuraEnabled 
-    public static void appendDataToContentVersion(String versionId, String base64Data){
-        ContentVersion vers = [SELECT Id, VersionData FROM ContentVersion WHERE Id = :versionId];
-        String existingVersionData = EncodingUtil.base64Encode(vers.VersionData);
-        if(existingVersionData == 'IA=='){
-            vers.VersionData = EncodingUtil.base64Decode(base64Data);
-        } else {
-            vers.VersionData = EncodingUtil.base64Decode(existingVersionData + base64Data);
-        }
-        update vers;
-    }
-        
-    /**
-    * @description              aura method to generate content document links
-    * @param                    versIds 
-    * @param                    encodedKey 
-    * @param                    visibleToAllUsers 
-    **/
-    @AuraEnabled
-    public static void createContentDocLink(List<String> versIds, String encodedKey, Boolean visibleToAllUsers){
-        List<ContentDocumentLink> links = new List<ContentDocumentLink>();
-        // for(ContentVersion vers : [SELECT Id, ContentDocumentId, Guest_Record_fileupload__c FROM ContentVersion WHERE Id IN :versIds]){
-        for(ContentVersion vers : [SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id IN :versIds]){
-            ContentDocumentLink link = new ContentDocumentLink(
-                ContentDocumentId = vers.ContentDocumentId
-                // LinkedEntityId = decrypt(vers.Guest_Record_fileupload__c, encodedKey)
-            );
-            if(visibleToAllUsers != null){
-                if(visibleToAllUsers){
-                    link.Visibility = 'AllUsers';
+    @SuppressWarnings('PMD.ApexCRUDViolation')
+    private static void fileValuesSet(){
+        List<H8_File_Upload_Configuration_Field__mdt> childFieldUpdates = configurationRecord.H8_File_Upload_Configuration_Fields__r;
+        if(childFieldUpdates.size() > 0){
+            List<ContentVersion> contentVersionUpdates = new List<ContentVersion>();
+            for(ContentVersion contentVersion:contentVersions){
+                for(H8_File_Upload_Configuration_Field__mdt fieldUpdates:childFieldUpdates){
+                    contentVersion.put(fieldUpdates.Custom_Field__r.QualifiedAPIName, fieldUpdates.Value__c);
                 }
+                if(null != configurationRecord.OverrideFileName__c){
+                    contentVersion.Title = configurationRecord.OverrideFileName__c;
+                }
+                contentVersionUpdates.add(contentVersion);
             }
-            links.add(link);
-        }
-        if(!links.isEmpty()){
-            insert links;
-        }
-    }
-    
-    /**
-    * @description              aura method to update files names
-    * @param                    versIds 
-    * @param                    fileName 
-    **/
-    @AuraEnabled
-    public static void updateFileName(List<String> versIds, String fileName){
-        List<ContentDocument> docs = new List<ContentDocument>();
-        for(ContentVersion vers : [SELECT Id, ContentDocumentId, ContentDocument.Title FROM ContentVersion WHERE Id IN :versIds]){
-            if(vers.ContentDocument.Title != fileName){
-                ContentDocument doc = new ContentDocument(
-                    Id = vers.ContentDocumentId,
-                    Title = fileName
-                );
-                docs.add(doc);
-            }
-        }
-        if(!docs.isEmpty()){
-            update docs;
+            update contentVersionUpdates;
         }
     }
 
     /**
-    * @description              aura method to delete a content document
-    * @param                    versId 
+    * @description                  method to process the content versions and get the relevant data
+    * @param                        contentDocumentIds 
     **/
+    @SuppressWarnings('PMD.ApexCRUDViolation')
+    private static void getContentDocumentIds(List<String> contentDocumentIds){
+        for(ContentVersion version:[SELECT Id, ContentDocumentId 
+                                                FROM ContentVersion 
+                                                WHERE ContentDocumentId IN:contentDocumentIds]){
+            contentDocumentIdSet.add(version.ContentDocumentId);
+            contentVersions.add(version);
+        }
+    }
+
+    /**
+    * @description                  method to pull in the metadata configuration
+    * @param                        configuration 
+    **/
+    private static void getConfiguration(String configuration){
+        try {
+            configurationRecord = Test.isRunningTest() ? testConfigurationRecord : [SELECT Id, OverrideFileName__c, ShareType__c, 
+                                                                                                (SELECT Id, Custom_Field__r.QualifiedAPIName, Value__c 
+                                                                                                                FROM H8_File_Upload_Configuration_Fields__r) 
+                                                                                                FROM H8_File_Upload_Configuration__mdt 
+                                                                                                WHERE DeveloperName=:configuration 
+                                                                                                LIMIT 1];
+        } catch (Exception e){
+            configurationRecord = new H8_File_Upload_Configuration__mdt();
+        }
+    }
+
+    /**
+    * @description                  aura method to delete a content document
+    * @param                        contentVersionId 
+    **/
+    @SuppressWarnings('PMD.ApexCRUDViolation')
     @AuraEnabled
-    public static void deleteContentDoc(String versId){
-        ContentVersion cv = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :versId LIMIT 1];
-        ContentDocument cd = new ContentDocument(Id=cv.ContentDocumentId);
-        delete cd;
+    public static void deleteContentDoc(String contentVersionId){
+        try {
+            ContentVersion contentVersion = [SELECT ContentDocumentId 
+                                                        FROM ContentVersion 
+                                                        WHERE Id=:contentVersionId 
+                                                        LIMIT 1];
+            ContentDocument contentDocument = new ContentDocument(Id=contentVersion.ContentDocumentId);
+            delete contentDocument;
+        } catch (Exception e){
+            throw new AuraHandledException(e.getMessage());
+        }
     }
 
     /**
     * @description              aura method to get existing files
-    * @param                    recordId 
     * @param                    contentDocumentIds
     * @return                   List<objFiles> 
     **/
+    @SuppressWarnings('PMD.ApexCRUDViolation')
     @AuraEnabled
-    public static List<objFiles> getExistingFiles(String recordId, List<String> contentDocumentIds){
-        Boolean isStandardUser = UserInfo.getUserType() == 'Standard';
-        Map<Id,objFiles> objFiles = new Map<Id,objFiles>();
-        for(ContentDocumentLink link : [SELECT ContentDocumentId, ContentDocument.Title, ContentDocument.FileExtension FROM ContentDocumentLink WHERE LinkedEntityId = :recordId]){
-            if(contentDocumentIds.contains(link.ContentDocumentId)){
-                objFiles files = new objFiles();
-                files.name = link.ContentDocument.Title +'.'+ link.ContentDocument.FileExtension;
-                if(isStandardUser){
-                    files.documentId = link.ContentDocumentId;
-                }
-                objFiles.put(link.ContentDocumentId,files);
-            }
-        }
-        for(ContentVersion vers : [SELECT Id, ContentDocumentId FROM ContentVersion WHERE ContentDocumentId IN :objFiles.keyset() AND IsLatest = TRUE]){
-            if(contentDocumentIds.contains(vers.ContentDocumentId)){
-                objFiles.get(vers.ContentDocumentId).contentVersionId = vers.Id;
-            }
-        }
-        return objFiles.values();
+    public static String getExistingFiles(List<String> contentDocumentIds){
+        List<ContentVersion> contentVersions = [SELECT Id, ContentModifiedDate, ContentSize, ContentDocumentId, ContentDocument.FileExtension, ContentDocument.Title FROM ContentVersion WHERE ContentDocumentId IN :contentDocumentIds AND IsLatest = TRUE];
+        return generateExistingFilesResponse(contentVersions);
     }
-
-    public class objFiles{
-        @AuraEnabled
-        public string name;
-
-        @AuraEnabled
-        public string documentId;
-
-        @AuraEnabled
-        public string contentVersionId;
-    }
-
 
     /**
-    * @description              private method to decrypt our encrypted data
-    * @param                    encodedValue 
-    * @param                    encodedKey 
+    * @description              method to generate our json for returning to the front end
+    * @param                    contentVersions 
     * @return                   String 
     **/
-    private static String decrypt(String encodedValue, String encodedKey){
-        Blob key = EncodingUtil.base64Decode(encodedKey);
-        Blob value = EncodingUtil.base64Decode(encodedValue);
-        Blob decryptedBlob = Crypto.decryptWithManagedIV('AES256', key, value);
-        String recordId = decryptedBlob.toString();
-        return recordId;
+    private static String generateExistingFilesResponse(List<ContentVersion> contentVersions){
+        JSONGenerator gen = JSON.createGenerator(true);
+        gen.writeStartObject();
+        gen.writeFieldName('files');
+        gen.writeStartArray();
+        for(ContentVersion version:contentVersions){
+            gen.writeStartObject();
+                gen.writeStringField('name', version.ContentDocument.Title);
+                gen.writeStringField('documentId', version.ContentDocumentId);
+                gen.writeStringField('contentVersionId', version.Id);
+                gen.writeStringField('fileExtension', version.ContentDocument.FileExtension);
+                gen.writeStringField('contentDescription', getContentDescription(version));
+            gen.writeEndObject();
+        }
+        gen.writeEndArray();
+        gen.writeEndObject();
+        return gen.getAsString();
     }
+
+    /**
+    * @description              method to get the content description for returning with the contentversion information
+    * @param                    contentVersion 
+    * @return                   String 
+    **/
+    private static String getContentDescription(ContentVersion contentVersion){
+        Integer kbSize = contentVersion.ContentSize / 1000;
+        return contentVersion.ContentModifiedDate + ' - ' + kbSize + 'KB - ' + contentVersion.ContentDocument.FileExtension; 
+    }
+
 }

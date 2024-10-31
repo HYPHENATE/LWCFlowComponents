@@ -1,0 +1,16 @@
+<!--
+  @description       : html for flow file upload tile
+  @author            : daniel@hyphen8.com
+  @last modified on  : 31/10/2024
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+  <article class="slds-tile">
+    <h3 class="slds-tile__title slds-truncate" title={objFile.name}>
+      <a href="#" data-docid={objFile.documentId} onclick={openFile}>{objFile.name}</a>
+    </h3>
+    <div class="slds-tile__detail">
+      <p class="slds-truncate" title={objFile.contentDescription} >{objFile.contentDescription}</p>
+    </div>
+  </article>
+</template>

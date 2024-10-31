@@ -3,7 +3,7 @@
     <apiVersion>61.0</apiVersion>
     <isExposed>true</isExposed>
     <description>This component allows you to provide a custom file upload that upon completion of the upload will display the file underneath it</description>
-    <masterLabel>H8 Flow File Upload</masterLabel>
+    <masterLabel>Flow File Upload</masterLabel>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
@@ -13,52 +13,42 @@
                 name="recordId"
                 type="String"
                 label='Related Record Id'
-                description="The Id of the record to associate the files with. Be aware that sharing rules are NOT enforced, so the user could be uploading files to a record that they wouldn't normally have access to. Don't know the Related Record Id because you're going to create the record after this screen? You can leave this field blank and use the 'Create Content Document Links Downstream' Apex Action."
+                description="The Id of the record to associate the files with."
+                role="inputOnly"
             />
             <property
                 name="fileUploadLabel"
                 type="String"
                 label='File Upload Label'
                 description="The text on the file upload button."
+                role="inputOnly"
             />
             <property
                 name="uploadedlabel"
                 type="String"
                 label='Uploaded File List Label'
-                description="The text on the list of files uploaded. You might want to use this if you are displaying previously uploaded files."
+                description="The text on the list of files uploaded."
                 role="inputOnly"
             />
             <property
                 name="acceptedFormats"
                 type="String" label="Accepted Formats"
                 description="The accepted file types. Enter a comma-separated list of the file extensions (such as .jpg,.pdf,.xlsx,.docx)"
+                role="inputOnly"
             />
             <property
                 name="allowMultipleFiles"
                 type="Boolean"
                 label="Allow Multiple Files"
                 description="Allow the user to upload multiple files. If this is not TRUE, then once the user uploads one file, the file upload component will not allow any additional files to be uploaded."
+                role="inputOnly"
             />
             <property
-                name="contentDocumentIds"
+                name="existingFileIds"
                 type="String[]"
-                label='Content Document Ids'
-                description="The Ids of the uploaded files. Store this value in a text collection variable. Content Document Ids are hidden from community users, so the collection will be null for them."
-                role="outputOnly"
-            />
-            <property
-                name="contentVersionIds"
-                type="String[]"
-                label='Content Version Ids'
-                description="The Version Ids of the uploaded files. Store this value in a text collection variable."
-                role="outputOnly"
-            />
-            <property
-                name="uploadedFileNames"
-                type="String[]"
-                label='Uploaded File Names'
-                description="The names of the uploaded files. Store this value in a text collection variable."
-                role="outputOnly"
+                label='Existing File Ids'
+                description="This is a collection of ContentDocumentId that have already been uploaded."
+                role="inputOnly"
             />
             <property
                 name="required"
@@ -68,31 +58,31 @@
                 role="inputOnly"
             />
             <property
+                name="showUploadButton"
+                type="Boolean"
+                label='Show Upload Button'
+                description="If you want to dynamically display this button dependant on if the form is now in readonly mode set this to false, when set to true the button will display. The button is still disable automatically in some cases."
+                role="inputOnly"
+            />
+            <property
                 name="requiredValidationMessage"
                 type="String"
                 label='Required Validation Message'
-                description="The validation message displayed if the user has not uploaded at least one file. The default message is 'Upload at least one file.'"
+                description="The validation message displayed if the user has not uploaded at least one file."
                 role="inputOnly"
             />
             <property
-                name="overriddenFileName"
+                name="overrideConfiguration"
                 type="String"
-                label="Overridden File Name"
-                description="The file name of the uploaded files defaults to the actual name of the file. If you'd prefer to override the default file name, you can specify the new file name here."
+                label="File Configuration"
+                description="This is the configuration that you created in meta data, specify the DeveloperAPIName for the Metadata record which will contain your custom configuration"
                 role="inputOnly"
             />
             <property
-                name="setVisibilityToAllUsers"
-                type="Boolean"
-                label="Set Visibility to All Users"
-                description="By default, when an internal user uploads a file, the file is only visible to other internal users (meaning community users can't see it). If you'd like to make the uploaded file visible to all users, set this to TRUE. When a community user uploads a file, the file is already visible to all users."
-                role="inputOnly"
-            />
-            <property
-                name="disableDelete"
+                name="disableFileDelete"
                 type="Boolean"
                 label="Disable File Deletion"
-                description="When this is TRUE, clicking the 'X' next to the Files will simply remove them from the UI and the output list, but the Files will NOT be deleted."
+                description="When this is TRUE the X next to the file will not be available."
                 role="inputOnly"
             />
             <property

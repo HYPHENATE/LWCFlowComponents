@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Content_Version_Object__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Always select the content version object here</inlineHelpText>
+    <label>Content Version Object</label>
+    <referenceTo>EntityDefinition</referenceTo>
+    <relationshipLabel>H8_File_Upload_Configuration_Fields</relationshipLabel>
+    <relationshipName>H8_File_Upload_Configuration_Fields</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>
