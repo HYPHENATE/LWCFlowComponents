@@ -1,7 +1,7 @@
 <!--
   @description       : flow stages display component
   @author            : daniel@hyphen8.com
-  @last modified on  : 13/08/2024
+  @last modified on  : 29/10/2024
   @last modified by  : daniel@hyphen8.com
 -->
 <aura:component implements="lightning:availableForFlowScreens">
@@ -10,8 +10,10 @@
     <aura:attribute name="currentStage" type="String"/>
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     <a href="#"/>
-    <lightning:progressIndicator 
-        aura:id="progressIndicator" 
-        currentStep="{!v.currentStage}" 
-        type="path"/>
+    <div class="slds-var-m-around_small slds-var-m-bottom_small">
+      <lightning:progressIndicator 
+          aura:id="progressIndicator" 
+          currentStep="{!v.currentStage}" 
+          type="path"/>
+    </div>
 </aura:component>

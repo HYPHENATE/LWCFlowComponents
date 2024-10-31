@@ -1,13 +1,13 @@
 /**
  * @description       : apex controller to support with generating validations for an entire section
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 03-10-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormSectionValidation {
     
     private static H8_Flow_Form__mdt formDetails;
-    private static List<String> validationFields = new List<String>();
+    private static Set<String> validationFields = new Set<String>();
     private static SObject currentRecord;
     private static Map<String, List<H8_Flow_Form_Section_Validation__mdt>> sectionValidations = new Map<String, List<H8_Flow_Form_Section_Validation__mdt>>();
     private static Map<String, Object> validationValue = new Map<String, Object>();

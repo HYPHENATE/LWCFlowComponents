@@ -1,7 +1,7 @@
 /**
  * @description       : custom text area component with word / character counter javascript
  * @author            : daniel@hyphen8.com
- * @last modified on  : 10-09-2024
+ * @last modified on  : 30/10/2024
  * @last modified by  : daniel@hyphen8.com
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -75,31 +75,34 @@ export default class CustomTextAreaComponent extends LightningElement {
         
         let valid = false;
         let customErrorMessage = '';
-
-        if(this.displayWordCount){
-            if(!this.wordCountError && !this.required){
-                valid = true;
-            } else if (this.wordCountError){
-                valid = false;
-                customErrorMessage = this.maxWordCountMessage;
-            } else if(!this.wordCountError && this.required && this.value == undefined){
-                valid = false;
-                customErrorMessage = this.requireFieldMessage;
-            } else {
-                valid = true;
+        if(!this.readOnly && !this.disabled){
+            if(this.displayWordCount){
+                if(!this.wordCountError && !this.required){
+                    valid = true;
+                } else if (this.wordCountError){
+                    valid = false;
+                    customErrorMessage = this.maxWordCountMessage;
+                } else if(!this.wordCountError && this.required && this.value == undefined){
+                    valid = false;
+                    customErrorMessage = this.requireFieldMessage;
+                } else {
+                    valid = true;
+                }
+            } else if(this.displayCharacterCount){
+                if(!this.characterCountError && !this.required){
+                    valid = true;
+                } else if (this.characterCountError){
+                    valid = false;
+                    customErrorMessage = this.maxCharacterCountMessage;
+                } else if(!this.characterCountError && this.required && this.value == undefined){
+                    valid = false;
+                    customErrorMessage = this.requireFieldMessage;
+                } else {
+                    valid = true;
+                }
             }
-        } else if(this.displayCharacterCount){
-            if(!this.characterCountError && !this.required){
-                valid = true;
-            } else if (this.characterCountError){
-                valid = false;
-                customErrorMessage = this.maxCharacterCountMessage;
-            } else if(!this.characterCountError && this.required && this.value == undefined){
-                valid = false;
-                customErrorMessage = this.requireFieldMessage;
-            } else {
-                valid = true;
-            }
+        } else {
+            valid = true;
         }
 
         if(valid){

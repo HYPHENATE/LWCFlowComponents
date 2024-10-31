@@ -1,7 +1,7 @@
 <!--
   @description       : html for core validation component for validation and entire form
   @author            : daniel@hyphen8.com
-  @last modified on  : 03/10/2024
+  @last modified on  : 29/10/2024
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -42,7 +42,7 @@
         
         <template if:true={isValid}>
             <lightning-card title={cardTitle} class="slds-var-m-top_medium">
-                <div class="slds-text-heading_small slds-var-m-bottom_small">
+                <div class="slds-var-m-around_medium slds-text-heading_small slds-var-m-bottom_small">
                     <lightning-formatted-rich-text value={validCardDescription}></lightning-formatted-rich-text>
                 </div>
                 <div slot="footer">

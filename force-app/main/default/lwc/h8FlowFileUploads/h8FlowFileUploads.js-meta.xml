@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>This component allows you to provide a custom file upload that upon completion of the upload will display the file underneath it</description>
+    <masterLabel>Flow File Upload</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property
+                name="recordId"
+                type="String"
+                label='Related Record Id'
+                description="The Id of the record to associate the files with."
+                role="inputOnly"
+            />
+            <property
+                name="fileUploadLabel"
+                type="String"
+                label='File Upload Label'
+                description="The text on the file upload button."
+                role="inputOnly"
+            />
+            <property
+                name="uploadedlabel"
+                type="String"
+                label='Uploaded File List Label'
+                description="The text on the list of files uploaded."
+                role="inputOnly"
+            />
+            <property
+                name="acceptedFormats"
+                type="String" label="Accepted Formats"
+                description="The accepted file types. Enter a comma-separated list of the file extensions (such as .jpg,.pdf,.xlsx,.docx)"
+                role="inputOnly"
+            />
+            <property
+                name="allowMultipleFiles"
+                type="Boolean"
+                label="Allow Multiple Files"
+                description="Allow the user to upload multiple files. If this is not TRUE, then once the user uploads one file, the file upload component will not allow any additional files to be uploaded."
+                role="inputOnly"
+            />
+            <property
+                name="existingFileIds"
+                type="String[]"
+                label='Existing File Ids'
+                description="This is a collection of ContentDocumentId that have already been uploaded."
+                role="inputOnly"
+            />
+            <property
+                name="required"
+                type="Boolean"
+                label='Required'
+                description="Require the user to upload at least one file."
+                role="inputOnly"
+            />
+            <property
+                name="showUploadButton"
+                type="Boolean"
+                label='Show Upload Button'
+                description="If you want to dynamically display this button dependant on if the form is now in readonly mode set this to false, when set to true the button will display. The button is still disable automatically in some cases."
+                role="inputOnly"
+            />
+            <property
+                name="requiredValidationMessage"
+                type="String"
+                label='Required Validation Message'
+                description="The validation message displayed if the user has not uploaded at least one file."
+                role="inputOnly"
+            />
+            <property
+                name="overrideConfiguration"
+                type="String"
+                label="File Configuration"
+                description="This is the configuration that you created in meta data, specify the DeveloperAPIName for the Metadata record which will contain your custom configuration"
+                role="inputOnly"
+            />
+            <property
+                name="disableFileDelete"
+                type="Boolean"
+                label="Disable File Deletion"
+                description="When this is TRUE the X next to the file will not be available."
+                role="inputOnly"
+            />
+            <property
+                name="helpText"
+                type="String"
+                label="Help Text"
+                description="The message that will be displayed in the help text popup."
+                role="inputOnly"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

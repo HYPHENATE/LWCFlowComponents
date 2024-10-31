@@ -9,6 +9,54 @@
         <value>Character Count:</value>
     </labels>
     <labels>
+        <fullName>H8FFUCDeleteFileFieldLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCDeleteFileFieldLabel</shortDescription>
+        <value>File Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FFUCDeleteFileGuidanceText</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCDeleteFileGuidanceText</shortDescription>
+        <value>Are you sure you want to delete this file? If you confirm this you will not be able to recover the file.</value>
+    </labels>
+    <labels>
+        <fullName>H8FFUCDeleteFileLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCDeleteFileLabel</shortDescription>
+        <value>Delete File</value>
+    </labels>
+    <labels>
+        <fullName>H8FFUCDeleteModalCancelLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCDeleteModalCancelLabel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>H8FFUCLoadingSpinnerLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCLoadingSpinnerLabel</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>H8FFUCStandardToastTitle</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCStandardToastTitle</shortDescription>
+        <value>Error Encountered</value>
+    </labels>
+    <labels>
         <fullName>WordCountText</fullName>
         <categories>CustomFlowComponents</categories>
         <language>en_US</language>
