@@ -1,7 +1,7 @@
 /**
- * @description       : Sample Description
+ * @description       : js for form validation section component
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 04-11-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -13,8 +13,8 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
     @api formName;
     @api parentObjectAPIName;
     @api sectionName;
-    @api helpText;
-    @api affectTextLabel;
+    @api helpText = 'You must complete the following fields';
+    @api affectTextLabel = 'Question(s) affected:';
     hasValidationErrors;
     pages;
 

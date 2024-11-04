@@ -1,7 +1,7 @@
 /**
  * @description       : H8FlowFormValidation test class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 04-11-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -120,6 +120,116 @@ public class H8FlowFormValidationTest {
             Assert.areEqual(true, (Boolean)jsonObjects.get('isValid'), 'we expect isValid to be set as true');
             List<Object> sections = (List<Object>)jsonObjects.get('sections');
             Assert.areEqual(0, sections.size(), 'we expect 0 section to be present');
+        Test.stopTest();
+        
+    }
+
+    /**
+    * @description          testing running the code when 2 form validations are present on master object and form is valid and ordered
+    **/
+    @isTest 
+    static void testValidationsOnFormMasterObjectValidOrder(){
+
+        Account account = (Account)testRecordSource.getObject(Account.sObjectType) 
+        .asVariant('FormValidation')
+        .withInsert();
+
+        Opportunity opportunity = (Opportunity)testRecordSource.getObject(Opportunity.sObjectType) 
+        .asVariant('FormValidation')
+        .withOutInsert();
+        opportunity.AccountId = account.Id;
+        opportunity.CloseDate = System.today();
+        insert opportunity;
+
+        List<H8_Flow_Form_Section_Validation__mdt> validationList = new List<H8_Flow_Form_Section_Validation__mdt>();
+        validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
+            .addFieldValue('MasterLabel', 'OppType')
+            .addFieldValue('DeveloperName', 'OppType')
+            .addFieldValue('FieldAPIName__c', 'Account.Type')
+            .addFieldValue('DataType__c', 'String')
+            .addFieldValue('Validation_Value__c', 'Sample')
+            .addFieldValue('Page__c', 'Page1')
+            .addFieldValue('QuestionName__c', 'Type')
+            .addFieldValue('Id', 'SampleId2')
+            .addFieldValue('Order__c', 10)
+            .getSingleMockMetaData());
+        validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
+            .addFieldValue('MasterLabel', 'OppAmount')
+            .addFieldValue('DeveloperName', 'OppAmount')
+            .addFieldValue('FieldAPIName__c', 'Amount')
+            .addFieldValue('DataType__c', 'Decimal')
+            .addFieldValue('Validation_Value__c', '1000')
+            .addFieldValue('Page__c', 'Page1')
+            .addFieldValue('QuestionName__c', 'Amount')
+            .addFieldValue('Id', 'SampleId3')
+            .addFieldValue('Order__c', 20)
+            .getSingleMockMetaData());
+        validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
+            .addFieldValue('MasterLabel', 'OppCloseDate')
+            .addFieldValue('DeveloperName', 'OppCloseDate')
+            .addFieldValue('FieldAPIName__c', 'CloseDate')
+            .addFieldValue('DataType__c', 'Date')
+            .addFieldValue('Validation_Value__c', '24/04/2024')
+            .addFieldValue('Page__c', 'Page1')
+            .addFieldValue('QuestionName__c', 'CloseDate')
+            .addFieldValue('Id', 'SampleId5')
+            .addFieldValue('Order__c', 30)
+            .getSingleMockMetaData());
+
+        List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
+            .addFieldValue('MasterLabel', 'FirstChild')
+            .addFieldValue('DeveloperName', 'FirstChild')
+            .addFieldValue('Flow_API_Name__c', 'Contact')
+            .addFieldValue('Icon_Name__c', 'Email')
+            .addFieldValue('Order__c', '1')
+            .addFieldValue('Id', 'SampleId1')
+            .addChildren('H8_Flow_Form_Section_Validations__r', validationList)
+            .getListMockMetaData();
+
+        List<H8_Flow_Form__mdt> testRecords = (List<H8_Flow_Form__mdt>)new MockMetaManager('H8_Flow_Form__mdt')    
+            .addFieldValue('MasterLabel', 'TestRecord')
+            .addFieldValue('DeveloperName', 'TestRecord')
+            .addChildren('H8_Flow_Form_Sections__r', childList)
+            .getListMockMetaData();
+
+        H8FlowFormValidationHelper.testForm = testRecords[0];
+
+        Test.startTest();
+            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
+            System.debug(jsonString);
+            Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
+            Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
+            Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
+            Assert.areEqual(true, (Boolean)jsonObjects.get('hasErrors'), 'we expect hasErrors to be set as false');
+            Assert.areEqual(false, (Boolean)jsonObjects.get('isValid'), 'we expect isValid to be set as true');
+            List<Object> sections = (List<Object>)jsonObjects.get('sections');
+            Assert.areEqual(1, sections.size(), 'we expect 1 section to be present');
+            for(Object sectionObject:sections){
+                System.debug(sectionObject);
+                Map<String, Object> pageObjects = (Map<String, Object>)JSON.deserializeUntyped(JSON.serialize(sectionObject));
+                List<Object> pages = (List<Object>)pageObjects.get('pages');
+                Assert.areEqual(1, pages.size(), 'we expect 1 page present here');
+                for(Object pageObject:pages){
+                    Map<String, Object> errorObjects = (Map<String, Object>)JSON.deserializeUntyped(JSON.serialize(pageObject));
+                    List<Object> errors = (List<Object>)errorObjects.get('errors');
+                    Assert.areEqual(3, errors.size(), 'we expect 2 errors here');
+                    Integer i = 1;
+                    for(Object error:errors){
+                        Map<String, Object> questionObjects = (Map<String, Object>)JSON.deserializeUntyped(JSON.serialize(error));
+                        String questionName = (String)questionObjects.get('questionName');
+                        if(i == 1){
+                            Assert.areEqual('Type', questionName, 'we expect this value to match');
+                        } else if(i==2){
+                            Assert.areEqual('Amount', questionName, 'we expect this value to match');
+                        } else {
+                            Assert.areEqual('CloseDate', questionName, 'we expect this value to match');
+                        }
+                        i = i + 1;
+                    }
+                }
+            }
+            Assert.areEqual(true, jsonString.contains('Amount'), 'we expect this question to be visible');
+            Assert.areEqual(true, jsonString.contains('CloseDate'), 'we expect this question to be visible');
         Test.stopTest();
         
     }

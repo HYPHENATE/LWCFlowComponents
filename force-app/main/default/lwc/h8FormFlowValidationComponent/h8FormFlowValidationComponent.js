@@ -1,7 +1,7 @@
 /**
  * @description       : Sample Description
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 04-11-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -13,12 +13,12 @@ export default class H8FormFlowValidationComponent extends LightningElement {
     @api recordId;
     @api formName;
     @api parentObjectAPIName;
-    @api cardTitle;
-    @api nextButtonLabel;
-    @api completeFieldsText;
-    @api invalidCardDescription
-    @api validCardDescription;
-    @api affectTextLabel;
+    @api cardTitle = 'Review.. before you submit';
+    @api nextButtonLabel = 'Review Sumbission';
+    @api completeFieldsText = 'You must complete the following fields';
+    @api invalidCardDescription = 'We have picked up that some of your answers are not valid. Before you can submit the form you will have to complete the required fields';
+    @api validCardDescription = 'If you have done all these feel free to submit... good luck';
+    @api affectTextLabel = 'Question(s) affected:';
     isLoading = true;
     sections;
     hasErrors;
