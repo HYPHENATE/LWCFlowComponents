@@ -1,7 +1,7 @@
 /**
  * @description       : master form flow validation class for validating an entire form submission looking for errors
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03-10-2024
+ * @last modified on  : 04-11-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormValidation {
@@ -83,15 +83,19 @@ public with sharing class H8FlowFormValidation {
             Map<String, List<H8_Flow_Form_Section_Validation__mdt>> pageValidations = mapOfValidations.get(sectionName);
             for(String pageName:pageValidations.keySet()){
                 List<H8_Flow_Form_Section_Validation__mdt> validations = pageValidations.get(pageName);
-                for(H8_Flow_Form_Section_Validation__mdt validation:validations){
-                    Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
-                    Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
-                    if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
-                        generateError(sectionName, validation);
-                    }
-                } 
+                generateErrorFromSection(validations, sectionName);
             }
         }
+    }
+
+    private static void generateErrorFromSection(List<H8_Flow_Form_Section_Validation__mdt> validations, String sectionName){
+        for(H8_Flow_Form_Section_Validation__mdt validation:validations){
+            Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
+            Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
+            if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
+                generateError(sectionName, validation);
+            }
+        } 
     }
 
     private static void generateError(String sectionName, H8_Flow_Form_Section_Validation__mdt validation){
