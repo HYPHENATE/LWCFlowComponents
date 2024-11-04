@@ -1,7 +1,7 @@
 /**
  * @description       : flow form validations helper class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03-10-2024
+ * @last modified on  : 04-11-2024
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormValidationHelper {
@@ -14,12 +14,10 @@ public with sharing class H8FlowFormValidationHelper {
     * @return               H8_Flow_Form__mdt 
     **/
     public static H8_Flow_Form__mdt getCompleteForm(String formAPIName){
-        return Test.isRunningTest() ? testForm : [SELECT MasterLabel, 
-                            (SELECT MasterLabel, Order__c,
-                                (SELECT MasterLabel, CustomErrorMessage__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
-                                    FROM H8_Flow_Form_Section_Validations__r)
-                                        FROM H8_Flow_Form_Sections__r ORDER BY Order__c ASC)
-                                            FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
+        return Test.isRunningTest() ? testForm : [SELECT MasterLabel, (SELECT MasterLabel, Order__c,
+                                                    (SELECT MasterLabel, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
+                                                        FROM H8_Flow_Form_Section_Validations__r ORDER BY Order__c ASC NULLS LAST)
+                                                            FROM H8_Flow_Form_Sections__r ORDER BY Order__c ASC) FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
     }
 
     /**
@@ -29,12 +27,10 @@ public with sharing class H8FlowFormValidationHelper {
     * @return               H8_Flow_Form__mdt 
     **/
     public static H8_Flow_Form__mdt getSpecificSectionForm(String formAPIName, String sectionName){
-        return Test.isRunningTest() ? testForm : [SELECT MasterLabel, 
-                            (SELECT MasterLabel, Order__c,
-                                (SELECT MasterLabel, CustomErrorMessage__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
-                                    FROM H8_Flow_Form_Section_Validations__r)
-                                        FROM H8_Flow_Form_Sections__r WHERE MasterLabel=:sectionName ORDER BY Order__c ASC)
-                                            FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
+        return Test.isRunningTest() ? testForm : [SELECT MasterLabel, (SELECT MasterLabel, Order__c,
+                                                    (SELECT MasterLabel, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
+                                                        FROM H8_Flow_Form_Section_Validations__r ORDER BY Order__c ASC NULLS LAST)
+                                                            FROM H8_Flow_Form_Sections__r WHERE MasterLabel=:sectionName ORDER BY Order__c ASC) FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
     }
 
     /**
@@ -44,12 +40,10 @@ public with sharing class H8FlowFormValidationHelper {
     * @return               H8_Flow_Form__mdt 
     **/
     public static H8_Flow_Form__mdt getSpecificPageForm(String formAPIName, String pageName){
-        return Test.isRunningTest() ? testForm : [SELECT MasterLabel, 
-                            (SELECT MasterLabel, Order__c,
-                                (SELECT MasterLabel, CustomErrorMessage__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
-                                    FROM H8_Flow_Form_Section_Validations__r WHERE Page__c=:pageName)
-                                        FROM H8_Flow_Form_Sections__r ORDER BY Order__c ASC)
-                                            FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
+        return Test.isRunningTest() ? testForm : [SELECT MasterLabel, (SELECT MasterLabel, Order__c,
+                                (SELECT MasterLabel, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c
+                                    FROM H8_Flow_Form_Section_Validations__r WHERE Page__c=:pageName ORDER BY Order__c ASC NULLS LAST)
+                                        FROM H8_Flow_Form_Sections__r ORDER BY Order__c ASC) FROM H8_Flow_Form__mdt WHERE DeveloperName=:formAPIName WITH SECURITY_ENFORCED LIMIT 1];
     }
 
     /**
