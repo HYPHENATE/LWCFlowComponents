@@ -12,7 +12,8 @@ public with sharing class H8FlowFormSectionValidation {
     private static Map<String, List<H8_Flow_Form_Section_Validation__mdt>> sectionValidations = new Map<String, List<H8_Flow_Form_Section_Validation__mdt>>();
     private static Map<String, Object> validationValue = new Map<String, Object>();
     private static Map<String, List<String>> currentErrors = new Map<String, List<String>>();
-    
+    private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
+
     /**
     * @description              aura method to validate an entire section and display the errors
     * @param                    recordId 
@@ -27,6 +28,9 @@ public with sharing class H8FlowFormSectionValidation {
             formDetails = H8FlowFormValidationHelper.getSpecificSectionForm(formName, sectionName);
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, parentObjectAPIName, validationFields);
+            if(formDetails.Validation_Flow_API_Name__c != null) {
+                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, sectionName, null, recordId);     
+            }
             validateCurrentRecord();
             return generateResponse(true, '');
         } catch (Exception e){
@@ -40,8 +44,10 @@ public with sharing class H8FlowFormSectionValidation {
     private static void getValidationFields(){
         for(H8_Flow_Form_Section__mdt formSection:formDetails.H8_Flow_Form_Sections__r){
             for(H8_Flow_Form_Section_Validation__mdt formSectionValidation:formSection.H8_Flow_Form_Section_Validations__r){
-                validationFields.add(formSectionValidation.FieldAPIName__c);
-                storeValidationValue(formSectionValidation);
+                if(!formSectionValidation.IsFlowValidation__c) {                
+                    validationFields.add(formSectionValidation.FieldAPIName__c);
+                    storeValidationValue(formSectionValidation);
+                }
                 String pageName = null != formSectionValidation.Page__c ? formSectionValidation.Page__c : 'NOPAGESCONFIGURED';
                 List<H8_Flow_Form_Section_Validation__mdt> validationPages = sectionValidations.containsKey(pageName) ?
                                                                                 sectionValidations.get(pageName) :
@@ -79,19 +85,28 @@ public with sharing class H8FlowFormSectionValidation {
         for(String pageName:sectionValidations.keySet()){
             List<H8_Flow_Form_Section_Validation__mdt> validations = sectionValidations.get(pageName);
             for(H8_Flow_Form_Section_Validation__mdt validation:validations){
-                Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
-                Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
-                if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){                   
-                    generateError(validation);
+                if(validation.IsFlowValidation__c) {
+                    List<String> validationMessages = flowValidations.get(validation.FlowValidationType__c);
+                    if(validationMessages != null && validationMessages.size()>0) {
+                        for(String validationMessage:validationMessages) {
+                            generateError(validation, validationMessage);
+                        }
+                    }                    
+                } else {
+                    Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
+                    Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
+                    if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){                   
+                        generateError(validation, validation.QuestionName__c);
+                    }
                 }
             } 
         }
     }
 
-    private static void generateError(H8_Flow_Form_Section_Validation__mdt validation){
+    private static void generateError(H8_Flow_Form_Section_Validation__mdt validation, String errorMessage){
         String pageName = null != validation.Page__c ? validation.Page__c : 'NOPAGESCONFIGURED';
         List<String> pageErrors = currentErrors.containsKey(pageName) ? currentErrors.get(pageName) : new List<String>();
-        pageErrors.add(validation.QuestionName__c);
+        pageErrors.add(errorMessage);
         currentErrors.put(pageName, pageErrors);
     }
 

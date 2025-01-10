@@ -75,13 +75,28 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <relatedLists>
+        <fields>MasterLabel</fields>
+        <fields>Page__c</fields>
+        <fields>DeveloperName</fields>
+        <fields>IsFlowValidation__c</fields>
+        <fields>FlowValidationType__c</fields>
+        <fields>QuestionName__c</fields>
+        <fields>FieldAPIName__c</fields>
+        <fields>DataType__c</fields>
+        <fields>Validation_Value__c</fields>
+        <fields>Order__c</fields>
+        <relatedList>H8_Flow_Form_Section_Validation__mdt.H8_Flow_Form_Section__c</relatedList>
+        <sortField>Order__c</sortField>
+        <sortOrder>Asc</sortOrder>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hQI000003jGlF</masterLabel>
+        <masterLabel>00hQI000005o9v1</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
