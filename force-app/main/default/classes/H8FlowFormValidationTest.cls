@@ -9,6 +9,15 @@ public class H8FlowFormValidationTest {
 
     static TestRecordSource testRecordSource = new TestRecordSource();
 
+    public static List<H8FlowFormFlowValidationResults> getMockFlowValidationResult() {
+        List<H8FlowFormFlowValidationResults> mockResults = new List<H8FlowFormFlowValidationResults>();
+        H8FlowFormFlowValidationResults mockResult = new H8FlowFormFlowValidationResults();
+        mockResult.validationFieldType = 'Test';
+        mockResult.validationMessages = new List<String>{'Test'};
+        mockResults.add(mockResult);
+        return mockResults;
+    }
+
     /**
     * @description          testing where really bad data is sent to method how it is handled
     **/
@@ -427,6 +436,57 @@ public class H8FlowFormValidationTest {
                     Assert.areEqual(6, errors.size(), 'we expect 1 error to be returned');
                 }
             }
+        Test.stopTest();
+        
+    }
+
+
+    /**
+    * @description          testing running the code when 1 form Flow validation is present on master object and form is valid
+    **/
+    @isTest 
+    static void testFlowValidationsOnFormMasterObjectValid(){
+
+        Account account = (Account)testRecordSource.getObject(Account.sObjectType) 
+        .asVariant('FormValidation')
+        .withInsert();
+        
+        List<H8_Flow_Form_Section_Validation__mdt> validationList = (List<H8_Flow_Form_Section_Validation__mdt>)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
+            .addFieldValue('MasterLabel', 'FlowValTest')
+            .addFieldValue('DeveloperName', 'FlowValTest')
+            .addFieldValue('IsFlowValidation__c', 'true')
+            .addFieldValue('FlowValidationType__c', 'Test')
+            .addFieldValue('Id', 'SampleId2')
+            .getListMockMetaData();
+
+        List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
+            .addFieldValue('MasterLabel', 'FirstChild')
+            .addFieldValue('DeveloperName', 'FirstChild')
+            .addFieldValue('Flow_API_Name__c', 'Contact')
+            .addFieldValue('Icon_Name__c', 'Email')
+            .addFieldValue('Order__c', '1')
+            .addFieldValue('Id', 'SampleId1')
+            .addChildren('H8_Flow_Form_Section_Validations__r', validationList)
+            .getListMockMetaData();
+
+        List<H8_Flow_Form__mdt> testRecords = (List<H8_Flow_Form__mdt>)new MockMetaManager('H8_Flow_Form__mdt')    
+            .addFieldValue('MasterLabel', 'TestRecord')
+            .addFieldValue('DeveloperName', 'TestRecord')
+            .addFieldValue('Validation_Flow_API_Name__c', 'H8FlowFormCustomValidationTemplate')
+            .addChildren('H8_Flow_Form_Sections__r', childList)
+            .getListMockMetaData();
+
+        H8FlowFormValidationHelper.testForm = testRecords[0];
+
+        Test.startTest();
+            String jsonString = H8FlowFormValidation.validateCompleteForm(account.Id, 'Account', 'TestRecord');
+            Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
+            Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
+            Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
+            Assert.areEqual(true, (Boolean)jsonObjects.get('hasErrors'), 'we expect hasErrors to be set as true');
+            Assert.areEqual(false, (Boolean)jsonObjects.get('isValid'), 'we expect isValid to be set as false');
+            List<Object> sections = (List<Object>)jsonObjects.get('sections');
+            Assert.areEqual(1, sections.size(), 'we expect 1 section to be present');
         Test.stopTest();
         
     }

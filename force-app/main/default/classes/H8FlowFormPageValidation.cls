@@ -12,6 +12,7 @@ public with sharing class H8FlowFormPageValidation {
     private static List<H8_Flow_Form_Section_Validation__mdt> pageValidations = new List<H8_Flow_Form_Section_Validation__mdt>();
     private static Map<String, Object> validationValue = new Map<String, Object>();
     private static List<String> currentErrors = new List<String>();
+    private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
     
     /**
     * @description              aura method to validate an individual page and display the errors
@@ -27,6 +28,9 @@ public with sharing class H8FlowFormPageValidation {
             formDetails = H8FlowFormValidationHelper.getSpecificPageForm(formName, pageName);
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, parentObjectAPIName, validationFields);
+            if(formDetails.Validation_Flow_API_Name__c != null) {
+                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, null, pageName, recordId);     
+            }
             validateCurrentRecord();
             return generateResponse(true, '');
         } catch (Exception e){
@@ -40,8 +44,10 @@ public with sharing class H8FlowFormPageValidation {
     private static void getValidationFields(){
         for(H8_Flow_Form_Section__mdt formSection:formDetails.H8_Flow_Form_Sections__r){
             for(H8_Flow_Form_Section_Validation__mdt formSectionValidation:formSection.H8_Flow_Form_Section_Validations__r){
-                validationFields.add(formSectionValidation.FieldAPIName__c);
-                storeValidationValue(formSectionValidation);
+                if(!formSectionValidation.IsFlowValidation__c) {
+                    validationFields.add(formSectionValidation.FieldAPIName__c);
+                    storeValidationValue(formSectionValidation);
+                }
                 pageValidations.add(formSectionValidation);
             }
         }
@@ -72,10 +78,19 @@ public with sharing class H8FlowFormPageValidation {
     **/
     private static void validateCurrentRecord(){
         for(H8_Flow_Form_Section_Validation__mdt validation:pageValidations){
-            Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
-            Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
-            if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
-                currentErrors.add(validation.QuestionName__c);
+            if(validation.IsFlowValidation__c) {
+                List<String> validationMessages = flowValidations.get(validation.FlowValidationType__c);
+                if(validationMessages != null && validationMessages.size()>0) {
+                    for(String validationMessage:validationMessages) {
+                        currentErrors.add(validationMessage);
+                    }
+                }                
+            } else {
+                Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
+                Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
+                if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
+                    currentErrors.add(validation.QuestionName__c);
+                }
             }
         } 
     }
