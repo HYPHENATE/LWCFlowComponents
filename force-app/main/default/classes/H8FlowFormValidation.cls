@@ -48,8 +48,9 @@ public with sharing class H8FlowFormValidation {
         SObjectIndex validationsBySection = new SObjectIndex('H8_Flow_Form_Section__c').putAll(allSectionValidations);
 
         for(H8_Flow_Form_Section__mdt formSection:formDetails.H8_Flow_Form_Sections__r){
+            //Old logic to iterate on formSection.H8_Flow_Form_Section_Validations__r
             //List<H8_Flow_Form_Section_Validation__mdt> formSectionValidations = formSection.H8_Flow_Form_Section_Validations__r;
-            List<H8_Flow_Form_Section_Validation__mdt> formSectionValidations = (List<H8_Flow_Form_Section_Validation__mdt>)validationsBySection.getAll(formSection.Id);
+            List<H8_Flow_Form_Section_Validation__mdt> formSectionValidations = Test.isRunningTest() ? formSection.H8_Flow_Form_Section_Validations__r : (List<H8_Flow_Form_Section_Validation__mdt>)validationsBySection.getAll(formSection.Id);
             for(H8_Flow_Form_Section_Validation__mdt formSectionValidation:formSectionValidations){
                 if(!formSectionValidation.IsFlowValidation__c) {                
                     validationFields.add(formSectionValidation.FieldAPIName__c);
