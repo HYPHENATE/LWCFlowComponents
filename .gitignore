@@ -34,3 +34,4 @@ coverage/                # LWC coverage information
 .localdevserver/         # SFDX/LWC dev
 
 .pmdCache                # pmd cache file
+.pmdCache
