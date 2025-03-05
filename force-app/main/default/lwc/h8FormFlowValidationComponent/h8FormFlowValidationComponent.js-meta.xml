@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>61.0</apiVersion>
+    <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Flow Form Validations</masterLabel>
     <description>This component works with custom metadata attached to the flow form component, ideally you should place this component on a review page. It will then trigger an entire form validation and update the flow form component to display where there are errors</description>
