@@ -1,7 +1,7 @@
 /**
  * @description       : js for individual item
  * @author            : daniel@hyphen8.com
- * @last modified on  : 05/09/2024
+ * @last modified on  : 13-03-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -16,6 +16,14 @@ export default class H8FlowFormRenderItem extends LightningElement {
             return 'slds-vertical-tabs__nav-item slds-is-active';
         } else {
             return 'slds-vertical-tabs__nav-item';
+        }
+    }
+
+    get ariaSelected(){
+        if(this.activeSection == this.section.id){
+            return true;
+        } else {
+            return false;
         }
     }
 

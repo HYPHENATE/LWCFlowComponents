@@ -9,6 +9,7 @@
         <target>lightning__RecordPage</target>
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__HomePage">
@@ -21,6 +22,11 @@
             <property name="defaultPage" label="Default Page" type="Integer" />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
+            <property name="formName" label="Form Name" type="String" />
+            <property name="recordId" label="RecordId" type="String" />
+            <property name="defaultPage" label="Default Page" type="Integer" />
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
             <property name="formName" label="Form Name" type="String" />
             <property name="recordId" label="RecordId" type="String" />
             <property name="defaultPage" label="Default Page" type="Integer" />
