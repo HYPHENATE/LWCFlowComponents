@@ -1,7 +1,7 @@
 <!--
   @description       : html to output vertical tabs based on metadata configuration
   @author            : daniel@hyphen8.com
-  @last modified on  : 16/08/2024
+  @last modified on  : 13-03-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -20,7 +20,7 @@
                     <c-h8-flow-form-render-item key={section.id} section={section} active-section={activeSectionId} onsectionselected={handleChangeSection}></c-h8-flow-form-render-item>
                 </template>
             </ul>
-            <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+            <div class="slds-vertical-tabs__content slds-show" id={activeSectionId} role="tabpanel" aria-labelledby={activeSectionId}>
                 <div class="slds-text-longform slds-is-relative">
                     <template if:true={loadFlow}>
                         <div class="slds-align_absolute-center" style="height:5rem">

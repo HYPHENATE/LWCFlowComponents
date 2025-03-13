@@ -1,12 +1,12 @@
 <!--
   @description       : html for individual item
   @author            : daniel@hyphen8.com
-  @last modified on  : 02/10/2024
+  @last modified on  : 13-03-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
     <li class={sectionCSS} title={section.label} role="presentation">
-        <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0" id="slds-vertical-tabs-0__nav" onclick={handleOnSectionSelection}>
+        <a class="slds-vertical-tabs__link" role="tab" tabindex="0" aria-selected={ariaSelected} aria-controls={section.id} id={section.id} onclick={handleOnSectionSelection}>
             <template if:true={section.hasIcon}>
                 <span class="slds-vertical-tabs__left-icon">
                     <lightning-icon icon-name={section.icon} alternative-text={section.label} title={section.label}></lightning-icon>
