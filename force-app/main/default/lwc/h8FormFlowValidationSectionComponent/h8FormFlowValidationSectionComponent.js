@@ -17,6 +17,9 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
     @api affectTextLabel = 'Question(s) affected:';
     hasValidationErrors;
     pages;
+    isLoading = true;
+    success;
+    message;
 
     connectedCallback(){
         const item = sessionStorage.getItem('formProcessing');
@@ -34,6 +37,9 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
         })
         .then((results) => {
             let parsedResults = JSON.parse(results);
+            this.success = parsedResults.success;
+            this.message = parsedResults.message;
+            this.isLoading = false;
             if(parsedResults.success){
                 this.hasValidationErrors = parsedResults.hasErrors;
                 this.pages = parsedResults.pages;

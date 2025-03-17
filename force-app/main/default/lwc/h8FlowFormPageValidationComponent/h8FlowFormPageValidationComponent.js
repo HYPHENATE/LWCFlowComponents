@@ -15,9 +15,11 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
     @api pageName;
     @api helpText;
     @api affectTextLabel;
-
+    isLoading = true;
     hasValidationErrors = false;
     validationErrors;
+    success;
+    message;
 
     connectedCallback(){
         const item = sessionStorage.getItem('formProcessing');
@@ -35,9 +37,12 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
         })
         .then((results) => {
             let parsedResults = JSON.parse(results);
+            this.success = parsedResults.success;
+            this.message = parsedResults.message;
+            this.isLoading = false;
             if(parsedResults.success){
                 this.hasValidationErrors = parsedResults.hasValidationErrors;
-                this.validationErrors = parsedResults.errors;
+                this.validationErrors = parsedResults.errors;                
             }
         })
         .catch((error) => {
