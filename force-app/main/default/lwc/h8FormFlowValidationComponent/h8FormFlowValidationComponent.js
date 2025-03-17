@@ -23,6 +23,8 @@ export default class H8FormFlowValidationComponent extends LightningElement {
     sections;
     hasErrors;
     isValid;
+    success;
+    message;
 
     connectedCallback(){
         this.handleValidateFormData();
@@ -39,6 +41,8 @@ export default class H8FormFlowValidationComponent extends LightningElement {
             this.sections = parsedResults.sections;
             this.hasErrors = parsedResults.hasErrors;
             this.isValid = parsedResults.isValid;
+            this.success = parsedResults.success;
+            this.message = parsedResults.message;
             this.isLoading = false;
             if(this.hasErrors){
                 sessionStorage.setItem('formProcessing', JSON.stringify({ formName: this.formName, recordId: this.recordId, parentObjectAPIName: this.parentObjectAPIName}));

@@ -5,16 +5,45 @@
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
-    <template if:true={hasValidationErrors}>
-        <lightning-card class="slds-var-m-top_medium">
+
+    <template if:true={isLoading}>
+        <div class="slds-align_absolute-center" style="height:5rem">
+            <lightning-spinner
+                alternative-text="Loading..." variant="brand">
+            </lightning-spinner>
+        </div>
+    </template>
+    
+    <template if:false={isLoading}>
+
+
+        <template if:false={success}>
+
             <div class="slds-box validation-box">
                 <div class="slds-var-m-around_medium">
-                <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
-                <template for:each={pages} for:item="page">
-                    <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
-                </template>
+                    <div class="slds-text-heading_medium slds-var-m-bottom_medium">
+                        {message}
+                    </div>
                 </div>
             </div>
-        </lightning-card>
+
+        </template>
+
+        <template if:true={success}>
+
+            <template if:true={hasValidationErrors}>
+                <lightning-card class="slds-var-m-top_medium">
+                    <div class="slds-box validation-box">
+                        <div class="slds-var-m-around_medium">
+                        <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
+                        <template for:each={pages} for:item="page">
+                            <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
+                        </template>
+                        </div>
+                    </div>
+                </lightning-card>
+            </template>
+
+        </template>
     </template>
 </template>

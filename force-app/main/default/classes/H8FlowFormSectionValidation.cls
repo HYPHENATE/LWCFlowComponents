@@ -13,6 +13,7 @@ public with sharing class H8FlowFormSectionValidation {
     private static Map<String, Object> validationValue = new Map<String, Object>();
     private static Map<String, List<String>> currentErrors = new Map<String, List<String>>();
     private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
+    private static Boolean hasActiveFlowValidations = false;
 
     /**
     * @description              aura method to validate an entire section and display the errors
@@ -28,13 +29,13 @@ public with sharing class H8FlowFormSectionValidation {
             formDetails = H8FlowFormValidationHelper.getSpecificSectionForm(formName, sectionName);
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, parentObjectAPIName, validationFields);
-            if(formDetails.Validation_Flow_API_Name__c != null) {
+            if(hasActiveFlowValidations) {
                 flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, sectionName, null, recordId);     
             }
             validateCurrentRecord();
             return generateResponse(true, '');
         } catch (Exception e){
-            return generateResponse(false, e.getMessage());
+            return generateResponse(false, e.getLineNumber() + ': ' + e.toString());
         }
     }
 
@@ -47,6 +48,8 @@ public with sharing class H8FlowFormSectionValidation {
                 if(!formSectionValidation.IsFlowValidation__c) {                
                     validationFields.add(formSectionValidation.FieldAPIName__c);
                     storeValidationValue(formSectionValidation);
+                } else {
+                    hasActiveFlowValidations = true;
                 }
                 String pageName = null != formSectionValidation.Page__c ? formSectionValidation.Page__c : 'NOPAGESCONFIGURED';
                 List<H8_Flow_Form_Section_Validation__mdt> validationPages = sectionValidations.containsKey(pageName) ?
@@ -132,6 +135,9 @@ public with sharing class H8FlowFormSectionValidation {
                     gen.writeFieldName('errors');
                     gen.writeStartArray();
                         for(String error:pageErrors){
+                            if(error == null) {
+                                error = 'Missing questionName in meta data';
+                            }
                             gen.writeStartObject();
                                 gen.writeStringField('questionName', error);
                             gen.writeEndObject();

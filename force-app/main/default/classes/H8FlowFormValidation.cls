@@ -13,6 +13,7 @@ public with sharing class H8FlowFormValidation {
     private static Map<String, Map<String, List<String>>> validationErrors = new Map<String, Map<String, List<String>>>();
     private static Map<String, Object> validationValue = new Map<String, Object>();
     private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
+    private static Boolean hasActiveFlowValidations = false;
 
     /**
     * @description          Aura Method to perform validations on flow forms
@@ -27,13 +28,13 @@ public with sharing class H8FlowFormValidation {
             formDetails = H8FlowFormValidationHelper.getCompleteForm(formAPIName);
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, primaryObjectAPIName, validationFields);
-            if(formDetails.Validation_Flow_API_Name__c != null) {
-                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, null, null, recordId);     
+            if(hasActiveFlowValidations) {
+                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, null, null, recordId);             
             }
             validateCurrentRecord();
             return generateResponse(true, '');
         } catch (Exception e) {
-            return generateResponse(false, e.getMessage());
+            return generateResponse(false, e.getLineNumber() + ': ' + e.toString());
         }
     }
 
@@ -43,7 +44,7 @@ public with sharing class H8FlowFormValidation {
     private static void getValidationFields(){
         //DC 10/01/25 Work around to resolve issue where querying all related meta data for forms and sections and validations are ordered only returns the first validation
         // requery all validation for all sections in order and SObjectIndex map the section id which should leave validations for that section in order
-        List<H8_Flow_Form_Section_Validation__mdt> allSectionValidations = [SELECT H8_Flow_Form_Section__c, MasterLabel, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c, IsFlowValidation__c, FlowValidationType__c FROM H8_Flow_Form_Section_Validation__mdt WHERE H8_Flow_Form_Section__c In:formDetails.H8_Flow_Form_Sections__r ORDER BY Order__c ASC NULLS LAST];
+        List<H8_Flow_Form_Section_Validation__mdt> allSectionValidations = [SELECT H8_Flow_Form_Section__c, MasterLabel, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c, IsFlowValidation__c, FlowValidationType__c FROM H8_Flow_Form_Section_Validation__mdt WHERE Disabled__c=false AND H8_Flow_Form_Section__c In:formDetails.H8_Flow_Form_Sections__r ORDER BY Order__c ASC NULLS LAST];
         //Create SObjectIndex by H8_Flow_Form_Section__c
         SObjectIndex validationsBySection = new SObjectIndex('H8_Flow_Form_Section__c').putAll(allSectionValidations);
 
@@ -55,6 +56,8 @@ public with sharing class H8FlowFormValidation {
                 if(!formSectionValidation.IsFlowValidation__c) {                
                     validationFields.add(formSectionValidation.FieldAPIName__c);
                     storeValidationValue(formSectionValidation);
+                } else {
+                    hasActiveFlowValidations = true;
                 }
                 String pageName = null != formSectionValidation.Page__c ? formSectionValidation.Page__c : 'NOPAGESCONFIGURED';
                 Map<String, List<H8_Flow_Form_Section_Validation__mdt>> validationsPages = mapOfValidations.containsKey(formSection.MasterLabel) ?
@@ -159,6 +162,9 @@ public with sharing class H8FlowFormValidation {
                                 List<String> errors = pageErrors.get(pageName);
                                 gen.writeStartArray();
                                 for(String error:errors){
+                                    if(error == null) {
+                                        error = 'Missing questionName in meta data';
+                                    }
                                     gen.writeStartObject();
                                         gen.writeStringField('questionName', error);
                                     gen.writeEndObject();
@@ -171,6 +177,7 @@ public with sharing class H8FlowFormValidation {
             }
             gen.writeEndArray();
         gen.writeEndObject();
+        System.debug('###gen.getAsString(): ' + gen.getAsString());        
         return gen.getAsString();
     }
 }

@@ -13,6 +13,7 @@ public with sharing class H8FlowFormPageValidation {
     private static Map<String, Object> validationValue = new Map<String, Object>();
     private static List<String> currentErrors = new List<String>();
     private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
+    private static Boolean hasActiveFlowValidations = false;
     
     /**
     * @description              aura method to validate an individual page and display the errors
@@ -28,13 +29,13 @@ public with sharing class H8FlowFormPageValidation {
             formDetails = H8FlowFormValidationHelper.getSpecificPageForm(formName, pageName);
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, parentObjectAPIName, validationFields);
-            if(formDetails.Validation_Flow_API_Name__c != null) {
+            if(hasActiveFlowValidations) {
                 flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, null, pageName, recordId);     
             }
             validateCurrentRecord();
             return generateResponse(true, '');
         } catch (Exception e){
-            return generateResponse(false, e.getMessage());
+            return generateResponse(false, e.getLineNumber() + ': ' + e.toString());
         }
     }
 
@@ -47,6 +48,8 @@ public with sharing class H8FlowFormPageValidation {
                 if(!formSectionValidation.IsFlowValidation__c) {
                     validationFields.add(formSectionValidation.FieldAPIName__c);
                     storeValidationValue(formSectionValidation);
+                } else {
+                    hasActiveFlowValidations = true;
                 }
                 pageValidations.add(formSectionValidation);
             }
@@ -111,6 +114,9 @@ public with sharing class H8FlowFormPageValidation {
             gen.writeStartArray();
             for(String error:currentErrors){
                 gen.writeStartObject();
+                    if(error == null) {
+                        error = 'Missing questionName in meta data';
+                    }
                     gen.writeStringField('questionName', error);
                 gen.writeEndObject();
             }

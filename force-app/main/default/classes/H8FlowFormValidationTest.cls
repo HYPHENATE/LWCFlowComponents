@@ -100,6 +100,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'CloseDate')
             .addFieldValue('Id', 'SampleId2')
+            .addFieldValue('Disabled__c', false)
             .getListMockMetaData();
 
         List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
@@ -161,6 +162,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('QuestionName__c', 'Type')
             .addFieldValue('Id', 'SampleId2')
             .addFieldValue('Order__c', 10)
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'OppAmount')
@@ -172,6 +174,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('QuestionName__c', 'Amount')
             .addFieldValue('Id', 'SampleId3')
             .addFieldValue('Order__c', 20)
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'OppCloseDate')
@@ -183,6 +186,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('QuestionName__c', 'CloseDate')
             .addFieldValue('Id', 'SampleId5')
             .addFieldValue('Order__c', 30)
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
 
         List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
@@ -269,6 +273,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'Amount')
             .addFieldValue('Id', 'SampleId2')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'OppAmount')
@@ -278,6 +283,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'Amount')
             .addFieldValue('Id', 'SampleId3')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
 
         List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
@@ -348,6 +354,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'Type')
             .addFieldValue('Id', 'SampleId2')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'OppAmount')
@@ -358,6 +365,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'Amount')
             .addFieldValue('Id', 'SampleId3')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'OppCloseDate')
@@ -368,6 +376,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'CloseDate')
             .addFieldValue('Id', 'SampleId5')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'OppName')
@@ -377,6 +386,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'Name')
             .addFieldValue('Id', 'SampleId6')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'IsPrivate')
@@ -387,6 +397,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'IsPrivate')
             .addFieldValue('Id', 'SampleId7')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
         validationList.add((H8_Flow_Form_Section_Validation__mdt)new MockMetaManager('H8_Flow_Form_Section_Validation__mdt')
             .addFieldValue('MasterLabel', 'Probability')
@@ -397,6 +408,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('Page__c', 'Page1')
             .addFieldValue('QuestionName__c', 'Probability')
             .addFieldValue('Id', 'SampleId8')
+            .addFieldValue('Disabled__c', false)
             .getSingleMockMetaData());
 
         List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
@@ -457,6 +469,7 @@ public class H8FlowFormValidationTest {
             .addFieldValue('IsFlowValidation__c', 'true')
             .addFieldValue('FlowValidationType__c', 'Test')
             .addFieldValue('Id', 'SampleId2')
+            .addFieldValue('Disabled__c', false)
             .getListMockMetaData();
 
         List<H8_Flow_Form_Section__mdt> childList = (List<H8_Flow_Form_Section__mdt>)new MockMetaManager('H8_Flow_Form_Section__mdt')
