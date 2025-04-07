@@ -1,8 +1,8 @@
 /**
  * @description       : js for form validation section component
  * @author            : daniel@hyphen8.com
- * @last modified on  : 04-11-2024
- * @last modified by  : daniel@hyphen8.com
+ * @last modified on  : 07/04/2025
+ * @last modified by  : dan@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
 
@@ -18,13 +18,16 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
     hasValidationErrors;
     pages;
     isLoading = true;
-    success;
+    success = true;
     message;
 
     connectedCallback(){
         const item = sessionStorage.getItem('formProcessing');
         if (item) {
             this.handleGetSectionValidation();
+        } else {
+            this.isLoading = false;
+            this.success = true;
         }
     }
 
@@ -49,6 +52,8 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
         })
         .catch((error) => {
             console.error('error handleGetSectionValidation > ' + JSON.stringify(error));
+            this.isLoading = false; //remove spinner if error
+            this.success = true; //remove error on page. Possibly should display something?
         });
     }
 }

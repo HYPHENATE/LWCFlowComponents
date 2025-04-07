@@ -1,8 +1,8 @@
 /**
  * @description       : Sample Description
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
- * @last modified by  : daniel@hyphen8.com
+ * @last modified on  : 07/04/2025
+ * @last modified by  : dan@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
 
@@ -18,13 +18,16 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
     isLoading = true;
     hasValidationErrors = false;
     validationErrors;
-    success;
+    success = true;
     message;
 
     connectedCallback(){
         const item = sessionStorage.getItem('formProcessing');
         if (item) {
             this.handleValidatePage();
+        } else {
+            this.isLoading = false;
+            this.success = true;
         }
     }
 
@@ -47,6 +50,8 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
         })
         .catch((error) => {
             console.error('error handleValidatePage > ' + JSON.stringify(error));
+            this.isLoading = false; //remove spinner if error
+            this.success = true; //remove error on page. Possibly should display something?
         });
     }
 }
