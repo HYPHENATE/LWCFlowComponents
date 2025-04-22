@@ -1,7 +1,7 @@
 /**
  * @description       : master form flow validation class for validating an entire form submission looking for errors
  * @author            : daniel@hyphen8.com
- * @last modified on  : 04-11-2024
+ * @last modified on  : 17-04-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormValidation {
@@ -44,7 +44,7 @@ public with sharing class H8FlowFormValidation {
     private static void getValidationFields(){
         //DC 10/01/25 Work around to resolve issue where querying all related meta data for forms and sections and validations are ordered only returns the first validation
         // requery all validation for all sections in order and SObjectIndex map the section id which should leave validations for that section in order
-        List<H8_Flow_Form_Section_Validation__mdt> allSectionValidations = [SELECT H8_Flow_Form_Section__c, MasterLabel, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c, IsFlowValidation__c, FlowValidationType__c FROM H8_Flow_Form_Section_Validation__mdt WHERE Disabled__c=false AND H8_Flow_Form_Section__c In:formDetails.H8_Flow_Form_Sections__r ORDER BY Order__c ASC NULLS LAST];
+        List<H8_Flow_Form_Section_Validation__mdt> allSectionValidations = [SELECT H8_Flow_Form_Section__c, MasterLabel, Use_Custom_Label__c, CustomErrorMessage__c, Order__c, FieldAPIName__c, QuestionName__c, Validation_Value__c, DataType__c, Page__c, IsFlowValidation__c, FlowValidationType__c FROM H8_Flow_Form_Section_Validation__mdt WHERE Disabled__c=false AND H8_Flow_Form_Section__c In:formDetails.H8_Flow_Form_Sections__r ORDER BY Order__c ASC NULLS LAST];
         //Create SObjectIndex by H8_Flow_Form_Section__c
         SObjectIndex validationsBySection = new SObjectIndex('H8_Flow_Form_Section__c').putAll(allSectionValidations);
 
@@ -119,7 +119,12 @@ public with sharing class H8FlowFormValidation {
                 Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
                 Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
                 if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
-                    generateError(sectionName, validation, validation.QuestionName__c);
+                    if(validation.Use_Custom_Label__c){
+                        String labelValue = Label.get(null, validation.QuestionName__c);
+                        generateError(sectionName, validation, null != labelValue ? labelValue : validation.QuestionName__c);
+                    } else {
+                        generateError(sectionName, validation, validation.QuestionName__c);
+                    }
                 }
             }
         } 
@@ -130,8 +135,15 @@ public with sharing class H8FlowFormValidation {
         Map<String, List<String>> pageErrors = validationErrors.containsKey(sectionName) ? validationErrors.get(sectionName) : new Map<String, List<String>>();
         List<String> currentErrors = pageErrors.containsKey(pageName) ? pageErrors.get(pageName) : new List<String>();
         currentErrors.add(errorMessage);
-        pageErrors.put(pageName, currentErrors);
-        validationErrors.put(sectionName, pageErrors);
+        if(validation.Use_Custom_Label__c){
+            String labelPageName = Label.get(null, pageName);
+            String labelSectionName = Label.get(null, sectionName);
+            pageErrors.put(null != labelPageName ? labelPageName : pageName, currentErrors);
+            validationErrors.put(null != labelSectionName ? labelSectionName : sectionName, pageErrors);
+        } else {
+            pageErrors.put(pageName, currentErrors);
+            validationErrors.put(sectionName, pageErrors);
+        }
     }
 
     /**
@@ -176,8 +188,7 @@ public with sharing class H8FlowFormValidation {
                 gen.writeEndObject();
             }
             gen.writeEndArray();
-        gen.writeEndObject();
-        System.debug('###gen.getAsString(): ' + gen.getAsString());        
+        gen.writeEndObject();    
         return gen.getAsString();
     }
 }

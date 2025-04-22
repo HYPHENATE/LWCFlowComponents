@@ -1,7 +1,7 @@
 /**
  * @description       : Meta driven form flow controller
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 17-04-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormController {
@@ -31,7 +31,7 @@ public with sharing class H8FlowFormController {
     **/
     private static void getFormMeta(String formAPIName){
         form = Test.isRunningTest() ? formTest : [SELECT Id, MasterLabel, DeveloperName,
-                                            (SELECT Id, Flow_API_Name__c, Icon_Name__c, Order__c, MasterLabel 
+                                            (SELECT Id, Flow_API_Name__c, Icon_Name__c, Order__c, MasterLabel, Use_Custom_Label__c
                                             FROM H8_Flow_Form_Sections__r
                                             ORDER BY Order__c ASC)
                                             FROM H8_Flow_Form__mdt 
@@ -53,7 +53,12 @@ public with sharing class H8FlowFormController {
             List<H8_Flow_Form_Section__mdt> formSections = Test.isRunningTest() ? formSectionsTest : form.H8_Flow_Form_Sections__r;
             for(H8_Flow_Form_Section__mdt section:formSections){
                 gen.writeStartObject();
-                    gen.writeStringField('label', section.MasterLabel);
+                    if(section.Use_Custom_Label__c){
+                        String labelValue = Label.get(null, section.MasterLabel);
+                        gen.writeStringField('label', null != labelValue ? labelValue : section.MasterLabel);
+                    } else {
+                        gen.writeStringField('label', section.MasterLabel);
+                    }
                     gen.writeStringField('icon', section.Icon_Name__c != null ? section.Icon_Name__c : '');
                     gen.writeBooleanField('hasIcon', section.Icon_Name__c != null);
                     gen.writeStringField('flow', section.Flow_API_Name__c);
