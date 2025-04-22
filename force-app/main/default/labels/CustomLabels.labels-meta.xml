@@ -9,6 +9,30 @@
         <value>Character Count:</value>
     </labels>
     <labels>
+        <fullName>H8FFSNameTestLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFSNameTestLabel</shortDescription>
+        <value>Test Section Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FFPNameTestLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFPNameTestLabel</shortDescription>
+        <value>Test Page Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FFQNameTestLabel</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFQNameTestLabel</shortDescription>
+        <value>Test Question Name</value>
+    </labels>
+    <labels>
         <fullName>H8FFUCDeleteFileFieldLabel</fullName>
         <categories>CustomFlowComponents</categories>
         <language>en_US</language>

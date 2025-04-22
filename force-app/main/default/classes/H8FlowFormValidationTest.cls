@@ -1,7 +1,7 @@
 /**
  * @description       : H8FlowFormValidation test class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 04-11-2024
+ * @last modified on  : 17-04-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -209,7 +209,6 @@ public class H8FlowFormValidationTest {
 
         Test.startTest();
             String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
-            System.debug(jsonString);
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
@@ -218,7 +217,6 @@ public class H8FlowFormValidationTest {
             List<Object> sections = (List<Object>)jsonObjects.get('sections');
             Assert.areEqual(1, sections.size(), 'we expect 1 section to be present');
             for(Object sectionObject:sections){
-                System.debug(sectionObject);
                 Map<String, Object> pageObjects = (Map<String, Object>)JSON.deserializeUntyped(JSON.serialize(sectionObject));
                 List<Object> pages = (List<Object>)pageObjects.get('pages');
                 Assert.areEqual(1, pages.size(), 'we expect 1 page present here');

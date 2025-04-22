@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Use_Custom_Label__c</fullName>
+    <defaultValue>false</defaultValue>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>When you select this option you can set the Page, Question Name as custom labels, you do not need to provide $Label. just the Label API Name</inlineHelpText>
+    <label>Use Custom Label</label>
+    <type>Checkbox</type>
+</CustomField>

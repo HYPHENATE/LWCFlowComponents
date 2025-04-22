@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Use_Custom_Label__c</fullName>
+    <defaultValue>false</defaultValue>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>When you tick this box you can set the name of section as a custom label - you do not need to include $Label. just the Label API Name will be enough</inlineHelpText>
+    <label>Use Custom Label</label>
+    <type>Checkbox</type>
+</CustomField>
