@@ -1,7 +1,7 @@
 /**
  * @description       : js for custom lightning data table
  * @author            : daniel@hyphen8.com
- * @last modified on  : 06-04-2023
+ * @last modified on  : 15-05-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
@@ -122,6 +122,7 @@ export default class CustomLightningDataTable extends LightningElement {
                         isPercent:element.isPercent,
                         isCurrency:element.isCurrency,
                         picklistOptions:pickListValues,
+                        stepScale:element.stepScale
                 }];
             });
             
@@ -159,7 +160,10 @@ export default class CustomLightningDataTable extends LightningElement {
                         isURL:element.isURL,
                         isPercent:element.isPercent,
                         isCurrency:element.isCurrency,
-                        picklistOptions:pickListValues,}];
+                        picklistOptions:pickListValues,
+                        stepScale:element.stepScale,
+                        scale:element.scale,
+                        length:element.length}];
                 });
                 editItems = [...editItems, {id: recordId, fields: individualrecord}];
             });
@@ -235,6 +239,10 @@ export default class CustomLightningDataTable extends LightningElement {
             case 'picklist':
                 return 'combobox';
             case 'currency':
+                return 'number';
+            case 'double':
+                return 'number';
+            case 'percent':
                 return 'number';
         }
     }
