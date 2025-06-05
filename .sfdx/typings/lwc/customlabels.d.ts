@@ -2,6 +2,18 @@ declare module "@salesforce/label/c.CharacterCountText" {
     var CharacterCountText: string;
     export default CharacterCountText;
 }
+declare module "@salesforce/label/c.H8FFSNameTestLabel" {
+    var H8FFSNameTestLabel: string;
+    export default H8FFSNameTestLabel;
+}
+declare module "@salesforce/label/c.H8FFPNameTestLabel" {
+    var H8FFPNameTestLabel: string;
+    export default H8FFPNameTestLabel;
+}
+declare module "@salesforce/label/c.H8FFQNameTestLabel" {
+    var H8FFQNameTestLabel: string;
+    export default H8FFQNameTestLabel;
+}
 declare module "@salesforce/label/c.H8FFUCDeleteFileFieldLabel" {
     var H8FFUCDeleteFileFieldLabel: string;
     export default H8FFUCDeleteFileFieldLabel;

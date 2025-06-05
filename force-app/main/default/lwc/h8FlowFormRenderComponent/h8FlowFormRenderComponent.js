@@ -1,7 +1,7 @@
 /**
  * @description       : js to support displaying a form with side navigation
  * @author            : daniel@hyphen8.com
- * @last modified on  : 19-05-2025
+ * @last modified on  : 05-06-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
@@ -46,12 +46,15 @@ export default class H8FlowFormRenderComponent extends LightningElement {
         clearInterval(this.intervalId);
     }
 
-    checkSessionStorage(){
+    checkSessionStorage() {
         const item = sessionStorage.getItem('formProcessing');
-        
         if (item) {
-            clearInterval(this.intervalId);
-            this.handleGetValidations(JSON.parse(item));
+            const records = JSON.parse(item);
+            const matchedRecord = records.find(record => record.recordId === this.recordId);
+            if (matchedRecord) {
+                clearInterval(this.intervalId);
+                this.handleGetValidations(matchedRecord);
+            }
         }
     }
 
