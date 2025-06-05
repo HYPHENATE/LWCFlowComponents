@@ -1,7 +1,7 @@
 <!--
   @description       : html for core validation component for validation and entire form
   @author            : daniel@hyphen8.com
-  @last modified on  : 04-11-2024
+  @last modified on  : 04-06-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -18,9 +18,9 @@
 
         <template if:false={success}>
 
-            <div class="slds-box validation-box">
+            <div tabindex="0" class="slds-box validation-box">
                 <div class="slds-var-m-around_medium">
-                    <div class="slds-text-heading_medium slds-var-m-bottom_medium">
+                    <div tabindex="0" class="slds-text-heading_medium slds-var-m-bottom_medium">
                         {message}
                     </div>
                   </div>
@@ -31,19 +31,19 @@
         <template if:true={success}>
 
             <template if:true={hasErrors}>
-                <lightning-card title={cardTitle} class="slds-var-m-top_medium">
+                <lightning-card title={cardTitle} class="slds-var-m-top_medium" tabindex="0">
                     <div class="slds-text-heading_small slds-var-m-around_medium slds-var-m-bottom_small">
-                        <lightning-formatted-rich-text value={invalidCardDescription}></lightning-formatted-rich-text>
+                        <lightning-formatted-rich-text value={invalidCardDescription} tabindex="0"></lightning-formatted-rich-text>
                     </div>  
                     <div class="slds-box validation-box">
                         <div class="slds-var-m-around_medium">
-                            <div class="slds-text-heading_medium slds-var-m-bottom_medium">
+                            <div tabindex="0" class="slds-text-heading_medium slds-var-m-bottom_medium">
                                 {completeFieldsText}
                             </div>
                             
                             <template for:each={sections} for:item="section">   
                                 <div key={section.sectionName} class="slds-var-m-bottom_small">
-                                    <div class="slds-text-heading_medium slds-var-m-bottom_small">{section.sectionName}</div>
+                                    <div tabindex="0" class="slds-text-heading_medium slds-var-m-bottom_small">{section.sectionName}</div>
                                     <template for:each={section.pages} for:item="page">
                                         <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
                                     </template>
@@ -55,9 +55,9 @@
             </template>
             
             <template if:true={isValid}>
-                <lightning-card title={cardTitle} class="slds-var-m-top_medium">
+                <lightning-card title={cardTitle} class="slds-var-m-top_medium" tabindex="0">
                     <div class="slds-var-m-around_medium slds-text-heading_small slds-var-m-bottom_small">
-                        <lightning-formatted-rich-text value={validCardDescription}></lightning-formatted-rich-text>
+                        <lightning-formatted-rich-text value={validCardDescription} tabindex="0"></lightning-formatted-rich-text>
                     </div>
                     <div slot="footer">
                         <div class="slds-clearfix">

@@ -1,7 +1,7 @@
 /**
  * @description       : js for row level data table items
  * @author            : daniel@hyphen8.com
- * @last modified on  : 06-04-2023
+ * @last modified on  : 15-05-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
@@ -44,6 +44,7 @@ export default class CustomLightningDataTableRow extends LightningElement {
         const index = datafields.findIndex((field) => field.fieldAPIName === eventFieldAPIName);
         datafields.splice(index, 1, thisfield);
         this.currentData = {'id':this.rowData.id, 'fields': datafields};
+        console.log('currentData', JSON.stringify(this.currentData));
         this.dispatchEventFunction('rowupdated', {recordId: this.recordId, rowData: this.currentData.fields});
     }
 

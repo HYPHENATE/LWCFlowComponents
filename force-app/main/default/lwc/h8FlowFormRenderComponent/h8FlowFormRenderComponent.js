@@ -1,7 +1,7 @@
 /**
  * @description       : js to support displaying a form with side navigation
  * @author            : daniel@hyphen8.com
- * @last modified on  : 31/10/2024
+ * @last modified on  : 05-06-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
@@ -14,12 +14,14 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     @api formName;
     @api recordId;
     @api defaultPage = 1;
+    @api scrollToTopOffset = 150;
     isLoading = true;
     @track sections;
     activeSectionId;
     flowAPIName;
     loadFlow = false;
     intervalId;
+    @track scrollToFlow = false;
 
     // connected call back to support with getting the form structure
     connectedCallback(){
@@ -29,16 +31,30 @@ export default class H8FlowFormRenderComponent extends LightningElement {
         }, 500);
     }
 
+    renderedCallback() {
+        if (this.scrollToFlow) {
+            const flowWrapper = this.template.querySelector('[data-id="flowWrapper"]');
+            if (flowWrapper) {
+                const y = flowWrapper.getBoundingClientRect().top + window.pageYOffset - this.scrollToTopOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+            this.scrollToFlow = false;
+        }
+    }
+
     disconnectedCallback() {
         clearInterval(this.intervalId);
     }
 
-    checkSessionStorage(){
+    checkSessionStorage() {
         const item = sessionStorage.getItem('formProcessing');
-        
         if (item) {
-            clearInterval(this.intervalId);
-            this.handleGetValidations(JSON.parse(item));
+            const records = JSON.parse(item);
+            const matchedRecord = records.find(record => record.recordId === this.recordId);
+            if (matchedRecord) {
+                clearInterval(this.intervalId);
+                this.handleGetValidations(matchedRecord);
+            }
         }
     }
 
@@ -121,8 +137,10 @@ export default class H8FlowFormRenderComponent extends LightningElement {
         this.activeSectionId = event.detail.sectionId;
         this.flowAPIName = event.detail.flowName;
         this.checkSessionStorage();
+        
         setTimeout(() => {
             this.loadFlow = false;
+            this.scrollToFlow = true; 
         }, 500);
     }
 

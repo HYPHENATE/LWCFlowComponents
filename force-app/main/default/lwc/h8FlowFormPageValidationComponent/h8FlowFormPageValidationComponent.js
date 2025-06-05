@@ -1,8 +1,8 @@
 /**
  * @description       : Sample Description
  * @author            : daniel@hyphen8.com
- * @last modified on  : 07/04/2025
- * @last modified by  : dan@hyphen8.com
+ * @last modified on  : 05-06-2025
+ * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
 
@@ -24,7 +24,14 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
     connectedCallback(){
         const item = sessionStorage.getItem('formProcessing');
         if (item) {
-            this.handleValidatePage();
+            const records = JSON.parse(item);
+            const exists = records.some(record => record.recordId === this.recordId);
+            if (exists) {
+                this.handleValidatePage();
+            } else {
+                this.isLoading = false;
+                this.success = true;
+            }
         } else {
             this.isLoading = false;
             this.success = true;

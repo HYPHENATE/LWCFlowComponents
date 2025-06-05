@@ -1,7 +1,7 @@
 /**
  * @description       : Sample Description
  * @author            : daniel@hyphen8.com
- * @last modified on  : 04-11-2024
+ * @last modified on  : 05-06-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -45,7 +45,17 @@ export default class H8FormFlowValidationComponent extends LightningElement {
             this.message = parsedResults.message;
             this.isLoading = false;
             if(this.hasErrors){
-                sessionStorage.setItem('formProcessing', JSON.stringify({ formName: this.formName, recordId: this.recordId, parentObjectAPIName: this.parentObjectAPIName}));
+                const newRecord = {
+                    formName: this.formName,
+                    recordId: this.recordId,
+                    parentObjectAPIName: this.parentObjectAPIName
+                };
+                let existingRecords = JSON.parse(sessionStorage.getItem('formProcessing')) || [];
+                const exists = existingRecords.some(item => item.recordId === newRecord.recordId);
+                if (!exists) {
+                    existingRecords.push(newRecord);
+                    sessionStorage.setItem('formProcessing', JSON.stringify(existingRecords));
+                }
             }
         })
         .catch((error) => {

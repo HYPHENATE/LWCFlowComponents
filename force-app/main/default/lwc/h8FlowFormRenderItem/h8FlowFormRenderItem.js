@@ -1,7 +1,7 @@
 /**
  * @description       : js for individual item
  * @author            : daniel@hyphen8.com
- * @last modified on  : 13-03-2025
+ * @last modified on  : 20-05-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -24,6 +24,13 @@ export default class H8FlowFormRenderItem extends LightningElement {
             return true;
         } else {
             return false;
+        }
+    }
+
+    handleOnSectionKeyDown(event){
+        const key = event.key || event.keyCode;
+        if (key === 'Enter' || key === 13 || key === ' ') {
+            this.handleOnSectionSelection(event);
         }
     }
 

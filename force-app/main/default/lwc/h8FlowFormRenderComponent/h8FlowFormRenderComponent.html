@@ -1,7 +1,7 @@
 <!--
   @description       : html to output vertical tabs based on metadata configuration
   @author            : daniel@hyphen8.com
-  @last modified on  : 13-03-2025
+  @last modified on  : 19-05-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -30,10 +30,12 @@
                         </div>
                     </template>
                     <template if:false={loadFlow}>
-                        <lightning-flow flow-api-name={flowAPIName} 
-                                        flow-input-variables={inputVariables}
-                                        onstatuschange={handleStatusChange}>
-                        </lightning-flow>
+                        <div class="flow-wrapper" data-id="flowWrapper">
+                            <lightning-flow flow-api-name={flowAPIName} 
+                                            flow-input-variables={inputVariables}
+                                            onstatuschange={handleStatusChange}>
+                            </lightning-flow>
+                        </div>
                     </template>
                 </div>
             </div>
