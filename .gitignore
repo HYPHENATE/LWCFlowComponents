@@ -19,19 +19,17 @@ venv/                    # Python
 *.sublime-project        # Sublime Text (used with MavensMate)
 *.sublime-workspace      # Sublime Text (used with MavensMate)
 
-.sfdx/                   # SFDX
-.sfdx
-.sfdx\
-.sf/
+.sfdx                   # SFDX
 .sf
 
-.vscode/                 # Visual Studio Code
+.vscode                  # Visual Studio Code
 
 .cci/                    # CumulusCI
 
-node_modules/            # Node.js (LWC, Prettier)
+node_modules             # Node.js (LWC, Prettier)
 coverage/                # LWC coverage information
 .localdevserver/         # SFDX/LWC dev
 
+
+
 .pmdCache                # pmd cache file
-.pmdCache
