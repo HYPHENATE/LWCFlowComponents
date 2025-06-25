@@ -9,7 +9,7 @@
 }
 
 .slds-vertical-tabs__nav {
-    width: var(--lwc-sizeXSmall, 12rem) !important;
+    width: var(--custom-nav-width, 12rem) !important;
     border-right: var(--lwc-borderWidthThin, 1px) solid var(--slds-g-color-border-base-1, var(--lwc-colorBorder, #939393)) !important;
     background: var(--slds-g-color-neutral-base-95, var(--lwc-colorBackground, #FFFFFF)) !important;
 }
