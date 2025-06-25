@@ -1,7 +1,7 @@
 <!--
   @description       : html for individual item
   @author            : daniel@hyphen8.com
-  @last modified on  : 19-05-2025
+  @last modified on  : 25-06-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -12,7 +12,7 @@
                     <lightning-icon icon-name={section.icon} alternative-text={section.label} title={section.label}></lightning-icon>
                 </span>
             </template>
-            <span class="slds-truncate">{section.label}</span>
+            <span class="slds-wrap">{section.label}</span>
             <span class="slds-vertical-tabs__right-icon">
                 <template if:true={section.hasValidationError}>
                     <lightning-icon icon-name='utility:error' variant="error" size="x-small" alternative-text='Validation errors found' title='Validation errors found'></lightning-icon>

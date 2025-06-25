@@ -1,7 +1,7 @@
 <!--
   @description       : html to output vertical tabs based on metadata configuration
   @author            : daniel@hyphen8.com
-  @last modified on  : 19-05-2025
+  @last modified on  : 25-06-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -15,7 +15,7 @@
     </template>
     <template if:false={isLoading}>
         <div class="slds-vertical-tabs tabsCustom">
-            <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+            <ul class="slds-vertical-tabs__nav navCustom" role="tablist" aria-orientation="vertical">
                 <template for:each={sections} for:item="section">
                     <c-h8-flow-form-render-item key={section.id} section={section} active-section={activeSectionId} onsectionselected={handleChangeSection}></c-h8-flow-form-render-item>
                 </template>

@@ -16,24 +16,28 @@
             <property name="formName" label="Form Name" type="String" />
             <property name="defaultPage" label="Default Page" type="Integer" />
             <property name="scrollToTopOffset" label="On Click Scroll Offset" type="Integer" description="Selecting a section will scroll to the top but you might want to offset that in px, enter a number without the px to set the offset difference" />
+            <property name="navWidth" label="Tab Navigation Width" type="String" description="You can use this to determine the width of the tab columns, for full responsiveness your should use rem options, the default is 12rem" default="12rem" />
         </targetConfig>
         <targetConfig targets="lightning__RecordPage">
             <property name="formName" label="Form Name" type="String" />
             <property name="recordId" label="RecordId" type="String" />
             <property name="defaultPage" label="Default Page" type="Integer" />
             <property name="scrollToTopOffset" label="On Click Scroll Offset" type="Integer" description="Selecting a section will scroll to the top but you might want to offset that in px, enter a number without the px to set the offset difference" />
+            <property name="navWidth" label="Tab Navigation Width" type="String" description="You can use this to determine the width of the tab columns, for full responsiveness your should use rem options, the default is 12rem" default="12rem" />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
             <property name="formName" label="Form Name" type="String" />
             <property name="recordId" label="RecordId" type="String" />
             <property name="defaultPage" label="Default Page" type="Integer" />
             <property name="scrollToTopOffset" label="On Click Scroll Offset" type="Integer" description="Selecting a section will scroll to the top but you might want to offset that in px, enter a number without the px to set the offset difference" />
+            <property name="navWidth" label="Tab Navigation Width" type="String" description="You can use this to determine the width of the tab columns, for full responsiveness your should use rem options, the default is 12rem" default="12rem" />
         </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
             <property name="formName" label="Form Name" type="String" />
             <property name="recordId" label="RecordId" type="String" />
             <property name="defaultPage" label="Default Page" type="Integer" />
             <property name="scrollToTopOffset" label="On Click Scroll Offset" type="Integer" description="Selecting a section will scroll to the top but you might want to offset that in px, enter a number without the px to set the offset difference" />
+            <property name="navWidth" label="Tab Navigation Width" type="String" description="You can use this to determine the width of the tab columns, for full responsiveness your should use rem options, the default is 12rem" default="12rem" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

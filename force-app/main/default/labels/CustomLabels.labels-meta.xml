@@ -88,4 +88,84 @@
         <shortDescription>WordCountText</shortDescription>
         <value>Word Count:</value>
     </labels>
+    <labels>
+        <fullName>H8FormCloneDuplicateFormNameMessage</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneDuplicateFormNameMessage</shortDescription>
+        <value>A form with this name or developer name already exists.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneCloneButtonLabel</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneCloneButtonLabel</shortDescription>
+        <value>Clone Selected Form</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneHelpText</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneHelpText</shortDescription>
+        <value>Your new Form Name must be unique!</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneLoadingSpinnerText</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneLoadingSpinnerText</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneCloningSpinnerText</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneCloningSpinnerText</shortDescription>
+        <value>Cloning...</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneFormSelectionLabel</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneFormSelectionLabel</shortDescription>
+        <value>Select the Form you want to Clone</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneFormSelectionPlaceholder</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneFormSelectionPlaceholder</shortDescription>
+        <value>Select Form</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneFormNameLabel</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneFormNameLabel</shortDescription>
+        <value>Form Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneFormToManyCharactersText</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneFormToManyCharactersText</shortDescription>
+        <value>A form name can be a maximum of 40 characters</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneFormTooFewCharactersText</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneFormTooFewCharactersText</shortDescription>
+        <value>A form name must be longer than 8 characters</value>
+    </labels>
 </CustomLabels>

@@ -1,0 +1,63 @@
+<template>
+    <lightning-card title="Clone Form">
+        <template if:true={isCloning}>
+            <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                <lightning-spinner alternative-text={label.cloneAssitiveText} size="large"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isCloning}>
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                    <lightning-spinner alternative-text={label.loadingAssitiveText} size="large"></lightning-spinner>
+                </div>
+            </template>
+            <template if:false={isLoading}>
+                <lightning-button-group slot="actions">
+                    <lightning-button-icon icon-name="utility:refresh" onclick={handleRefresh}></lightning-button-icon>
+                </lightning-button-group>
+                <div class="slds-var-m-around_medium">
+                    <lightning-combobox name="formCloneSelection"
+                                        label={label.formSelectionLabel}
+                                        value={selectedForm}
+                                        placeholder={label.formSelectionPlaceholder}
+                                        options={formOptions}
+                                        onchange={handleFormSelection} >
+                    </lightning-combobox>
+                </div>
+                <template if:true={formSelected}>  
+                    <div class="slds-var-m-left_medium">              
+                        <p>{label.helpText}</p>
+                    </div>
+                    <lightning-layout vertical-align="stretch">
+                        <lightning-layout-item flexibility="auto" padding="around-medium" >
+                            <lightning-input type="text" 
+                                                label={label.formNameLabel}
+                                                min-length="8"
+                                                message-when-too-short={label.formToFewCharacters}
+                                                max-length="40"
+                                                message-when-too-long={label.formToManyCharacters}
+                                                onchange={handleNewNameSet}></lightning-input>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout vertical-align="stretch">
+                        <lightning-layout-item flexibility="auto" padding="around-medium" >
+                            <template if:true={nameIsDuplicate}>
+                                <p class="slds-text-color_error slds-p-horizontal_small">
+                                    {label.duplicateNameText}
+                                </p>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+
+                    <lightning-layout vertical-align="stretch">
+                        <lightning-layout-item flexibility="auto" padding="around-medium" >
+                            <div class="slds-align_absolute-center slds-is-relative">
+                                <lightning-button variant="brand" label={label.cloneButtonLabel} disabled={isDisabled} onclick={handleCloneForm}></lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </template>
+        </template>
+    </lightning-card>
+</template>
