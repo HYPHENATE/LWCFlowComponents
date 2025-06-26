@@ -1,7 +1,7 @@
 /**
  * @description       : this class performs the actual clone and deployment of the form clone
  * @author            : daniel@hyphen8.com
- * @last modified on  : 25-06-2025
+ * @last modified on  : 26-06-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormCloneDeployment {
@@ -19,7 +19,7 @@ public with sharing class H8FlowFormCloneDeployment {
     * @param                newDeveloperName 
     **/
     @AuraEnabled
-    public static void cloneFlowForm(String sourceDeveloperName, String newMasterLabel, String newDeveloperName) {
+    public static Id cloneFlowForm(String sourceDeveloperName, String newMasterLabel, String newDeveloperName) {
         if (String.isBlank(sourceDeveloperName) || String.isBlank(newMasterLabel) || String.isBlank(newDeveloperName)) {
             throw new AuraHandledException('All inputs are required to clone the form.');
         }
@@ -101,6 +101,7 @@ public with sharing class H8FlowFormCloneDeployment {
         }
 
         Id asyncJobId = !Test.isRunningTest() ? Metadata.Operations.enqueueDeployment(mdContainer, null) : UserInfo.getUserId();
+        return asyncJobId;
     }
 
     /**

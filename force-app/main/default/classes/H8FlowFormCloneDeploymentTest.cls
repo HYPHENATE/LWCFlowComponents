@@ -1,7 +1,7 @@
 /**
  * @description       : H8FlowFormCloneDeployment test
  * @author            : daniel@hyphen8.com
- * @last modified on  : 25-06-2025
+ * @last modified on  : 26-06-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -13,7 +13,7 @@ public class H8FlowFormCloneDeploymentTest {
         H8FlowFormCloneDeployment.testFormSections = new List<H8_Flow_Form_Section__mdt>();
         Test.startTest();
             try {
-                H8FlowFormCloneDeployment.cloneFlowForm(null,null,null);
+                Id asyncJobId = H8FlowFormCloneDeployment.cloneFlowForm(null,null,null);
             } catch (Exception e){
                 String expectedError = 'Script-thrown exception';
                 System.assertEquals(expectedError, e.getMessage(), 'we expect this value to match');
@@ -38,7 +38,8 @@ public class H8FlowFormCloneDeploymentTest {
         H8FlowFormCloneDeployment.testForm = testFlowForms[0];
 
         Test.startTest();
-            H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            Id asyncJobId = H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            System.assertEquals(asyncJobId, UserInfo.getUserId(), 'we expect these ids to match');
         Test.stopTest();
     }
 
@@ -128,7 +129,8 @@ public class H8FlowFormCloneDeploymentTest {
         H8FlowFormCloneDeployment.testFormSections = testFlowSectionsExisting;
 
         Test.startTest();
-            H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            Id asyncJobId = H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            System.assertEquals(asyncJobId, UserInfo.getUserId(), 'we expect these ids to match');
         Test.stopTest();
     }
 
@@ -176,7 +178,8 @@ public class H8FlowFormCloneDeploymentTest {
         H8FlowFormCloneDeployment.testForm = testFlowForms[0];
         
         Test.startTest();
-            H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            Id asyncJobId = H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            System.assertEquals(asyncJobId, UserInfo.getUserId(), 'we expect these ids to match');
         Test.stopTest();
     }
 }
