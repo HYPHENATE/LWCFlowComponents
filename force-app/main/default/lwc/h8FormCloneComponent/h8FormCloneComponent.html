@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Clone Form">
+    <lightning-card title={cardTitle}>
         <template if:true={isCloning}>
             <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
                 <lightning-spinner alternative-text={label.cloneAssitiveText} size="large"></lightning-spinner>

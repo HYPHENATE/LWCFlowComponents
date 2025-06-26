@@ -168,4 +168,76 @@
         <shortDescription>H8FormCloneFormTooFewCharactersText</shortDescription>
         <value>A form name must be longer than 8 characters</value>
     </labels>
+    <labels>
+        <fullName>H8FormCloneErrorEncounteredToastTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneErrorEncounteredToastTitle</shortDescription>
+        <value>Error encountered</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneCloningToastTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneCloningToastTitle</shortDescription>
+        <value>Form clone process started successfully, this can take 5 minutes to complete dependent on the size of your form</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneSuccessToastMessage</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneSuccessToastMessage</shortDescription>
+        <value>The selected form was cloned successfully you can update or use the new form</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneErrorGettingFormToastTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneErrorGettingFormToastTitle</shortDescription>
+        <value>Error Getting Forms</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneErrorUnknownErrorToastMessage</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneErrorUnknownErrorToastMessage</shortDescription>
+        <value>An unknown error occurred</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneDeploymentErrorToastMessage</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneDeploymentErrorToastMessage</shortDescription>
+        <value>This process has not completed, please review the deployment status page to see what error was encountered</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneCloningWithStatusTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneCloningWithStatusTitle</shortDescription>
+        <value>Cloning form - </value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneCloningWaitTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneCloningWaitTitle</shortDescription>
+        <value>Cloning form please wait</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneCloningTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneCloningTitle</shortDescription>
+        <value>Clone form</value>
+    </labels>
 </CustomLabels>
