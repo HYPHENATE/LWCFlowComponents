@@ -39,4 +39,34 @@ public class H8SignatureControllerTest {
             }
         Test.stopTest();
     }
+
+    @isTest 
+    static void testFileGetSuccess(){
+
+        Account account = (Account)testRecordSource.getObject(Account.sObjectType) 
+        .asVariant('FormValidation')
+        .withInsert();
+        String recordId = account.Id;
+        String signatureName = 'TestSignature';
+        String dataUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR422NgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgY';
+        String contentVersionId = H8SignatureController.processSignature(recordId, signatureName, dataUrl);
+
+        Test.startTest();
+            String base64Body = H8SignatureController.getBase64Image(contentVersionId);
+            System.assertNotEquals(null, base64Body, 'we always expect the body to be returned here');
+        Test.stopTest();
+
+    }
+
+    @isTest 
+    static void testFileGetFailure(){
+        Test.startTest();
+            try {
+                String base64Body = H8SignatureController.getBase64Image('dsdfasdasdadas');
+            } catch (Exception e){
+                System.debug(e.getMessage());
+                System.assert(e.getMessage().contains('Invalid'), 'Expected exception message not found');
+            }
+        Test.stopTest();
+    }
 }

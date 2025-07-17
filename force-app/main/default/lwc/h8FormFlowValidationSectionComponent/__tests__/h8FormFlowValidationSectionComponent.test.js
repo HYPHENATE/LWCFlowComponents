@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8FormFlowValidationSectionComponent from 'c/h8FormFlowValidationSectionComponent';
 
 describe('c-h8-form-flow-validation-section-component', () => {

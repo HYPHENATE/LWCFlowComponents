@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8FlowFileUploadDeleteFile from 'c/h8FlowFileUploadDeleteFile';
 
 describe('c-h8-flow-file-upload-delete-file', () => {

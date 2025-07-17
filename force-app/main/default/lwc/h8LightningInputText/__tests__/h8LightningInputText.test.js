@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8LightningInputText from 'c/h8LightningInputText';
 
 describe('c-h8-lightning-input-text', () => {

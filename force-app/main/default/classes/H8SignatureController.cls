@@ -6,30 +6,32 @@
 **/
 public with sharing class H8SignatureController {
 
-    private static ContentVersion contentVersion;
-    
     @AuraEnabled 
     public static String processSignature(String recordId, String signatureName, String dataUrl){
         try {
-            createContentVersion(recordId, signatureName, dataUrl);
-            Id contentVersionId = insertContentVersion();
-            return contentVersionId;
+            String base64Body = dataUrl.substringAfter(',');
+            ContentVersion contentVersion = new ContentVersion();
+            contentVersion.Title = signatureName;
+            contentVersion.PathOnClient = signatureName + '.png';
+            contentVersion.VersionData = EncodingUtil.base64Decode(base64Body);
+            contentVersion.FirstPublishLocationId = recordId; 
+            insert contentVersion;
+            return contentVersion.Id;
         } catch (Exception e) {
-            throw new AuraHandledException('Failed to process signature: ' + e.getMessage());
+            throw new AuraHandledException(System.Label.H8ESignatureProcessSignatureError + ' ' + e.getMessage());
         }
     }
 
-    private static void createContentVersion(String recordId, String signatureName, String dataUrl){
-        String base64Body = dataUrl.substringAfter(',');
-        contentVersion = new ContentVersion();
-        contentVersion.Title = signatureName;
-        contentVersion.PathOnClient = signatureName + '.png';
-        contentVersion.VersionData = EncodingUtil.base64Decode(base64Body);
-        contentVersion.FirstPublishLocationId = recordId; 
-    }
-
-    private static Id insertContentVersion(){
-        insert contentVersion;
-        return contentVersion.Id;
+    @AuraEnabled(cacheable=true)
+    public static String getBase64Image(Id contentVersionId) {
+        try {
+            ContentVersion cv = [SELECT VersionData
+                                        FROM ContentVersion
+                                        WHERE Id = :contentVersionId
+                                        LIMIT 1];
+            return EncodingUtil.base64Encode(cv.VersionData);
+        } catch (Exception e){
+            throw new AuraHandledException(System.label.H8ESignatureGetBase64ImageError + ' ' + e.getMessage());
+        }
     }
 }

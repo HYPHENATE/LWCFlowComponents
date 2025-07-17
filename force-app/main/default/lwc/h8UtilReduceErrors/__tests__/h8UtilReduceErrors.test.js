@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8UtilReduceErrors from 'c/h8UtilReduceErrors';
 
 describe('c-h8-util-reduce-errors', () => {

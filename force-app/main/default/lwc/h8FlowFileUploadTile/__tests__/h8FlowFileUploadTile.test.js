@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8FlowFileUploadTile from 'c/h8FlowFileUploadTile';
 
 describe('c-h8-flow-file-upload-tile', () => {

@@ -10,6 +10,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { loadScript } from 'lightning/platformResourceLoader';
 import SIGNATURE_PAD from '@salesforce/resourceUrl/H8ESignature';
 import processSignature from '@salesforce/apex/H8SignatureController.processSignature';
+import labels from './labels';
 
 export default class H8ESignature extends LightningElement {
     @api isReadOnly = false;
@@ -17,6 +18,7 @@ export default class H8ESignature extends LightningElement {
     @api signatureFileName;
     @api recordId;
     @api signatureRecordId;
+    label = labels;
     
     signaturePad;
     canvas;
@@ -28,7 +30,7 @@ export default class H8ESignature extends LightningElement {
         if(this.required && this.signatureRecordId == undefined){
             return {
                 isValid: false,
-                errorMessage: 'You have to provide a signature before proceeding.'
+                errorMessage: labels.requiredValidationMessage
             }
         } else {
             return {
@@ -46,13 +48,12 @@ export default class H8ESignature extends LightningElement {
             this.canvas = this.template.querySelector('canvas');
             this.resizeCanvas();
             this.signaturePad = new window.SignaturePad(this.canvas);
+            if(this.isReadOnly){
+                this.signaturePad.off();
+            }
         }).catch(error => {
-            this.showToast('Error', 'Failed to load signature pad library: ' + reduceErrors(error).toString(), 'error');
+            this.showToast('Error', labels.failedToLoadLibraryToastMessage + ' ' + reduceErrors(error).toString(), 'error');
         });
-
-        if(this.isReadOnly) {
-            this.signaturePad.off();
-        }
     }
 
     resizeCanvas() {
@@ -62,13 +63,21 @@ export default class H8ESignature extends LightningElement {
         this.canvas.getContext('2d').scale(ratio, ratio);
     }
 
+    get disableSaveButtons(){
+        if(this.isReadOnly){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     clearSignature() {
         this.signaturePad.clear();
     }
 
     saveSignature() {
         if (this.signaturePad.isEmpty()) {
-            this.showToast('Error', 'Please provide a signature before saving.', 'error');
+            this.showToast('Error', labels.signatureRequiredToastMessage, 'error');
         } else {
             this.signaturePad.off();
             const dataUrl = this.signaturePad.toDataURL();
@@ -87,7 +96,7 @@ export default class H8ESignature extends LightningElement {
             this.saveComplete = true;
         })
         .catch((error) => {
-            this.showToast('Error', 'Failed to save signature: ' + reduceErrors(error).toString(), 'error');
+            this.showToast('Error', labels.failedToSaveSignatureToastMessage + ' ' + reduceErrors(error).toString(), 'error');
         });
     }
 
