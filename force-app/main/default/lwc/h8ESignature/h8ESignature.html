@@ -1,0 +1,23 @@
+<!--
+  @description       : html to support with the h8ESignature component
+  @author            : daniel@hyphen8.com
+  @last modified on  : 17-07-2025
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    <div>
+        <canvas lwc:dom="manual" class="signature-canvas"></canvas>
+    </div>
+    <template if:false={saveComplete}>
+        <lightning-button-group class="slds-float_right slds-var-m-top_small">
+            <lightning-button label="Clear Signature"
+                                variant="destructive"
+                                onclick={clearSignature} >
+            </lightning-button>
+            <lightning-button label="Save Signature"
+                                variant="brand"
+                                onclick={saveSignature}>
+            </lightning-button>
+        </lightning-button-group>
+    </template>
+</template>

@@ -82,3 +82,39 @@ declare module "@salesforce/label/c.H8FormCloneFormTooFewCharactersText" {
     var H8FormCloneFormTooFewCharactersText: string;
     export default H8FormCloneFormTooFewCharactersText;
 }
+declare module "@salesforce/label/c.H8FormCloneErrorEncounteredToastTitle" {
+    var H8FormCloneErrorEncounteredToastTitle: string;
+    export default H8FormCloneErrorEncounteredToastTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningToastTitle" {
+    var H8FormCloneCloningToastTitle: string;
+    export default H8FormCloneCloningToastTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneSuccessToastMessage" {
+    var H8FormCloneSuccessToastMessage: string;
+    export default H8FormCloneSuccessToastMessage;
+}
+declare module "@salesforce/label/c.H8FormCloneErrorGettingFormToastTitle" {
+    var H8FormCloneErrorGettingFormToastTitle: string;
+    export default H8FormCloneErrorGettingFormToastTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneErrorUnknownErrorToastMessage" {
+    var H8FormCloneErrorUnknownErrorToastMessage: string;
+    export default H8FormCloneErrorUnknownErrorToastMessage;
+}
+declare module "@salesforce/label/c.H8FormCloneDeploymentErrorToastMessage" {
+    var H8FormCloneDeploymentErrorToastMessage: string;
+    export default H8FormCloneDeploymentErrorToastMessage;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningWithStatusTitle" {
+    var H8FormCloneCloningWithStatusTitle: string;
+    export default H8FormCloneCloningWithStatusTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningWaitTitle" {
+    var H8FormCloneCloningWaitTitle: string;
+    export default H8FormCloneCloningWaitTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningTitle" {
+    var H8FormCloneCloningTitle: string;
+    export default H8FormCloneCloningTitle;
+}
