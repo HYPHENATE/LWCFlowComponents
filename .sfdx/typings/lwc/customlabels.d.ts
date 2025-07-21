@@ -82,3 +82,79 @@ declare module "@salesforce/label/c.H8FormCloneFormTooFewCharactersText" {
     var H8FormCloneFormTooFewCharactersText: string;
     export default H8FormCloneFormTooFewCharactersText;
 }
+declare module "@salesforce/label/c.H8FormCloneErrorEncounteredToastTitle" {
+    var H8FormCloneErrorEncounteredToastTitle: string;
+    export default H8FormCloneErrorEncounteredToastTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningToastTitle" {
+    var H8FormCloneCloningToastTitle: string;
+    export default H8FormCloneCloningToastTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneSuccessToastMessage" {
+    var H8FormCloneSuccessToastMessage: string;
+    export default H8FormCloneSuccessToastMessage;
+}
+declare module "@salesforce/label/c.H8FormCloneErrorGettingFormToastTitle" {
+    var H8FormCloneErrorGettingFormToastTitle: string;
+    export default H8FormCloneErrorGettingFormToastTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneErrorUnknownErrorToastMessage" {
+    var H8FormCloneErrorUnknownErrorToastMessage: string;
+    export default H8FormCloneErrorUnknownErrorToastMessage;
+}
+declare module "@salesforce/label/c.H8FormCloneDeploymentErrorToastMessage" {
+    var H8FormCloneDeploymentErrorToastMessage: string;
+    export default H8FormCloneDeploymentErrorToastMessage;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningWithStatusTitle" {
+    var H8FormCloneCloningWithStatusTitle: string;
+    export default H8FormCloneCloningWithStatusTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningWaitTitle" {
+    var H8FormCloneCloningWaitTitle: string;
+    export default H8FormCloneCloningWaitTitle;
+}
+declare module "@salesforce/label/c.H8FormCloneCloningTitle" {
+    var H8FormCloneCloningTitle: string;
+    export default H8FormCloneCloningTitle;
+}
+declare module "@salesforce/label/c.H8ESignatureProcessSignatureError" {
+    var H8ESignatureProcessSignatureError: string;
+    export default H8ESignatureProcessSignatureError;
+}
+declare module "@salesforce/label/c.H8ESignatureGetBase64ImageError" {
+    var H8ESignatureGetBase64ImageError: string;
+    export default H8ESignatureGetBase64ImageError;
+}
+declare module "@salesforce/label/c.H8ESignatureClearSignatureButtonLabel" {
+    var H8ESignatureClearSignatureButtonLabel: string;
+    export default H8ESignatureClearSignatureButtonLabel;
+}
+declare module "@salesforce/label/c.H8ESignatureSaveSignatureButtonLabel" {
+    var H8ESignatureSaveSignatureButtonLabel: string;
+    export default H8ESignatureSaveSignatureButtonLabel;
+}
+declare module "@salesforce/label/c.H8ESignatureFailedToSaveSignatureToastMessage" {
+    var H8ESignatureFailedToSaveSignatureToastMessage: string;
+    export default H8ESignatureFailedToSaveSignatureToastMessage;
+}
+declare module "@salesforce/label/c.H8ESignatureRequiredToastMessage" {
+    var H8ESignatureRequiredToastMessage: string;
+    export default H8ESignatureRequiredToastMessage;
+}
+declare module "@salesforce/label/c.H8ESignatureRequiredValidationMessage" {
+    var H8ESignatureRequiredValidationMessage: string;
+    export default H8ESignatureRequiredValidationMessage;
+}
+declare module "@salesforce/label/c.H8ESignatureLibraryErrorToastMessage" {
+    var H8ESignatureLibraryErrorToastMessage: string;
+    export default H8ESignatureLibraryErrorToastMessage;
+}
+declare module "@salesforce/label/c.H8ESignatureViewError" {
+    var H8ESignatureViewError: string;
+    export default H8ESignatureViewError;
+}
+declare module "@salesforce/label/c.H8ESignatureAltValue" {
+    var H8ESignatureAltValue: string;
+    export default H8ESignatureAltValue;
+}

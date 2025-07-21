@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8LightningInputDate from 'c/h8LightningInputDate';
 
 describe('c-h8-lightning-input-date', () => {

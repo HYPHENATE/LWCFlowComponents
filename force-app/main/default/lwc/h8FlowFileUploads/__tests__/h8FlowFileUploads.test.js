@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8FlowFileUploads from 'c/h8FlowFileUploads';
 
 describe('c-h8-flow-file-uploads', () => {

@@ -240,4 +240,85 @@
         <shortDescription>H8FormCloneCloningTitle</shortDescription>
         <value>Clone form</value>
     </labels>
+    <labels>
+        <fullName>H8ESignatureProcessSignatureError</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureProcessSignatureError</shortDescription>
+        <value>Failed to process signature:</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureGetBase64ImageError</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureGetBase64ImageError</shortDescription>
+        <value>Failed to get signature:</value>
+    </labels>
+
+    <labels>
+        <fullName>H8ESignatureClearSignatureButtonLabel</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureClearSignatureButtonLabel</shortDescription>
+        <value>Clear Signature</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureSaveSignatureButtonLabel</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureSaveSignatureButtonLabel</shortDescription>
+        <value>Save Signature</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureFailedToSaveSignatureToastMessage</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureFailedToSaveSignatureToastMessage</shortDescription>
+        <value>Failed to save signature:</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureRequiredToastMessage</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureRequiredToastMessage</shortDescription>
+        <value>Please provide a signature before saving.</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureRequiredValidationMessage</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureRequiredValidationMessage</shortDescription>
+        <value>You have to provide a signature before proceeding.</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureLibraryErrorToastMessage</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureLibraryErrorToastMessage</shortDescription>
+        <value>Failed to load signature pad library:</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureViewError</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureViewError</shortDescription>
+        <value>Error loading image:</value>
+    </labels>
+    <labels>
+        <fullName>H8ESignatureAltValue</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureAltValue</shortDescription>
+        <value>Signature</value>
+    </labels>
 </CustomLabels>

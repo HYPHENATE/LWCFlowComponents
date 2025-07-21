@@ -1,0 +1,8 @@
+<template>
+    <template if:true={imageDataUri}>
+        <img src={imageDataUri} alt={signatureAlt} style="max-width:100%; height:auto;" />
+    </template>
+    <template if:true={error}>
+        <p class="slds-text-color_error">{errorText} {error}</p>
+    </template>
+</template>

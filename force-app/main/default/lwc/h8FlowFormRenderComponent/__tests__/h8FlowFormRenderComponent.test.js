@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from '@lwc/engine-dom';
 import H8FlowFormRenderComponent from 'c/h8FlowFormRenderComponent';
 
 describe('c-h-8-flow-form-render-component', () => {
