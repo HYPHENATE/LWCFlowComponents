@@ -313,4 +313,12 @@
         <shortDescription>H8ESignatureViewError</shortDescription>
         <value>Error loading image:</value>
     </labels>
+    <labels>
+        <fullName>H8ESignatureAltValue</fullName>
+        <categories>H8Esignature</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8ESignatureAltValue</shortDescription>
+        <value>Signature</value>
+    </labels>
 </CustomLabels>
