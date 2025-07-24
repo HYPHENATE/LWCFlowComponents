@@ -1,7 +1,7 @@
 /**
  * @description       : js to support displaying a form with side navigation
  * @author            : daniel@hyphen8.com
- * @last modified on  : 25-06-2025
+ * @last modified on  : 24-07-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
@@ -33,14 +33,20 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     }
 
     renderedCallback() {
-        this.template.host.style.setProperty('--custom-nav-width', this.navWidth);
+        //this.template.host.style.setProperty('--custom-nav-width', this.navWidth);
+        const hostWrapper = this.template.querySelector('[data-id="hostWrapper"]');
+        if (hostWrapper) {
+            hostWrapper.style.setProperty('--custom-nav-width', this.navWidth);
+        }
         if (this.scrollToFlow) {
-            const flowWrapper = this.template.querySelector('[data-id="flowWrapper"]');
-            if (flowWrapper) {
-                const y = flowWrapper.getBoundingClientRect().top + window.pageYOffset - this.scrollToTopOffset;
-                window.scrollTo({ top: y, behavior: 'smooth' });
-            }
-            this.scrollToFlow = false;
+            setTimeout(() => {
+                const flowWrapper = this.template.querySelector('[data-id="flowWrapper"]');
+                if (flowWrapper) {
+                    const y = flowWrapper.getBoundingClientRect().top + window.pageYOffset - this.scrollToTopOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+                this.scrollToFlow = false;
+            }, 50);
         }
     }
 
@@ -159,6 +165,7 @@ export default class H8FlowFormRenderComponent extends LightningElement {
                 this.checkSessionStorage();
                 setTimeout(() => {
                     this.loadFlow = false;
+                    this.scrollToFlow = true;
                 }, 500);
             } else {
                 return null;
