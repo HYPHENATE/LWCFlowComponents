@@ -3,13 +3,15 @@
     overflow-y: initial !important;  
 }
 
-
 .slds-vertical-tabs { 
     display: flex !important;
 }
 
-.slds-vertical-tabs__nav {
+.navCustom {
     width: var(--custom-nav-width, 12rem) !important;
+}
+
+.slds-vertical-tabs__nav {
     border-right: var(--lwc-borderWidthThin, 1px) solid var(--slds-g-color-border-base-1, var(--lwc-colorBorder, #939393)) !important;
     background: var(--slds-g-color-neutral-base-95, var(--lwc-colorBackground, #FFFFFF)) !important;
 }
