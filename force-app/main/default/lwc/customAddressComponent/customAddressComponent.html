@@ -1,0 +1,30 @@
+<!--
+  @description       : html for display the input address component
+  @author            : daniel@hyphen8.com
+  @last modified on  : 19-08-2025
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    <lightning-input-address
+        address-lookup-label={addressLookupLabel}
+        address-lookup-placeholder={addressLookupPlaceholder}
+        address-label={addressLabel}
+        street-label={streetLabel}
+        city-label={cityLabel}
+        country-label={countryLabel}
+        province-label={provinceLabel}
+        postal-code-label={postalCodeLabel}
+        onchange={handleChange}
+        street={streetValue}
+        city={cityValue}
+        country={countryValue}
+        province={provinceValue}
+        postal-code={postalCodeValue}
+        field-level-help={fieldLevelHelp}
+        read-only={readOnly}
+        required={required}
+        show-address-lookup={showAddressLookup}
+        show-compact-address={showCompactAddress}
+        variant={variant}>
+    </lightning-input-address>
+</template>

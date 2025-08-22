@@ -20,10 +20,11 @@
             <property name="minRows" label="minRows" description="Confirm what the min number of rows allowed is and validate against it" type="Integer" role="inputOnly"/>
             <property name="startingRowCount" label="startingRowCount" description="Confirm what the default row count on edit should be." type="Integer" role="inputOnly"/>
             <property name="whereClause" label="whereClause" description="SOQL WHERE Clause." type="String" role="inputOnly"/>
-            <property name="defaultFieldValues" label="defaultFieldValues" description="Project a JSON entry to set default fields when new records being created." type="String" role="inputOnly"/>
+            <property name="defaultFieldValues" label="defaultFieldValues" description="Provide a JSON entry to set default fields when new records being created." type="String" role="inputOnly"/>
             <property name="newRecords" label="new Records for Insert" type="{T[]}" role="outputOnly"/>
             <property name="existingRecords" label="exisiting Records for Update" type="{T[]}" role="outputOnly"/>
             <property name="allowRowDeletion" label="select this if you want to allow deletion of a row within the component" type="Boolean" role="inputOnly"/>
+            <property name="addRowButtonLabel" label="addRowButtonLabel" description="This is the label for the add row button on the table" type="String" role="inputOnly" default="Add Row"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

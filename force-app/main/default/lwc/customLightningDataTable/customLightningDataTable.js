@@ -1,7 +1,7 @@
 /**
  * @description       : js for custom lightning data table
  * @author            : daniel@hyphen8.com
- * @last modified on  : 15-05-2025
+ * @last modified on  : 22-08-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
@@ -28,6 +28,7 @@ export default class CustomLightningDataTable extends LightningElement {
     @api newRecords;
     @api existingRecords;
     @api minRows;
+    @api addRowButtonLabel = 'Add Row';
 
     @api
     validate() {
