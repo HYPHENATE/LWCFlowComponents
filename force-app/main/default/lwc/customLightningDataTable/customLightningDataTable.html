@@ -2,7 +2,7 @@
 <!--
   @description       : top level custom lightning data table
   @author            : daniel@hyphen8.com
-  @last modified on  : 06-04-2023
+  @last modified on  : 22-08-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -45,7 +45,7 @@
           <div class="slds-clearfix">
             <div class="slds-float_right">
               <template if:true={displayRowAddButton}>
-                <lightning-button variant="base" label="Add Row" title="Add Row" icon-name="utility:add" onclick={addRow}></lightning-button>
+                <lightning-button variant="base" label={addRowButtonLabel} title={addRowButtonLabel} icon-name="utility:add" onclick={addRow}></lightning-button>
               </template>
             </div>
           </div>

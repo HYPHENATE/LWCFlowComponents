@@ -12,7 +12,7 @@
             <property name="recordId" label="Master RecordId" type="String" role="inputOnly"/>
             <property name="formName" label="Form API Name" type="String" role="inputOnly"/>
             <property name="parentObjectAPIName" label="Parent Object API Name" type="String" role="inputOnly"/>
-            <property name="pageName" label="Enter the page name you are current viewing (you can not pass in the stagename as its not available for export)" type="String" role="inputOnly"/>
+            <property name="pageName" label="Page Name" description="Enter the page name you are current viewing (you cannot pass in the Stage as its not available for export)" type="String" role="inputOnly"/>
             <property name="helpText" label="Help Text" type="String" role="inputOnly" required="true" default="You must complete the following fields"/>
             <property name="affectTextLabel" label="Affect Fields/Question Text" type="String" role="inputOnly" required="true" default="Question(s) affected:"/>
         </targetConfig>
