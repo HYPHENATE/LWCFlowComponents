@@ -1,0 +1,4 @@
+<design:component>
+    <design:attribute name="url" label="Target URL" description="Enter the URL to navigate to"/>
+    <design:attribute name="openInNewWindow" label="Open in New Window?" description="If checked, the URL will open in a new browser tab/window" />
+</design:component>

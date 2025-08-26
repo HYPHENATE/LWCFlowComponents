@@ -2,18 +2,47 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>H8 ESignature</masterLabel>
+    <masterLabel>Hyphen8 - ESignature</masterLabel>
     <description>This is a simple component to support with the collection of an esignature within salesforce, the signature is stored as a content document linked to provided recordId</description>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="isReadOnly" label="Is Read Only" type="Boolean" description="Set this to true if the signature has already been returned and you just want to output the signature for view" default="false" role="inputOnly"/>
-            <property name="required" label="Required" type="Boolean" description="Use this to enforce that a signature is provided prior to navigation to the next screen" default="false" role="inputOnly"/>
-            <property name="signatureFileName" label="Signature File Name" type="String" description="The file name to use when saving the signature image" required="true" role="inputOnly"/>
-            <property name="recordId" label="Record Id" type="String" description="The Id of the record to which this signature is related. This is used to save the signature to the correct record." required="true" role="inputOnly"/>
-            <property name="signatureRecordId" label="Saved Signature Id" type="String" description="This is the content version id saved during the process" role="outputOnly"/>
+            <property name="isReadOnly" 
+                        label="Is Read Only" 
+                        type="Boolean" 
+                        description="Set this to true if the signature has already been returned and you just want to output the signature for view" 
+                        default="false" 
+                        role="inputOnly"
+            />
+            <property name="required" 
+                        label="Required" 
+                        type="Boolean" 
+                        description="Use this to enforce that a signature is provided prior to navigation to the next screen" 
+                        default="false" 
+                        role="inputOnly"
+            />
+            <property name="signatureFileName" 
+                        label="Signature File Name" 
+                        type="String" 
+                        description="The file name to use when saving the signature image" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="recordId" 
+                        label="Record Id" 
+                        type="String" 
+                        description="The Id of the record to which this signature is related. This is used to save the signature to the correct record." 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="signatureRecordId" 
+                        label="Saved Signature Id" 
+                        type="String" 
+                        description="This is the content version id saved during the process" 
+                        role="outputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

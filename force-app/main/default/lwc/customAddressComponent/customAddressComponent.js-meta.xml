@@ -2,31 +2,127 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Custom Address Component</masterLabel>
-    <description>Custom component implementing lightning-address-input to solve issues where you can not change the label names on the standard address component</description>
+    <masterLabel>Hyphen8 - Custom Address Component</masterLabel>
+    <description>Custom component implementing lightning-address-input to solve issues where you cannot change the label names on the standard address component</description>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="addressLookupLabel" label="Address Lookup Label" description="The label for the address lookup field option. Only visible when show-address-lookup is set to true and label string is passed" type="String" role="inputOnly"/>
-            <property name="addressLookupPlaceholder" label="Address Lookup Placeholder" description="The placeholder for the address lookup field option. Visible only when using show-address-lookup." type="String" role="inputOnly"/>
-            <property name="addressLabel" label="Address Label"  description="The label for the address compound field." type="String" required="true" role="inputOnly"/>
-            <property name="streetLabel" label="Street Label" description="The label for the street field." type="String" required="true" role="inputOnly"/>
-            <property name="cityLabel" label="City Label" description="The label for the city field." type="String" required="true" role="inputOnly"/>
-            <property name="countryLabel" label="Country Label" description="The label for the country field." type="String" required="true" role="inputOnly"/>
-            <property name="provinceLabel" label="Province/State/County Label" description="The label for the province/state/county field." type="String" required="true" role="inputOnly"/>
-            <property name="postalCodeLabel" label="Postcode Label" description="The label for the postal code field." type="String" required="true" role="inputOnly"/>
-            <property name="streetValue" label="Street Value" description="The value for the street field. Maximum length is 255 characters when rendered as a textarea." type="String" required="true"/>
-            <property name="cityValue" label="City Value" description="The value for the city field. Maximum length is 40 characters." type="String" required="true"/>
-            <property name="countryValue" label="Country Value" description="The country field for the address. Maximum length is 80 characters." type="String" required="true" />
-            <property name="provinceValue" label="Province/State/County Value" description="The province/state/county field for the address. Maximum length is 80 characters." type="String" required="true" />
-            <property name="postalCodeValue" label="Postcode Value" description="The value for postal code field. Maximum length is 20 characters." type="String" required="true" />
-            <property name="fieldLevelHelp" label="Field Level Help" description="Help text detailing the purpose and function of the input." type="String" role="inputOnly"/>
-            <property name="readOnly" label="Read Only" description="If present, the address fields are read-only and cannot be edited." type="Boolean" required="true" default="false" role="inputOnly"/>
-            <property name="required" label="Required" description="If present, the address fields must be filled before the form is submitted." type="Boolean" required="true" default="false" role="inputOnly"/>
-            <property name="showAddressLookup" label="Show Address Lookup" description="If present, an address lookup field using Google Maps is displayed." type="Boolean" required="true" default="false" role="inputOnly"/>
-            <property name="variant" label="Variant" description="The variant changes the appearance of an input address field. Accepted variants include standard, label-hidden, label-inline, and label-stacked." type="String" required="true" role="inputOnly"/>
+            <property name="addressLookupLabel" 
+                        label="Address Lookup Label" 
+                        description="The label for the address lookup field option. Only visible when show-address-lookup is set to true and label string is passed" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="addressLookupPlaceholder" 
+                        label="Address Lookup Placeholder" 
+                        description="The placeholder for the address lookup field option. Visible only when using show-address-lookup." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="addressLabel" 
+                        label="Address Label" 
+                        description="The label for the address compound field." 
+                        type="String" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="streetLabel" 
+                        label="Street Label" 
+                        description="The label for the street field." 
+                        type="String" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="cityLabel" 
+                        label="City Label" 
+                        description="The label for the city field." 
+                        type="String" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="countryLabel" 
+                        label="Country Label" 
+                        description="The label for the country field." 
+                        type="String" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="provinceLabel" 
+                        label="Province/State/County Label" 
+                        description="The label for the province/state/county field." 
+                        type="String" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="postalCodeLabel" 
+                        label="Postcode Label" 
+                        description="The label for the postal code field." 
+                        type="String" 
+                        required="true" 
+                        role="inputOnly"
+            />
+            <property name="streetValue" 
+                        label="Street Value" 
+                        description="The value for the street field. Maximum length is 255 characters when rendered as a textarea." 
+                        type="String" 
+            />
+            <property name="cityValue" 
+                        label="City Value" 
+                        description="The value for the city field. Maximum length is 40 characters." 
+                        type="String" 
+            />
+            <property name="countryValue" 
+                        label="Country Value" 
+                        description="The country field for the address. Maximum length is 80 characters." 
+                        type="String"  
+            />
+            <property name="provinceValue" 
+                        label="Province/State/County Value" 
+                        description="The province/state/county field for the address. Maximum length is 80 characters." 
+                        type="String" 
+            />
+            <property name="postalCodeValue" 
+                        label="Postcode Value" 
+                        description="The value for postal code field. Maximum length is 20 characters." 
+                        type="String" 
+            />
+            <property name="fieldLevelHelp" 
+                        label="Field Level Help" 
+                        description="Help text detailing the purpose and function of the input." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="readOnly" 
+                        label="Read Only" 
+                        description="If present, the address fields are read-only and cannot be edited." 
+                        type="Boolean" 
+                        required="true" 
+                        default="false" 
+                        role="inputOnly"/>
+            <property name="required" 
+                        label="Required" 
+                        description="If present, the address fields must be filled before the form is submitted." 
+                        type="Boolean" 
+                        required="true" 
+                        default="false" 
+                        role="inputOnly"
+            />
+            <property name="showAddressLookup" 
+                        label="Show Address Lookup" 
+                        description="If present, an address lookup field using Google Maps is displayed." 
+                        type="Boolean" 
+                        required="true" 
+                        default="false" 
+                        role="inputOnly"
+            />
+            <property name="variant" 
+                        label="Variant" 
+                        description="The variant changes the appearance of an input address field. Accepted variants include standard, label-hidden, label-inline, and label-stacked." 
+                        type="String"
+                        role="inputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

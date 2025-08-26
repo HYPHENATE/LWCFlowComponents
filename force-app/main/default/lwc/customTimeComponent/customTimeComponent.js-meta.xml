@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>62.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Custom Time Input/Output</masterLabel>
-    <description>Custom implementation of lightning-input where type is time</description>
+    <masterLabel>Hyphen8 - Custom Time Input/Output</masterLabel>
+    <description>Custom implementation of lightning-input where type is time (this is now natively supported within FLOW)</description>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="value" label="Value" description="The content in the field." type="String"/>
-            <property name="label" label="Label" description="The label of the field." type="String" role="inputOnly"/>
-            <property name="required" label="Required" description="If present, the time field must be filled out before the form can be submitted." type="String" role="inputOnly"/>
-            <property name="disabled" label="Disabled" description="If present, the time field is disabled and users cannot interact with it." type="String" role="inputOnly"/>
-            <property name="minValue" label="Min Value" description="If present, the time has a min value set. Must be in a form of 00:00:00.000Z" type="String" role="inputOnly"/>
-            <property name="maxValue" label="Max Value" description="If present, the time has a max value set. Must be in a form of 23:59:59.000Z" type="String" role="inputOnly"/>
-            <property name="requiredMessage" label="Required Message" description="Set the message to display if the field is required and not populated." type="String" role="inputOnly"/>
+            <property name="value" 
+                        label="Value" 
+                        description="The content in the field." 
+                        type="String"
+            />
+            <property name="label" 
+                        label="Label" 
+                        description="The label of the field." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="required" 
+                        label="Required" 
+                        description="If present, the time field must be filled out before the form can be submitted." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="disabled" 
+                        label="Disabled" 
+                        description="If present, the time field is disabled and users cannot interact with it." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="minValue" 
+                        label="Min Value" 
+                        description="If present, the time has a min value set. Must be in a form of 00:00:00.000Z" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="maxValue" 
+                        label="Max Value" 
+                        description="If present, the time has a max value set. Must be in a form of 23:59:59.000Z" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="requiredMessage" 
+                        label="Required Message" 
+                        description="Set the message to display if the field is required and not populated." 
+                        type="String" 
+                        role="inputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

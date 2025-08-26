@@ -1,0 +1,10 @@
+<!--
+  @description       : component configuration for flow navigate to URL
+  @author            : daniel@hyphen8.com
+  @last modified on  : 26-08-2025
+  @last modified by  : daniel@hyphen8.com
+-->
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions">
+    <aura:attribute name="url" type="String" />
+    <aura:attribute name="openInNewWindow" type="Boolean" default="false" />
+</aura:component>

@@ -3,7 +3,7 @@
     <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>
     <description>This component is used to support the Flow Form Clone component</description>
-    <masterLabel>Flow Form Clone Component</masterLabel>
+    <masterLabel>Hyphen8 - Flow Form Clone Component</masterLabel>
     <targets>
         <target>lightning__AppPage</target>
     </targets>
