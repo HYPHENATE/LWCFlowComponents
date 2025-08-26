@@ -2,14 +2,19 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>H8 Signature View</masterLabel>
+    <masterLabel>Hyphen8 - Signature View</masterLabel>
     <description>This is a simple component to support with displaying a signature based on the provided content version id</description>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="contentVersionId" type="String" label="Content Version Id" description="This should be the content version id that was a signature uploaded previously" required="true" />
+            <property name="contentVersionId" 
+                        type="String" 
+                        label="Content Version Id" 
+                        description="This should be the content version id that was a signature uploaded previously" 
+                        required="true" 
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

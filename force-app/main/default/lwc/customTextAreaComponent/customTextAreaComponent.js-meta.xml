@@ -1,30 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>62.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>
-    <description>Custom Text Area Component implementing lightning-textarea</description>
-    <masterLabel>Custom TextArea Input/Output</masterLabel>
+    <description>Custom implementation of lightning-textarea with extra options to support with display a word or character count</description>
+    <masterLabel>Hyphen8 - Custom TextArea Input/Output</masterLabel>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="value" label="Value" description="The content in the text area." type="String"/>
-            <property name="label" label="Label" description="The label of the Text Area." type="String" role="inputOnly"/>
-            <property name="fieldLevelHelp" label="Help Text" description="The help text that appears in a popover." type="String" role="inputOnly"/>
-            <property name="required" label="Required" description="If present, the textarea field must be filled out before the form can be submitted." type="String" role="inputOnly"/>
-            <property name="readOnly" label="Read Only" description="If present, the textarea field is read-only and cannot be edited." type="String" role="inputOnly"/>
-            <property name="disabled" label="Disabled" description="If present, the textarea field is disabled and users cannot interact with it." type="String" role="inputOnly"/>
-            <property name="variant" label="Variant" description="The variant changes the appearance of the textarea. Accepted variants include standard, label-hidden, label-inline, and label-stacked. This value defaults to standard. Use label-hidden to hide the label but make it available to assistive technology. Use label-inline to horizontally align the label and textarea. Use label-stacked to place the label above the textarea." type="String" role="inputOnly"/>
-            <property name="placeholder" label="Placeholder" description="Text that is displayed when the field is empty, to prompt the user for a valid entry." type="String" role="inputOnly"/>
-            <property name="maxCharacterCount" label="Max Character Count" description="Maximum number of characters allowed" type="String" role="inputOnly"/>
-            <property name="maxCharacterCountMessage" label="Max Character Count Message" description="Maximum number of characters allowed error message" type="String" role="inputOnly"/>
-            <property name="maxWordCount" label="Max Word Count" description="Maximum number of words allowed" type="String" role="inputOnly"/>
-            <property name="maxWordCountMessage" label="Max Word Count Message" description="Maximum number of words allowed error message" type="String" role="inputOnly"/>
-            <property name="displayCharacterCount" label="Display Character Count" description="Confirm that you want to apply and display the character count on page" type="Boolean" role="inputOnly"/>
-            <property name="displayWordCount" label="Display Word Count" description="Confirm that you want to apply and display the word count on page" type="Boolean" role="inputOnly"/>
-            <property name="requireFieldMessage" label="Required field message" description="Provide a message when a field is required but not completed" type="String" role="inputOnly"/>
-            <property name="textAreaHeight" label="Input box minimum height" description="Define the minimum height of the input box supports px, em or rem sizes but you must include them so 300px/30em/30rem are all valid" type="String" role="inputOnly"/>
+            <property name="value" 
+                        label="Value" 
+                        description="This is the existing value for input or the current value for output." 
+                        type="String"
+            />
+            <property name="label" 
+                        label="Label" 
+                        description="Provide the label / title for the text area." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="fieldLevelHelp" 
+                        label="Help Text" 
+                        description="The help text that appears in a popover." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="required" 
+                        label="Required" 
+                        description="If present, the textarea field must be filled out before the form can be submitted." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="readOnly" 
+                        label="Read Only" 
+                        description="If present, the textarea field is read-only and cannot be edited." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="disabled" 
+                        label="Disabled" 
+                        description="If present, the textarea field is disabled and users cannot interact with it." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="variant" 
+                        label="Variant" 
+                        description="The variant changes the appearance of the textarea. Accepted variants include standard, label-hidden, label-inline, and label-stacked. This value defaults to standard. Use label-hidden to hide the label but make it available to assistive technology. Use label-inline to horizontally align the label and textarea. Use label-stacked to place the label above the textarea." type="String" role="inputOnly"/>
+            <property name="placeholder" 
+                        label="Placeholder" 
+                        description="Text that is displayed when the field is empty, to prompt the user for a valid entry." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="maxCharacterCount" 
+                        label="Max Character Count" 
+                        description="Maximum number of characters allowed" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="maxCharacterCountMessage" 
+                        label="Max Character Count Message" 
+                        description="Provide the text to appear should if you have set the Max Character Count and the input value exceeds this. This message is a live message and so is activated only the limit is reached. " 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="maxWordCount" 
+                        label="Max Word Count" 
+                        description="Maximum number of words allowed" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="maxWordCountMessage" 
+                        label="Max Word Count Message" 
+                        description="Provide the text to appear should if you have set the Max Word Count and the input value exceeds this. This message is a live message and so is activated only the limit is reached. " 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="displayCharacterCount" 
+                        label="Display Character Count" 
+                        description="Confirm that you want to apply and display the character count on page" 
+                        type="Boolean" 
+                        role="inputOnly"
+            />
+            <property name="displayWordCount" 
+                        label="Display Word Count" 
+                        description="Confirm that you want to apply and display the word count on page" 
+                        type="Boolean" 
+                        role="inputOnly"
+            />
+            <property name="requireFieldMessage" 
+                        label="Required field message" 
+                        description="Provide a message to appear if this field is required and the value has not been provided. This message will display in 2 different places. If the field is required and the user enters the box then moves to another box it will highlight that it is required. If the user navigates to the next page within the flow and the value has not been provided it will appear." 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="textAreaHeight" 
+                        label="Input box minimum height" 
+                        description="Define the minimum height of the input box supports px, em or rem sizes but you must include them so 300px/30em/30rem are all valid" 
+                        type="String" 
+                        role="inputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

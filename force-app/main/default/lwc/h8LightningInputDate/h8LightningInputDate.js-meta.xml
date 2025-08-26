@@ -1,28 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>62.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <isExposed>true</isExposed>    
-    <masterLabel>Lightning Input (Date)</masterLabel>
+    <masterLabel>Hyphen8 - Custom Lightning Input (Date)</masterLabel>
     <description>Custom implementation of lightning-input with a type of Date</description>
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="label" label="Field Label" type="String" role="inputOnly"/>
-            <property name="placeholder" label="Field Placeholder" type="String" role="inputOnly"/>
-            <property name="value" label="Field Value" type="Date" />
-            <property name="fieldLevelHelp" label="Field Level Help" type="String" role="inputOnly"/>
-            <property name="required" label="Required" type="Boolean" role="inputOnly" default="false"/>
-            <property name="disabled" label="Disabled" type="Boolean" role="inputOnly" default="false"/>
-            <property name="readOnly" label="Read Only" type="Boolean" role="inputOnly" default="false"/>
-            <property name="max" label="Maximum Date" type="Date" role="inputOnly"/>
-            <property name="min" label="Minimum Date" type="Date" role="inputOnly"/>
-            <property name="messageWhenValueMissing" label="Required value missing message" type="String" role="inputOnly"/>
-            <property name="messageWhenRangeOverflow" label="Message when date provided is over the minimum date" type="String" role="inputOnly"/>
-            <property name="messageWhenRangeUnderflow" label="Message when date provided is under the minimum date" type="String" role="inputOnly"/>
-            <property name="messageWhenBadInput" label="Message value provided is not a date" type="String" role="inputOnly"/>
-            <property name="variant" label="UI Variant" type="String" role="inputOnly"/>
+            <property name="label" 
+                        label="Field Label" 
+                        description="Provide the field label / title for output"
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="placeholder" 
+                        label="Field Placeholder" 
+                        description="Provide a placeholder for the field as an example"
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="value" 
+                        label="Field Value" 
+                        description="This is the current and new value for this field"
+                        type="Date"
+            />
+            <property name="fieldLevelHelp" 
+                        label="Field Level Help" 
+                        description="Provide some guidance text that will appear in the help popup icon"
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="required" 
+                        label="Required" 
+                        description="Set this if you want this field to be required for input"
+                        type="Boolean" 
+                        role="inputOnly" 
+                        default="false"
+            />
+            <property name="disabled" 
+                        label="Disabled" 
+                        description="Set this if you want to disable the ability to interact with this field"
+                        type="Boolean" 
+                        role="inputOnly" 
+                        default="false"
+            />
+            <property name="readOnly" 
+                        label="Read Only" 
+                        description="Set this if you want to make the input read only but still appear as an input field"
+                        type="Boolean" 
+                        role="inputOnly" 
+                        default="false"
+            />
+            <property name="max" 
+                        label="Maximum Date" 
+                        description="This is the maximum date value that you want to allow within this field"
+                        type="Date" 
+                        role="inputOnly"
+            />
+            <property name="min" 
+                        label="Minimum Date" 
+                        description="This is the minimum date value that you want to allow within this field"
+                        type="Date" 
+                        role="inputOnly"
+            />
+            <property name="messageWhenValueMissing" 
+                        label="Required value missing message" 
+                        description="Provide text here that will appear if you have set the field as required, this can appear twice during the process, once if the user clicks into the field and doesn't set a value and then again if the user presses next/finish within the flow."
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="messageWhenRangeOverflow" 
+                        label="Message when date provided is over the minimum date" 
+                        description="This is the message you want to display when the provided date is over your defined maximum date value"
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="messageWhenRangeUnderflow" 
+                        label="Message when date provided is under the minimum date" 
+                        description="This is the message you want to display when the provided date is under your defined minimum date value"
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="messageWhenBadInput" 
+                        label="Message value provided is not a date" 
+                        description="This is the message you want to display when the input provided is not a date or in correct date format"
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="variant" 
+                        label="Variant" 
+                        description="The variant changes the appearance of an input field. Accepted variants include standard, label-inline, label-hidden, and label-stacked. This value defaults to standard, which displays the label above the field. Use label-hidden to hide the label but make it available to assistive technology. Use label-inline to horizontally align the label and input field. Use label-stacked to place the label above the input field."
+                        type="String" 
+                        role="inputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
