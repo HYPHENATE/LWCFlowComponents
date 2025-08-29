@@ -1,7 +1,7 @@
 /**
  * @description       : custom text area component with word / character counter javascript
  * @author            : daniel@hyphen8.com
- * @last modified on  : 30/10/2024
+ * @last modified on  : 29-08-2025
  * @last modified by  : daniel@hyphen8.com
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -47,12 +47,18 @@ export default class CustomTextAreaComponent extends LightningElement {
     renderedCallback() {
         this.currentWordCount = this.wordCount();
         this.currentCharacterCount = this.characterCount();
-        this.resize();
+        //this.resize();
     }
 
-    resize(){
-        var css = this.template.host.style;
-        css.setProperty('--txt-size', this.textAreaHeight);
+    // resize(){
+    //     var css = this.template.host.style;
+    //     css.setProperty('--txt-size', this.textAreaHeight);
+    // }
+
+    get textareaCssVars() {
+    return this.textAreaHeight
+        ? `--slds-c-textarea-sizing-min-height: ${this.textAreaHeight};`
+        : '40rem';
     }
 
     // default flow validation method
