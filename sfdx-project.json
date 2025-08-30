@@ -4,8 +4,8 @@
       "path": "force-app",
       "default": true,
       "package": "Hyphen8LabsFlowComponents",
-      "versionName": "v2.0.3",
-      "versionNumber": "2.0.3.NEXT",
+      "versionName": "v2.0.4",
+      "versionNumber": "2.0.4.NEXT",
       "dependencies": [
         {
           "package": "Hyphen8 Apex Tools"

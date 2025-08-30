@@ -2,7 +2,7 @@
 <!--
   @description       : html for row line item
   @author            : daniel@hyphen8.com
-  @last modified on  : 15-05-2025
+  @last modified on  : 29-08-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -45,7 +45,7 @@
     <template if:true={rowDeleteEnabled}>
       <td class="" scope="col">
           <div class="slds-align_absolute-center">
-              <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" title="Delete" variant="bare" onclick={deleteRow}></lightning-button-icon>
+              <lightning-button-icon icon-name="utility:delete" alternative-text={deleteIconLabel} title={deleteIconLabel} variant="bare" onclick={deleteRow}></lightning-button-icon>
           </div>
       </td>
     </template>

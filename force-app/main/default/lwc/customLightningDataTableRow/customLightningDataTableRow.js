@@ -1,10 +1,12 @@
 /**
  * @description       : js for row level data table items
  * @author            : daniel@hyphen8.com
- * @last modified on  : 15-05-2025
+ * @last modified on  : 29-08-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
+
+import deleteIconLabel from '@salesforce/label/c.H8CustomDataTableDeleteIconLabel';
 
 export default class CustomLightningDataTableRow extends LightningElement {
 
@@ -20,6 +22,7 @@ export default class CustomLightningDataTableRow extends LightningElement {
     }
     @api recordId;
     @api rowDeleteEnabled;
+    deleteIconLabel = deleteIconLabel;
 
 
     // function that tracks changes and commits at field level to ensure that master editData is kept up to

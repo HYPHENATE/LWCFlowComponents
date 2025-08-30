@@ -2,7 +2,7 @@
 <!--
   @description       : top level custom lightning data table
   @author            : daniel@hyphen8.com
-  @last modified on  : 22-08-2025
+  @last modified on  : 29-08-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -31,7 +31,7 @@
                 </template>
                 <template if:true={allowRowDeletion}>
                   <th class="" scope="col">
-                    <div class="slds-truncate slds-align_absolute-center" title="Actions">Actions</div>
+                    <div class="slds-truncate slds-align_absolute-center" title={actionsLabel}>{actionsLabel}</div>
                   </th>
                 </template>
               </tr>

@@ -34,6 +34,12 @@
                         description="You can use this to determine the width of the tab columns, for full responsiveness you should use rem options, the default is 12rem" 
                         default="12rem" 
             />
+            <property name="getLanguage" 
+                        label="Get Language"
+                        type="Boolean"
+                        description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
+                        default="false"
+            />
         </targetConfig>
         <targetConfig targets="lightning__RecordPage">
             <property name="formName" 
@@ -61,6 +67,12 @@
                         type="String" 
                         description="You can use this to determine the width of the tab columns, for full responsiveness you should use rem options, the default is 12rem" 
                         default="12rem" 
+            />
+            <property name="getLanguage" 
+                        label="Get Language"
+                        type="Boolean"
+                        description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
+                        default="false"
             />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
@@ -90,6 +102,12 @@
                         description="You can use this to determine the width of the tab columns, for full responsiveness you should use rem options, the default is 12rem" 
                         default="12rem"
             />
+            <property name="getLanguage" 
+                        label="Get Language"
+                        type="Boolean"
+                        description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
+                        default="false"
+            />
         </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
             <property name="formName" 
@@ -117,6 +135,12 @@
                         type="String" 
                         description="You can use this to determine the width of the tab columns, for full responsiveness you should use rem options, the default is 12rem" 
                         default="12rem"
+            />
+            <property name="getLanguage" 
+                        label="Get Language"
+                        type="Boolean"
+                        description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
+                        default="false"
             />
         </targetConfig>
     </targetConfigs>
