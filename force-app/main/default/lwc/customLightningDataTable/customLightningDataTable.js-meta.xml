@@ -103,6 +103,18 @@
                         role="inputOnly" 
                         default="Add Row"
             />
+            <property name="totalFields"
+                        label="Total Field API Names"
+                        description="Comma-separated API names of Number/Currency/Percent fields to total in the footer."
+                        type="String"
+                        role="inputOnly"
+            />
+            <property name="currencyCode"
+                        label="Currency Code (optional)"
+                        description="Currency code to use for currency totals (e.g., USD, GBP). Leave blank to use the default."
+                        type="String"
+                        role="inputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

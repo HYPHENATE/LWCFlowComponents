@@ -1,10 +1,11 @@
 /**
  * @description       : js to support displaying a form with side navigation
  * @author            : daniel@hyphen8.com
- * @last modified on  : 24-07-2025
+ * @last modified on  : 29-08-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track } from 'lwc';
+import LANG from '@salesforce/i18n/lang';
 
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getForm from '@salesforce/apex/H8FlowFormController.getForm';
@@ -16,6 +17,8 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     @api defaultPage = 1;
     @api scrollToTopOffset = 150;
     @api navWidth = '12rem';
+    @api getLanguage = false;
+    varLanguage;
     isLoading = true;
     @track sections;
     activeSectionId;
@@ -27,9 +30,29 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     // connected call back to support with getting the form structure
     connectedCallback(){
         this.handleGetForm();
+        if(this.getLanguage){
+            this.fetchLanguage();
+        }
         this.intervalId = setInterval(() => {
             this.checkSessionStorage();
         }, 500);
+    }
+
+    fetchLanguage(){
+        const urlLang = this._getUrlLanguage();
+        const raw = (urlLang || LANG || 'en').toLowerCase();
+        const normalized = this.normalizeToTwoLetters ? raw.substring(0, 2) : raw;
+        this.varLanguage = normalized;
+        this.isLoading = false;
+    }
+
+    _getUrlLanguage() {
+        try {
+            const params = new URL(window.location.href).searchParams;
+            return params.get('language');
+        } catch (e) {
+            return null;
+        }
     }
 
     renderedCallback() {
@@ -130,13 +153,28 @@ export default class H8FlowFormRenderComponent extends LightningElement {
 
     // getter to set the input variables
     get inputVariables() {
-        return [
-            {
-                name: 'recordId',
-                type: 'String',
-                value: this.recordId != null ? this.recordId : ''
-            }
-        ];
+        if(this.getLanguage){
+            return [
+                {
+                    name: 'recordId',
+                    type: 'String',
+                    value: this.recordId != null ? this.recordId : ''
+                },
+                {
+                    name: 'varLanguage',
+                    type: 'String',
+                    value: this.varLanguage != null ? this.varLanguage : 'en'
+                }
+            ];
+        } else {
+            return [
+                {
+                    name: 'recordId',
+                    type: 'String',
+                    value: this.recordId != null ? this.recordId : ''
+                }
+            ];
+        }
     }
 
     // dispatched event that will set the current selected section and reload the flow for the selected section

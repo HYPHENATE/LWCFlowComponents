@@ -321,4 +321,28 @@
         <shortDescription>H8ESignatureAltValue</shortDescription>
         <value>Signature</value>
     </labels>
+    <labels>
+        <fullName>H8CustomDataTableActionsLabel</fullName>
+        <categories>H8CustomDataTable</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8CustomDataTableActionsLabel</shortDescription>
+        <value>Actions</value>
+    </labels>
+    <labels>
+        <fullName>H8CustomDataTableDeleteIconLabel</fullName>
+        <categories>H8CustomDataTable</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8CustomDataTableDeleteIconLabel</shortDescription>
+        <value>Delete row</value>
+    </labels>
+    <labels>
+        <fullName>H8CustomDataTableDependentFieldInvalidSelection</fullName>
+        <categories>H8CustomDataTable</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8CustomDataTableDependentFieldInvalidSelection</shortDescription>
+        <value>Invalid selection</value>
+    </labels>
 </CustomLabels>

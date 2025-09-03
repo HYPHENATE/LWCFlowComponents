@@ -158,3 +158,15 @@ declare module "@salesforce/label/c.H8ESignatureAltValue" {
     var H8ESignatureAltValue: string;
     export default H8ESignatureAltValue;
 }
+declare module "@salesforce/label/c.H8CustomDataTableActionsLabel" {
+    var H8CustomDataTableActionsLabel: string;
+    export default H8CustomDataTableActionsLabel;
+}
+declare module "@salesforce/label/c.H8CustomDataTableDeleteIconLabel" {
+    var H8CustomDataTableDeleteIconLabel: string;
+    export default H8CustomDataTableDeleteIconLabel;
+}
+declare module "@salesforce/label/c.H8CustomDataTableDependentFieldInvalidSelection" {
+    var H8CustomDataTableDependentFieldInvalidSelection: string;
+    export default H8CustomDataTableDependentFieldInvalidSelection;
+}

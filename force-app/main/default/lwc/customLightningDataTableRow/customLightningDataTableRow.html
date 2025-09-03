@@ -1,53 +1,171 @@
 <!-- sldsValidatorIgnore -->
 <!--
   @description       : html for row line item
-  @author            : daniel@hyphen8.com
-  @last modified on  : 15-05-2025
-  @last modified by  : daniel@hyphen8.com
+  @author            : daniel
+  @last modified on  : 31-08-2025
 -->
 <template>
+  <template for:each={currentData.fields} for:item="field">
+    <td key={field.fieldAPIName} scope="col">
+      <!-- Checkbox -->
+      <template if:true={field.isCheckbox}>
+        <lightning-input
+          type="checkbox"
+          checked={field.value}
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          variant="label-hidden"
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
 
-    
-    <template for:each={rowData.fields} for:item="field">
-        <td key={field.fieldType} class="" scope="col">
-            <template if:true={field.isCheckbox}>
-              <lightning-input type="checkbox" checked={field.value} required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} variant="label-hidden" onchange={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isPicklist}>
-              <lightning-combobox required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} options={field.picklistOptions}  onchange={fieldChange} variant="label-hidden"></lightning-combobox>
-            </template>
-            <template if:true={field.isNumber}>
-              <lightning-input type="number" required={field.required} step={field.stepScale} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isCurrency}>
-              <lightning-input type="number" formatter="currency" step={field.stepScale} required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isDate}>
-              <lightning-input type="date" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isText}>
-              <lightning-input type="text" maxlength={field.length} required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isEmail}>
-              <lightning-input type="email" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isPhone}>
-              <lightning-input type="tel" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isURL}>
-              <lightning-input type="url" required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-            <template if:true={field.isPercent}>
-              <lightning-input type="number" formatter="percent-fixed" step={field.stepScale} required={field.required} data-target-field-type={field.fieldType} data-target-field={field.fieldAPIName} value={field.value} variant="label-hidden" onchange={fieldChange} oncommit={fieldChange}></lightning-input>
-            </template>
-        </td>
-    </template>
-    <template if:true={rowDeleteEnabled}>
-      <td class="" scope="col">
-          <div class="slds-align_absolute-center">
-              <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" title="Delete" variant="bare" onclick={deleteRow}></lightning-button-icon>
-          </div>
-      </td>
-    </template>
-    
+      <!-- Picklist -->
+      <template if:true={field.isPicklist}>
+        <lightning-combobox
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          options={field.picklistOptions}
+          disabled={field._disabled}
+          placeholder="Select an Option"
+          onchange={fieldChange}
+          variant="label-hidden">
+        </lightning-combobox>
+      </template>
+
+      <!-- Number -->
+      <template if:true={field.isNumber}>
+        <lightning-input type="number"
+          required={field.required}
+          step={field.stepScale}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- Currency -->
+      <template if:true={field.isCurrency}>
+        <lightning-input type="number"
+          formatter="currency"
+          step={field.stepScale}
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- Date -->
+      <template if:true={field.isDate}>
+        <lightning-input type="date"
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          onchange={fieldChange}
+          onblur={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- Text -->
+      <template if:true={field.isText}>
+        <lightning-input type="text"
+          maxlength={field.length}
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- Email -->
+      <template if:true={field.isEmail}>
+        <lightning-input type="email"
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- Phone -->
+      <template if:true={field.isPhone}>
+        <lightning-input type="tel"
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- URL -->
+      <template if:true={field.isURL}>
+        <lightning-input type="url"
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+
+      <!-- Percent -->
+      <template if:true={field.isPercent}>
+        <lightning-input type="number"
+          formatter="percent-fixed"
+          step={field.stepScale}
+          required={field.required}
+          data-target-field-type={field.fieldType}
+          data-target-field={field.fieldAPIName}
+          value={field.value}
+          variant="label-hidden"
+          oninput={fieldChange}
+          onblur={fieldChange}
+          onchange={fieldChange}>
+        </lightning-input>
+      </template>
+    </td>
+  </template>
+
+  <!-- Delete column -->
+  <template if:true={rowDeleteEnabled}>
+    <td class="" scope="col">
+      <div class="slds-align_absolute-center">
+        <lightning-button-icon
+          icon-name="utility:delete"
+          alternative-text={deleteIconLabel}
+          title={deleteIconLabel}
+          variant="bare"
+          onclick={deleteRow}>
+        </lightning-button-icon>
+      </div>
+    </td>
+  </template>
 </template>

@@ -2,56 +2,105 @@
 <!--
   @description       : top level custom lightning data table
   @author            : daniel@hyphen8.com
-  @last modified on  : 22-08-2025
+  @last modified on  : 31-08-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
 
-    <lightning-card>
-      <div class="slds-p-horizontal_small">
-        <template if:false={allowEdit}>
-          <lightning-datatable 
-                  key-field="Id"
-                  data={data}
-                  columns={columns}
-                  hide-checkbox-column
-                  row-number-offset={offSet}
-                  show-row-number-column
-                  suppress-bottom-bar>
-              </lightning-datatable> 
+  <template if:false={allowEdit}>
+    <lightning-datatable 
+            key-field="Id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column
+            row-number-offset={offSet}
+            show-row-number-column
+            suppress-bottom-bar>
+    </lightning-datatable> 
+  </template>
+
+  <template if:true={allowEdit}>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+      <thead>
+        <tr class="slds-line-height_reset">
+          <template for:each={columns} for:item="column">
+            <th key={column.label} scope="col">
+              <div class="slds-truncate" title={column.label}>{column.label}</div>
+            </th>
+          </template>
+          <template if:true={allowRowDeletion}>
+            <th scope="col">
+              <div class="slds-truncate slds-align_absolute-center" title={actionsLabel}>{actionsLabel}</div>
+            </th>
+          </template>
+        </tr>
+      </thead>
+
+      <tbody>
+        <template for:each={editData} for:item="record">
+          <c-custom-lightning-data-table-row
+              key={record.id}
+              record-id={record.id}
+              row-delete-enabled={allowRowDeletion}
+              row-data={record}
+              picklist-meta={picklistMeta}
+              onrowdeleted={handleRowDelete}
+              onrowupdated={handleRowUpdate}>
+          </c-custom-lightning-data-table-row>
         </template>
-        <template if:true={allowEdit}>
-          <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label other-element-with-table-label">
-            <thead>
-              <tr class="slds-line-height_reset">
-                <template for:each={columns} for:item="column">
-                  <th key={column.label} class="" scope="col">
-                    <div class="slds-truncate" title={column.label}>{column.label}</div>
-                  </th>
+      </tbody>
+
+      <tfoot if:true={showTotalsRow}>
+        <tr>
+          <template for:each={footerRow} for:item="cell">
+            <td key={cell.key} class="slds-text-align_left" style="padding-left: 1rem;">
+              <strong>
+                <template if:true={cell.isTotal}>
+                  <template if:true={cell.isCurrency}>
+                    <lightning-formatted-number
+                      value={cell.value}
+                      format-style="currency"
+                      currency-code={currencyCode}
+                      minimum-fraction-digits={cell.scale}
+                      maximum-fraction-digits={cell.scale}>
+                    </lightning-formatted-number>
+                  </template>
+                  <template if:true={cell.isNumber}>
+                    <lightning-formatted-number
+                      value={cell.value}
+                      minimum-fraction-digits={cell.scale}
+                      maximum-fraction-digits={cell.scale}>
+                    </lightning-formatted-number>
+                  </template>
+                  <template if:true={cell.isPercent}>
+                    <lightning-formatted-number
+                      value={cell.percentDisplayValue}
+                      format-style="percent"
+                      minimum-fraction-digits={cell.scale}
+                      maximum-fraction-digits={cell.scale}>
+                    </lightning-formatted-number>
+                  </template>
                 </template>
-                <template if:true={allowRowDeletion}>
-                  <th class="" scope="col">
-                    <div class="slds-truncate slds-align_absolute-center" title="Actions">Actions</div>
-                  </th>
-                </template>
-              </tr>
-            </thead>
-            <tbody>
-              <template for:each={editData} for:item="record">
-                <c-custom-lightning-data-table-row key={record.id} record-id={record.id} row-delete-enabled={allowRowDeletion} row-data={record} onrowdeleted={handleRowDelete} onrowupdated={handleRowUpdate}></c-custom-lightning-data-table-row>
-              </template>
-            </tbody>
-          </table>
-          <div class="slds-clearfix">
-            <div class="slds-float_right">
-              <template if:true={displayRowAddButton}>
-                <lightning-button variant="base" label={addRowButtonLabel} title={addRowButtonLabel} icon-name="utility:add" onclick={addRow}></lightning-button>
-              </template>
-            </div>
-          </div>
-          
+              </strong>
+            </td>
+          </template>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="slds-clearfix">
+      <div class="slds-float_right">
+        <template if:true={displayRowAddButton}>
+          <lightning-button
+              variant="base"
+              label={addRowButtonLabel}
+              title={addRowButtonLabel}
+              icon-name="utility:add"
+              onclick={addRow}>
+          </lightning-button>
         </template>
       </div>
-    </lightning-card>
-    
+    </div>
+  </template>
+  
 </template>
