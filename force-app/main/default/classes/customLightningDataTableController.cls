@@ -1,210 +1,125 @@
 /**
  * @description       : custom data table controller class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03/10/2024
+ * @last modified on  : 30-08-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 @SuppressWarnings('PMD')
 public with sharing class customLightningDataTableController {
-    
+
     @AuraEnabled
-    public static customLightningDataTableWrapper getFieldsAndRecords(string sObjectName, string fieldSetAPIName, string parentIDField, string parentId, string whereClause){
+    public static customLightningDataTableWrapper getFieldsAndRecords(String sObjectName, String fieldSetAPIName, String parentIDField, String parentId, String whereClause){
         try {
-
-            Map<String, String> returnMap = new Map<String,String>();
-            if(!String.isEmpty(sObjectName) && !String.isEmpty(fieldSetAPIName))
-            {    
-                SObject sObj = (SObject)(Type.forName('Schema.'+ sObjectName).newInstance());   
-                List<Schema.FieldSetMember> lstFSMember = sObj.getSObjectType().getDescribe().fieldSets.getMap().get(fieldSetAPIName).getFields();
-                String query = 'SELECT Id, ';
-                integer fieldSetMemberCount = 1;
-                for(Schema.FieldSetMember f : lstFSMember) 
-                {
-                    query += f.getFieldPath();
-                    if(fieldSetMemberCount != lstFSMember.size()){
-                        query += ', ';
-                    }
-                    fieldSetMemberCount = fieldSetMemberCount + 1;
-                }
-                query += ' FROM ' + sObjectName ;
-                
-                if(!(String.isEmpty(parentIDField) && String.isEmpty(parentId)))
-                {
-                    query += ' WHERE ' + parentIDField + '=\'' + parentId + '\'';
-                }
-
-                if(!(String.isEmpty(whereClause)))
-                {
-                    query += ' AND ' + whereClause;
-                }
-                            
-                List<SObject> lstRecords = Database.query(query);
-
-                customLightningDataTableWrapper returnWrapper = new customLightningDataTableWrapper();
-                returnWrapper.records = lstRecords;
-                customLightningDataTableWrapper.fieldData fieldData = new customLightningDataTableWrapper.fieldData();
-                fieldData.fields = getFieldDetails(sObjectName, lstFSMember);
-                returnWrapper.fieldDetail = fieldData;
-
-                return returnWrapper;
+            if (String.isBlank(sObjectName) || String.isBlank(fieldSetAPIName)) {
+                return null;
             }
-            
-            return null;
+
+            SObject sObj = (SObject)(Type.forName('Schema.'+ sObjectName).newInstance());   
+            List<Schema.FieldSetMember> lstFSMember =
+                sObj.getSObjectType().getDescribe().fieldSets.getMap().get(fieldSetAPIName).getFields();
+
+            String fieldsCsv = '';
+            Integer idx = 0;
+            for (Schema.FieldSetMember f : lstFSMember) {
+                fieldsCsv += (idx++ == 0 ? '' : ', ') + f.getFieldPath();
+            }
+
+            String query = 'SELECT Id, ' + fieldsCsv + ' FROM ' + sObjectName;
+
+            List<String> whereParts = new List<String>();
+            if (!String.isBlank(parentIDField) && !String.isBlank(parentId)) {
+                try {
+                    Id pid = Id.valueOf(parentId);
+                    whereParts.add(parentIDField + ' = \'' + String.escapeSingleQuotes(String.valueOf(pid)) + '\'');
+                } catch (Exception ex) {
+                    whereParts.add(parentIDField + ' = \'' + String.escapeSingleQuotes(parentId) + '\'');
+                }
+            }
+            if (!String.isBlank(whereClause)) {
+                whereParts.add('(' + whereClause + ')');
+            }
+            if (!whereParts.isEmpty()) {
+                query += ' WHERE ' + String.join(whereParts, ' AND ');
+            }
+
+            List<SObject> lstRecords = Database.query(query);
+
+            customLightningDataTableWrapper returnWrapper = new customLightningDataTableWrapper();
+            returnWrapper.records = lstRecords;
+
+            customLightningDataTableWrapper.fieldData fd = new customLightningDataTableWrapper.fieldData();
+            fd.fields = getFieldDetails(sObjectName, lstFSMember);
+            returnWrapper.fieldDetail = fd;
+
+            return returnWrapper;
 
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
 
-    private static List<customLightningDataTableWrapper.fieldSetup> getFieldDetails(string sObjectAPIName, List<Schema.FieldSetMember> lstFSMember){
+    private static List<customLightningDataTableWrapper.fieldSetup> getFieldDetails(String sObjectAPIName,List<Schema.FieldSetMember> lstFSMember){
         Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(sObjectAPIName).getDescribe().fields.getMap();
+
         List<customLightningDataTableWrapper.fieldSetup> fieldDetails = new List<customLightningDataTableWrapper.fieldSetup>();
-        for(Schema.FieldSetMember field:lstFSMember){
-            DescribeFieldResult currentFieldDetal = fieldMap.get(field.getFieldPath()).getDescribe();
-            customLightningDataTableWrapper.fieldSetup fieldWrapper = new customLightningDataTableWrapper.fieldSetup();
-            fieldWrapper.fieldAPIName = field.getFieldPath();
-            fieldWrapper.label = field.getLabel();
-            fieldWrapper.fieldType = string.valueOf(currentFieldDetal.getType()).toLowerCase();
-            fieldWrapper.picklistOptions = getPickListValues(currentFieldDetal);
-            fieldWrapper.length = currentFieldDetal.getLength();
-            fieldWrapper.scale = currentFieldDetal.getScale();
-            fieldWrapper.required = field.required;
-            fieldWrapper.isCheckbox = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'boolean') ? true:false;
-            fieldWrapper.isText = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'string' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'text' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'textarea') ? true:false;
-            fieldWrapper.isCurrency = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'currency') ? true:false;
-            fieldWrapper.isNumber = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'double') ? true:false;
-            fieldWrapper.isDate = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'date' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'datetime') ? true:false;
-            fieldWrapper.isEmail = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'email') ? true:false;
-            fieldWrapper.isPhone = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'phone') ? true:false;
-            fieldWrapper.isURL = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'url') ? true:false;
-            fieldWrapper.isPicklist = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'picklist' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'multipicklist') ? true:false;
-            fieldWrapper.isPercent = (string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'percent') ? true:false;
-            if(string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'currency' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'double' || string.valueOf(currentFieldDetal.getType()).toLowerCase() == 'percent'){
-                if(currentFieldDetal.getScale() == 0){
-                    fieldWrapper.stepScale = 0;
+
+        for (Schema.FieldSetMember fsm : lstFSMember) {
+            Schema.DescribeFieldResult d = fieldMap.get(fsm.getFieldPath()).getDescribe();
+
+            customLightningDataTableWrapper.fieldSetup f = new customLightningDataTableWrapper.fieldSetup();
+            f.fieldAPIName = fsm.getFieldPath();
+            f.label        = fsm.getLabel();
+            f.fieldType    = String.valueOf(d.getType()).toLowerCase();
+            f.length       = d.getLength();
+            f.scale        = d.getScale();
+            f.required     = fsm.required;
+
+            f.isCheckbox = f.fieldType == 'boolean';
+            f.isText     = f.fieldType == 'string' || f.fieldType == 'text' || f.fieldType == 'textarea';
+            f.isCurrency = f.fieldType == 'currency';
+            f.isNumber   = f.fieldType == 'double';
+            f.isDate     = f.fieldType == 'date' || f.fieldType == 'datetime';
+            f.isEmail    = f.fieldType == 'email';
+            f.isPhone    = f.fieldType == 'phone';
+            f.isURL      = f.fieldType == 'url';
+            f.isPicklist = f.fieldType == 'picklist' || f.fieldType == 'multipicklist';
+            f.isPercent  = f.fieldType == 'percent';
+
+            if (f.isCurrency || f.isNumber || f.isPercent) {
+                if (d.getScale() == 0) {
+                    f.stepScale = 0;
                 } else {
                     String stepValue = '0.';
-                    for(Integer i = 1; i <= currentFieldDetal.getScale(); i++){
-                        if(i == 1){
-                            if(i == currentFieldDetal.getScale()){
-                                stepValue = stepValue + '1';
-                            } else {
-                                stepValue = stepValue + '0';
-                            }
-                        } else {
-                            if(i == currentFieldDetal.getScale()){
-                                stepValue = stepValue + '1';
-                            } else {
-                                stepValue = stepValue + '0';
-                            }
-                        }
+                    for (Integer i = 1; i <= d.getScale(); i++) {
+                        stepValue += (i == d.getScale()) ? '1' : '0';
                     }
-                    fieldWrapper.stepScale = Decimal.valueOf(stepValue);
+                    f.stepScale = Decimal.valueOf(stepValue);
                 }
             }
-            fieldDetails.add(fieldWrapper);
+
+            if (f.isPicklist) {
+                f.picklistOptions = getPicklistOptionsMap(d);
+            }
+
+            Schema.SObjectField ctrl = d.getController();
+            if (ctrl != null) {
+                f.controllerFieldAPIName = ctrl.getDescribe().getName();
+            }
+
+            fieldDetails.add(f);
         }
 
         return fieldDetails;
     }
 
-    //TODO Switch to Map<String, String> then update JS to convert this
-    private static List<String> getPickListValues(DescribeFieldResult currentFieldDetal){
-        List<Schema.PicklistEntry> pickListValue = currentFieldDetal.getPicklistValues();
-        List<String> returnList = new List<String>();
-        for(Schema.PicklistEntry picklist:pickListValue){
-            returnList.add(picklist.getLabel());
+    private static List<Map<String, String>> getPicklistOptionsMap(Schema.DescribeFieldResult dfr) {
+        List<Map<String, String>> out = new List<Map<String, String>>();
+        for (Schema.PicklistEntry pe : dfr.getPicklistValues()) {
+            out.add(new Map<String, String>{
+                'label' => pe.getLabel(),
+                'value' => pe.getValue()
+            });
         }
-        return returnList;
-    }
-
-    @AuraEnabled
-    public static List<sObject> generateSaveDataRecords(string sObjectAPIName, string parentIDField, string parentId, string dataArray, string defaultFieldValues){
-        try {
-
-            Map<String, Object> defaultObjectValues;
-            if(!String.isEmpty(defaultFieldValues)){
-                defaultObjectValues = (Map<String, Object>) JSON.deserializeUntyped(defaultFieldValues);
-            } else {
-                defaultObjectValues = new Map<String, Object>();
-            }
-            List<CustomLDTSaveWrapper> saveData = (List<CustomLDTSaveWrapper>)JSON.deserialize(dataArray, List<CustomLDTSaveWrapper>.class);
-            List<sObject> returnList = new List<sObject>();
-            for(CustomLDTSaveWrapper data:saveData){
-                sObject sObj = Schema.getGlobalDescribe().get(sObjectAPIName).newSObject();
-                sObj.put(parentIDField, parentId);
-
-                string recordId = data.id;
-            
-                if(recordId.length() > 5){
-                    sObj.put('Id', data.id);
-                }
-
-                for(String defaultField:defaultObjectValues.keySet()){
-                    object defaultValue = defaultObjectValues.get(defaultField);
-                    try {
-                        sObj = setObjectValue(defaultValue, defaultField, sObj);
-                    } catch (Exception e){
-                        system.debug(e.getMessage());
-                    }
-                }
-
-                List<CustomLDTSaveWrapper.field> fields = data.fields;
-                for(CustomLDTSaveWrapper.field field:fields){
-                    if(field.value != ''){
-                        if(field.fieldType == 'date'){
-                            sObj.put(field.fieldAPIName, date.valueOf(field.value));
-                        } else if(field.fieldType == 'checkbox'){
-                            sObj.put(field.fieldAPIName, boolean.valueOf(field.value));
-                        } else if(field.fieldType == 'number'){
-                            sObj.put(field.fieldAPIName, decimal.valueOf(field.value));
-                        } else {
-                            sObj.put(field.fieldAPIName, field.value);
-                        }
-                    }
-                }
-                returnList.add(sObj);
-            }
-
-            return returnList;
-            
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    public static sObject setObjectValue(Object obj, string fieldAPIName, sObject newObject) {
-        if(obj instanceof Boolean) {
-            boolean booleanValue = boolean.valueOf(obj);
-            newObject.put(fieldAPIName, booleanValue);
-        } else if(obj instanceof Id){
-            string stringIdValue = string.valueOf(obj);
-            newObject.put(fieldAPIName, stringIdValue);
-        } else if(obj instanceof String){
-            string stringValue = string.valueOf(obj);
-            newObject.put(fieldAPIName, stringValue);
-        } else if(obj instanceof Date) {
-            date dateValue = date.valueOf(obj);
-            newObject.put(fieldAPIName, dateValue);
-        } else if(obj instanceof Datetime){
-            datetime datetimeValue = datetime.valueOf(obj);
-            newObject.put(fieldAPIName, datetimeValue);
-        } else if(obj instanceof Integer) {
-            integer integerValue = integer.valueOf(obj);
-            newObject.put(fieldAPIName, integerValue);
-        } else if(obj instanceof Long){
-            string stringDecimalValue = string.valueOf(obj);
-            decimal decimalValue = decimal.valueOf(stringDecimalValue);
-            newObject.put(fieldAPIName, decimalValue);
-        } else if(obj instanceof Decimal){
-            string stringDecimalValue = string.valueOf(obj);
-            decimal decimalValue = decimal.valueOf(stringDecimalValue);
-            newObject.put(fieldAPIName, decimalValue);
-        } else if(obj instanceof Double){
-            double doubleValue = double.valueOf(obj);
-            newObject.put(fieldAPIName, doubleValue);
-        }
-        
-        return newObject;
+        return out;
     }
 }

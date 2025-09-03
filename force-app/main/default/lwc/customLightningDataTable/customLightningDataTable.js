@@ -1,392 +1,441 @@
 /**
- * @description       : js for custom lightning data table
- * @author            : daniel@hyphen8.com
- * @last modified on  : 29-08-2025
- * @last modified by  : daniel@hyphen8.com
-**/
-import { LightningElement, api, track } from 'lwc';
+ * Custom Lightning Data Table (no session storage, UI API picklist deps, live totals)
+ */
+import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { deleteRecord } from 'lightning/uiRecordApi';
-import {FlowAttributeChangeEvent} from 'lightning/flowSupport';
+import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
+
+// UI API for picklists
+import { getObjectInfo, getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
 
 import actionsLabel from '@salesforce/label/c.H8CustomDataTableActionsLabel';
-
 import getData from '@salesforce/apex/customLightningDataTableController.getFieldsAndRecords';
-import generateSaveDataRecords from '@salesforce/apex/customLightningDataTableController.generateSaveDataRecords';
 
 export default class CustomLightningDataTable extends LightningElement {
+  // public api
+  @api sObjectAPIName;
+  @api fieldSetAPIName;
+  @api parentFieldAPIName;
+  @api parentRecordId;
+  @api allowAddRow = false;
+  @api allowEdit = false;
+  @api allowRowDeletion = false;
+  @api maxRows;
+  @api startingRowCount;
+  @api whereClause;
+  @api defaultFieldValues;
+  @api newRecords;
+  @api existingRecords;
+  @api minRows;
+  @api addRowButtonLabel = 'Add Row';
 
-    @api sObjectAPIName;
-    @api fieldSetAPIName;
-    @api parentFieldAPIName;
-    @api parentRecordId;
-    @api allowAddRow = false;
-    @api allowEdit = false;
-    @api allowRowDeletion = false;
-    @api maxRows;
-    @api startingRowCount;
-    @api whereClause;
-    @api defaultFieldValues;
-    @api newRecords;
-    @api existingRecords;
-    @api minRows;
-    @api addRowButtonLabel = 'Add Row';
-    actionsLabel = actionsLabel;
+  // NEW: totals configuration
+  @api totalFields;      // comma-separated API names, e.g. "Amount, Discount__c"
+  @api currencyCode;     // optional, e.g. "USD", "GBP" (for currency totals)
 
-    @api
-    validate() {
-        if(this.validForSaveCheck || !this.allowEdit) { 
-            return { isValid: true }; 
-        } else { 
-            return { 
-                isValid: false, 
-                errorMessage: 'You need to complete this table before you proceed' 
-            }; 
-        }
+  actionsLabel = actionsLabel;
+
+  // picklist dependency meta
+  @track picklistMeta = {};
+  recordTypeId;
+
+  // wires
+  @wire(getObjectInfo, { objectApiName: '$sObjectAPIName' })
+  handleObjectInfo({ data }) {
+    if (data) this.recordTypeId = data.defaultRecordTypeId;
+  }
+
+  @wire(getPicklistValuesByRecordType, { objectApiName: '$sObjectAPIName', recordTypeId: '$recordTypeId' })
+  handlePicklistValues({ data }) {
+    if (data) {
+      const out = {};
+      const pfv = data.picklistFieldValues || {};
+      Object.keys(pfv).forEach(api => {
+        out[api] = {
+          controllerValues: pfv[api].controllerValues,
+          values: pfv[api].values
+        };
+      });
+      this.picklistMeta = out;
     }
+  }
 
-    @track columns;
-    @track data;
-    editData;
-    @track defaultFields;
+  // validation used by Flow
+  @api
+  validate() {
+    this.template.querySelectorAll('lightning-input, lightning-combobox').forEach(el => el.blur());
+    this.refreshOutputs(); // ensure latest
+    if (this.validForSaveCheck || !this.allowEdit) return { isValid: true };
+    return { isValid: false, errorMessage: 'You need to complete this table before you proceed' };
+  }
 
-    @track rowCount = 0;
-    offSet = 0;
+  // state
+  @track columns;
+  @track data;
+  @track defaultFields;
+  editData;
 
-    // standard connected callback for getting data and configuring dataTable
-    connectedCallback(){
+  @track rowCount = 0;
+  offSet = 0;
 
-        this.handleGetData();
-    }
+  // NEW: field meta + totals
+  fieldMetaByApi = {};                 // { api : { type, scale, isCurrency, isPercent, isNumber } }
+  totalFieldSet = new Set();           // normalized list of fields to total
+  @track totalsByField = {};           // { api : number }
+  @track footerRow = [];               // array aligned to columns for tfoot
 
-    // apex funcation that pulls in key json to support with building the UI
-    handleGetData() {
-        getData({
-            sObjectName: this.sObjectAPIName,
-            fieldSetAPIName: this.fieldSetAPIName,
-            parentIDField: this.parentFieldAPIName,
-            parentId: this.parentRecordId,
-            whereClause: this.whereClause
-        })
-        .then((results) => {
+  connectedCallback() {
+    this.handleGetData();
+  }
 
-            // TODO MOVE ALL THIS INTO OWN FUNCTION FOR HANDLING SESSION STORAGE CHECKING
-            let validationStateCheck = JSON.parse(sessionStorage.getItem('validationState'));
-            let parentCheckId = sessionStorage.getItem('parentRecordCheckId');
-            let sessionData = JSON.parse(sessionStorage.getItem('editData'));
-            let rowCountSession = JSON.parse(sessionStorage.getItem('rowCount'));
+  // Load records + field metadata
+  handleGetData() {
+    getData({
+      sObjectName: this.sObjectAPIName,
+      fieldSetAPIName: this.fieldSetAPIName,
+      parentIDField: this.parentFieldAPIName,
+      parentId: this.parentRecordId,
+      whereClause: this.whereClause
+    })
+      .then((results) => {
+        const recordData = results.records || [];
+        const fieldData = (results.fieldDetail && results.fieldDetail.fields) || [];
 
-            let useSessionStorage = true;
+        // Build meta map and defaultFields template
+        this.fieldMetaByApi = {};
+        const templateFields = [];
+        fieldData.forEach(fd => {
+          // meta
+          this.fieldMetaByApi[fd.fieldAPIName] = {
+            type: fd.fieldType, // original type: 'currency' | 'double' | 'percent' | 'string' ...
+            scale: fd.scale || 0,
+            isCurrency: fd.isCurrency,
+            isPercent: fd.isPercent,
+            isNumber: fd.isNumber || fd.fieldType === 'double'
+          };
 
-            if(validationStateCheck == undefined && parentCheckId == undefined){
-                sessionStorage.clear();
-                useSessionStorage = false;
-            } else if(validationStateCheck == true){
-                sessionStorage.clear();
-                useSessionStorage = false;
-            } else if(this.parentRecordId != parentCheckId){
-                sessionStorage.clear();
-                useSessionStorage = false;
-            }
-
-            let recordData = results.records;
-            let fieldData = results.fieldDetail.fields;
-            
-            if(useSessionStorage){
-                this.rowCount = rowCountSession;
-            }
-
-            let templateFields = [];
-            fieldData.map(element=> {
-
-                let pickListValues = this.getPickListValues(element.picklistOptions);
-                let fieldType = this.getType(element.fieldType);
-                let defaultValue;
-                if(fieldType == 'checkbox'){
-                    defaultValue = false;
-                } else {
-                    defaultValue = '';
-                }
-                templateFields = [...templateFields, {
-                        value:defaultValue,
-                        fieldAPIName:element.fieldAPIName,
-                        fieldType:fieldType,
-                        label:element.label,
-                        scale:element.scale,
-                        length:element.length,
-                        required:element.required,
-                        isPicklist:element.isPicklist,
-                        isCheckbox:element.isCheckbox,
-                        isText:element.isText,
-                        isNumber:element.isNumber,
-                        isDate:element.isDate,
-                        isEmail:element.isEmail,
-                        isPhone:element.isPhone,
-                        isURL:element.isURL,
-                        isPercent:element.isPercent,
-                        isCurrency:element.isCurrency,
-                        picklistOptions:pickListValues,
-                        stepScale:element.stepScale
-                }];
-            });
-            
-            let editItems = [];
-            recordData.map(element=> {
-                if(!useSessionStorage){
-                    this.rowCount = this.rowCount + 1;
-                }
-                var recordId = element.Id;
-                const arrayOfObj = Object.entries(element).map((e) => ( { key: e[0], value: e[1] } ));
-
-                let individualrecord = [];
-
-                fieldData.forEach(element=> {
-                    let pickListValues = this.getPickListValues(element.picklistOptions);
-                    var fieldValue = arrayOfObj.find(field => field.key === element.fieldAPIName);
-                    let value;
-                    if(fieldValue == undefined){
-                        value = '';
-                    } else {
-                        value = fieldValue.value;
-                    }
-                    individualrecord = [...individualrecord, {
-                        value:value, 
-                        fieldAPIName:element.fieldAPIName, 
-                        fieldType:this.getType(element.fieldType), 
-                        required:element.required, 
-                        isPicklist:element.isPicklist,
-                        isCheckbox:element.isCheckbox,
-                        isText:element.isText,
-                        isNumber:element.isNumber,
-                        isDate:element.isDate,
-                        isEmail:element.isEmail,
-                        isPhone:element.isPhone,
-                        isURL:element.isURL,
-                        isPercent:element.isPercent,
-                        isCurrency:element.isCurrency,
-                        picklistOptions:pickListValues,
-                        stepScale:element.stepScale,
-                        scale:element.scale,
-                        length:element.length}];
-                });
-                editItems = [...editItems, {id: recordId, fields: individualrecord}];
-            });
-
-            let items = [];
-            fieldData.map(element=> {
-                items = [...items ,{label: element.label, fieldName: element.fieldAPIName, type: this.getType(element.fieldType)}];
-            });
-
-            this.columns = items; 
-            this.data = recordData;
-            this.defaultFields = templateFields;
-    
-            if(useSessionStorage){
-                this.editData = sessionData;
-            } else {
-                this.editData = editItems;
-            }
-
-            if(this.allowAddRow && this.allowEdit) {
-                let startingCount = this.rowCount + 1;
-                for(var i = startingCount; i <= this.startingRowCount; i++) {
-                    this.generateRecord();
-                }
-            }
-
-            if(this.allowAddRow && this.allowEdit){
-                this.generateSaveData();
-                this.configureSessionStorage();
-            } else {
-                 sessionStorage.clear();
-            }
-        })
-        .catch((error) => {
-            console.error('error handleGetData > ' + JSON.stringify(error.message));
-            this.showToast('Error encountered', 'Contact the site administrator an error or configuration error has been encountered', 'error');
+          // template
+          const pickListValues = this.getPickListValues(fd.picklistOptions);
+          const fieldType = this.getType(fd.fieldType);
+          const defaultValue = fieldType === 'checkbox' ? false : '';
+          templateFields.push({
+            value: defaultValue,
+            fieldAPIName: fd.fieldAPIName,
+            fieldType: fieldType,
+            label: fd.label,
+            scale: fd.scale,
+            length: fd.length,
+            required: fd.required,
+            isPicklist: fd.isPicklist,
+            isCheckbox: fd.isCheckbox,
+            isText: fd.isText,
+            isNumber: fd.isNumber,
+            isDate: fd.isDate,
+            isEmail: fd.isEmail,
+            isPhone: fd.isPhone,
+            isURL: fd.isURL,
+            isPercent: fd.isPercent,
+            isCurrency: fd.isCurrency,
+            picklistOptions: pickListValues,
+            stepScale: fd.stepScale,
+            controllerFieldAPIName: fd.controllerFieldAPIName
+          });
         });
-    }
 
-    // function when action addRow is clicked in UI it will create a new rowRecord based off the template
-    addRow(event){
+        // Parse totals config now that we know available fields
+        this.configureTotals();
+
+        // Existing rows -> editData
+        this.rowCount = 0;
+        let editItems = [];
+        recordData.forEach(rec => {
+          this.rowCount += 1;
+          const flat = Object.entries(rec).map(([k, v]) => ({ key: k, value: v }));
+          let individualrecord = [];
+          fieldData.forEach(fd => {
+            const pickListValues = this.getPickListValues(fd.picklistOptions);
+            const found = flat.find(f => f.key === fd.fieldAPIName);
+            const value = found ? found.value : '';
+            individualrecord.push({
+              value: value,
+              fieldAPIName: fd.fieldAPIName,
+              fieldType: this.getType(fd.fieldType),
+              required: fd.required,
+              isPicklist: fd.isPicklist,
+              isCheckbox: fd.isCheckbox,
+              isText: fd.isText,
+              isNumber: fd.isNumber,
+              isDate: fd.isDate,
+              isEmail: fd.isEmail,
+              isPhone: fd.isPhone,
+              isURL: fd.isURL,
+              isPercent: fd.isPercent,
+              isCurrency: fd.isCurrency,
+              picklistOptions: pickListValues,
+              stepScale: fd.stepScale,
+              scale: fd.scale,
+              length: fd.length,
+              controllerFieldAPIName: fd.controllerFieldAPIName
+            });
+          });
+          editItems.push({ id: rec.Id, fields: individualrecord });
+        });
+
+        // columns for read-only datatable
+        this.columns = fieldData.map(fd => ({
+          label: fd.label,
+          fieldName: fd.fieldAPIName,
+          type: this.getType(fd.fieldType)
+        }));
+
+        this.data = recordData;
+        this.defaultFields = templateFields;
+        this.editData = editItems;
+
+        // starting rows
+        if (this.allowAddRow && this.allowEdit && this.startingRowCount) {
+          const startingCount = this.rowCount + 1;
+          for (let i = startingCount; i <= this.startingRowCount; i++) {
+            this.generateRecord();
+          }
+        }
+
+        // Build outputs & totals
+        if (this.allowEdit) {
+          this.refreshOutputs();
+        } else {
+          this.recalculateTotals(); // if you later want totals in read-only mode
+        }
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('error handleGetData > ' + JSON.stringify(error && error.message));
+        this.showToast('Error encountered', 'Contact the site administrator an error or configuration error has been encountered', 'error');
+      });
+  }
+
+  // UI helpers
+  getPickListValues(pickValues) {
+    const pickListValues = [];
+    (pickValues || []).forEach(p => {
+      if (p && typeof p === 'object' && 'label' in p && 'value' in p) {
+        pickListValues.push({ label: p.label, value: p.value });
+      } else {
+        pickListValues.push({ label: p, value: p });
+      }
+    });
+    return pickListValues;
+  }
+
+  getType(typeValue) {
+    switch (typeValue) {
+      case 'string':   return 'text';
+      case 'email':    return 'email';
+      case 'phone':    return 'phone';
+      case 'boolean':  return 'checkbox';
+      case 'date':
+      case 'datetime': return 'date';
+      case 'url':      return 'url';
+      case 'textarea': return 'text';
+      case 'picklist': return 'combobox';
+      case 'currency':
+      case 'double':
+      case 'percent':  return 'number';
+      default:         return 'text';
+    }
+  }
+
+  get displayRowAddButton() {
+    const currentRowCount = this.rowCount + 1;
+    return currentRowCount <= this.maxRows && this.allowAddRow;
+  }
+
+  generateRecord() {
+    this.rowCount += 1;
+    const randomValue = Math.floor(Math.random() * 1000000) + 1;
+    const fields = this.defaultFields.map(f => ({ ...f }));
+    this.editData = [...this.editData, { id: `tmp_${randomValue}`, fields }];
+    if (this.allowEdit) this.refreshOutputs();
+  }
+
+  handleRowDelete(event) {
+    this.rowCount -= 1;
+    const deleteRowEvent = event.detail.detail;
+    this.editData = (this.editData || []).filter(record => record.id !== deleteRowEvent);
+    if (deleteRowEvent && !deleteRowEvent.startsWith('tmp_')) {
+      deleteRecord(deleteRowEvent).catch(error => {
+        // eslint-disable-next-line no-console
+        console.error(JSON.stringify(error && error.message));
+      });
+    }
+    this.recalculateTotals();
+    if (this.allowEdit) this.refreshOutputs();
+  }
+
+  handleRowUpdate(event) {
+    const rowId = event.detail.recordId;
+    const rowData = event.detail.rowData;
+    const rowIndex = (this.editData || []).findIndex(row => row.id === rowId);
+    if (rowIndex >= 0) {
+      this.editData[rowIndex].fields = rowData.map(f => ({ ...f }));
+    }
+    this.recalculateTotals();
+    if (this.allowEdit) this.refreshOutputs();
+  }
+
+  // Validation
+  get validForSaveCheck() {
+    let validForSave = true;
+    (this.editData || []).forEach(element => {
+      (element.fields || []).forEach(field => {
+        if (field.required && (field.value === '' || field.value === null || field.value === undefined)) {
+          validForSave = false;
+        }
+      });
+    });
+    if (this.minRows > 0 && this.rowCount < this.minRows) {
+      validForSave = false;
+    }
+    return validForSave;
+  }
+
+  // ==== Totals ====
+
+  configureTotals() {
+    this.totalFieldSet = new Set();
+    if (!this.totalFields) return;
+
+    const wanted = this.totalFields.split(',').map(s => s.trim()).filter(Boolean);
+    wanted.forEach(api => {
+      const meta = this.fieldMetaByApi[api];
+      if (!meta) return;
+      if (meta.isCurrency || meta.isPercent || meta.isNumber || meta.type === 'double' || meta.type === 'currency' || meta.type === 'percent') {
+        this.totalFieldSet.add(api);
+      }
+    });
+  }
+
+    addRow() {
         this.generateRecord();
     }
 
-    // converts a list of picklist values into the correct format
-    getPickListValues(pickValues){
-        let pickListValues = [];
-        pickValues.map(element=>{
-            pickListValues = [...pickListValues, { label: element, value: element}];
-        });
-        return pickListValues;
+  recalculateTotals() {
+    const totals = {};
+    // init totals to 0
+    this.totalFieldSet.forEach(api => { totals[api] = 0; });
+
+    (this.editData || []).forEach(row => {
+      (row.fields || []).forEach(f => {
+        if (!this.totalFieldSet.has(f.fieldAPIName)) return;
+        const v = f.value;
+        if (v === '' || v === null || v === undefined) return;
+        const num = Number(v);
+        if (!isNaN(num)) totals[f.fieldAPIName] += num;
+      });
+    });
+
+    this.totalsByField = totals;
+    this.rebuildFooterRow();
+  }
+
+  rebuildFooterRow() {
+    // Build a row aligned to columns (+ actions if present)
+    const cells = [];
+    const cols = this.columns || [];
+    cols.forEach(col => {
+      const api = col.fieldName;
+      const meta = this.fieldMetaByApi[api] || {};
+      const isTotal = this.totalFieldSet.has(api);
+      const raw = isTotal ? (this.totalsByField[api] || 0) : null;
+      const cell = {
+        key: `f_${api}`,
+        isTotal,
+        isCurrency: !!meta.isCurrency,
+        isPercent: !!meta.isPercent,
+        isNumber: !!meta.isNumber || meta.type === 'double',
+        value: raw,
+        scale: meta.scale || 0,
+        percentDisplayValue: null
+      };
+      if (isTotal && cell.isPercent) {
+        // lightning-formatted-number with style="percent" expects decimals (0.1 === 10%)
+        cell.percentDisplayValue = raw / 100;
+      }
+      cells.push(cell);
+    });
+
+    if (this.allowRowDeletion) {
+      cells.push({ key: 'f_actions', isTotal: false }); // blank under actions
+    }
+    this.footerRow = cells;
+  }
+
+  // ==== Outputs (client-side) ====
+  buildSavePayload() {
+    const toTyped = (f) => {
+      const v = f.value;
+      if (v === '' || v === null || v === undefined) return undefined;
+      switch (f.fieldType) {
+        case 'checkbox': return !!v;
+        case 'number':   return Number(v);
+        case 'date':     return v;
+        default:         return v;
+      }
+    };
+
+    let defaults = {};
+    if (this.defaultFieldValues) {
+      try { defaults = JSON.parse(this.defaultFieldValues) || {}; } catch (e) { /* noop */ }
     }
 
-    // helper function that is used to support with confirming what type of field we need to output
-    getType(typeValue){
-        switch (typeValue){
-            case 'string':
-                return 'text';
-            case 'email':
-                return 'email';
-            case 'phone':
-                return 'phone';
-            case 'boolean':
-                return 'checkbox';
-            case 'date':
-                return 'date';
-            case 'datetime':
-                return 'date';
-            case 'url':
-                return 'url';
-            case 'textarea':
-                return 'text';
-            case 'picklist':
-                return 'combobox';
-            case 'currency':
-                return 'number';
-            case 'double':
-                return 'number';
-            case 'percent':
-                return 'number';
-        }
-    }
+    const newList = [];
+    const oldList = [];
 
-    // get to confirm if we are allowed to show the row add button
-    get displayRowAddButton(){
-        let currentRowCount = this.rowCount + 1;
-        if(currentRowCount <= this.maxRows && this.allowAddRow){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    // generate blank record and add to edit data array
-    generateRecord(){
-        this.rowCount = this.rowCount + 1;
-        var randomValue = Math.floor(Math.random() * 1000) + 1;
-        let fields = this.defaultFields;
-        this.editData = [...this.editData, {id: 'A' + randomValue.toString(), fields}];
-        this.configureSessionStorage();
-    }
+    (this.editData || []).forEach(row => {
+      const rec = { [this.parentFieldAPIName]: this.parentRecordId };
+      Object.assign(rec, defaults);
 
-    // dispatch event that updates row count and removes rows / records
-    handleRowDelete(event){
-        this.rowCount = this.rowCount - 1;
-        const deleteRowEvent = event.detail.detail;
-        this.handleRemoveRecord(deleteRowEvent);
-        if(deleteRowEvent.charAt(0) != 'A'){
-            this.handleDeleteRecord(deleteRowEvent);
-        }
-    }
+      (row.fields || []).forEach(f => {
+        const typed = toTyped(f);
+        if (typed !== undefined) rec[f.fieldAPIName] = typed;
+      });
 
-    // function to remove a record from editData
-    handleRemoveRecord(value){
-        let cleanData = this.editData.filter(function(record) {
-            return record.id !== value;
-        });
-        this.editData = [];
-        this.editData = cleanData;
-        this.generateSaveData();
-    }
-    
-    // generic delete recordExample
-    handleDeleteRecord(rowId){
-        deleteRecord(rowId)
-        .catch(error => {
-            console.error(JSON.stringify(error.message));
-        })
-    }
+      const isExisting = row.id && !row.id.startsWith('tmp_') && (row.id.length === 15 || row.id.length === 18);
+      if (isExisting) {
+        rec.Id = row.id;
+        oldList.push(rec);
+      } else {
+        newList.push(rec);
+      }
+    });
 
-    // apex method that generating the data in a save / update format
-    generateSaveData() {
-        generateSaveDataRecords({
-            sObjectAPIName: this.sObjectAPIName,
-            parentIDField: this.parentFieldAPIName,
-            parentId: this.parentRecordId,
-            dataArray: JSON.stringify(this.editData),
-            defaultFieldValues: this.defaultFieldValues
-        })
-        .then((results) => {
+    return { newList, oldList };
+  }
 
-            let newRecordList = [];
-            let oldRecordList = [];
+  refreshOutputs() {
+    const { newList, oldList } = this.buildSavePayload();
+    this.newRecords = newList;
+    this.existingRecords = oldList;
+    this.notifyFlowComponentOfData('newRecords', newList);
+    this.notifyFlowComponentOfData('existingRecords', oldList);
 
-            results.forEach(element => {
-                if(element.Id == undefined){
-                    newRecordList.push(element);
-                } else {
-                    oldRecordList.push(element);
-                }
-            })
+    // ensure totals reflect latest data
+    this.recalculateTotals();
+  }
 
-            this.newRecords = newRecordList;
-            this.existingRecords = oldRecordList;
+  // events
+  showToast(toastTitle, toastMessage, toastVariant) {
+    this.dispatchEvent(new ShowToastEvent({ title: toastTitle, message: toastMessage, variant: toastVariant }));
+  }
 
-            this.notifyFlowComponentOfData('newRecords', newRecordList);
-            this.notifyFlowComponentOfData('existingRecords', oldRecordList);
+  notifyFlowComponentOfData(variable, value) {
+    const attributeChangeEvent = new FlowAttributeChangeEvent(variable, value);
+    this.dispatchEvent(attributeChangeEvent);
+  }
 
-            this.configureSessionStorage();
-        })
-        .catch((error) => {
-            console.error('error generateSaveData > ' + JSON.stringify(error.message));
-       });
-    }
-
-
-    // bubble up function from child component to handle changes
-    handleRowUpdate(event){
-
-        let rowId = event.detail.recordId;
-        let rowData = event.detail.rowData;
-
-        const rowIndex = this.editData.findIndex(
-            (row) => row.id === rowId
-        );
-
-        this.editData[rowIndex].fields = rowData;
-        this.generateSaveData();
-    }
-
-    // save validation function
-    get validForSaveCheck(){
-        let validForSave = true;
-
-        this.editData.forEach(element => {
-            let fields = element.fields;
-
-            fields.forEach(field => {
-                if(field.required && field.value == ''){
-                    validForSave = false;
-                }
-            });
-        });
-        if(this.minRows > 0 && this.rowCount < this.minRows){
-            validForSave = false;
-        }
-        return validForSave;
-    }
-
-    // setup session storage
-    configureSessionStorage(){
-        sessionStorage.setItem('editData', JSON.stringify(this.editData));
-        sessionStorage.setItem('rowCount', this.rowCount);
-        sessionStorage.setItem('validationState', this.validForSaveCheck);
-        sessionStorage.setItem('parentRecordCheckId', this.parentRecordId);
-    }
-
-    // generic dispatch toast event
-    showToast(toastTitle, toastMessage, toastVariant){
-        this.dispatchEvent(new ShowToastEvent({title: toastTitle, message: toastMessage, variant: toastVariant}));
-    }
-
-    // send records function to the flow for processing
-    notifyFlowComponentOfData(variable, value){
-        const attributeChangeEvent = new FlowAttributeChangeEvent(
-            variable,
-            value
-        );
-        this.dispatchEvent(attributeChangeEvent);
-    }
-
+  // Totals row visibility
+  get showTotalsRow() {
+    return this.allowEdit && this.totalFieldSet.size > 0 && (this.columns || []).length > 0;
+  }
 }
