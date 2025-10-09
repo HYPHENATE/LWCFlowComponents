@@ -75,6 +75,11 @@
                         required="true" 
                         default="Question(s) affected:"
             />
+            <property name="sectionsToNotDisplay" 
+                        label="Sections to Not Display"
+                        type="String[]"                        
+                        description="A collection of Section APINames that you do not want to display or validate within this currently displaying of the form" 
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

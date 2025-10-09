@@ -1,7 +1,7 @@
 /**
  * @description       : apex controller to support with generating validations for an entire section
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03-10-2024
+ * @last modified on  : 07-10-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormSectionValidation {
@@ -14,6 +14,7 @@ public with sharing class H8FlowFormSectionValidation {
     private static Map<String, List<String>> currentErrors = new Map<String, List<String>>();
     private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
     private static Boolean hasActiveFlowValidations = false;
+    
 
     /**
     * @description              aura method to validate an entire section and display the errors
@@ -25,17 +26,18 @@ public with sharing class H8FlowFormSectionValidation {
     **/
     @AuraEnabled 
     public static String validatePage(String recordId, String formName, String parentObjectAPIName, String sectionName){
+        
         try {
             formDetails = H8FlowFormValidationHelper.getSpecificSectionForm(formName, sectionName);
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, parentObjectAPIName, validationFields);
             if(hasActiveFlowValidations) {
-                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, sectionName, null, recordId);     
+                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, sectionName, null, recordId, new List<String>());     
             }
             validateCurrentRecord();
-            return generateResponse(true, '');
+            return H8FlowFormResponseGenerator.generateFormSectionResponse(true, '', currentErrors, formDetails);
         } catch (Exception e){
-            return generateResponse(false, e.getLineNumber() + ': ' + e.toString());
+            return H8FlowFormResponseGenerator.generateFormSectionResponse(false, e.getLineNumber() + ': ' + e.toString(), currentErrors, null);
         }
     }
 
@@ -89,20 +91,28 @@ public with sharing class H8FlowFormSectionValidation {
             List<H8_Flow_Form_Section_Validation__mdt> validations = sectionValidations.get(pageName);
             for(H8_Flow_Form_Section_Validation__mdt validation:validations){
                 if(validation.IsFlowValidation__c) {
-                    List<String> validationMessages = flowValidations.get(validation.FlowValidationType__c);
-                    if(validationMessages != null && validationMessages.size()>0) {
-                        for(String validationMessage:validationMessages) {
-                            generateError(validation, validationMessage);
-                        }
-                    }                    
+                    handleFlowValidationErrors(validations, validation);
                 } else {
-                    Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
-                    Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
-                    if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){                   
-                        generateError(validation, validation.QuestionName__c);
-                    }
+                    handleCustomValidationErrors(validation);
                 }
             } 
+        }
+    }
+
+    private static void handleFlowValidationErrors(List<H8_Flow_Form_Section_Validation__mdt> validations, H8_Flow_Form_Section_Validation__mdt validation){
+        List<String> validationMessages = flowValidations.get(validation.FlowValidationType__c);
+        if(validationMessages != null && validationMessages.size()>0) {
+            for(String validationMessage:validationMessages) {
+                generateError(validation, validationMessage);
+            }
+        }
+    }
+
+    private static void handleCustomValidationErrors(H8_Flow_Form_Section_Validation__mdt validation){
+        Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
+        Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
+        if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){                   
+            generateError(validation, validation.QuestionName__c);
         }
     }
 
@@ -111,42 +121,5 @@ public with sharing class H8FlowFormSectionValidation {
         List<String> pageErrors = currentErrors.containsKey(pageName) ? currentErrors.get(pageName) : new List<String>();
         pageErrors.add(errorMessage);
         currentErrors.put(pageName, pageErrors);
-    }
-
-    /**
-    * @description          private method used to generate the response
-    * @param                success 
-    * @param                message         
-    * @return               String 
-    **/
-    private static String generateResponse(Boolean success, String message){
-        JSONGenerator gen = JSON.createGenerator(true);
-        gen.writeStartObject();
-            gen.writeBooleanField('success', success);
-            gen.writeStringField('message', message);
-            gen.writeBooleanField('hasErrors', currentErrors.size() > 0);
-            gen.writeBooleanField('isValid', currentErrors.size() == 0);
-            gen.writeFieldName('pages');
-            gen.writeStartArray();
-            for(String pageName:currentErrors.keySet()){
-                gen.writeStartObject();
-                    gen.writeStringField('pageName', pageName);
-                    List<String> pageErrors = currentErrors.get(pageName);
-                    gen.writeFieldName('errors');
-                    gen.writeStartArray();
-                        for(String error:pageErrors){
-                            if(error == null) {
-                                error = 'Missing questionName in meta data';
-                            }
-                            gen.writeStartObject();
-                                gen.writeStringField('questionName', error);
-                            gen.writeEndObject();
-                        }
-                    gen.writeEndArray();
-                gen.writeEndObject();
-            }
-            gen.writeEndArray();
-        gen.writeEndObject();
-        return gen.getAsString();
     }
 }

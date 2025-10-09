@@ -1,7 +1,7 @@
 /**
  * @description       : custom rich text area component with word / character counter
  * @author            : daniel@hyphen8.com
- * @last modified on  : 30/10/2024
+ * @last modified on  : 06-10-2025
  * @last modified by  : daniel@hyphen8.com
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -121,7 +121,7 @@ export default class CustomRichTextComponent extends LightningElement {
         this.handleFlowChangeEvent(currentValue);
         this.currentWordCount = this.wordCount();
         this.currentCharacterCount = this.characterCount();
-        let validateInput = this.validateInput(currentValue);
+        let validate = this.validateInput(currentValue);
     }
 
     // get our wordCount for display

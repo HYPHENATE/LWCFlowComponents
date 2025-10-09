@@ -345,4 +345,141 @@
         <shortDescription>H8CustomDataTableDependentFieldInvalidSelection</shortDescription>
         <value>Invalid selection</value>
     </labels>
+    <labels>
+        <fullName>H8FFLoadingAltText</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFLoadingAltText</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>H8FFGeneralHelpText</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFGeneralHelpText</shortDescription>
+        <value>You must complete the following fields</value>
+    </labels>
+    <labels>
+        <fullName>H8FFAffectedQuestions</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFAffectedQuestions</shortDescription>
+        <value>Question(s) affected:</value>
+    </labels>
+    <labels>
+        <fullName>H8FFGetValidationToastTitle</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFGetValidationToastTitle</shortDescription>
+        <value>Error getting validations</value>
+    </labels>
+    <labels>
+        <fullName>H8FFPageErrorIconAltText</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFPageErrorIconAltText</shortDescription>
+        <value>Name of error page</value>
+    </labels>
+    <labels>
+        <fullName>H8FFNoPageErrorIconAltText</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFNoPageErrorIconAltText</shortDescription>
+        <value>Questions affected within this section</value>
+    </labels>
+
+    <labels>
+        <fullName>H8FFValidationCardTitle</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFValidationCardTitle</shortDescription>
+        <value>Review your submission</value>
+    </labels>
+    <labels>
+        <fullName>H8FFValidationSubmissionButtonLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFValidationSubmissionButtonLabel</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>H8FFValidSubmissionText</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFValidSubmissionText</shortDescription>
+        <value>Your submission appears to be valid, you can press Submit to continue</value>
+    </labels>
+    <labels>
+        <fullName>H8FFInvalidSubmissionText</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFInvalidSubmissionText</shortDescription>
+        <value>We have picked up that some of your answers are not valid. Before you can submit the form you will have to complete the required fields</value>
+    </labels>
+    <labels>
+        <fullName>H8FFChangeSectionErrorToastTitle</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFChangeSectionErrorToastTitle</shortDescription>
+        <value>Error changing section</value>
+    </labels>
+    <labels>
+        <fullName>H8FFChangeSectionErrorDescription</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFChangeSectionErrorDescription</shortDescription>
+        <value>Could not resolve the selected section.</value>
+    </labels>
+    <labels>
+        <fullName>H8FFFormLoaderErrorToastTitle</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFFormLoaderErrorToastTitle</shortDescription>
+        <value>Error loading form</value>
+    </labels>
+    <labels>
+        <fullName>H8FFFormLoaderNoSectionsDescription</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFFormLoaderNoSectionsDescription</shortDescription>
+        <value>The form has no sections to display.</value>
+    </labels>
+    <labels>
+        <fullName>H8FFActiveSectionLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFActiveSectionLabel</shortDescription>
+        <value>This section</value>
+    </labels>
+    <labels>
+        <fullName>H8FFMissingQuestionNameInMetadata</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFMissingQuestionNameInMetadata</shortDescription>
+        <value>Missing questionName in meta data</value>
+    </labels>
+    <labels>
+        <fullName>H8CFHCloseModalLabel</fullName>
+        <categories>H8 Custom Form Help</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8CFHCloseModalLabel</shortDescription>
+        <value>Close</value>
+    </labels>
 </CustomLabels>

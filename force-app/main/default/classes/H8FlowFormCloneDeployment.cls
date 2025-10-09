@@ -1,7 +1,7 @@
 /**
  * @description       : this class performs the actual clone and deployment of the form clone
  * @author            : daniel@hyphen8.com
- * @last modified on  : 26-06-2025
+ * @last modified on  : 10-09-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormCloneDeployment {
@@ -160,12 +160,10 @@ public with sharing class H8FlowFormCloneDeployment {
     **/
     private static void getMasterLabels(){
         List<H8_Flow_Form_Section__mdt> formSections = !Test.isRunningTest() ? [SELECT MasterLabel, DeveloperName FROM H8_Flow_Form_Section__mdt] : testFormSections;
-        System.debug('formSections > ' + formSections);
         for(H8_Flow_Form_Section__mdt section:formSections){
             masterLabels.add(section.DeveloperName);
         }
         List<H8_Flow_Form_Section_Validation__mdt> formValidations = !Test.isRunningTest() ? [SELECT MasterLabel, DeveloperName FROM H8_Flow_Form_Section_Validation__mdt] : testFormValidations;
-        System.debug('formValidations > ' + formValidations);
         for(H8_Flow_Form_Section_Validation__mdt validation:formValidations){
             masterLabels.add(validation.DeveloperName);
         }

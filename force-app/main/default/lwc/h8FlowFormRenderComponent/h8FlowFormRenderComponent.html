@@ -1,7 +1,7 @@
 <!--
   @description       : html to output vertical tabs based on metadata configuration
   @author            : daniel@hyphen8.com
-  @last modified on  : 24-07-2025
+  @last modified on  : 12-09-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -9,7 +9,7 @@
     <template if:true={isLoading}>
         <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
             <lightning-spinner
-                alternative-text="Loading..." variant="brand">
+                alternative-text={label.loadingAltText} variant="brand">
             </lightning-spinner>
         </div>
     </template>
@@ -25,11 +25,24 @@
                     <template if:true={loadFlow}>
                         <div class="slds-align_absolute-center" style="height:5rem">
                             <lightning-spinner
-                                alternative-text="Loading..." variant="brand">
+                                alternative-text={label.loadingAltText} variant="brand">
                             </lightning-spinner>
                         </div>
                     </template>
                     <template if:false={loadFlow}>
+                        <template if:true={renderValidationPanel}>
+                            <c-h8-section-validation-panel section-label={activeSectionLabel}
+                                                            affect-text-label={label.affectedQuestionsText}
+                                                            help-text={label.generalHelpText}
+                                                            default-open="true"
+                                                            auto-collapse-on-fix
+                                                            live-has-errors={activeLiveHasErrors}
+                                                            live-pages={activeLivePages}
+                                                            master-has-errors={activeMasterHasErrors}
+                                                            master-pages={activeMasterPages}>
+                            </c-h8-section-validation-panel>
+                        </template>
+
                         <div class="flow-wrapper" data-id="flowWrapper">
                             <lightning-flow flow-api-name={flowAPIName} 
                                             flow-input-variables={inputVariables}

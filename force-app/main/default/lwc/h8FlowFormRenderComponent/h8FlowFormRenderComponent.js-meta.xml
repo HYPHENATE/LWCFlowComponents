@@ -142,6 +142,29 @@
                         description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
                         default="false"
             />
+            <property name="sectionsToNotDisplay" 
+                        label="Sections to Not Display"
+                        type="String[]"                        
+                        description="A collection of Section APINames that you do not want to display or validate within this currently displaying of the form" 
+            />
+            <property name="liveValidation" 
+                        label="Perform Live Validation"
+                        type="Boolean"
+                        description="When set to true each time that a user navigated between sections the previous section will be validated, if errors are found a warning icon will appear, if no errors found a green tick will appear. This does not impact the full validation at the end of the form where the red alert will still appear." 
+                        default="false"
+            />
+            <property name="showSectionValidationPanel" 
+                        label="Show inline Validation Panel per section"
+                        type="Boolean"
+                        description="When set to true this will display the inline section validation component with any errors per section, you will no longer need to use the component within the flow per section. If you are using per page configuration then you should set this to false and continue using the individual components" 
+                        default="false"
+            />
+            <property name="showNoValidationErrorsFound" 
+                        label="Show No Validation Errors Icon on Section"
+                        type="Boolean"
+                        description="When set to true this will display a green tick on sections that have validations configured and no errors" 
+                        default="false"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

@@ -1,7 +1,7 @@
 /**
  * @description       : js for custom address component
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03-09-2025
+ * @last modified on  : 08-09-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -46,7 +46,6 @@ export default class CustomAddressComponent extends LightningElement {
         }
 
         const addr = this.template.querySelector('lightning-input-address');
-        console.log('Validating address component', addr);
 
         ['street','city','postalCode'].forEach(f => addr.setCustomValidityForField('', f));
 

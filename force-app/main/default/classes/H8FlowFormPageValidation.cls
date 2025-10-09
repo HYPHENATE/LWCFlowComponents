@@ -1,7 +1,7 @@
 /**
  * @description       : Apex controller for display page level validation errors within a flow
  * @author            : daniel@hyphen8.com
- * @last modified on  : 03-10-2024
+ * @last modified on  : 10-09-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormPageValidation {
@@ -14,6 +14,7 @@ public with sharing class H8FlowFormPageValidation {
     private static List<String> currentErrors = new List<String>();
     private static Map<String, List<String>> flowValidations = new Map<String, List<String>>();
     private static Boolean hasActiveFlowValidations = false;
+    
     
     /**
     * @description              aura method to validate an individual page and display the errors
@@ -30,12 +31,12 @@ public with sharing class H8FlowFormPageValidation {
             getValidationFields();
             currentRecord = H8FlowFormValidationHelper.getProcessingRecord(recordId, parentObjectAPIName, validationFields);
             if(hasActiveFlowValidations) {
-                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, null, pageName, recordId);     
+                flowValidations = H8FlowFormValidationHelper.getFlowValidations(formDetails.Validation_Flow_API_Name__c, formDetails.DeveloperName, null, pageName, recordId, new List<String>());     
             }
             validateCurrentRecord();
-            return generateResponse(true, '');
+            return H8FlowFormResponseGenerator.generateFormPageResponse(true, '', currentErrors);
         } catch (Exception e){
-            return generateResponse(false, e.getLineNumber() + ': ' + e.toString());
+            return H8FlowFormResponseGenerator.generateFormPageResponse(false, e.getLineNumber() + ': ' + e.toString(), currentErrors);
         }
     }
 
@@ -82,46 +83,27 @@ public with sharing class H8FlowFormPageValidation {
     private static void validateCurrentRecord(){
         for(H8_Flow_Form_Section_Validation__mdt validation:pageValidations){
             if(validation.IsFlowValidation__c) {
-                List<String> validationMessages = flowValidations.get(validation.FlowValidationType__c);
-                if(validationMessages != null && validationMessages.size()>0) {
-                    for(String validationMessage:validationMessages) {
-                        currentErrors.add(validationMessage);
-                    }
-                }                
+                handleFlowValidationErrors(validation);              
             } else {
-                Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
-                Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
-                if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
-                    currentErrors.add(validation.QuestionName__c);
-                }
+                handleCustomValidationErrors(validation);
             }
         } 
     }
-    
-    /**
-    * @description          private method used to generate the response
-    * @param                success 
-    * @param                message         
-    * @return               String 
-    **/
-    private static String generateResponse(Boolean success, String message){
-        JSONGenerator gen = JSON.createGenerator(true);
-        gen.writeStartObject();
-            gen.writeBooleanField('success', success);
-            gen.writeStringField('message', message);
-            gen.writeBooleanField('hasValidationErrors', currentErrors.size() > 0);
-            gen.writeFieldName('errors');
-            gen.writeStartArray();
-            for(String error:currentErrors){
-                gen.writeStartObject();
-                    if(error == null) {
-                        error = 'Missing questionName in meta data';
-                    }
-                    gen.writeStringField('questionName', error);
-                gen.writeEndObject();
+
+    private static void handleFlowValidationErrors(H8_Flow_Form_Section_Validation__mdt validation){
+        List<String> validationMessages = flowValidations.get(validation.FlowValidationType__c);
+        if(validationMessages != null && validationMessages.size()>0) {
+            for(String validationMessage:validationMessages) {
+                currentErrors.add(validationMessage);
             }
-            gen.writeEndArray();
-        gen.writeEndObject();
-        return gen.getAsString();
+        }
+    }
+
+    private static void handleCustomValidationErrors(H8_Flow_Form_Section_Validation__mdt validation){
+        Object fieldValue = H8FlowFormValidationHelper.getFieldValue(currentRecord, validation.FieldAPIName__c);
+        Object expectedValue = validationValue.containsKey(validation.FieldAPIName__c) ? validationValue.get(validation.FieldAPIName__c) : null;
+        if(null == fieldValue || (null != expectedValue && expectedValue != fieldValue)){
+            currentErrors.add(validation.QuestionName__c);
+        }
     }
 }

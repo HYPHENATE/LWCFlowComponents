@@ -1,21 +1,47 @@
-<!--
-  @description       : html for individual item
-  @author            : daniel@hyphen8.com
-  @last modified on  : 25-06-2025
-  @last modified by  : daniel@hyphen8.com
--->
 <template>
     <li class={sectionCSS} title={section.label} role="presentation">
-        <a class="slds-vertical-tabs__link" role="tab" tabindex="0" aria-selected={ariaSelected} aria-controls={section.id} id={section.id} onclick={handleOnSectionSelection} onkeydown={handleOnSectionKeyDown}>
+        <a
+            class="slds-vertical-tabs__link"
+            role="tab"
+            tabindex="0"
+            aria-selected={ariaSelected}
+            aria-controls={section.id}
+            id={section.id}
+            aria-describedby={describedById}
+            onclick={handleOnSectionSelection}
+            onkeydown={handleOnSectionKeyDown}
+        >
             <template if:true={section.hasIcon}>
                 <span class="slds-vertical-tabs__left-icon">
-                    <lightning-icon icon-name={section.icon} alternative-text={section.label} title={section.label}></lightning-icon>
+                    <!-- Decorative icon: hide from AT -->
+                    <lightning-icon icon-name={section.icon} alternative-text="" title=""></lightning-icon>
                 </span>
             </template>
+
             <span class="slds-wrap">{section.label}</span>
+
             <span class="slds-vertical-tabs__right-icon">
+                <!-- Decorative status icons (AT gets text below instead) -->
                 <template if:true={section.hasValidationError}>
-                    <lightning-icon icon-name='utility:error' variant="error" size="x-small" alternative-text='Validation errors found' title='Validation errors found'></lightning-icon>
+                    <lightning-icon icon-name="utility:error" variant="error" size="x-small" alternative-text="" title=""></lightning-icon>
+                </template>
+                <template if:true={section.hasValidationWarning}>
+                    <lightning-icon icon-name="utility:warning" variant="warning" size="x-small" alternative-text="" title=""></lightning-icon>
+                </template>
+                <template if:true={section.hasValidationSuccess}>
+                    <lightning-icon icon-name="utility:success" variant="success" size="x-small" alternative-text="" title=""></lightning-icon>
+                </template>
+
+                <!-- Screen-reader status (live + referenced by aria-describedby) -->
+                <template if:true={hasStatus}>
+                    <span
+                        id={statusId}
+                        class="slds-assistive-text"
+                        aria-live="polite"
+                        aria-atomic="true"
+                    >
+                        {statusTextForSR}
+                    </span>
                 </template>
             </span>
         </a>

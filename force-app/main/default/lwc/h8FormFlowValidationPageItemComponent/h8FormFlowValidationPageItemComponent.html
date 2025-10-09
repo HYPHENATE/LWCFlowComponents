@@ -1,7 +1,7 @@
 <!--
   @description       : html for outputting page errors
   @author            : daniel@hyphen8.com
-  @last modified on  : 04-06-2025
+  @last modified on  : 08-09-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -11,17 +11,17 @@
             <div class="slds-col slds-size_1-of-12">
               <div class="slds-clearfix">
                 <div class="slds-float_right">
-                  <lightning-icon class="slds-var-m-right_small" icon-name='utility:forward' size="x-small" alternative-text='Page' title='Page'></lightning-icon>
+                  <lightning-icon class="slds-var-m-right_small slds-var-m-top_x-small" icon-name='utility:forward' size="x-small" alternative-text={label.pageErrorIconAltText} title={label.pageErrorIconAltText}></lightning-icon>
                 </div>
               </div>
             </div>
             <div class="slds-col slds-size_11-of-12">
               <div>
                 <span tabindex="0" class="slds-text-heading_medium">{page.pageName}</span></br>
-                <span tabindex="0" class="slds-text-heading_small">{affectTextLabel}</span>
+                <span tabindex="0" class="slds-text-heading_medium">{affectTextLabel}</span>
               </div>
               <template for:each={page.errors} for:item="error">
-                <div tabindex="0" key={error.questionName}>
+                <div class="slds-text-heading_medium" tabindex="0" key={error.questionName}>
                     <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text={affectTextLabel} title={affectTextLabel}></lightning-icon>
                     <strong>{error.questionName}</strong>
                 </div>
@@ -34,16 +34,16 @@
             <div class="slds-col slds-size_1-of-12">
                 <div class="slds-clearfix">
                     <div class="slds-float_right">
-                        <lightning-icon class="slds-var-m-right_small" icon-name='utility:forward' size="x-small" alternative-text='Page' title='Page'></lightning-icon>
+                        <lightning-icon class="slds-var-m-right_small" icon-name='utility:forward' size="x-small" alternative-text={label.noPageErrorIconAltText} title={label.noPageErrorIconAltText}></lightning-icon>
                     </div>
                 </div>
             </div>
             <div class="slds-col slds-size_11-of-12">
-                <div tabindex="0" class="slds-text-heading_small">
-                    {affectTextLabel}
+                <div tabindex="0" class="slds-text-heading_medium">
+                  {affectTextLabel}
                 </div>
                 <template for:each={page.errors} for:item="error">
-                    <div tabindex="0" key={error.questionName}>
+                    <div class="slds-text-heading_medium" tabindex="0" key={error.questionName}>
                         <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text={affectTextLabel} title={affectTextLabel}></lightning-icon>
                         <strong>{error.questionName}</strong>
                     </div>

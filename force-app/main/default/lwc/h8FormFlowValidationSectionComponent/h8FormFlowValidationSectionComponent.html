@@ -1,24 +1,13 @@
 <!--
   @description       : html to output an entire sections validation errors
   @author            : daniel@hyphen8.com
-  @last modified on  : 04-06-2025
+  @last modified on  : 10-09-2025
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
-
-    <template if:true={isLoading}>
-        <div class="slds-align_absolute-center" style="height:5rem">
-            <lightning-spinner
-                alternative-text="Loading..." variant="brand">
-            </lightning-spinner>
-        </div>
-    </template>
     
     <template if:false={isLoading}>
-
-
         <template if:false={success}>
-
             <div tabindex="0" class="slds-box validation-box">
                 <div class="slds-var-m-around_medium">
                     <div class="slds-text-heading_medium slds-var-m-bottom_medium">
@@ -26,24 +15,23 @@
                     </div>
                 </div>
             </div>
-
         </template>
 
         <template if:true={success}>
-
             <template if:true={hasValidationErrors}>
-                <lightning-card class="slds-var-m-top_medium" tabindex="0" >
-                    <div class="slds-box validation-box">
-                        <div class="slds-var-m-around_medium">
+                <div class="slds-box validation-box">
+                    <div class="slds-var-m-around_medium">
                         <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
                         <template for:each={pages} for:item="page">
-                            <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
+                            <c-h8-form-flow-validation-page-item-component
+                                key={page.pageLabel}
+                                page={page}
+                                affect-text-label={affectTextLabel}>
+                            </c-h8-form-flow-validation-page-item-component>
                         </template>
-                        </div>
                     </div>
-                </lightning-card>
+                </div>
             </template>
-
         </template>
     </template>
 </template>
