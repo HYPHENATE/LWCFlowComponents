@@ -1,7 +1,7 @@
 /**
  * @description       : H8FlowFormController test class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 16-04-2025
+ * @last modified on  : 05-09-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -12,7 +12,7 @@ public class H8FlowFormControllerTest {
     **/
     @isTest 
     static void getNoFormPresent(){
-        String jsonResponse = H8FlowFormController.getForm('DUMMY FORM');
+        String jsonResponse = H8FlowFormController.getForm('DUMMY FORM', new List<String>());
         Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonResponse);
         Assert.isFalse((Boolean)jsonObjects.get('success'), 'we expect this to be false');
     }
@@ -41,7 +41,7 @@ public class H8FlowFormControllerTest {
         H8FlowFormController.formTest = testRecords[0];
         H8FlowFormController.formSectionsTest = childList;
 
-        String jsonResponse = H8FlowFormController.getForm('Form');
+        String jsonResponse = H8FlowFormController.getForm('Form', new List<String>());
         Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonResponse);
         Assert.isTrue((Boolean)jsonObjects.get('success'), 'we expect this to be true');
     }
@@ -71,7 +71,7 @@ public class H8FlowFormControllerTest {
         H8FlowFormController.formTest = testRecords[0];
         H8FlowFormController.formSectionsTest = childList;
 
-        String jsonResponse = H8FlowFormController.getForm('Form');
+        String jsonResponse = H8FlowFormController.getForm('Form', new List<String>());
         Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonResponse);
         Assert.isTrue((Boolean)jsonObjects.get('success'), 'we expect this to be true');
         List<Object> sections = (List<Object>)jsonObjects.get('sections');

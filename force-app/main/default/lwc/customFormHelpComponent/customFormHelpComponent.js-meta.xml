@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Hyphen8 - Custom Form Help Component</masterLabel>
+    <description>This component is used for displaying a simple link that can output help when clicked on</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>   
+    <targetConfigs>
+        <targetConfig targets='lightning__FlowScreen'>
+            <property name='helpLinkText' 
+                        type='String' 
+                        label='Help Link Text' 
+                        description='This is the test that you want to use for the help link'
+                        required="True"
+                        role="inputOnly"
+            />  
+            <property name='helpMessage' 
+                        type='String' 
+                        label='Help Message' 
+                        description='This is the rich/plain text that you want to display in your help message'
+                        required="True"
+                        role="inputOnly"
+            /> 
+            <property name='fontSize' 
+                        type='String' 
+                        label='Font Size' 
+                        description='Set the font size class that you want to apply in here view slds1 text page for available options'
+                        required="True"
+                        role="inputOnly"
+            />  
+            <property name='useModal' 
+                        type='Boolean' 
+                        label='Use Modal' 
+                        description='Set this to true if you want the help text to appear in a modal on screen, by default it will appear beneath'
+                        default="False"
+                        required="True"
+                        role="inputOnly"
+            />  
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

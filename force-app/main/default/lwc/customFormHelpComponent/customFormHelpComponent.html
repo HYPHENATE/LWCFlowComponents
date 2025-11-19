@@ -1,0 +1,33 @@
+<template>
+    
+    <div class="slds-var-m-top_small slds-var-m-bottom_small">
+        <div class={fontSize}><a onclick={onclick}>{helpLinkText}</a></div>
+    </div>
+
+    <template if:true={showHelp}>
+        <div class="slds-var-m-top_small">
+            <lightning-formatted-rich-text value={helpMessage}></lightning-formatted-rich-text>
+        </div>
+    </template>
+
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title={closeLabel} onclick={closeHelp}>
+                        <lightning-icon icon-name="utility:close"
+                                        variant="inverse"
+                                        size="small">
+                        </lightning-icon>
+                    <span class="slds-assistive-text">{closeLabel}</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate" style="margin-bottom:none !important">{helpLinkText}</h2>
+            </header>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <lightning-formatted-rich-text value={helpMessage}></lightning-formatted-rich-text>
+            </div>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

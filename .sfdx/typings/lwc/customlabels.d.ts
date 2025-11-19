@@ -170,3 +170,71 @@ declare module "@salesforce/label/c.H8CustomDataTableDependentFieldInvalidSelect
     var H8CustomDataTableDependentFieldInvalidSelection: string;
     export default H8CustomDataTableDependentFieldInvalidSelection;
 }
+declare module "@salesforce/label/c.H8FFLoadingAltText" {
+    var H8FFLoadingAltText: string;
+    export default H8FFLoadingAltText;
+}
+declare module "@salesforce/label/c.H8FFGeneralHelpText" {
+    var H8FFGeneralHelpText: string;
+    export default H8FFGeneralHelpText;
+}
+declare module "@salesforce/label/c.H8FFAffectedQuestions" {
+    var H8FFAffectedQuestions: string;
+    export default H8FFAffectedQuestions;
+}
+declare module "@salesforce/label/c.H8FFGetValidationToastTitle" {
+    var H8FFGetValidationToastTitle: string;
+    export default H8FFGetValidationToastTitle;
+}
+declare module "@salesforce/label/c.H8FFPageErrorIconAltText" {
+    var H8FFPageErrorIconAltText: string;
+    export default H8FFPageErrorIconAltText;
+}
+declare module "@salesforce/label/c.H8FFNoPageErrorIconAltText" {
+    var H8FFNoPageErrorIconAltText: string;
+    export default H8FFNoPageErrorIconAltText;
+}
+declare module "@salesforce/label/c.H8FFValidationCardTitle" {
+    var H8FFValidationCardTitle: string;
+    export default H8FFValidationCardTitle;
+}
+declare module "@salesforce/label/c.H8FFValidationSubmissionButtonLabel" {
+    var H8FFValidationSubmissionButtonLabel: string;
+    export default H8FFValidationSubmissionButtonLabel;
+}
+declare module "@salesforce/label/c.H8FFValidSubmissionText" {
+    var H8FFValidSubmissionText: string;
+    export default H8FFValidSubmissionText;
+}
+declare module "@salesforce/label/c.H8FFInvalidSubmissionText" {
+    var H8FFInvalidSubmissionText: string;
+    export default H8FFInvalidSubmissionText;
+}
+declare module "@salesforce/label/c.H8FFChangeSectionErrorToastTitle" {
+    var H8FFChangeSectionErrorToastTitle: string;
+    export default H8FFChangeSectionErrorToastTitle;
+}
+declare module "@salesforce/label/c.H8FFChangeSectionErrorDescription" {
+    var H8FFChangeSectionErrorDescription: string;
+    export default H8FFChangeSectionErrorDescription;
+}
+declare module "@salesforce/label/c.H8FFFormLoaderErrorToastTitle" {
+    var H8FFFormLoaderErrorToastTitle: string;
+    export default H8FFFormLoaderErrorToastTitle;
+}
+declare module "@salesforce/label/c.H8FFFormLoaderNoSectionsDescription" {
+    var H8FFFormLoaderNoSectionsDescription: string;
+    export default H8FFFormLoaderNoSectionsDescription;
+}
+declare module "@salesforce/label/c.H8FFActiveSectionLabel" {
+    var H8FFActiveSectionLabel: string;
+    export default H8FFActiveSectionLabel;
+}
+declare module "@salesforce/label/c.H8FFMissingQuestionNameInMetadata" {
+    var H8FFMissingQuestionNameInMetadata: string;
+    export default H8FFMissingQuestionNameInMetadata;
+}
+declare module "@salesforce/label/c.H8CFHCloseModalLabel" {
+    var H8CFHCloseModalLabel: string;
+    export default H8CFHCloseModalLabel;
+}

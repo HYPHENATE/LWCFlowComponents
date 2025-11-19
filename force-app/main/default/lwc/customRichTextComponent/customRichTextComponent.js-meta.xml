@@ -33,7 +33,7 @@
                         role="inputOnly"
             />
             <property name="readOnly" 
-                        label="Read Only" 
+                        label="Read Only (Depreciated)" 
                         description="If present, the textarea field is read-only and cannot be edited. Accepts true or false" 
                         type="String" 
                         role="inputOnly"

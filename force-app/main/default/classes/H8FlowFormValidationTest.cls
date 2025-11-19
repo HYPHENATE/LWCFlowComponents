@@ -1,7 +1,7 @@
 /**
  * @description       : H8FlowFormValidation test class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 17-04-2025
+ * @last modified on  : 05-09-2025
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -24,7 +24,7 @@ public class H8FlowFormValidationTest {
     @isTest 
     static void testCompleteError(){
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm('dsdasdsa', 'fsdfsdfds', 'sdfsdfsd');
+            String jsonString = H8FlowFormValidation.validateCompleteForm('dsdasdsa', 'fsdfsdfds', 'sdfsdfsd', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.isFalse((Boolean)jsonObjects.get('success'), 'we expect this to be false');
         Test.stopTest();
@@ -65,7 +65,7 @@ public class H8FlowFormValidationTest {
         H8FlowFormValidationHelper.testForm = testRecords[0];
 
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
+            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
@@ -122,7 +122,7 @@ public class H8FlowFormValidationTest {
         H8FlowFormValidationHelper.testForm = testRecords[0];
 
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
+            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
@@ -208,7 +208,7 @@ public class H8FlowFormValidationTest {
         H8FlowFormValidationHelper.testForm = testRecords[0];
 
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
+            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
@@ -303,7 +303,7 @@ public class H8FlowFormValidationTest {
         H8FlowFormValidationHelper.testForm = testRecords[0];
 
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
+            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
@@ -428,7 +428,7 @@ public class H8FlowFormValidationTest {
         H8FlowFormValidationHelper.testForm = testRecords[0];
 
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord');
+            String jsonString = H8FlowFormValidation.validateCompleteForm(opportunity.Id, 'Opportunity', 'TestRecord', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');
@@ -490,7 +490,7 @@ public class H8FlowFormValidationTest {
         H8FlowFormValidationHelper.testForm = testRecords[0];
 
         Test.startTest();
-            String jsonString = H8FlowFormValidation.validateCompleteForm(account.Id, 'Account', 'TestRecord');
+            String jsonString = H8FlowFormValidation.validateCompleteForm(account.Id, 'Account', 'TestRecord', new List<String>());
             Map<String, Object> jsonObjects = (Map<String, Object>)JSON.deserializeUntyped(jsonString);
             Assert.areEqual(true, jsonObjects.containsKey('success'), 'we expect the success key to be present');
             Assert.areEqual(true, (Boolean)jsonObjects.get('success'), 'we expect success to be set as true');

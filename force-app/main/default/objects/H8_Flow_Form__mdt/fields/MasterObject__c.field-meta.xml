@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MasterObject__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Select the master object that this form is associated with, this is used to support with dynamic / live validations to reduce the amount of manual configuration required within the flow</inlineHelpText>
+    <label>Master Object</label>
+    <referenceTo>EntityDefinition</referenceTo>
+    <relationshipLabel>H8_Flow_Forms</relationshipLabel>
+    <relationshipName>H8_Flow_Forms</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

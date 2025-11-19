@@ -1,66 +1,108 @@
 /**
- * @description       : js for form validation section component
- * @author            : daniel@hyphen8.com
- * @last modified on  : 05-06-2025
- * @last modified by  : daniel@hyphen8.com
-**/
-import { LightningElement, api } from 'lwc';
+ * @file
+ * H8FormFlowValidationSectionComponent.js
+ *
+ * Renders ONLY when:
+ *  - showSectionValidationPanel = false, AND
+ *  - (MASTER) store.sections includes an error entry for this section, OR
+ *  - (LIVE)   store.partialValidations has an error entry for this section
+ *
+ * Loose label matching avoids label formatting issues (e.g., "Section 2" == "section2").
+ * No cross-section bleed.
+ *
+ * @last modified on: 09-10-2025
+ */
 
+import { LightningElement, api } from 'lwc';
 import getSectionValidation from '@salesforce/apex/H8FlowFormSectionValidation.validatePage';
+import { reduceErrors } from 'c/h8UtilReduceErrors';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import labels from 'c/h8UtilLabels';
+
+import {
+  getRecordStore,
+  gateSectionRender
+} from 'c/h8FormValidationUtils';
 
 export default class H8FormFlowValidationSectionComponent extends LightningElement {
-    @api recordId;
-    @api formName;
-    @api parentObjectAPIName;
-    @api sectionName;
-    @api helpText = 'You must complete the following fields';
-    @api affectTextLabel = 'Question(s) affected:';
-    hasValidationErrors;
-    pages;
-    isLoading = true;
-    success = true;
-    message;
+  label = labels;
 
-    connectedCallback(){
-        const item = sessionStorage.getItem('formProcessing');
-        if (item) {
-            const records = JSON.parse(item);
-            const exists = records.some(record => record.recordId === this.recordId);
-            if (exists) {
-                this.handleGetSectionValidation();
-            } else {
-                this.isLoading = false;
-                this.success = true;
-            }
-        } else {
-            this.isLoading = false;
-            this.success = true;
-        }
+  // Public API
+  @api recordId;
+  @api formName;
+  @api parentObjectAPIName;
+  @api sectionName;
+
+  @api helpText = this.label.H8FFGeneralHelpText;
+  @api affectTextLabel = this.label.H8FFAffectedQuestions;
+
+  // View model
+  hasValidationErrors;
+  pages;
+  isLoading = true;
+  success = true;
+  message;
+
+  connectedCallback() {
+    const store = getRecordStore(this.recordId);
+    if (!store) return this._finishWithoutRendering();
+
+    const targetSection = (this.sectionName || store.currentSectionName || '').trim();
+    if (!targetSection) return this._finishWithoutRendering();
+
+    const shouldShow = gateSectionRender(store, targetSection);
+    if (!shouldShow) return this._finishWithoutRendering();
+
+    // Fill inputs defensively
+    this.formName = this.formName || store.formName;
+    this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
+    this.sectionName = targetSection;
+
+    if (!this.recordId || !this.formName || !this.parentObjectAPIName || !this.sectionName) {
+      return this._finishWithoutRendering();
     }
 
-    handleGetSectionValidation() {
-        getSectionValidation({
-            recordId: this.recordId,
-            formName: this.formName,
-            parentObjectAPIName:this.parentObjectAPIName,
-            sectionName:this.sectionName
-        })
-        .then((results) => {
-            let parsedResults = JSON.parse(results);
-            this.success = parsedResults.success;
-            this.message = parsedResults.message;
-            this.isLoading = false;
-            if(parsedResults.success){
-                this.hasValidationErrors = parsedResults.hasErrors;
-                this.pages = parsedResults.pages;
-            }
-            
-        
-        })
-        .catch((error) => {
-            console.error('error handleGetSectionValidation > ' + JSON.stringify(error));
-            this.isLoading = false; //remove spinner if error
-            this.success = true; //remove error on page. Possibly should display something?
-        });
-    }
+    this.handleGetSectionValidation();
+  }
+
+  // Apex
+  handleGetSectionValidation() {
+    getSectionValidation({
+      recordId: this.recordId,
+      formName: this.formName,
+      parentObjectAPIName: this.parentObjectAPIName,
+      sectionName: this.sectionName
+    })
+    .then((results) => {
+      let parsed = JSON.parse(results);
+      
+      this.success = parsed.success === true;
+      this.message = parsed.message;
+      this.isLoading = false;
+
+      if (!this.success) return;
+
+      const pages = Array.isArray(parsed.pages) ? parsed.pages : [];
+      const normalizedPages = pages.map(p => ({ ...p, pageLabel: p.pageLabel || p.pageName || '' }));
+      const inferredHasErrors = normalizedPages.some(p => Array.isArray(p.errors) && p.errors.length > 0);
+
+      this.hasValidationErrors = parsed.hasErrors === true || inferredHasErrors;
+      this.pages = normalizedPages;
+    })
+    .catch((error) => {
+      this.showToast(this.label.validationToastTitle, reduceErrors(error).toString(), 'error');
+      this._finishWithoutRendering();
+    });
+  }
+
+  // Helpers
+  _finishWithoutRendering() {
+    this.isLoading = false;
+    this.success = true;
+    this.hasValidationErrors = false;
+    this.pages = [];
+  }
+  showToast(title, message, variant) {
+    this.dispatchEvent(new ShowToastEvent({ title, message, variant }));
+  }
 }
