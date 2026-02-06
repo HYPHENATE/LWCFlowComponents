@@ -1,7 +1,7 @@
 /**
  * @description       : js to support with collection of the esignature
  * @author            : daniel@hyphen8.com
- * @last modified on  : 17-07-2025
+ * @last modified on  : 06-02-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api } from 'lwc';
@@ -47,7 +47,18 @@ export default class H8ESignature extends LightningElement {
         ]).then(() => {
             this.canvas = this.template.querySelector('canvas');
             this.resizeCanvas();
-            this.signaturePad = new window.SignaturePad(this.canvas);
+            
+            // Patch SignaturePad to suppress event dispatching in LWC
+            const OriginalSignaturePad = window.SignaturePad;
+            const PatchedSignaturePad = function(canvas, options) {
+                const instance = new OriginalSignaturePad(canvas, options);
+                // Override dispatchEvent to do nothing - LWC doesn't support CustomEvent the same way
+                instance.dispatchEvent = function() {};
+                return instance;
+            };
+            
+            this.signaturePad = new PatchedSignaturePad(this.canvas);
+            
             if(this.isReadOnly){
                 this.signaturePad.off();
             }

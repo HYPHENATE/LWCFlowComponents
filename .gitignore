@@ -35,6 +35,3 @@ coverage/                # LWC coverage information
 
 
 .pmdCache                # pmd cache file
-.sfdx/typings/lwc/customlabels.d.ts
-.sfdx/indexes/lwc/custom-components.json
-.sfdx/sfdx-config.json

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>This is a template flow to demonstrate different configurations / setup of the eSignature component</description>
     <environments>Default</environments>
     <interviewLabel>TEMPLATE - eSignature Component Setup {!$Flow.CurrentDateTime}</interviewLabel>
@@ -41,6 +42,14 @@
             <name>DisplaySignatureComponentText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Display signature&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;This screen is demonstrating how you can display a previous signature that was uploaded with the eSignature component. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Input Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Content Version Id is required and must be a file you previously uploaded using the eSignature Component&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>displaySignatureComponent</name>
@@ -55,6 +64,14 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -75,6 +92,14 @@
             <name>SimpleSignatureText</name>
             <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/span&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Simple Signature Setup&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;This screen just has the component added with basic configuration.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Input Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Record Id&lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; is the Id of the record you want to link the signature to.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Signature File Name &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to a generic name so I could query it back out later if I want&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Is Read Only &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to False&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Required &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to False&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Output Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Saved Signature Id&lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; this is linked to a variable again so once saved I can pull back the file and potentially move it or update permissions or embed on a page.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>page1Signature</name>
@@ -110,6 +135,14 @@
                 <assignToReference>savedSignatureId</assignToReference>
                 <name>signatureRecordId</name>
             </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -130,6 +163,14 @@
             <name>SimpleSignatureText2</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Signature Setup - Required&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;This screen just has the component added and is set to required, this is will prevent navigation to the next screen until the signature has been saved.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Input Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Record Id&lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; is the Id of the record you want to link the signature to.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Signature File Name &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to a generic name so I could query it back out later if I want&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Is Read Only &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to False&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Required &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to True - this will prevent navigation to the next screen until you have saved your signature&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Output Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Saved Signature Id &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;this is linked to a variable again so once saved I can pull back the file and potentially move it or update permissions or embed on a page.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>page2Signature</name>
@@ -165,6 +206,14 @@
                 <assignToReference>savedSignatureId</assignToReference>
                 <name>signatureRecordId</name>
             </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -182,6 +231,14 @@
             <name>Copy_1_of_Copy_1_of_SimpleSignatureText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Signature Setup - ReadOnly&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;This screen just has basic configuration and is blocking the entry of a signature - you might want to do this for potentially if someone has to complete other fields and data prior to being able to add their signature.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Input Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Record Id&lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; is the Id of the record you want to link the signature to.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Signature File Name &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to a generic name so I could query it back out later if I want&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Is Read Only &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to True&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Required &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;is set to False&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;Output Configuration&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Saved Signature Id &lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;this is linked to a variable again so once saved I can pull back the file and potentially move it or update permissions or embed on a page.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>page3Signature</name>
@@ -217,6 +274,14 @@
                 <assignToReference>savedSignatureId</assignToReference>
                 <name>signatureRecordId</name>
             </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
