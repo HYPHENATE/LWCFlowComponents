@@ -2,7 +2,7 @@
 <!--
   @description       : html for row line item
   @author            : daniel
-  @last modified on  : 31-08-2025
+  @last modified on  : 12-02-2026
 -->
 <template>
   <template for:each={currentData.fields} for:item="field">
@@ -29,7 +29,7 @@
           value={field.value}
           options={field.picklistOptions}
           disabled={field._disabled}
-          placeholder="Select an Option"
+          placeholder={picklistPlaceholder}
           onchange={fieldChange}
           variant="label-hidden">
         </lightning-combobox>

@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import deleteIconLabel from '@salesforce/label/c.H8CustomDataTableDeleteIconLabel';
 import invalidSelectionText from '@salesforce/label/c.H8CustomDataTableDependentFieldInvalidSelection';
-
+import picklistPlaceholder from '@salesforce/label/c.H8DataTablePicklistPlaceholder';
 const SHOW_CLEAR_MESSAGE = true;
 
 export default class CustomLightningDataTableRow extends LightningElement {
@@ -11,6 +11,7 @@ export default class CustomLightningDataTableRow extends LightningElement {
   currentData = { id: undefined, fields: [] };
   deleteIconLabel = deleteIconLabel;
   invalidSelectionText = invalidSelectionText;
+  picklistPlaceholder = picklistPlaceholder;
 
   @api
   get rowData() { return this._rowData; }
