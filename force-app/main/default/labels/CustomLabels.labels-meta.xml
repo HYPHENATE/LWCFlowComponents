@@ -482,4 +482,12 @@
         <shortDescription>H8CFHCloseModalLabel</shortDescription>
         <value>Close</value>
     </labels>
+    <labels>
+        <fullName>H8DataTablePicklistPlaceholder</fullName>
+        <categories>H8 Custom Data Table</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8DataTablePicklistPlaceholder</shortDescription>
+        <value>Select an Option</value>
+    </labels>
 </CustomLabels>
