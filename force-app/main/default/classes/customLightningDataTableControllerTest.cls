@@ -1,7 +1,7 @@
 /**
  * @description       : test class for customLightningDataTableController
  * @author            : daniel@hyphen8.com
- * @last modified on  : 30-08-2025
+ * @last modified on  : 17-02-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 @isTest
@@ -15,12 +15,12 @@ public class customLightningDataTableControllerTest {
 
         string oppwhereClause = 'Type = \'New Business\'';
 
-        customLightningDataTableWrapper oppWrapper = customLightningDataTableController.getFieldsAndRecords('Opportunity', 'SampleFlowFieldSet', 'AccountId', account.Id, oppwhereClause);
-        customLightningDataTableWrapper contactWrapper = customLightningDataTableController.getFieldsAndRecords('Contact', 'SampleFlowFieldSet', 'AccountId', account.Id, null);
-        customLightningDataTableWrapper nullWrapper = customLightningDataTableController.getFieldsAndRecords('', '', 'AccountId', account.Id, null);
+        customLightningDataTableWrapper oppWrapper = customLightningDataTableController.getFieldsAndRecords('Opportunity', 'SampleFlowFieldSet', 'AccountId', account.Id, oppwhereClause, 'ORDER BY CreatedDate ASC');
+        customLightningDataTableWrapper contactWrapper = customLightningDataTableController.getFieldsAndRecords('Contact', 'SampleFlowFieldSet', 'AccountId', account.Id, null, null);
+        customLightningDataTableWrapper nullWrapper = customLightningDataTableController.getFieldsAndRecords('', '', 'AccountId', account.Id, null, null);
 
         try {
-            customLightningDataTableWrapper errorWrapper = customLightningDataTableController.getFieldsAndRecords('Contact', 'SampleFlowFieldSetError', 'Account', account.Id, null);
+            customLightningDataTableWrapper errorWrapper = customLightningDataTableController.getFieldsAndRecords('Contact', 'SampleFlowFieldSetError', 'Account', account.Id, null, null);
         } catch (Exception e){
             string error = e.getMessage();
             boolean errorContains = error.contains('Script');

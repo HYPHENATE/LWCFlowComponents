@@ -24,6 +24,7 @@ export default class CustomLightningDataTable extends LightningElement {
   @api maxRows;
   @api startingRowCount;
   @api whereClause;
+  @api orderByClause;
   @api defaultFieldValues;
   @api newRecords;
   @api existingRecords;
@@ -96,7 +97,8 @@ export default class CustomLightningDataTable extends LightningElement {
       fieldSetAPIName: this.fieldSetAPIName,
       parentIDField: this.parentFieldAPIName,
       parentId: this.parentRecordId,
-      whereClause: this.whereClause
+      whereClause: this.whereClause,
+      orderByClause: this.orderByClause
     })
       .then((results) => {
         const recordData = results.records || [];
