@@ -1,14 +1,14 @@
 /**
  * @description       : custom data table controller class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 30-08-2025
+ * @last modified on  : 17-02-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 @SuppressWarnings('PMD')
 public with sharing class customLightningDataTableController {
 
     @AuraEnabled
-    public static customLightningDataTableWrapper getFieldsAndRecords(String sObjectName, String fieldSetAPIName, String parentIDField, String parentId, String whereClause){
+    public static customLightningDataTableWrapper getFieldsAndRecords(String sObjectName, String fieldSetAPIName, String parentIDField, String parentId, String whereClause, String orderByClause){
         try {
             if (String.isBlank(sObjectName) || String.isBlank(fieldSetAPIName)) {
                 return null;
@@ -40,6 +40,10 @@ public with sharing class customLightningDataTableController {
             }
             if (!whereParts.isEmpty()) {
                 query += ' WHERE ' + String.join(whereParts, ' AND ');
+            }
+
+            if(!String.isBlank(orderByClause)){
+                query += ' ' + orderByClause;
             }
 
             List<SObject> lstRecords = Database.query(query);

@@ -74,6 +74,12 @@
                         type="String" 
                         role="inputOnly"
             />
+            <property name="orderByClause" 
+                        label="Order By Clause" 
+                        description="This is the a part of the SOQL query for the order by clause i.e ORDER BY CreatedDate ASC" 
+                        type="String" 
+                        role="inputOnly"
+            />
             <property name="defaultFieldValues" 
                         label="Default Field Values" 
                         description="Provide a JSON entry to set default fields when new records being created." 
