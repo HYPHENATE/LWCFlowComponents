@@ -68,6 +68,18 @@
                         type="String" 
                         role="inputOnly"
             />
+            <property name="minCharacterCount" 
+                        label="Min Character Count" 
+                        description="Minimum number of characters required (if value is provided)" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="minCharacterCountMessage" 
+                        label="Min Character Count Message" 
+                        description="Message to show when the input value is shorter than Min Character Count." 
+                        type="String" 
+                        role="inputOnly"
+            />
             <property name="maxWordCount" 
                         label="Max Word Count" 
                         description="Maximum number of words allowed" 
@@ -80,6 +92,18 @@
                         type="String" 
                         role="inputOnly"
                         />
+            <property name="minWordCount" 
+                        label="Min Word Count" 
+                        description="Minimum number of words required (if value is provided)" 
+                        type="String" 
+                        role="inputOnly"
+            />
+            <property name="minWordCountMessage" 
+                        label="Min Word Count Message" 
+                        description="Message to show when the input value has fewer words than Min Word Count." 
+                        type="String" 
+                        role="inputOnly"
+            />
             <property name="formats" 
                         label="Formats" 
                         description="A list of allowed formats. By default, the list is computed based on enabled categories. The 'table' format is always enabled to support copying and pasting of tables if formats are not provided." 

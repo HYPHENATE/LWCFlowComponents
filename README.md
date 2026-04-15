@@ -4,3 +4,6 @@ A collection of LWC Flow components that we have build to expend the capabilitie
 This package comes with an example inactive flow associated with it, this flow is not to be used or activated as it will be updated in future releases as more components are added to this library.
 
 Installation and configuration moved to MSTeams Wiki
+
+# Apex Tools
+sf package install --package 04tQB000002Df93YAC --wait 10 --publish-wait 10

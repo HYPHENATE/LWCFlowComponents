@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Hyphen8 - Data Fetcher</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen" configurationEditor="c-h8-data-fetcher-c-p-e">
+            <propertyType name="T" extends="SObject"  label="Object API Name" description="Select the API Name of the SObject to Query"/>
+
+            <property name="queryDeveloperName" type="String" role="inputOnly"
+                label="Query Developer Name"
+                description="DeveloperName of the H8_DataFetcherQuery__mdt record to execute."/>
+
+            <property name="bindsJson" type="String" role="inputOnly"
+                label="Bind Variables (JSON)"
+                description="JSON object mapping bind variable names to values, used with Database.queryWithBinds (e.g. {&quot;type&quot;:&quot;Customer&quot;})."/>
+
+            <property name="debounceTime" type="String" default="300" role="inputOnly"/>
+
+            <property name="firstRetrievedRecord" type="{T}" label="First Retrieved Record"/>
+            <property name="retrievedRecords" type="{T[]}" label="Retrieved Records"/>
+            <property name="error" type="String" role="outputOnly" label="Error Message"
+                description="Error message when there is an error output from Data Fetcher"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
