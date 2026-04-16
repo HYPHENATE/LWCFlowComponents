@@ -5,6 +5,8 @@
 * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8DataFetcherController {
+    @TestVisible
+    private static List<H8_DataFetcherQuery__mdt> testQueries;
     
     @AuraEnabled
     public static QueryResult getSObjects(String queryDeveloperName, String bindsJson) {
@@ -17,11 +19,7 @@ public with sharing class H8DataFetcherController {
     @AuraEnabled(cacheable=true)
     public static List<QueryOption> getAvailableQueries() {
         List<QueryOption> results = new List<QueryOption>();
-        for (H8_DataFetcherQuery__mdt q : [
-            SELECT DeveloperName, MasterLabel, ObjectApiName__c, AccessMode__c
-            FROM H8_DataFetcherQuery__mdt
-            ORDER BY MasterLabel
-        ]) {
+        for (H8_DataFetcherQuery__mdt q : getQueryMetadata()) {
             results.add(new QueryOption(q.DeveloperName, q.MasterLabel, q.ObjectApiName__c, q.AccessMode__c));
         }
         return results;
@@ -32,12 +30,13 @@ public with sharing class H8DataFetcherController {
             throw new AuraHandledException('Query DeveloperName is required.');
         }
 
-        List<H8_DataFetcherQuery__mdt> found = [
-            SELECT DeveloperName, MasterLabel, ObjectApiName__c, SoqlTemplate__c, AccessMode__c
-            FROM H8_DataFetcherQuery__mdt
-            WHERE DeveloperName = :queryDeveloperName
-            LIMIT 1
-        ];
+        List<H8_DataFetcherQuery__mdt> found = new List<H8_DataFetcherQuery__mdt>();
+        for (H8_DataFetcherQuery__mdt queryMetadata : getQueryMetadata()) {
+            if (queryMetadata.DeveloperName == queryDeveloperName) {
+                found.add(queryMetadata);
+                break;
+            }
+        }
         if (found.isEmpty()) {
             throw new AuraHandledException('Unknown Data Fetcher query: ' + queryDeveloperName);
         }
@@ -50,6 +49,18 @@ public with sharing class H8DataFetcherController {
         String template = q.SoqlTemplate__c.trim();
         validateTemplate(template, q.ObjectApiName__c);
         return new QueryDefinition(q.ObjectApiName__c, template, q.AccessMode__c);
+    }
+
+    private static List<H8_DataFetcherQuery__mdt> getQueryMetadata() {
+        if (Test.isRunningTest() && testQueries != null) {
+            return testQueries;
+        }
+
+        return [
+            SELECT DeveloperName, MasterLabel, ObjectApiName__c, SoqlTemplate__c, AccessMode__c
+            FROM H8_DataFetcherQuery__mdt
+            ORDER BY MasterLabel
+        ];
     }
 
     private static void validateTemplate(String soqlTemplate, String objectApiName) {

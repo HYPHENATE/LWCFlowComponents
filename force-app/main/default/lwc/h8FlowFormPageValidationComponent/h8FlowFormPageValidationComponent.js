@@ -32,12 +32,6 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
   @api parentObjectAPIName;
   @api pageName;
 
-  /**
-   * Section label this page component belongs to (recommended).
-   * If omitted, falls back to store.currentSectionName.
-   */
-  @api sectionName;
-
   @api helpText = this.label.generalHelpText;
   @api affectTextLabel = this.label.affectedQuestionsText;
 
@@ -50,22 +44,14 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
 
   connectedCallback(){
     const store = getRecordStore(this.recordId);
-    if (!store) return this._finishWithoutRendering();
-
-    const sectionLabel = (this.sectionName || store.currentSectionName || '').trim();
-    if (!sectionLabel) return this._finishWithoutRendering();
-
-    const shouldShow = gatePageRender(store, sectionLabel, this.pageName);
-    if (!shouldShow) return this._finishWithoutRendering();
-
-    // Fill inputs defensively
-    this.formName = this.formName || store.formName;
-    this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
-
-    if (!this.recordId || !this.formName || !this.parentObjectAPIName || !this.pageName) {
-      return this._finishWithoutRendering();
+    const shouldShow = gatePageRender(store, undefined, this.pageName);
+    if (!shouldShow) {
+      this._finishWithoutRendering();
+      return;
     }
 
+    this.formName = this.formName || store.formName;
+    this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
     this.handleValidatePage();
   }
 
