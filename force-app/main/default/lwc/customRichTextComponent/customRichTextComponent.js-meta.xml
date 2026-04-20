@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <description>Custom implementation of lightning-input-rich-text with extra options to support with display a word or character count </description>
     <masterLabel>Hyphen8 - Custom Rich Text Input/Output</masterLabel>

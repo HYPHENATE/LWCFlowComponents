@@ -1,7 +1,7 @@
 /**
  * @description       : LWC component for CPE of Data Fetcher Flow Action
  * @author            : daniel@hyphen8.com
- * @last modified on  : 13-04-2026
+ * @last modified on  : 20-04-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track, wire } from 'lwc';
@@ -83,6 +83,7 @@ export default class H8DataFetcherCPE extends LightningElement {
         this._ensureGenericTypeMapping();
     }
 
+    //TODO Check and confirm now I have removed dual soql query and custom SOQL query if this is needed
     @api get genericTypeMappings() {
         return this._genericTypeMappings;
     }

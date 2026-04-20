@@ -1,7 +1,7 @@
 <!--
   @description       : custom text area component with word / character counter
   @author            : daniel@hyphen8.com
-  @last modified on  : 14-04-2026
+  @last modified on  : 20-04-2026
   @last modified by  : daniel@hyphen8.com
   Modifications Log 
   Ver   Date         Author               Modification
@@ -35,7 +35,7 @@
                     <lightning-formatted-text value={labels.characterLabelText}></lightning-formatted-text>
                     {currentCharacterCount}
                     <template if:true={maxCharacterCount}> / {maxCharacterCount}</template>
-                    <template if:true={minCharacterCount}> (min {minCharacterCount})</template>
+                    <template if:true={minCharacterCount}> ({labels.minWordCharacterCountText} {minCharacterCount})</template>
                 </span>
             </div>
         </div>

@@ -1,7 +1,7 @@
 /**
 * @description       : master controller for fetching data from the server using dynamic SOQL queries. It provides methods to execute queries and return results in a structured format.
 * @author            : daniel@hyphen8.com
-* @last modified on  : 13-04-2026
+* @last modified on  : 20-04-2026
 * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8DataFetcherController {
@@ -59,6 +59,7 @@ public with sharing class H8DataFetcherController {
         return [
             SELECT DeveloperName, MasterLabel, ObjectApiName__c, SoqlTemplate__c, AccessMode__c
             FROM H8_DataFetcherQuery__mdt
+            WITH SYSTEM_MODE
             ORDER BY MasterLabel
         ];
     }
@@ -90,15 +91,11 @@ public with sharing class H8DataFetcherController {
     }
 
     private static System.AccessLevel resolveAccessLevel(String accessMode) {
-        if (String.isBlank(accessMode) || accessMode == 'USER') {
-            return System.AccessLevel.USER_MODE;
-        }
-
         if (accessMode == 'SYSTEM') {
             return System.AccessLevel.SYSTEM_MODE;
+        } else {
+            return System.AccessLevel.USER_MODE;
         }
-
-        return System.AccessLevel.USER_MODE;
     }
     
     public class QueryResult {

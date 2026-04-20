@@ -1,14 +1,14 @@
 /**
  * @description       : method that is used to check the status of the metadata deployment
  * @author            : daniel@hyphen8.com
- * @last modified on  : 26-06-2025
+ * @last modified on  : 20-04-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 public with sharing class H8FlowFormCloneStatus {
     
     @AuraEnabled
     public static String checkDeployStatus(String deploymentId, Boolean includeDetails) {
-        String metadataEndpoint = System.URL.getOrgDomainUrl().toExternalForm() + '/services/Soap/m/64.0';
+        String metadataEndpoint = System.URL.getOrgDomainUrl().toExternalForm() + '/services/Soap/m/66.0';
         String sessionId = UserInfo.getSessionId();
 
         String body = '<?xml version="1.0" encoding="UTF-8"?>'
