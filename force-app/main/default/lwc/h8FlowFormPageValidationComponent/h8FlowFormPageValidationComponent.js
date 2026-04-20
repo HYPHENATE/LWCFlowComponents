@@ -9,7 +9,7 @@
  *
  * Prevents cross-section bleed when page names repeat.
  *
- * @last modified on: 09-10-2025
+ * @last modified on: 20-04-2026
  */
 
 import { LightningElement, api } from 'lwc';
@@ -31,6 +31,8 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
   @api formName;
   @api parentObjectAPIName;
   @api pageName;
+
+  @api sectionName;
 
   @api helpText = this.label.generalHelpText;
   @api affectTextLabel = this.label.affectedQuestionsText;
