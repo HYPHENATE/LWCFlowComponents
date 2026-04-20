@@ -45,23 +45,14 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
 
   connectedCallback() {
     const store = getRecordStore(this.recordId);
-    if (!store) return this._finishWithoutRendering();
-
-    const targetSection = (this.sectionName || store.currentSectionName || '').trim();
-    if (!targetSection) return this._finishWithoutRendering();
-
-    const shouldShow = gateSectionRender(store, targetSection);
-    if (!shouldShow) return this._finishWithoutRendering();
-
-    // Fill inputs defensively
-    this.formName = this.formName || store.formName;
-    this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
-    this.sectionName = targetSection;
-
-    if (!this.recordId || !this.formName || !this.parentObjectAPIName || !this.sectionName) {
-      return this._finishWithoutRendering();
+    const shouldShow = gateSectionRender(store, this.sectionName ? this.sectionName : store.currentSectionName);
+    if (!shouldShow) {
+      this._finishWithoutRendering();
+      return;
     }
 
+    this.formName = this.formName || store.formName;
+    this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
     this.handleGetSectionValidation();
   }
 

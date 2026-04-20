@@ -702,6 +702,18 @@
                     <stringValue>200px</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>minCharacterCount</name>
+                <value>
+                    <stringValue>50</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minCharacterCountMessage</name>
+                <value>
+                    <stringValue>You have to provide more than 50 characters here</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>

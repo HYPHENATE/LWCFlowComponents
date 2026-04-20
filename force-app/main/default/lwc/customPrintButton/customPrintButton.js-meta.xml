@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <description>A component that allows for embedding a quick/shortcut inside a flow to Print the page. This emulates the same approach as pressing File/Print within a browser.</description>
     <masterLabel>Hyphen8 - Custom Print Button</masterLabel>

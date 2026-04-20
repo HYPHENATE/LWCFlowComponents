@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccessMode__c</fullName>
+    <label>Access Mode</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>USER</fullName>
+                <label>User Mode</label>
+                <default>true</default>
+            </value>
+            <value>
+                <fullName>SYSTEM</fullName>
+                <label>System Mode</label>
+                <default>false</default>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <required>true</required>
+    <description>Default USER. SYSTEM runs the query in SYSTEM_MODE.</description>
+</CustomField>

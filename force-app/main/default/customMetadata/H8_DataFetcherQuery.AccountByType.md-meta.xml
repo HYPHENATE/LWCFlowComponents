@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Account By Type</label>
+    <protected>false</protected>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>AccessMode__c</field>
+        <value xsi:type="xsd:string">USER</value>
+    </values>
+    <values>
+        <field>SoqlTemplate__c</field>
+        <value xsi:type="xsd:string">SELECT Id, Name, Type FROM Account WHERE Type = :type ORDER BY Name LIMIT 200</value>
+    </values>
+</CustomMetadata>

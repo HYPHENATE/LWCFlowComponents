@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <description>This component allows you to provide a custom file upload that upon completion of the upload will display the file underneath it</description>
     <masterLabel>Hyphen8 - Flow File Upload</masterLabel>

@@ -1,7 +1,7 @@
 <!--
   @description       : custom text area component with word / character counter
   @author            : daniel@hyphen8.com
-  @last modified on  : 29-08-2025
+  @last modified on  : 20-04-2026
   @last modified by  : daniel@hyphen8.com
   Modifications Log 
   Ver   Date         Author               Modification
@@ -31,7 +31,12 @@
     <template if:true={displayCharacterCount}>
         <div class="slds-grid">
             <div class="slds-col slds-size_1-of-1">
-                <span class="slds-float_left"><lightning-formatted-text value={labels.characterLabelText}></lightning-formatted-text> {currentCharacterCount} / {maxCharacterCount}</span>
+                <span class="slds-float_left">
+                    <lightning-formatted-text value={labels.characterLabelText}></lightning-formatted-text>
+                    {currentCharacterCount}
+                    <template if:true={maxCharacterCount}> / {maxCharacterCount}</template>
+                    <template if:true={minCharacterCount}> ({labels.minWordCharacterCountText} {minCharacterCount})</template>
+                </span>
             </div>
         </div>
     </template>
@@ -39,7 +44,12 @@
     <template if:true={displayWordCount}>
         <div class="slds-grid">
             <div class="slds-col slds-size_1-of-1">
-                <span class="slds-float_left"><lightning-formatted-text value={labels.wordCountLabelText}></lightning-formatted-text> {currentWordCount} / {maxWordCount}</span>
+                <span class="slds-float_left">
+                    <lightning-formatted-text value={labels.wordCountLabelText}></lightning-formatted-text>
+                    {currentWordCount}
+                    <template if:true={maxWordCount}> / {maxWordCount}</template>
+                    <template if:true={minWordCount}> ({labels.minWordCharacterCountText} {minWordCount})</template>
+                </span>
             </div>
         </div>
     </template> 

@@ -1,0 +1,44 @@
+<template>
+    <template lwc:if={queryOptions.length}>
+        <lightning-combobox
+            data-id="queryDeveloperName"
+            name="queryDeveloperName"
+            label={inputValues.queryDeveloperName.label}
+            value={inputValues.queryDeveloperName.value}
+            options={queryOptions}
+            onchange={handleQueryChange}>
+        </lightning-combobox>
+    </template>
+    <template lwc:else>
+        <lightning-input
+            data-id="queryDeveloperName"
+            type="text"
+            name="queryDeveloperName"
+            label={inputValues.queryDeveloperName.label}
+            value={inputValues.queryDeveloperName.value}
+            onchange={handleQueryDeveloperNameTextChange}
+            field-level-help="DeveloperName of the H8_DataFetcherQuery__mdt record.">
+        </lightning-input>
+    </template>
+
+    <c-h8-data-fetcher-c-p-e-combobox
+        data-id="bindsJson"
+        name="bindsJson"
+        value={inputValues.bindsJson.value}
+        label={inputValues.bindsJson.label}
+        builder-context={_builderContext}
+        automatic-output-variables={automaticOutputVariables}
+        onvaluechanged={handleFlowComboboxValueChange}
+        field-level-help="JSON object of bind variables used by the selected query (e.g. {&quot;type&quot;:&quot;Customer&quot;}).">
+    </c-h8-data-fetcher-c-p-e-combobox>
+
+    <c-h8-data-fetcher-c-p-e-combobox
+        data-id="debounceTime"
+        name="debounceTime"
+        value={inputValues.debounceTime.value}
+        label={inputValues.debounceTime.label}
+        builder-context={_builderContext}
+        automatic-output-variables={automaticOutputVariables}
+        onvaluechanged={handleFlowComboboxValueChange}>
+    </c-h8-data-fetcher-c-p-e-combobox>
+</template>

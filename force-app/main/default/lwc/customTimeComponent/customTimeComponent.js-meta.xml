@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Hyphen8 - Custom Time Input/Output</masterLabel>
     <description>Custom implementation of lightning-input where type is time (this is now natively supported within FLOW)</description>
