@@ -121,6 +121,12 @@
                         type="String"
                         role="inputOnly"
             />
+            <property name="readOnlyFields"
+                        label="Read Only Field API Names"
+                        description="Comma-separated API names of fields to render as read-only in the editable table (e.g., Amount__c, Account.Name)."
+                        type="String"
+                        role="inputOnly"
+            />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

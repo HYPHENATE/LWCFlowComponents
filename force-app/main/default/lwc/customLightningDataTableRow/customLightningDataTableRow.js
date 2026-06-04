@@ -8,6 +8,8 @@ export default class CustomLightningDataTableRow extends LightningElement {
   _rowData;
   _picklistMeta;
 
+  _readOnlyFields;
+
   currentData = { id: undefined, fields: [] };
   deleteIconLabel = deleteIconLabel;
   invalidSelectionText = invalidSelectionText;
@@ -17,7 +19,15 @@ export default class CustomLightningDataTableRow extends LightningElement {
   get rowData() { return this._rowData; }
   set rowData(value) {
     this._rowData = value;
-    const fields = (value?.fields || []).map(f => ({ ...f }));
+    const roSet = this._readOnlySet();
+    const fields = (value?.fields || []).map(f => {
+      const copy = { ...f };
+      const norm = this._norm(f.fieldAPIName);
+      copy._readOnly = roSet.has(f.fieldAPIName) || roSet.has(norm) || false;
+      // ensure _disabled reflects readonly as well (combobox/checkbox)
+      copy._disabled = !!copy._disabled || copy._readOnly;
+      return copy;
+    });
     this.currentData = { id: value?.id, fields };
     this.applyAllDependencies();
   }
@@ -29,12 +39,23 @@ export default class CustomLightningDataTableRow extends LightningElement {
     this.applyAllDependencies();
   }
 
+  @api
+  get readOnlyFields() { return this._readOnlyFields; }
+  set readOnlyFields(val) {
+    this._readOnlyFields = val;
+    if (this._rowData) this.rowData = this._rowData; // reapply to pick up readonly state
+  }
+
   @api recordId;
   @api rowDeleteEnabled;
 
   fieldChange(event) {
     const apiPath = event.target.dataset.targetField;
     const type = event.target.dataset.targetFieldType;
+    // ignore changes to read-only fields
+    const existing = (this.currentData.fields || []).find(x => x.fieldAPIName === apiPath);
+    if (existing && existing._readOnly) return;
+
     const newVal = (type === 'checkbox') ? event.target.checked : event.target.value;
 
     const fields = (this.currentData.fields || []).map(f =>
@@ -81,9 +102,12 @@ export default class CustomLightningDataTableRow extends LightningElement {
         const ctrlVal = ctrlVals[f.controllerFieldAPIName];
         return this._filteredDependentField(f, ctrlVal, false);
       }
-      if (f.isPicklist) return { ...f, _disabled: false };
+      if (f.isPicklist) return { ...f, _disabled: false, _readOnly: !!f._readOnly };
       return f;
     });
+
+    // ensure readonly propagates to _disabled where appropriate
+    nextFields.forEach(n => { n._disabled = !!n._disabled || !!n._readOnly; });
 
     this.currentData = { id: this.currentData.id, fields: nextFields };
   }
@@ -104,6 +128,9 @@ export default class CustomLightningDataTableRow extends LightningElement {
       return isDependentOfThis ? this._filteredDependentField(f, ctrlVal, true) : f;
     });
 
+    // ensure readonly propagates to _disabled where appropriate
+    nextFields.forEach(n => { n._disabled = !!n._disabled || !!n._readOnly; });
+
     this.currentData = { id: this.currentData.id, fields: nextFields };
   }
 
@@ -113,7 +140,7 @@ export default class CustomLightningDataTableRow extends LightningElement {
 
     if (!meta || !controllerValue) {
       const hadValue = !!depField.value;
-      const cleared = { ...depField, _disabled: true, value: '', picklistOptions: [] };
+      const cleared = { ...depField, _disabled: true, value: '', picklistOptions: [], _readOnly: !!depField._readOnly };
 
       if (fromControllerChange && hadValue) this._showFieldClearedMessage(depField.fieldAPIName);
       else this._clearFieldError(depField.fieldAPIName);
@@ -126,7 +153,7 @@ export default class CustomLightningDataTableRow extends LightningElement {
 
     if (ctrlIdx === undefined) {
       const hadValue = !!depField.value;
-      const cleared = { ...depField, _disabled: true, value: '', picklistOptions: [] };
+      const cleared = { ...depField, _disabled: true, value: '', picklistOptions: [], _readOnly: !!depField._readOnly };
 
       if (fromControllerChange && hadValue) this._showFieldClearedMessage(depField.fieldAPIName);
       else this._clearFieldError(depField.fieldAPIName);
@@ -149,7 +176,22 @@ export default class CustomLightningDataTableRow extends LightningElement {
       this._clearFieldError(depField.fieldAPIName);
     }
 
-    return { ...depField, _disabled: false, value: nextValue, picklistOptions: allowed };
+    return { ...depField, _disabled: false, value: nextValue, picklistOptions: allowed, _readOnly: !!depField._readOnly };
+  }
+
+  _readOnlySet() {
+    const out = new Set();
+    if (!this._readOnlyFields) return out;
+    let arr = [];
+    if (typeof this._readOnlyFields === 'string') arr = this._readOnlyFields.split(',');
+    else if (Array.isArray(this._readOnlyFields)) arr = this._readOnlyFields;
+    arr.forEach(s => {
+      const v = (s || '').trim();
+      if (!v) return;
+      out.add(v);
+      out.add(this._norm(v));
+    });
+    return out;
   }
 
   _validForIncludes(validFor, index) {

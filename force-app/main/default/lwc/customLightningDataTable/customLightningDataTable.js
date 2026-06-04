@@ -34,6 +34,7 @@ export default class CustomLightningDataTable extends LightningElement {
   // NEW: totals configuration
   @api totalFields;      // comma-separated API names, e.g. "Amount, Discount__c"
   @api currencyCode;     // optional, e.g. "USD", "GBP" (for currency totals)
+  @api readOnlyFields;   // comma-separated API names to render read-only
 
   actionsLabel = actionsLabel;
 

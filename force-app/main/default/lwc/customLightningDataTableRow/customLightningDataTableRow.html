@@ -12,6 +12,7 @@
         <lightning-input
           type="checkbox"
           checked={field.value}
+          disabled={field._disabled}
           required={field.required}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
@@ -40,6 +41,7 @@
         <lightning-input type="number"
           required={field.required}
           step={field.stepScale}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
@@ -56,6 +58,7 @@
           formatter="currency"
           step={field.stepScale}
           required={field.required}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
@@ -70,6 +73,7 @@
       <template if:true={field.isDate}>
         <lightning-input type="date"
           required={field.required}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
@@ -84,6 +88,7 @@
         <lightning-input type="text"
           maxlength={field.length}
           required={field.required}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
@@ -98,7 +103,8 @@
       <template if:true={field.isEmail}>
         <lightning-input type="email"
           required={field.required}
-          data-target-field-type={field.fieldType}
+          readonly={field._readOnly}
+          data-target-field-type={field.fieldAPIName}
           data-target-field={field.fieldAPIName}
           value={field.value}
           variant="label-hidden"
@@ -112,6 +118,7 @@
       <template if:true={field.isPhone}>
         <lightning-input type="tel"
           required={field.required}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
@@ -126,6 +133,7 @@
       <template if:true={field.isURL}>
         <lightning-input type="url"
           required={field.required}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
@@ -142,6 +150,7 @@
           formatter="percent-fixed"
           step={field.stepScale}
           required={field.required}
+          readonly={field._readOnly}
           data-target-field-type={field.fieldType}
           data-target-field={field.fieldAPIName}
           value={field.value}
