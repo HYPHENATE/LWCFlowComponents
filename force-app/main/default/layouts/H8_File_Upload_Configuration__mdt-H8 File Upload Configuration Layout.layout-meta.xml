@@ -19,6 +19,10 @@
                 <field>ShareType__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>Share_Type__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OverrideFileName__c</field>
             </layoutItems>
