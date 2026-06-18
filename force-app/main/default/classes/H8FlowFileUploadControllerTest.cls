@@ -152,6 +152,7 @@ public class H8FlowFileUploadControllerTest {
             .addFieldValue('MasterLabel', 'TestRecord')
             .addFieldValue('DeveloperName', 'TestRecord')
             .addFieldValue('ShareType__c', 'AllUsers')
+            .addFieldValue('Share_Type__c', 'I')
             .addFieldValue('OverrideFileName__c', 'DummyFile')
             .addChildren('H8_File_Upload_Configuration_Fields__r', childList)
             .getListMockMetaData();
@@ -193,6 +194,7 @@ public class H8FlowFileUploadControllerTest {
             .addFieldValue('MasterLabel', 'TestRecord')
             .addFieldValue('DeveloperName', 'TestRecord')
             .addFieldValue('ShareType__c', 'AllUsers')
+            .addFieldValue('Share_Type__c', 'I')
             .addFieldValue('OverrideFileName__c', 'DummyFile')
             .addChildren('H8_File_Upload_Configuration_Fields__r', childList)
             .getListMockMetaData();

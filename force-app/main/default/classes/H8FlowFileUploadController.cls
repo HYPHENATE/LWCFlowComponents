@@ -45,6 +45,7 @@ public without sharing class H8FlowFileUploadController {
             contentDocumentLink.LinkedEntityId = recordId;
             if(null != configurationRecord){
                 contentDocumentLink.Visibility = configurationRecord.ShareType__c;
+                contentDocumentLink.ShareType = configurationRecord.Share_Type__c ?? 'V'; //Default to V if null to prevent errors if metadata hasn't been configured correctly
             }
             contentDocumentLinks.add(contentDocumentLink);
         }
@@ -92,7 +93,7 @@ public without sharing class H8FlowFileUploadController {
     **/
     private static void getConfiguration(String configuration){
         try {
-            configurationRecord = Test.isRunningTest() ? testConfigurationRecord : [SELECT Id, OverrideFileName__c, ShareType__c, 
+            configurationRecord = Test.isRunningTest() ? testConfigurationRecord : [SELECT Id, OverrideFileName__c, ShareType__c, Share_Type__c,
                                                                                                 (SELECT Id, Custom_Field__r.QualifiedAPIName, Value__c 
                                                                                                                 FROM H8_File_Upload_Configuration_Fields__r) 
                                                                                                 FROM H8_File_Upload_Configuration__mdt 

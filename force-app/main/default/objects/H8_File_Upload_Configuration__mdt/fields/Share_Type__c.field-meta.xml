@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Share_Type__c</fullName>
+    <description>The ShareType of the ContentDocumentLink to be created</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>V = Viewer, C = Collaborator, I = Inferred (Set to this to control access by associated record)</inlineHelpText>
+    <label>Share Type</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>V</fullName>
+                <default>true</default>
+                <label>Viewer</label>
+            </value>
+            <value>
+                <fullName>C</fullName>
+                <default>false</default>
+                <label>Collaborator</label>
+            </value>
+            <value>
+                <fullName>I</fullName>
+                <default>false</default>
+                <label>Inferred</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
