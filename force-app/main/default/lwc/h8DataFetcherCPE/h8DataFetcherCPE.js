@@ -1,7 +1,7 @@
 /**
  * @description       : LWC component for CPE of Data Fetcher Flow Action
  * @author            : daniel@hyphen8.com
- * @last modified on  : 20-04-2026
+ * @last modified on  : 04-08-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 import { LightningElement, api, track, wire } from 'lwc';
@@ -163,7 +163,6 @@ export default class H8DataFetcherCPE extends LightningElement {
         };
     }
 
-
     dispatchFlowValueChangeEvent(id, newValue, dataType = DATA_TYPE.STRING) {
         if (this.inputValues[id] && this.inputValues[id].serialized) {
             newValue = JSON.stringify(newValue);
@@ -230,14 +229,24 @@ export default class H8DataFetcherCPE extends LightningElement {
         }
 
         const bindsJson = this.inputValues?.bindsJson?.value;
-        if (bindsJson) {
-            try {
-                const parsed = JSON.parse(bindsJson);
-                if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-                    errors.push({ key: 'bindsJson', errorString: 'Bind Variables (JSON) must be a JSON object (e.g. {"type":"Customer"}).' });
+        if (bindsJson !== null && bindsJson !== undefined && bindsJson !== '') {
+            const valueAsString = typeof bindsJson === 'string' ? bindsJson : JSON.stringify(bindsJson);
+            const trimmedValue = valueAsString.trim();
+
+            // Flow formula variables and merge fields should be preserved as raw text.
+            // Only validate literal JSON when the input clearly looks like JSON and not a formula resource.
+            const looksLikeFormulaReference = /(^\{!|^\{!?.*\}$|^\w+$)/.test(trimmedValue);
+            const looksLikeLiteralJson = trimmedValue.startsWith('{') || trimmedValue.startsWith('[');
+
+            if (looksLikeLiteralJson && !looksLikeFormulaReference) {
+                try {
+                    const parsed = JSON.parse(trimmedValue);
+                    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+                        errors.push({ key: 'bindsJson', errorString: 'Bind Variables (JSON) must be a JSON object (e.g. {"type":"Customer"}).' });
+                    }
+                } catch (e) {
+                    errors.push({ key: 'bindsJson', errorString: 'Bind Variables (JSON) must be valid JSON.' });
                 }
-            } catch (e) {
-                errors.push({ key: 'bindsJson', errorString: 'Bind Variables (JSON) must be valid JSON.' });
             }
         }
 
