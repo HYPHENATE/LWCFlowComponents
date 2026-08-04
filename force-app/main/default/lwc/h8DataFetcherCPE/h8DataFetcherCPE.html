@@ -28,8 +28,9 @@
         label={inputValues.bindsJson.label}
         builder-context={_builderContext}
         automatic-output-variables={automaticOutputVariables}
+        allow-hard-code-reference="true"
         onvaluechanged={handleFlowComboboxValueChange}
-        field-level-help="JSON object of bind variables used by the selected query (e.g. {&quot;type&quot;:&quot;Customer&quot;}).">
+        field-level-help="JSON object of bind variables used by the selected query. You can enter literal JSON or Flow merge-field references such as {!Account_Type}.">
     </c-h8-data-fetcher-c-p-e-combobox>
 
     <c-h8-data-fetcher-c-p-e-combobox
