@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow File ZIP Downloader</masterLabel>
+    <description>Downloads a supplied list of ContentDocument or ContentVersion files as a ZIP archive from a Screen Flow.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property
+                name="fileIds"
+                type="String[]"
+                role="inputOnly"
+                label="File Ids"
+                description="Collection of ContentDocumentIds or ContentVersionIds to include in the ZIP."
+                required="true"
+            />
+            <property
+                name="outputFileName"
+                type="String"
+                role="inputOnly"
+                label="Output File Name"
+                description="Name for the downloaded ZIP file."
+            />
+            <property
+                name="buttonLabel"
+                type="String"
+                role="inputOnly"
+                label="Button Label"
+                description="Label displayed on the ZIP download button."
+            />
+            <property
+                name="variant"
+                type="String"
+                role="inputOnly"
+                label="Button Variant"
+                description="Optional SLDS button variant such as neutral or brand."
+            />
+            <property
+                name="downloadComplete"
+                type="Boolean"
+                role="outputOnly"
+                label="Download Complete"
+                description="True after the ZIP download has started."
+            />
+            <property
+                name="errorMessage"
+                type="String"
+                role="outputOnly"
+                label="Error Message"
+                description="Error message returned when the ZIP download fails."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
