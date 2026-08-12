@@ -1,7 +1,7 @@
 <!--
   @description       : html to output an entire sections validation errors
   @author            : daniel@hyphen8.com
-  @last modified on  : 10-09-2025
+  @last modified on  : 12-08-2026
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
@@ -21,7 +21,9 @@
             <template if:true={hasValidationErrors}>
                 <div class="slds-box validation-box">
                     <div class="slds-var-m-around_medium">
-                        <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
+                        <div class="slds-var-m-bottom_medium">
+                            <lightning-formatted-rich-text value={helpText}></lightning-formatted-rich-text>
+                        </div>
                         <template for:each={pages} for:item="page">
                             <c-h8-form-flow-validation-page-item-component
                                 key={page.pageLabel}

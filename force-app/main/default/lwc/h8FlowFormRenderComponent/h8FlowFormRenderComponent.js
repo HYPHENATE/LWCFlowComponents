@@ -18,7 +18,7 @@
  * - UI may still display `label`; logic must not depend on `label` or `sectionName`.
  *
  * @author
- * @last modified on  : 09-10-2025
+ * @last modified on  : 12-08-2026
  */
 
 import { LightningElement, api, track } from 'lwc';
@@ -120,6 +120,9 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     /** Interval id for polling for master triggers in storage. */
     intervalId;
 
+    /** Original browser title captured before this component prefixes the active section. */
+    originalDocumentTitle = '';
+
     // ------------------------------
     // Caches for inline panel (keyed by **customLabel**)
     // ------------------------------
@@ -190,6 +193,7 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     // ------------------------------
 
     connectedCallback(){
+        this.captureOriginalDocumentTitle();
         this.handleGetForm();
         if (this.getLanguage) this.fetchLanguage();
 
@@ -521,6 +525,7 @@ export default class H8FlowFormRenderComponent extends LightningElement {
 
             this.activeSectionId = this.sections[idx].id;
             this.flowAPIName = this.sections[idx].flow;
+            this.updateDocumentTitle(this.sections[idx].label);
 
             // Persist current section (customLabel)
             this.sectionValidationHandling(this.sections[idx].customLabel);
@@ -608,6 +613,7 @@ export default class H8FlowFormRenderComponent extends LightningElement {
             // Switch to the new section
             this.activeSectionId = target.id;
             this.flowAPIName = flowName;
+            this.updateDocumentTitle(target.label);
 
             // Revalidate the section we just left (pre- or post-master)
             this._maybeRevalidatePreviousOnNav(previousKey);
@@ -645,6 +651,7 @@ export default class H8FlowFormRenderComponent extends LightningElement {
                 this.loadFlow = true;
                 this.activeSectionId = nextSection.id;
                 this.flowAPIName = nextSection.flow;
+                this.updateDocumentTitle(nextSection.label);
 
                 // Revalidate the section we just left (pre- or post-master)
                 this._maybeRevalidatePreviousOnNav(previousKey);
@@ -738,6 +745,27 @@ export default class H8FlowFormRenderComponent extends LightningElement {
             ...this._masterErrorsByKey,
             [customKey]: { hasErrors: !!hasErrors, pages: pages || [], ts: Date.now() }
         };
+    }
+
+    captureOriginalDocumentTitle() {
+        if (typeof document === 'undefined' || this.originalDocumentTitle) return;
+        this.originalDocumentTitle = document.title || '';
+    }
+
+    updateDocumentTitle(sectionLabel) {
+        if (typeof document === 'undefined') return;
+
+        this.captureOriginalDocumentTitle();
+
+        const trimmedSectionLabel = (sectionLabel || '').trim();
+        const trimmedOriginalTitle = (this.originalDocumentTitle || '').trim();
+
+        if (trimmedSectionLabel && trimmedOriginalTitle) {
+            document.title = `${trimmedSectionLabel} | ${trimmedOriginalTitle}`;
+            return;
+        }
+
+        document.title = trimmedSectionLabel || trimmedOriginalTitle;
     }
 
     showToast(toastTitle, toastMessage, toastVariant){
