@@ -40,6 +40,12 @@
                         description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
                         default="false"
             />
+            <property name="showSectionHeader"
+                        label="Show Current Section Header"
+                        type="Boolean"
+                        description="When set to true this displays the currently active section name as a heading above the rendered form content"
+                        default="false"
+            />
         </targetConfig>
         <targetConfig targets="lightning__RecordPage">
             <property name="formName" 
@@ -74,6 +80,12 @@
                         description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
                         default="false"
             />
+            <property name="showSectionHeader"
+                        label="Show Current Section Header"
+                        type="Boolean"
+                        description="When set to true this displays the currently active section name as a heading above the rendered form content"
+                        default="false"
+            />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
             <property name="formName" 
@@ -106,6 +118,12 @@
                         label="Get Language"
                         type="Boolean"
                         description="Tick this is you want to pass in the the URL site language on to the flow, to prevent errors you will need a varaible varLanguage available within the flow as an input" 
+                        default="false"
+            />
+            <property name="showSectionHeader"
+                        label="Show Current Section Header"
+                        type="Boolean"
+                        description="When set to true this displays the currently active section name as a heading above the rendered form content"
                         default="false"
             />
         </targetConfig>
@@ -163,6 +181,12 @@
                         label="Show No Validation Errors Icon on Section"
                         type="Boolean"
                         description="When set to true this will display a green tick on sections that have validations configured and no errors" 
+                        default="false"
+            />
+            <property name="showSectionHeader"
+                        label="Show Current Section Header"
+                        type="Boolean"
+                        description="When set to true this displays the currently active section name as a heading above the rendered form content"
                         default="false"
             />
         </targetConfig>

@@ -39,6 +39,7 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
   // View model
   hasValidationErrors;
   pages;
+  validationTone = 'error';
   isLoading = true;
   success = true;
   message;
@@ -53,6 +54,7 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
 
     this.formName = this.formName || store.formName;
     this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
+    this.validationTone = store?.masterValidatedAt ? 'error' : 'warning';
     this.handleGetSectionValidation();
   }
 
@@ -74,7 +76,18 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
       if (!this.success) return;
 
       const pages = Array.isArray(parsed.pages) ? parsed.pages : [];
-      const normalizedPages = pages.map(p => ({ ...p, pageLabel: p.pageLabel || p.pageName || '' }));
+      const visiblePages = pages.filter((page) => page?.pageName !== 'NOPAGESCONFIGURED');
+      const shouldShowPageHeading = visiblePages.length > 1;
+      const normalizedPages = pages.map((p) => ({
+        ...p,
+        pageLabel: p.pageLabel || p.pageName || '',
+        errors: (Array.isArray(p?.errors) ? p.errors : []).map((error) => ({
+          ...error,
+          questionName: error?.questionName || error?.field || error?.message || ''
+        })),
+        tone: this.validationTone,
+        showPageName: shouldShowPageHeading
+      }));
       const inferredHasErrors = normalizedPages.some(p => Array.isArray(p.errors) && p.errors.length > 0);
 
       this.hasValidationErrors = parsed.hasErrors === true || inferredHasErrors;
@@ -92,6 +105,9 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
     this.success = true;
     this.hasValidationErrors = false;
     this.pages = [];
+  }
+  get panelClass() {
+    return `slds-box validation-box validation-box_${this.validationTone}`;
   }
   showToast(title, message, variant) {
     this.dispatchEvent(new ShowToastEvent({ title, message, variant }));

@@ -13,6 +13,14 @@ import changeSectionErrorDescription from '@salesforce/label/c.H8FFChangeSection
 import formLoaderErrorToastTitle from '@salesforce/label/c.H8FFFormLoaderErrorToastTitle';
 import formLoaderErrorNoSections from '@salesforce/label/c.H8FFFormLoaderNoSectionsDescription';
 import activeSectionLabel from '@salesforce/label/c.H8FFActiveSectionLabel';
+import singleIssueFound from '@salesforce/label/c.H8FFSingleIssueFound';
+import multipleIssuesFound from '@salesforce/label/c.H8FFMultipleIssuesFound';
+import showLabel from '@salesforce/label/c.H8FFShowLabel';
+import hideLabel from '@salesforce/label/c.H8FFHideLabel';
+import validationWarningsLabel from '@salesforce/label/c.H8FFValidationWarningsLabel';
+import validationErrorsLabel from '@salesforce/label/c.H8FFValidationErrorsLabel';
+import forLabel from '@salesforce/label/c.H8FFForLabel';
+import forThisSectionLabel from '@salesforce/label/c.H8FFForThisSectionLabel';
 
 export default {
     loadingAltText,
@@ -29,5 +37,13 @@ export default {
     changeSectionErrorDescription,
     formLoaderErrorToastTitle,
     formLoaderErrorNoSections,
-    activeSectionLabel
+    activeSectionLabel,
+    singleIssueFound,
+    multipleIssuesFound,
+    showLabel,
+    hideLabel,
+    validationWarningsLabel,
+    validationErrorsLabel,
+    forLabel,
+    forThisSectionLabel
 }

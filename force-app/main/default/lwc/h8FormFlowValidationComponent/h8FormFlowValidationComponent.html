@@ -7,7 +7,7 @@
 <template>
     
     <template if:true={isLoading}>
-        <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+        <div class="slds-align_absolute-center slds-is-relative spinner-container">
             <lightning-spinner
                 alternative-text={label.loadingAltText} variant="brand">
             </lightning-spinner>
@@ -31,24 +31,24 @@
         <template if:true={success}>
 
             <template if:true={hasErrors}>
-                <div class="slds-var-m-bottom_x-small">
-                    <lightning-formatted-rich-text value={cardTitle}></lightning-formatted-rich-text>
-                </div>
-                <div class="slds-var-m-bottom_x-small">
+                <h3 class="summary-heading slds-var-m-bottom_x-small" data-id="summaryHeading" tabindex="-1">
+                    {cardTitle}
+                </h3>
+                <div class="slds-var-m-bottom_medium">
                     <lightning-formatted-rich-text value={invalidCardDescription}></lightning-formatted-rich-text>
-                </div>  
+                </div>
                 <div class="slds-box validation-box">
                     <div class="slds-var-m-around_medium">
-                        <div class="slds-var-m-bottom_x-small">
+                        <div class="slds-var-m-bottom_medium">
                             <lightning-formatted-rich-text value={completeFieldsText}></lightning-formatted-rich-text>
                         </div>
 
-                        <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        <ul class="section-summary-list">
                             <template for:each={sections} for:item="section">
                                 <li key={section.sectionName} class="slds-var-m-bottom_small">
-                                    <span class="slds-var-m-bottom_small" style="font-size:16px">
+                                    <h3 class="section-summary-heading slds-var-m-bottom_x-small">
                                         {section.displayLabel}
-                                    </span>
+                                    </h3>
                                     <template for:each={section.pages} for:item="page">
                                         <c-h8-form-flow-validation-page-item-component key={page.pageName} page={page} affect-text-label={affectTextLabel}></c-h8-form-flow-validation-page-item-component>
                                     </template>
@@ -60,10 +60,10 @@
             </template>
             
             <template if:true={isValid}>
-                <div class="slds-var-m-bottom_x-small">
-                    <lightning-formatted-rich-text value={cardTitle}></lightning-formatted-rich-text>
-                </div>
-                <div class="slds-var-m-bottom_x-small">
+                <h3 class="summary-heading slds-var-m-bottom_x-small">
+                    {cardTitle}
+                </h3>
+                <div class="slds-var-m-bottom_medium">
                     <lightning-formatted-rich-text value={validCardDescription}></lightning-formatted-rich-text>
                 </div>
                 <div slot="footer">

@@ -11,6 +11,23 @@
     width: var(--custom-nav-width, 12rem) !important;
 }
 
+.spinner-container {
+    height: 5rem;
+}
+
+.section-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+}
+
+.section-heading-divider {
+    border: 0;
+    border-top: 1px solid var(--slds-g-color-border-base-1, var(--lwc-colorBorder, #c9c9c9));
+    margin-top: 0.5rem;
+}
+
 .slds-vertical-tabs__nav {
     border-right: var(--lwc-borderWidthThin, 1px) solid var(--slds-g-color-border-base-1, var(--lwc-colorBorder, #939393)) !important;
     background: var(--slds-g-color-neutral-base-95, var(--lwc-colorBackground, #FFFFFF)) !important;

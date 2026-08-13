@@ -9,15 +9,19 @@
     <template if:true={displayPage}>
         <div class="slds-grid slds-wrap">
             <div class="slds-col slds-size_12-of-12">
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                <ul class="page-summary-list">
                     <li>
-                        <span style="font-size:16px">{page.pageName}</span>
-                        <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        <template if:true={showPageName}>
+                            <h4 class="page-summary-heading slds-var-m-bottom_x-small">
+                                {page.pageName}
+                            </h4>
+                        </template>
+                        <ul class="page-error-list">
                             <template for:each={page.errors} for:item="error">
                                 <li key={error.questionName}>
-                                    <div>
-                                        <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text={affectTextLabel} title={affectTextLabel}></lightning-icon>
-                                        <span style="font-size: 16px;">{error.questionName}</span>
+                                    <div class={errorRowClass}>
+                                        <lightning-icon class="slds-var-m-right_small" icon-name={iconName} variant={iconVariant} size="x-small" alternative-text="" title=""></lightning-icon>
+                                        <span>{error.questionName}</span>
                                     </div>
                                 </li>
                             </template>
@@ -30,12 +34,12 @@
     <template if:false={displayPage}>
         <div class="slds-grid slds-wrap">
             <div class="slds-col slds-size_12-of-12">
-                <ul style="list-style-type: none;padding: 0;margin: 0;">
+                <ul class="page-error-list">
                   <template for:each={page.errors} for:item="error">
                     <li key={error.questionName}>
-                      <div style="font-size:16px">
-                          <lightning-icon class="slds-var-m-right_small" icon-name='utility:error' variant="error" size="x-small" alternative-text={affectTextLabel} title={affectTextLabel}></lightning-icon>
-                          <span style="font-size: 16px;">{error.questionName}</span>
+                      <div class={errorRowClass}>
+                          <lightning-icon class="slds-var-m-right_small" icon-name={iconName} variant={iconVariant} size="x-small" alternative-text="" title=""></lightning-icon>
+                          <span>{error.questionName}</span>
                       </div>
                     </li>
                   </template>

@@ -41,6 +41,7 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
   isLoading = true;
   hasValidationErrors = false;
   validationErrors;
+  validationTone = 'error';
   success = true;
   message;
 
@@ -54,6 +55,7 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
 
     this.formName = this.formName || store.formName;
     this.parentObjectAPIName = this.parentObjectAPIName || store.parentObjectAPIName;
+    this.validationTone = store?.masterValidatedAt ? 'error' : 'warning';
     this.handleValidatePage();
   }
 
@@ -77,7 +79,8 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
       const errors = Array.isArray(parsed.errors) ? parsed.errors : [];
       this.validationErrors = errors.map(e => ({
         ...e,
-        questionName: e.questionName || e.field || e.message || ''
+        questionName: e.questionName || e.field || e.message || '',
+        tone: this.validationTone
       }));
 
       this.hasValidationErrors = parsed.hasValidationErrors === true
@@ -95,6 +98,18 @@ export default class H8FlowFormPageValidationComponent extends LightningElement 
     this.success = true;
     this.hasValidationErrors = false;
     this.validationErrors = [];
+  }
+  get panelClass() {
+    return `slds-box validation-box validation-box_${this.validationTone}`;
+  }
+  get iconName() {
+    return this.validationTone === 'warning' ? 'utility:warning' : 'utility:error';
+  }
+  get iconVariant() {
+    return this.validationTone === 'warning' ? 'warning' : 'error';
+  }
+  get itemClass() {
+    return `page-validation-item page-validation-item_${this.validationTone}`;
   }
   showToast(title, message, variant){
     this.dispatchEvent(new ShowToastEvent({ title, message, variant }));

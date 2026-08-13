@@ -1,6 +1,13 @@
 .validation-box {
     padding: 2px 2px 2px 2px;
-    border: 5px solid #cd0000;
     background-color: #ffffff;
     box-sizing: border-box;
+}
+
+.validation-box_error {
+    border: 0.3125rem solid #cd0000;
+}
+
+.validation-box_warning {
+    border: 0.3125rem solid #b16804;
 }

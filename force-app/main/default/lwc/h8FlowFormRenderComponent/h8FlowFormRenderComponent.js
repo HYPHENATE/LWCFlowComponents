@@ -84,6 +84,9 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     /** Show the right-hand validation results panel for the active section. */
     @api showSectionValidationPanel = false;
 
+    /** When true, display the active section heading above the rendered content. */
+    @api showSectionHeader = false;
+
     /**
      * When true, allow success ticks to show when no errors.
      * When false (default), never show green ticks — only warnings/errors appear.

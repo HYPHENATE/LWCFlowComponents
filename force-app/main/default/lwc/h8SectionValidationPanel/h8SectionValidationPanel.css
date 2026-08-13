@@ -1,6 +1,70 @@
-.validation-box {
-    padding: 2px 2px 2px 2px;
-    border: 5px solid #cd0000;
+.validation-panel {
     background-color: #ffffff;
     box-sizing: border-box;
+}
+
+.validation-panel_error {
+    border: 0.3125rem solid #cd0000;
+}
+
+.validation-panel_warning {
+    border: 0.3125rem solid #b16804;
+}
+
+.validation-panel__toggle {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: left;
+}
+
+.validation-panel__toggle:focus-visible {
+    outline: 0.125rem solid var(--lwc-brandAccessible, #0176d3);
+    outline-offset: 0.125rem;
+}
+
+.validation-panel__toggle-main,
+.validation-panel__toggle-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.validation-panel__toggle-main {
+    min-width: 0;
+}
+
+.validation-panel__summary-text,
+.validation-panel__issue-count {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.validation-panel__summary-text {
+    font-weight: 600;
+}
+
+.validation-panel__issue-count {
+    white-space: nowrap;
+}
+
+.validation-panel__status-icon_warning {
+    color: #8c4f00;
+}
+
+.validation-panel__content {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.panel-help-text {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
 }
