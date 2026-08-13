@@ -5,7 +5,6 @@
   @last modified by  : daniel@hyphen8.com
 -->
 <template>
-    
     <template if:false={isLoading}>
         <template if:false={success}>
             <div class="slds-box validation-box">
@@ -19,20 +18,16 @@
 
         <template if:true={success}>
             <template if:true={hasValidationErrors}>
-                <div class={panelClass}>
-                    <div class="slds-var-m-around_medium">
-                        <div class="slds-var-m-bottom_medium">
-                            <lightning-formatted-rich-text value={helpText}></lightning-formatted-rich-text>
-                        </div>
-                        <template for:each={pages} for:item="page">
-                            <c-h8-form-flow-validation-page-item-component
-                                key={page.pageLabel}
-                                page={page}
-                                affect-text-label={affectTextLabel}>
-                            </c-h8-form-flow-validation-page-item-component>
-                        </template>
-                    </div>
-                </div>
+                <c-h8-section-validation-panel
+                    section-label={resolvedSectionLabel}
+                    affect-text-label={affectTextLabel}
+                    help-text={helpText}
+                    default-open="true"
+                    live-has-errors={liveHasErrors}
+                    live-pages={livePages}
+                    master-has-errors={masterHasErrors}
+                    master-pages={masterPages}>
+                </c-h8-section-validation-panel>
             </template>
         </template>
     </template>

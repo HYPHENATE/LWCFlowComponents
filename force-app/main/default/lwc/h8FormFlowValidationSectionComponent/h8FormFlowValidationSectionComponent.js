@@ -106,9 +106,31 @@ export default class H8FormFlowValidationSectionComponent extends LightningEleme
     this.hasValidationErrors = false;
     this.pages = [];
   }
-  get panelClass() {
-    return `slds-box validation-box validation-box_${this.validationTone}`;
+
+  get resolvedSectionLabel() {
+    return this.sectionName;
   }
+
+  get isLiveValidationMode() {
+    return this.validationTone === 'warning';
+  }
+
+  get liveHasErrors() {
+    return this.isLiveValidationMode ? this.hasValidationErrors : false;
+  }
+
+  get livePages() {
+    return this.isLiveValidationMode ? this.pages : [];
+  }
+
+  get masterHasErrors() {
+    return this.isLiveValidationMode ? undefined : this.hasValidationErrors;
+  }
+
+  get masterPages() {
+    return this.isLiveValidationMode ? [] : this.pages;
+  }
+
   showToast(title, message, variant) {
     this.dispatchEvent(new ShowToastEvent({ title, message, variant }));
   }
