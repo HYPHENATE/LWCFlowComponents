@@ -4,3 +4,28 @@
     background-color: #ffffff;
     box-sizing: border-box;
 }
+
+.spinner-container {
+    height: 5rem;
+}
+
+.section-summary-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.summary-heading,
+.section-summary-heading {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.summary-heading {
+    font-size: 1.75rem;
+}
+
+.section-summary-heading {
+    font-size: 1.25rem;
+}

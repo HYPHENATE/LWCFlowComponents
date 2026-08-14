@@ -123,6 +123,9 @@ export default class H8FormFlowValidationComponent extends LightningElement {
     /** Optional server message. */
     message;
 
+    /** When true, move focus to the rendered summary heading after validation completes. */
+    focusSummaryOnRender = false;
+
     // ------------------------------
     // Lifecycle
     // ------------------------------
@@ -133,6 +136,16 @@ export default class H8FormFlowValidationComponent extends LightningElement {
      */
     connectedCallback(){
         this.handleValidateFormData();
+    }
+
+    renderedCallback() {
+        if (!this.focusSummaryOnRender) return;
+
+        const summaryHeading = this.template.querySelector('[data-id="summaryHeading"]');
+        if (!summaryHeading) return;
+
+        summaryHeading.focus();
+        this.focusSummaryOnRender = false;
     }
 
     // ------------------------------
@@ -204,13 +217,14 @@ export default class H8FormFlowValidationComponent extends LightningElement {
             const parsedResults = JSON.parse(results);
 
             // Persist server payload to view model
-            this.sections  = parsedResults.sections;
+            this.sections  = this.normalizeSections(parsedResults.sections);
             this.hasErrors = parsedResults.hasErrors;
             this.isValid   = parsedResults.isValid;
             this.success   = parsedResults.success;
             this.message   = parsedResults.message;
 
             this.isLoading = false;
+            this.focusSummaryOnRender = this.hasErrors === true;
 
             // Notify sibling components (renderer, panels) to refresh their state
             this._setMasterTrigger({ sections: parsedResults.sections });
@@ -248,5 +262,26 @@ export default class H8FormFlowValidationComponent extends LightningElement {
      */
     showToast(toastTitle, toastMessage, toastVariant){
        this.dispatchEvent(new ShowToastEvent({ title: toastTitle, message: toastMessage, variant: toastVariant }));
+    }
+
+    normalizeSections(sections = []) {
+        return (Array.isArray(sections) ? sections : []).map((section) => {
+            const pages = Array.isArray(section?.pages) ? section.pages : [];
+            const visiblePages = pages.filter((page) => page?.pageName !== 'NOPAGESCONFIGURED');
+            const shouldShowPageHeading = visiblePages.length > 1;
+
+            return {
+                ...section,
+                pages: pages.map((page) => ({
+                    ...page,
+                    errors: (Array.isArray(page?.errors) ? page.errors : []).map((error) => ({
+                        ...error,
+                        questionName: error?.questionName || error?.field || error?.message || ''
+                    })),
+                    tone: 'error',
+                    showPageName: shouldShowPageHeading
+                }))
+            };
+        });
     }
 }

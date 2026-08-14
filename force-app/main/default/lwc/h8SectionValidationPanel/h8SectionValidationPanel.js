@@ -44,6 +44,12 @@ export default class H8SectionValidationPanel extends LightningElement {
     @api helpText = this.label.H8FFGeneralHelpText;
 
     /**
+     * Optional active section label, used to make the disclosure control more descriptive.
+     * @type {string}
+     */
+    @api sectionLabel;
+
+    /**
      * Label used above the list of items that are affected by validation errors.
      * Defaults to labels.H8FFAffectedQuestions.
      * @type {string}
@@ -172,12 +178,86 @@ export default class H8SectionValidationPanel extends LightningElement {
         return this.hasMaster ? this.masterHasErrors : this.liveHasErrors;
     }
 
+    get tone() {
+        if (this.hasMaster && this.masterHasErrors === true) return 'error';
+        if (!this.hasMaster && this.liveHasErrors === true) return 'warning';
+        return 'error';
+    }
+
+    get panelClass() {
+        return `validation-panel validation-panel_${this.tone}`;
+    }
+
+    get issueCount() {
+        return this.pages.reduce((count, page) => count + (page?.errors?.length || 0), 0);
+    }
+
+    get issueCountText() {
+        const suffix = this.issueCount === 1
+            ? this.label.singleIssueFound
+            : this.label.multipleIssuesFound;
+
+        return `${this.issueCount} ${suffix}`;
+    }
+
+    get toggleButtonLabel() {
+        const action = this.isOpen ? this.label.hideLabel : this.label.showLabel;
+        const issueType = this.tone === 'warning'
+            ? this.label.validationWarningsLabel
+            : this.label.validationErrorsLabel;
+        const sectionSuffix = this.sectionLabel
+            ? `${this.label.forLabel} ${this.sectionLabel}`
+            : this.label.forThisSectionLabel;
+
+        return `${action} ${this.issueCount} ${issueType} ${sectionSuffix}`;
+    }
+
+    get toggleSummaryText() {
+        return this.isOpen ? this.helpText : this.issueCountText;
+    }
+
+    get toggleIconName() {
+        return this.tone === 'warning' ? 'utility:warning' : 'utility:error';
+    }
+
+    get toggleIconVariant() {
+        return this.tone === 'warning' ? 'warning' : 'error';
+    }
+
+    get toggleIconClass() {
+        return `validation-panel__status-icon validation-panel__status-icon_${this.tone}`;
+    }
+
+    get chevronIconName() {
+        return this.isOpen ? 'utility:chevrondown' : 'utility:chevronright';
+    }
+
+    get contentId() {
+        return 'validation-summary-content';
+    }
+
     /**
      * Effective pages/errors to display. Prefers master when available, otherwise falls back to live.
      * Expected shape per page: { pageLabel: string, errors: Array<{ message: string, field?: string }> }
      * @returns {Array}
      */
     get pages() {
-        return this.hasMaster ? (this.masterPages || []) : (this.livePages || []);
+        const pages = this.hasMaster ? (this.masterPages || []) : (this.livePages || []);
+        const visiblePages = pages.filter((page) => page?.pageName !== 'NOPAGESCONFIGURED');
+        const shouldShowPageHeading = visiblePages.length > 1;
+
+        return pages.map((page) => ({
+            ...page,
+            errors: (Array.isArray(page?.errors) ? page.errors : []).map((error) => ({
+                ...error,
+                questionName: error?.questionName || error?.field || error?.message || ''
+            })),
+            tone: this.tone,
+            showPageName: shouldShowPageHeading
+        }));
+    }
+
+    handleToggle() {
+        this.isOpen = !this.isOpen;
     }
 }

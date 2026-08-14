@@ -483,6 +483,70 @@
         <value>Missing questionName in meta data</value>
     </labels>
     <labels>
+        <fullName>H8FFSingleIssueFound</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFSingleIssueFound</shortDescription>
+        <value>issue found</value>
+    </labels>
+    <labels>
+        <fullName>H8FFMultipleIssuesFound</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFMultipleIssuesFound</shortDescription>
+        <value>issues found</value>
+    </labels>
+    <labels>
+        <fullName>H8FFShowLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFShowLabel</shortDescription>
+        <value>Show</value>
+    </labels>
+    <labels>
+        <fullName>H8FFHideLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFHideLabel</shortDescription>
+        <value>Hide</value>
+    </labels>
+    <labels>
+        <fullName>H8FFValidationWarningsLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFValidationWarningsLabel</shortDescription>
+        <value>validation warnings</value>
+    </labels>
+    <labels>
+        <fullName>H8FFValidationErrorsLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFValidationErrorsLabel</shortDescription>
+        <value>validation errors</value>
+    </labels>
+    <labels>
+        <fullName>H8FFForLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFForLabel</shortDescription>
+        <value>for</value>
+    </labels>
+    <labels>
+        <fullName>H8FFForThisSectionLabel</fullName>
+        <categories>H8 Flow Forms</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FFForThisSectionLabel</shortDescription>
+        <value>for this section</value>
+    </labels>
+    <labels>
         <fullName>H8CFHCloseModalLabel</fullName>
         <categories>H8 Custom Form Help</categories>
         <language>en_US</language>

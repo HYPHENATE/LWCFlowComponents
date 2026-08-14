@@ -1,17 +1,55 @@
+<!--
+  @description       : html component used for displaying section validation panel with toggle and list of pages and questions
+  @author            : daniel@hyphen8.com
+  @last modified on  : 12-08-2026
+  @last modified by  : daniel@hyphen8.com
+-->
 <template>
   <template if:true={hasErrors}>
-    <lightning-card class="slds-var-m-top_medium" tabindex="0" >
-        <div class="slds-box validation-box">
-            <div class="slds-var-m-around_medium">
-            <div class="slds-text-heading_medium slds-var-m-bottom_medium">{helpText}</div>
-            <template for:each={pages} for:item="page">
-                <c-h8-form-flow-validation-page-item-component key={page.pageName} 
-                                                                page={page} 
-                                                                affect-text-label={affectTextLabel}>
-                </c-h8-form-flow-validation-page-item-component>
-            </template>
+    <section class={panelClass}>
+        <button
+            type="button"
+            class="validation-panel__toggle"
+            aria-expanded={isOpen}
+            aria-controls={contentId}
+            aria-label={toggleButtonLabel}
+            onclick={handleToggle}
+        >
+            <span class="validation-panel__toggle-main">
+                <template if:false={isOpen}>
+                    <lightning-icon
+                        class={toggleIconClass}
+                        icon-name={toggleIconName}
+                        variant={toggleIconVariant}
+                        size="x-small"
+                        alternative-text=""
+                        title=""
+                    ></lightning-icon>
+                </template>
+                <span class="validation-panel__summary-text">{toggleSummaryText}</span>
+            </span>
+            <span class="validation-panel__toggle-meta">
+                <span class="validation-panel__issue-count">{issueCountText}</span>
+                <lightning-icon
+                    class="validation-panel__chevron"
+                    icon-name={chevronIconName}
+                    size="x-small"
+                    alternative-text=""
+                    title=""
+                ></lightning-icon>
+            </span>
+        </button>
+
+        <template if:true={isOpen}>
+            <div id={contentId} class="validation-panel__content">
+                <template for:each={pages} for:item="page">
+                    <c-h8-form-flow-validation-page-item-component key={page.pageName} 
+                                                                    page={page} 
+                                                                    affect-text-label={affectTextLabel}>
+                    </c-h8-form-flow-validation-page-item-component>
+                </template>
             </div>
-        </div>
-    </lightning-card>
+        </template>
+    </section>
   </template>
 </template>

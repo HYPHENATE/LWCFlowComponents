@@ -35,3 +35,4 @@ coverage/                # LWC coverage information
 
 
 .pmdCache                # pmd cache file
+scripts/

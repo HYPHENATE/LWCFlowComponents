@@ -62,4 +62,24 @@ export default class H8FormFlowValidationPageItemComponent extends LightningElem
     get displayPage() {
         return this.page.pageName !== 'NOPAGESCONFIGURED';
     }
+
+    get showPageName() {
+        return this.page?.showPageName === true;
+    }
+
+    get tone() {
+        return this.page?.tone === 'warning' ? 'warning' : 'error';
+    }
+
+    get iconName() {
+        return this.tone === 'warning' ? 'utility:warning' : 'utility:error';
+    }
+
+    get iconVariant() {
+        return this.tone === 'warning' ? 'warning' : 'error';
+    }
+
+    get errorRowClass() {
+        return `page-error-text page-error-text_${this.tone}`;
+    }
 }

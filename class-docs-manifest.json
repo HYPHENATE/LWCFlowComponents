@@ -1,0 +1,1595 @@
+[
+    {
+        "className":  "CustomLDTSaveWrapper",
+        "description":  "save wrapper class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "customLightningDataTableController",
+        "description":  "custom data table controller class",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getFieldsAndRecords",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sObjectName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "fieldSetAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "parentIDField",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "parentId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "whereClause",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "orderByClause",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "customLightningDataTableWrapper"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getFieldDetails",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sObjectAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "lstFSMember",
+                                                       "type":  "List\u003cSchema.FieldSetMember\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003ccustomLightningDataTableWrapper.fieldSetup\u003e"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getPicklistOptionsMap",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "dfr",
+                                                       "type":  "Schema.DescribeFieldResult"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003cMap\u003cString, String\u003e\u003e"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "customLightningDataTableControllerTest",
+        "description":  "test class for customLightningDataTableController",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "customLightningDataTableWrapper",
+        "description":  "field specification wrapper class",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8DataFetcherController",
+        "description":  "master controller for fetching data from the server using dynamic SOQL queries. It provides methods to execute queries and return results in a structured format.",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getSObjects",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "queryDeveloperName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "bindsJson",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "QueryResult"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getAvailableQueries",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003cQueryOption\u003e"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getQueryDefinition",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "queryDeveloperName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "QueryDefinition"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getQueryMetadata",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003cH8_DataFetcherQuery__mdt\u003e"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "validateTemplate",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "soqlTemplate",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "objectApiName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "parseBindsJson",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "bindsJson",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "Map\u003cString, Object\u003e"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "resolveAccessLevel",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "accessMode",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "System.AccessLevel"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8DataFetcherControllerTest",
+        "description":  "Test class for H8DataFetcherController",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+                        {
+                            "methodName":  "buildQueryMetadata",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "developerName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "label",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "objectApiName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "soqlTemplate",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "accessMode",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "H8_DataFetcherQuery__mdt"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8DataFetcherFieldSelectorController",
+        "description":  "controller for fetching fields of a specified Salesforce object. It provides a method to retrieve the fields and their metadata, which can be used in the UI for dynamic field selection.",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getObjectFields",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "objectName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003cField\u003e"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8DataFetcherFieldSelectorControllerTest",
+        "description":  "Test class for H8DataFetcherFieldSelectorController",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+                        {
+                            "methodName":  "doTest",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FilePdfZipHelper",
+        "description":  "Retrieves file payloads for ContentDocument or ContentVersion ids so client-side ZIP/PDF utilities can work without browser CORS issues.",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getFilePayloads",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "fileIds",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003cFilePayload\u003e"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "applyContentVersion",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "payload",
+                                                       "type":  "FilePayload"
+                                                   },
+                                                   {
+                                                       "name":  "contentVersion",
+                                                       "type":  "ContentVersion"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "buildFileName",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentVersion",
+                                                       "type":  "ContentVersion"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "tryParseId",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "value",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "Id"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FilePdfZipHelperTest",
+        "description":  "Tests H8FilePDFZipHelper file payload retrieval for ContentDocument and ContentVersion inputs.",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+                        {
+                            "methodName":  "createContentVersion",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "title",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "pathOnClient",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "versionData",
+                                                       "type":  "Blob"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "ContentVersion"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFileUploadController",
+        "description":  "flow file upload controller",
+        "apiVersion":  "66.0",
+        "sharing":  "without",
+        "methods":  [
+                        {
+                            "methodName":  "updateFileData",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentDocumentIds",
+                                                       "type":  "List\u003cString\u003e"
+                                                   },
+                                                   {
+                                                       "name":  "configuration",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "contentDocumentCreation",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "fileValuesSet",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getContentDocumentIds",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentDocumentIds",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getConfiguration",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "configuration",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "deleteContentDoc",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentVersionId",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getExistingFiles",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentDocumentIds",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "generateExistingFilesResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentVersions",
+                                                       "type":  "List\u003cContentVersion\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getContentDescription",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentVersion",
+                                                       "type":  "ContentVersion"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFileUploadControllerTest",
+        "description":  "H8FlowFileUploadController test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormCloneController",
+        "description":  "controller class to support with the screen for selection a flow form to clone",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getFlowForms",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getFlowFormsMetadata",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateResponse",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormCloneControllerTest",
+        "description":  "H8FlowFormCloneController test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormCloneDeployment",
+        "description":  "this class performs the actual clone and deployment of the form clone",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "cloneFlowForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sourceDeveloperName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "newMasterLabel",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "newDeveloperName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "Id"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "buildCMDTValue",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "field",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "value",
+                                                       "type":  "Object"
+                                                   },
+                                                   {
+                                                       "name":  "dataType",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "Metadata.CustomMetadataValue"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getUniqueName",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "newName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "originalName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "regenerateUnique",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "newName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "uniqueDevName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getMasterLabels",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormCloneDeploymentTest",
+        "description":  "H8FlowFormCloneDeployment test",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormCloneStatus",
+        "description":  "method that is used to check the status of the metadata deployment",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "checkDeployStatus",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "deploymentId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "includeDetails",
+                                                       "type":  "Boolean"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormCloneStatusTest",
+        "description":  "H8FlowFormCloneStatus test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+                        {
+                            "methodName":  "respond",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "req",
+                                                       "type":  "HTTPRequest"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "HTTPResponse"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "respond",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "req",
+                                                       "type":  "HTTPRequest"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "HTTPResponse"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormController",
+        "description":  "Meta-driven form flow controller.",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionsToExclude",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getFormMeta",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionsToExclude",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateFormSectionResponse",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateErrorResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "message",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormControllerTest",
+        "description":  "H8FlowFormController test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormFlowValidationResults",
+        "description":  "Data Transfer Object (DTO) used to return validation results",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormPageValidation",
+        "description":  "Apex controller for display page level validation errors within a flow",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "validatePage",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "formName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "parentObjectAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "pageName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getValidationFields",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "storeValidationValue",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "pageValidation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "validateCurrentRecord",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "handleFlowValidationErrors",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "handleCustomValidationErrors",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormPageValidationTest",
+        "description":  "H8FlowFormPageValidation test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormResponseGenerator",
+        "description":  "Helper class for generating JSON responses for form validation flows.",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "generateFormValidationResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "success",
+                                                       "type":  "Boolean"
+                                                   },
+                                                   {
+                                                       "name":  "message",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "Map\u003cString",
+                                                       "type":  ""
+                                                   },
+                                                   {
+                                                       "name":  "Map\u003cString",
+                                                       "type":  ""
+                                                   },
+                                                   {
+                                                       "name":  "validationErrors",
+                                                       "type":  "List\u003cString\u003e\u003e\u003e"
+                                                   },
+                                                   {
+                                                       "name":  "formDetails",
+                                                       "type":  "H8_Flow_Form__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "generateFormSectionResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "success",
+                                                       "type":  "Boolean"
+                                                   },
+                                                   {
+                                                       "name":  "message",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "Map\u003cString",
+                                                       "type":  ""
+                                                   },
+                                                   {
+                                                       "name":  "currentErrors",
+                                                       "type":  "List\u003cString\u003e\u003e"
+                                                   },
+                                                   {
+                                                       "name":  "formDetails",
+                                                       "type":  "H8_Flow_Form__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "generateFormPageResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "success",
+                                                       "type":  "Boolean"
+                                                   },
+                                                   {
+                                                       "name":  "message",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "currentErrors",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "generateMapOfValues",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formDetails",
+                                                       "type":  "H8_Flow_Form__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getDisplayLabel",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "section",
+                                                       "type":  "H8_Flow_Form_Section__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getCustomLabel",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "useLabel",
+                                                       "type":  "Boolean"
+                                                   },
+                                                   {
+                                                       "name":  "masterLabel",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormSectionValidation",
+        "description":  "apex controller to support with generating validations for an entire section",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "validatePage",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "formName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "parentObjectAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getValidationFields",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "storeValidationValue",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sectionValidation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "validateCurrentRecord",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "handleFlowValidationErrors",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validations",
+                                                       "type":  "List\u003cH8_Flow_Form_Section_Validation__mdt\u003e"
+                                                   },
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "handleCustomValidationErrors",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateError",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   },
+                                                   {
+                                                       "name":  "errorMessage",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormSectionValidationTest",
+        "description":  "H8FlowFormSectionValidation test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
+        "className":  "H8FlowFormValidation",
+        "description":  "master form flow validation class for validating an entire form submission looking for errors",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "validateCompleteForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "primaryObjectAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "formAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionsToNotDisplay",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getValidationFields",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "processFormSectionsValidationRecords",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formSection",
+                                                       "type":  "H8_Flow_Form_Section__mdt"
+                                                   },
+                                                   {
+                                                       "name":  "formSectionValidation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "storeValidationValue",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sectionValidation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "validateCurrentRecord",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateErrorFromSection",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validations",
+                                                       "type":  "List\u003cH8_Flow_Form_Section_Validation__mdt\u003e"
+                                                   },
+                                                   {
+                                                       "name":  "sectionName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "handleFlowValidationErrors",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sectionName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "validations",
+                                                       "type":  "List\u003cH8_Flow_Form_Section_Validation__mdt\u003e"
+                                                   },
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "handleCustomValidationErrors",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sectionName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateError",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "sectionName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "validation",
+                                                       "type":  "H8_Flow_Form_Section_Validation__mdt"
+                                                   },
+                                                   {
+                                                       "name":  "errorMessage",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "void"
+                                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormValidationHelper",
+        "description":  "flow form validations helper class",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getCompleteForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionsToNotDisplay",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "H8_Flow_Form__mdt"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getSpecificSectionForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "H8_Flow_Form__mdt"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getSpecificPageForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "formAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "pageName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "H8_Flow_Form__mdt"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getProcessingRecord",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "primaryObjectAPIName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "soqlFields",
+                                                       "type":  "Set\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "SObject"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getFieldValue",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "currentRecord",
+                                                       "type":  "SObject"
+                                                   },
+                                                   {
+                                                       "name":  "fieldAPIName",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "Object"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getFlowValidations",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "validationFlowName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "flowFormName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "flowFormSectionName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "flowFormSectionPageName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "sectionsToNotDisplay",
+                                                       "type":  "List\u003cString\u003e"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "Map\u003cString, List\u003cString\u003e\u003e"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormValidationTest",
+        "description":  "H8FlowFormValidation test class",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+                        {
+                            "methodName":  "getMockFlowValidationResult",
+                            "description":  "",
+                            "inputVariables":  [
+
+                                               ],
+                            "outputVariables":  [
+                                                    "List\u003cH8FlowFormFlowValidationResults\u003e"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8SignatureController",
+        "description":  "e signature controller for handling signature uploads",
+        "apiVersion":  "66.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "processSignature",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "recordId",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "signatureName",
+                                                       "type":  "String"
+                                                   },
+                                                   {
+                                                       "name":  "dataUrl",
+                                                       "type":  "String"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getBase64Image",
+                            "description":  "",
+                            "inputVariables":  [
+                                                   {
+                                                       "name":  "contentVersionId",
+                                                       "type":  "Id"
+                                                   }
+                                               ],
+                            "outputVariables":  [
+                                                    "String"
+                                                ],
+                            "visibility":  "public"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8SignatureControllerTest",
+        "description":  "H8SignatureController test class for testing the signature upload functionality",
+        "apiVersion":  "66.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    }
+]
