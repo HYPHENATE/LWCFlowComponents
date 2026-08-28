@@ -20,7 +20,7 @@
             />
             <property name="defaultPage" 
                         label="Default Page" 
-                        description="Enter the section number that you want to default the loading to"
+                        description="Enter the section's order number (as configured in the section metadata, e.g. 10/20/30) that you want to default the loading to"
                         type="Integer" 
             />
             <property name="scrollToTopOffset" 
@@ -45,6 +45,11 @@
                         type="Boolean"
                         description="When set to true this displays the currently active section name as a heading above the rendered form content"
                         default="false"
+            />
+            <property name="isReadOnly"
+                        label="Is Read Only"
+                        type="Boolean"
+                        description="Optional. When set (true or false), this value is passed to the child Flow as an isReadOnly input variable. Leave unset for existing forms that do not use this variable."
             />
         </targetConfig>
         <targetConfig targets="lightning__RecordPage">
@@ -60,7 +65,7 @@
             />
             <property name="defaultPage" 
                         label="Default Page" 
-                        description="Enter the section number that you want to default the loading to"
+                        description="Enter the section's order number (as configured in the section metadata, e.g. 10/20/30) that you want to default the loading to"
                         type="Integer" 
             />
             <property name="scrollToTopOffset" 
@@ -86,6 +91,11 @@
                         description="When set to true this displays the currently active section name as a heading above the rendered form content"
                         default="false"
             />
+            <property name="isReadOnly"
+                        label="Is Read Only"
+                        type="Boolean"
+                        description="Optional. When set (true or false), this value is passed to the child Flow as an isReadOnly input variable. Leave unset for existing forms that do not use this variable."
+            />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
             <property name="formName" 
@@ -100,7 +110,7 @@
             />
             <property name="defaultPage" 
                         label="Default Page" 
-                        description="Enter the section number that you want to default the loading to"
+                        description="Enter the section's order number (as configured in the section metadata, e.g. 10/20/30) that you want to default the loading to"
                         type="Integer"
             />
             <property name="scrollToTopOffset" 
@@ -126,6 +136,11 @@
                         description="When set to true this displays the currently active section name as a heading above the rendered form content"
                         default="false"
             />
+            <property name="isReadOnly"
+                        label="Is Read Only"
+                        type="Boolean"
+                        description="Optional. When set (true or false), this value is passed to the child Flow as an isReadOnly input variable. Leave unset for existing forms that do not use this variable."
+            />
         </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
             <property name="formName" 
@@ -140,7 +155,7 @@
             />
             <property name="defaultPage" 
                         label="Default Page" 
-                        description="Enter the section number that you want to default the loading to"
+                        description="Enter the section's order number (as configured in the section metadata, e.g. 10/20/30) that you want to default the loading to"
                         type="Integer"
             />
             <property name="scrollToTopOffset" 
@@ -188,6 +203,11 @@
                         type="Boolean"
                         description="When set to true this displays the currently active section name as a heading above the rendered form content"
                         default="false"
+            />
+            <property name="isReadOnly"
+                        label="Is Read Only"
+                        type="Boolean"
+                        description="Optional. When set (true or false), this value is passed to the child Flow as an isReadOnly input variable. Leave unset for existing forms that do not use this variable."
             />
         </targetConfig>
     </targetConfigs>
