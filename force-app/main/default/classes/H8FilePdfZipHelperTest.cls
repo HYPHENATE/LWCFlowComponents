@@ -13,19 +13,21 @@ private class H8FilePdfZipHelperTest {
             'ReusablePdf.pdf',
             Blob.valueOf('PDF version 1')
         );
-        insert new ContentVersion(
+        ContentVersion secondVersion = new ContentVersion(
             ContentDocumentId = initialVersion.ContentDocumentId,
             Title = 'ReusablePdf',
             PathOnClient = 'ReusablePdf.pdf',
             VersionData = Blob.valueOf('PDF version 2')
         );
+        insert secondVersion;
 
+        // Look up by the id we just inserted rather than ORDER BY CreatedDate DESC:
+        // both versions can share the same CreatedDate within a test transaction,
+        // making that ordering non-deterministic.
         ContentVersion latestVersion = [
             SELECT Id, ContentDocumentId, Title, FileExtension, VersionData
             FROM ContentVersion
-            WHERE ContentDocumentId = :initialVersion.ContentDocumentId
-            ORDER BY CreatedDate DESC
-            LIMIT 1
+            WHERE Id = :secondVersion.Id
         ];
 
         ContentVersion docxVersion = createContentVersion(

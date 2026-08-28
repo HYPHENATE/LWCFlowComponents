@@ -88,6 +88,12 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     @api showSectionHeader = false;
 
     /**
+     * Optional global read-only flag. Left undefined unless explicitly set,
+     * so it is only forwarded to the child Flow when configured.
+     */
+    @api isReadOnly;
+
+    /**
      * When true, allow success ticks to show when no errors.
      * When false (default), never show green ticks — only warnings/errors appear.
      */
@@ -223,6 +229,27 @@ export default class H8FlowFormRenderComponent extends LightningElement {
         try {
             const params = new URL(window.location.href).searchParams;
             return params.get('language');
+        } catch {
+            return null;
+        }
+    }
+
+    /** 1-based section number from ?sectionNumber=N in the URL, or null if absent/invalid. */
+    _getUrlSectionNumber() {
+        try {
+            const raw = new URL(window.location.href).searchParams.get('sectionNumber');
+            if (raw === null) return null;
+            const n = parseInt(raw, 10);
+            return Number.isFinite(n) && n >= 1 ? n : null;
+        } catch {
+            return null;
+        }
+    }
+
+    /** Section metadata DeveloperName from ?sectionName=API_Name in the URL, or null if absent. */
+    _getUrlSectionName() {
+        try {
+            return new URL(window.location.href).searchParams.get('sectionName');
         } catch {
             return null;
         }
@@ -524,7 +551,25 @@ export default class H8FlowFormRenderComponent extends LightningElement {
                 this.showToast(this.label.formLoaderErrorToastTitle, this.label.formLoaderErrorNoSections, 'warning');
                 return;
             }
-            const idx = Math.min(Math.max((this.defaultPage ?? 1) - 1, 0), Math.max(total - 1, 0));
+            // Resolve the initial section, in priority order:
+            // 1) ?sectionName=<metadata DeveloperName> in the URL
+            // 2) ?sectionNumber=<sectionOrder> in the URL, matched against the metadata's sectionOrder
+            // 3) defaultPage, matched against sectionOrder (e.g. 10/20/30 spaced values),
+            //    falling back to a positional index for legacy 1,2,3.. configs.
+            const urlSectionName = this._getUrlSectionName();
+            const nameMatchIdx = urlSectionName
+                ? this.sections.findIndex(s => s.sectionName === urlSectionName)
+                : -1;
+
+            const urlSectionNumber = this._getUrlSectionNumber();
+            const requestedPage = urlSectionNumber ?? (this.defaultPage ?? 1);
+            const orderMatchIdx = this.sections.findIndex(s => Number(s.sectionOrder) === Number(requestedPage));
+
+            const idx = nameMatchIdx !== -1
+                ? nameMatchIdx
+                : (orderMatchIdx !== -1
+                    ? orderMatchIdx
+                    : Math.min(Math.max(requestedPage - 1, 0), Math.max(total - 1, 0)));
 
             this.activeSectionId = this.sections[idx].id;
             this.flowAPIName = this.sections[idx].flow;
@@ -551,16 +596,19 @@ export default class H8FlowFormRenderComponent extends LightningElement {
     // Flow input vars
     // ------------------------------
     get inputVariables() {
-        if (this.getLanguage){
-            return [
-                { name: 'recordId', type: 'String', value: this.recordId ?? '' },
-                { name: 'varLanguage', type: 'String', value: this.varLanguage ?? 'en' }
-            ];
-        } else {
-            return [
-                { name: 'recordId', type: 'String', value: this.recordId ?? '' }
-            ];
+        const vars = [
+            { name: 'recordId', type: 'String', value: this.recordId ?? '' }
+        ];
+
+        if (this.getLanguage) {
+            vars.push({ name: 'varLanguage', type: 'String', value: this.varLanguage ?? 'en' });
         }
+
+        if (this.isReadOnly !== undefined && this.isReadOnly !== null) {
+            vars.push({ name: 'isReadOnly', type: 'Boolean', value: this.isReadOnly });
+        }
+
+        return vars;
     }
 
     // ------------------------------
