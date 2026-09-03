@@ -1,14 +1,18 @@
 /**
  * @description       : custom data table controller class
  * @author            : daniel@hyphen8.com
- * @last modified on  : 17-02-2026
+ * @last modified on  : 03-09-2026
  * @last modified by  : daniel@hyphen8.com
 **/
 @SuppressWarnings('PMD')
 public with sharing class customLightningDataTableController {
 
+    public static final String USER_MODE = 'USER_MODE';
+    public static final String SYSTEM_MODE = 'SYSTEM_MODE';
+    public static final String SYSTEM_MODE_WITHOUT_SHARING = 'SYSTEM_MODE_WITHOUT_SHARING';
+
     @AuraEnabled
-    public static customLightningDataTableWrapper getFieldsAndRecords(String sObjectName, String fieldSetAPIName, String parentIDField, String parentId, String whereClause, String orderByClause){
+    public static customLightningDataTableWrapper getFieldsAndRecords(String sObjectName, String fieldSetAPIName, String parentIDField, String parentId, String whereClause, String orderByClause, String dataAccessMode){
         try {
             if (String.isBlank(sObjectName) || String.isBlank(fieldSetAPIName)) {
                 return null;
@@ -46,7 +50,16 @@ public with sharing class customLightningDataTableController {
                 query += ' ' + orderByClause;
             }
 
-            List<SObject> lstRecords = Database.query(query);
+            String mode = resolveMode(dataAccessMode);
+
+            List<SObject> lstRecords;
+            if (mode == SYSTEM_MODE_WITHOUT_SHARING) {
+                lstRecords = customLightningDataTableNoSharing.queryWithoutSharing(query);
+            } else if (mode == SYSTEM_MODE) {
+                lstRecords = Database.query(query, AccessLevel.SYSTEM_MODE);
+            } else {
+                lstRecords = Database.query(query, AccessLevel.USER_MODE);
+            }
 
             customLightningDataTableWrapper returnWrapper = new customLightningDataTableWrapper();
             returnWrapper.records = lstRecords;
@@ -60,6 +73,39 @@ public with sharing class customLightningDataTableController {
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    @AuraEnabled
+    public static void deleteRecord(String recordId, String dataAccessMode){
+        try {
+            if (String.isBlank(recordId)) {
+                return;
+            }
+
+            List<Id> ids = new List<Id>{ Id.valueOf(recordId) };
+            String mode = resolveMode(dataAccessMode);
+
+            List<Database.DeleteResult> results;
+            if (mode == SYSTEM_MODE_WITHOUT_SHARING) {
+                // lightning/uiRecordApi's deleteRecord always enforces the running user's sharing
+                // and FLS, so it cannot honour this mode - it is routed through Apex instead.
+                results = customLightningDataTableNoSharing.deleteWithoutSharing(ids);
+            } else if (mode == SYSTEM_MODE) {
+                results = Database.delete(ids, AccessLevel.SYSTEM_MODE);
+            } else {
+                results = Database.delete(ids, AccessLevel.USER_MODE);
+            }
+
+            if (!results.isEmpty() && !results[0].isSuccess()) {
+                throw new AuraHandledException(results[0].getErrors()[0].getMessage());
+            }
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    private static String resolveMode(String dataAccessMode){
+        return String.isBlank(dataAccessMode) ? USER_MODE : dataAccessMode.trim().toUpperCase();
     }
 
     private static List<customLightningDataTableWrapper.fieldSetup> getFieldDetails(String sObjectAPIName,List<Schema.FieldSetMember> lstFSMember){

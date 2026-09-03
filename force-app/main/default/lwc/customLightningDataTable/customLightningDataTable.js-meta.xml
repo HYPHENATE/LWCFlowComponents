@@ -74,11 +74,18 @@
                         type="String" 
                         role="inputOnly"
             />
-            <property name="orderByClause" 
-                        label="Order By Clause" 
-                        description="This is the a part of the SOQL query for the order by clause i.e ORDER BY CreatedDate ASC" 
-                        type="String" 
+            <property name="orderByClause"
+                        label="Order By Clause"
+                        description="This is the a part of the SOQL query for the order by clause i.e ORDER BY CreatedDate ASC"
+                        type="String"
                         role="inputOnly"
+            />
+            <property name="accessMode"
+                        label="Data Access Mode"
+                        description="Enter one of: USER_MODE (recommended - respects the running user's field, object and sharing access), SYSTEM_MODE (ignores field/object permissions but still respects sharing rules), or SYSTEM_MODE_WITHOUT_SHARING (ignores field/object permissions and sharing rules entirely - only use this when the running user is deliberately not shared the records, e.g. reviewer scenarios)."
+                        type="String"
+                        role="inputOnly"
+                        default="USER_MODE"
             />
             <property name="defaultFieldValues" 
                         label="Default Field Values" 

@@ -11,6 +11,7 @@ import { getObjectInfo, getPicklistValuesByRecordType } from 'lightning/uiObject
 
 import actionsLabel from '@salesforce/label/c.H8CustomDataTableActionsLabel';
 import getData from '@salesforce/apex/customLightningDataTableController.getFieldsAndRecords';
+import deleteRecordApex from '@salesforce/apex/customLightningDataTableController.deleteRecord';
 
 export default class CustomLightningDataTable extends LightningElement {
   // public api
@@ -25,6 +26,7 @@ export default class CustomLightningDataTable extends LightningElement {
   @api startingRowCount;
   @api whereClause;
   @api orderByClause;
+  @api accessMode = 'USER_MODE';
   @api defaultFieldValues;
   @api newRecords;
   @api existingRecords;
@@ -99,7 +101,8 @@ export default class CustomLightningDataTable extends LightningElement {
       parentIDField: this.parentFieldAPIName,
       parentId: this.parentRecordId,
       whereClause: this.whereClause,
-      orderByClause: this.orderByClause
+      orderByClause: this.orderByClause,
+      dataAccessMode: this.accessMode
     })
       .then((results) => {
         const recordData = results.records || [];
@@ -267,7 +270,11 @@ export default class CustomLightningDataTable extends LightningElement {
     const deleteRowEvent = event.detail.detail;
     this.editData = (this.editData || []).filter(record => record.id !== deleteRowEvent);
     if (deleteRowEvent && !deleteRowEvent.startsWith('tmp_')) {
-      deleteRecord(deleteRowEvent).catch(error => {
+      // lightning/uiRecordApi's deleteRecord always enforces the running user's own sharing and
+      const deletePromise = (this.accessMode && this.accessMode !== 'USER_MODE')
+        ? deleteRecordApex({ recordId: deleteRowEvent, dataAccessMode: this.accessMode })
+        : deleteRecord(deleteRowEvent);
+      deletePromise.catch(error => {
         // eslint-disable-next-line no-console
         console.error(JSON.stringify(error && error.message));
       });
