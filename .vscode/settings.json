@@ -1,15 +1,4 @@
 {
     "salesforcedx-vscode-core.show-cli-success-msg": false,
-    "xml.preferences.showSchemaDocumentationType": "none",
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#05628a",
-        "statusBar.foreground": "#ffffff",
-        "statusBar.border": "#0d9dda",
-        "statusBarItem.hoverBackground": "#327e9f",
-        "statusBarItem.remoteBackground": "#0b4c68",
-        "statusBarItem.remoteForeground": "#ffffff",
-        "activityBar.activeBorder": "#0d9dda",
-        "activityBarBadge.background": "#0d9dda",
-        "activityBarBadge.foreground": "#181818"
-    }
+    "xml.preferences.showSchemaDocumentationType": "none"
 }

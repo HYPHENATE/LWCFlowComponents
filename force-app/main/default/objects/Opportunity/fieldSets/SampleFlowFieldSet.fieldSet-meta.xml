@@ -23,14 +23,14 @@
         <isRequired>true</isRequired>
     </displayedFields>
     <displayedFields>
-        <field>IsPrivate</field>
-        <isFieldManaged>false</isFieldManaged>
-        <isRequired>false</isRequired>
-    </displayedFields>
-    <displayedFields>
         <field>StageName</field>
         <isFieldManaged>false</isFieldManaged>
         <isRequired>true</isRequired>
+    </displayedFields>
+    <displayedFields>
+        <field>IsWon</field>
+        <isFieldManaged>false</isFieldManaged>
+        <isRequired>false</isRequired>
     </displayedFields>
     <label>SampleFlowFieldSet</label>
 </FieldSet>
