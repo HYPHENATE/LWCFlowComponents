@@ -84,6 +84,10 @@
         "path":  "lwc-doc-pages\\h8ESignature.md"
     },
     {
+        "name":  "h8FlowExplorer",
+        "path":  "lwc-doc-pages\\h8FlowExplorer.md"
+    },
+    {
         "name":  "h8FlowFileUploadDeleteFile",
         "path":  "lwc-doc-pages\\h8FlowFileUploadDeleteFile.md"
     },
@@ -112,8 +116,20 @@
         "path":  "lwc-doc-pages\\h8FlowFormRenderItem.md"
     },
     {
+        "name":  "h8FlowUsageModal",
+        "path":  "lwc-doc-pages\\h8FlowUsageModal.md"
+    },
+    {
+        "name":  "h8FlowUsageTable",
+        "path":  "lwc-doc-pages\\h8FlowUsageTable.md"
+    },
+    {
         "name":  "h8FormCloneComponent",
         "path":  "lwc-doc-pages\\h8FormCloneComponent.md"
+    },
+    {
+        "name":  "h8FormCloneModal",
+        "path":  "lwc-doc-pages\\h8FormCloneModal.md"
     },
     {
         "name":  "h8FormFlowValidationComponent",
@@ -126,6 +142,10 @@
     {
         "name":  "h8FormFlowValidationSectionComponent",
         "path":  "lwc-doc-pages\\h8FormFlowValidationSectionComponent.md"
+    },
+    {
+        "name":  "h8FormManager",
+        "path":  "lwc-doc-pages\\h8FormManager.md"
     },
     {
         "name":  "h8FormValidationUtils",

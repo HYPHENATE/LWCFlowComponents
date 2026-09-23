@@ -1,0 +1,358 @@
+<!--
+  @description       : form management component for Hyphen8 Flow Components
+  @author            : daniel@hyphen8.com
+  @last modified on  : 22-09-2026
+  @last modified by  : daniel@hyphen8.com
+-->
+<template>
+    <lightning-tabset variant="scoped" active-tab-value={activeTabValue}>
+        <lightning-tab label={label.formExplorerTabLabel} icon-name="standard:form" value="formExplorer" onactive={handleTabActive}>
+        <div>
+            <template if:false={isTestMode}>
+            <lightning-layout class="slds-var-m-bottom_medium">
+                <lightning-layout-item size="4" padding="around-small">
+                    <lightning-combobox name="formTypeFilter"
+                                        label={label.formTypeFilterLabel}
+                                        value={formTypeFilter}
+                                        options={formTypeFilterOptions}
+                                        disabled={isFormSelectionDisabled}
+                                        onchange={handleFormTypeFilterChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="8" padding="around-small">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="form-search-input">{label.formSelectionLabel}</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-combobox_container">
+                                <div class={formComboboxClass}>
+                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                        <input type="text"
+                                            id="form-search-input"
+                                            class="slds-input slds-combobox__input"
+                                            placeholder={label.formSelectionPlaceholder}
+                                            value={formSearchTerm}
+                                            disabled={isFormSelectionDisabled}
+                                            autocomplete="off"
+                                            role="combobox"
+                                            aria-expanded={isFormDropdownExpanded}
+                                            aria-controls="form-search-listbox"
+                                            aria-activedescendant={highlightedFormOptionId}
+                                            aria-autocomplete="list"
+                                            oninput={handleFormSearchInput}
+                                            onfocus={handleFormSearchFocus}
+                                            onblur={handleFormSearchBlur}
+                                            onkeydown={handleFormSearchKeydown} />
+                                        <lightning-icon icon-name="utility:search" size="x-small" class="slds-input__icon slds-input__icon_right"></lightning-icon>
+                                    </div>
+                                    <div class="slds-dropdown slds-dropdown_fluid" role="listbox">
+                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation" id="form-search-listbox">
+                                            <template if:true={hasFilteredFormOptions}>
+                                                <template for:each={formOptionsForDisplay} for:item="option">
+                                                    <li key={option.value} role="presentation" class="slds-listbox__item">
+                                                        <div id={option.id}
+                                                            class={option.optionClass}
+                                                            role="option"
+                                                            aria-selected={option.isHighlighted}
+                                                            data-value={option.value}
+                                                            onmousedown={handleFormOptionSelect}>
+                                                            <span class="slds-media__body">
+                                                                <span class="slds-truncate">{option.label}</span>
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </template>
+                                            </template>
+                                            <template if:false={hasFilteredFormOptions}>
+                                                <li class="slds-listbox__item">
+                                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small">
+                                                        <span class="slds-media__body slds-text-color_weak">{label.noFormsFoundText}</span>
+                                                    </div>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            </template>
+
+            <template if:false={hasSelectedForm}>
+                <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                    <p class="slds-text-color_weak">{label.selectFormHelpText}</p>
+                </div>
+            </template>
+
+            <template if:true={hasSelectedForm}>
+                <template if:false={isTestMode}>
+                    <lightning-card icon-name="standard:form" title={formInfoCardTitle} class="slds-var-m-bottom_medium">
+                        <lightning-button-group slot="actions">
+                            <lightning-button label={label.cloneActionLabel} onclick={handleCloneAction}></lightning-button>
+                            <lightning-button label={label.testActionLabel}
+                                            disabled={isTestActionDisabled}
+                                            title={testActionTitle}
+                                            onclick={handleTestAction}>
+                            </lightning-button>
+                        </lightning-button-group>
+                        <lightning-accordion allow-multiple-sections-open active-section-name={formInfoActiveSections}>
+                        <lightning-accordion-section name="information" label={label.informationAccordionLabel}>
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="4" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                <div class="slds-form-element">
+                                    <span class="slds-form-element__label slds-text-color_weak">{label.formTypeLabel}</span>
+                                    <div class="slds-form-element__static slds-truncate">{selectedFormDetails.type}</div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                <div class="slds-form-element">
+                                    <span class="slds-form-element__label slds-text-color_weak">{label.formStatusLabel}</span>
+                                    <div class="slds-form-element__static slds-truncate">{selectedFormDetails.status}</div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                <div class="slds-form-element">
+                                    <span class="slds-form-element__label slds-text-color_weak">{label.formDeveloperNameLabel}</span>
+                                    <div class="slds-form-element__static slds-truncate">
+                                        <a href={selectedFormMetadataUrl} target="_blank" style="display: inline-flex; align-items: center;">
+                                            <span>{selectedFormDetails.developerName}</span>
+                                            <lightning-icon icon-name="utility:new_window"
+                                                            size="xx-small"
+                                                            class="slds-var-m-left_xx-small"
+                                                            alternative-text={label.openMetadataNewWindowAltText}
+                                                            title={label.openMetadataNewWindowAltText}>
+                                            </lightning-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                <div class="slds-form-element">
+                                    <span class="slds-form-element__label slds-text-color_weak">{label.formMasterObjectLabel}</span>
+                                    <div class="slds-form-element__static slds-truncate">{selectedFormDetails.masterObject}</div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                <div class="slds-form-element">
+                                    <span class="slds-form-element__label slds-text-color_weak">{label.formValidationFlowApiNameLabel}</span>
+                                    <div class="slds-form-element__static slds-truncate">
+                                        <template if:true={hasValidationFlow}>
+                                            <a href="javascript:void(0);" onclick={handleOpenValidationFlow} style="display: inline-flex; align-items: center;">
+                                                <span>{selectedFormDetails.validationFlowAPIName}</span>
+                                                <lightning-icon icon-name="utility:new_window"
+                                                                size="xx-small"
+                                                                class="slds-var-m-left_xx-small"
+                                                                alternative-text={label.openFlowNewWindowAltText}
+                                                                title={label.openFlowNewWindowAltText}>
+                                                </lightning-icon>
+                                            </a>
+                                            <a href="javascript:void(0);" onclick={handleShowValidationFlowUsage} class="slds-var-m-left_small">{label.whereUsedLinkLabel}</a>
+                                        </template>
+                                        <template if:false={hasValidationFlow}>
+                                            {selectedFormDetails.validationFlowAPIName}
+                                        </template>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        </lightning-accordion-section>
+                        <template if:true={hasCustomFields}>
+                        <lightning-accordion-section name="custom" label={label.customAccordionLabel}>
+                            <lightning-layout multiple-rows="true">
+                                <template for:each={customFields} for:item="field">
+                                    <lightning-layout-item key={field.apiName} size="4" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                        <div class="slds-form-element">
+                                            <span class="slds-form-element__label slds-text-color_weak">{field.label}</span>
+                                            <div class="slds-form-element__static slds-truncate">{field.value}</div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                        </template>
+                        <lightning-accordion-section name="sections" label={label.sectionsCardTitle}>
+                            <template if:true={isSectionsAreaLoading}>
+                                <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                                    <lightning-spinner alternative-text={label.loadingSpinnerText} size="medium"></lightning-spinner>
+                                </div>
+                            </template>
+                            <template if:false={isSectionsAreaLoading}>
+                                <template if:true={hasSectionsError}>
+                                    <p class="slds-var-p-around_medium slds-text-color_error">{label.sectionsErrorText}</p>
+                                </template>
+                                <template if:false={hasSectionsError}>
+                                    <template if:true={hasSections}>
+                                        <lightning-datatable key-field="developerName"
+                                                            data={sectionsForDatatable}
+                                                            columns={sectionColumns}
+                                                            max-row-selection="1"
+                                                            selected-rows={selectedSectionRows}
+                                                            sorted-by={sectionsSortedBy}
+                                                            sorted-direction={sectionsSortedDirection}
+                                                            onsort={handleSectionsSort}
+                                                            onrowselection={handleSectionSelection}
+                                                            onrowaction={handleSectionRowAction}>
+                                        </lightning-datatable>
+                                    </template>
+                                    <template if:false={hasSections}>
+                                        <p class="slds-var-p-around_medium slds-text-color_weak">{label.noSectionsText}</p>
+                                    </template>
+                                </template>
+                            </template>
+                        </lightning-accordion-section>
+                        </lightning-accordion>
+                    </lightning-card>
+
+                    <template if:true={hasSections}>
+                        <template if:false={hasSelectedSection}>
+                            <p class="slds-var-p-around_medium slds-text-color_weak">{label.selectSectionHelpText}</p>
+                        </template>
+
+                        <template if:true={hasSelectedSection}>
+                            <lightning-card icon-name="standard:asset_audit" title={label.validationsCardTitle} variant="narrow">
+                                <template if:true={isLoadingValidations}>
+                                    <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+                                        <lightning-spinner alternative-text={label.loadingSpinnerText} size="medium"></lightning-spinner>
+                                    </div>
+                                </template>
+                                <template if:false={isLoadingValidations}>
+                                    <template if:true={hasValidationsError}>
+                                        <p class="slds-var-p-around_medium slds-text-color_error">{label.validationsErrorText}</p>
+                                    </template>
+                                    <template if:false={hasValidationsError}>
+                                        <template if:true={hasFlowValidations}>
+                                            <h3 class="slds-text-heading_small slds-var-m-bottom_x-small">{label.flowValidationsTableTitle}</h3>
+                                            <lightning-datatable key-field="developerName"
+                                                                data={flowValidationsForDatatable}
+                                                                columns={flowValidationColumns}
+                                                                sorted-by={flowValidationsSortedBy}
+                                                                sorted-direction={flowValidationsSortedDirection}
+                                                                onsort={handleFlowValidationsSort}
+                                                                onrowaction={handleValidationRowAction}
+                                                                hide-checkbox-column
+                                                                class="slds-var-m-bottom_medium">
+                                            </lightning-datatable>
+                                        </template>
+                                        <template if:true={hasFieldValidations}>
+                                            <h3 class="slds-text-heading_small slds-var-m-bottom_x-small">{label.fieldValidationsTableTitle}</h3>
+                                            <lightning-datatable key-field="developerName"
+                                                                data={fieldValidationsForDatatable}
+                                                                columns={fieldValidationColumns}
+                                                                sorted-by={fieldValidationsSortedBy}
+                                                                sorted-direction={fieldValidationsSortedDirection}
+                                                                onsort={handleFieldValidationsSort}
+                                                                onrowaction={handleValidationRowAction}
+                                                                hide-checkbox-column>
+                                            </lightning-datatable>
+                                        </template>
+                                        <template if:false={hasValidations}>
+                                            <p class="slds-var-p-around_medium slds-text-color_weak">{label.validationsEmptyText}</p>
+                                        </template>
+                                    </template>
+                                </template>
+                            </lightning-card>
+                        </template>
+                    </template>
+                </template>
+
+                <template if:true={isTestMode}>
+                    <template if:true={isProductionOrg}>
+                        <div class="slds-notify slds-notify_alert slds-theme_error production-warning slds-var-m-bottom_small" role="alert">
+                            <span class="slds-assistive-text">{label.productionWarningAssistiveText}</span>
+                            <lightning-icon icon-name="utility:error" variant="inverse" size="small" class="slds-var-m-right_x-small"></lightning-icon>
+                            <h2>{label.productionWarningText}</h2>
+                        </div>
+                    </template>
+                    <template if:false={isProductionOrg}>
+                        <div class="slds-notify slds-notify_alert slds-theme_warning test-mode-warning slds-var-m-bottom_small" role="alert">
+                            <span class="slds-assistive-text">{label.testModeWarningAssistiveText}</span>
+                            <lightning-icon icon-name="utility:warning" variant="inverse" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                            <h2>{label.testModeWarningText}</h2>
+                        </div>
+                    </template>
+
+                    <lightning-card icon-name="standard:path_experiment" title={testModeCardTitle} variant="narrow">
+                        <lightning-button slot="actions"
+                                        label={label.backToFormManagementLabel}
+                                        icon-name="utility:back"
+                                        onclick={handleBackToFormManagement}>
+                        </lightning-button>
+                        <template if:true={hasMasterObject}>
+                            <div class="slds-grid slds-grid_vertical-align-end">
+                                <div class="slds-col slds-grow">
+                                    <lightning-record-picker label={label.testRecordSearchLabel}
+                                                            placeholder={label.testRecordSearchPlaceholder}
+                                                            object-api-name={selectedFormDetails.masterObject}
+                                                            onchange={handleTestRecordSelection}>
+                                    </lightning-record-picker>
+                                </div>
+                                <div class="slds-col slds-no-flex slds-var-m-left_x-small" style="position: relative;">
+                                    <lightning-button-icon icon-name="utility:settings"
+                                                            variant="border-filled"
+                                                            alternative-text={label.testSettingsButtonAltText}
+                                                            title={label.testSettingsButtonAltText}
+                                                            onclick={handleToggleTestSettings}>
+                                    </lightning-button-icon>
+                                    <template if:true={isTestSettingsOpen}>
+                                        <div class="slds-dropdown slds-dropdown_right slds-p-around_medium">
+                                            <lightning-input type="toggle"
+                                                            label={label.liveValidationToggleLabel}
+                                                            checked={testLiveValidation}
+                                                            data-setting="testLiveValidation"
+                                                            onchange={handleTestSettingToggle}
+                                                            class="slds-var-m-bottom_small">
+                                            </lightning-input>
+                                            <lightning-input type="toggle"
+                                                            label={label.showSectionValidationPanelToggleLabel}
+                                                            checked={testShowSectionValidationPanel}
+                                                            data-setting="testShowSectionValidationPanel"
+                                                            onchange={handleTestSettingToggle}
+                                                            class="slds-var-m-bottom_small">
+                                            </lightning-input>
+                                            <lightning-input type="toggle"
+                                                            label={label.showNoValidationErrorsFoundToggleLabel}
+                                                            checked={testShowNoValidationErrorsFound}
+                                                            data-setting="testShowNoValidationErrorsFound"
+                                                            onchange={handleTestSettingToggle}
+                                                            class="slds-var-m-bottom_small">
+                                            </lightning-input>
+                                            <lightning-input type="toggle"
+                                                            label={label.showSectionHeaderToggleLabel}
+                                                            checked={testShowSectionHeader}
+                                                            data-setting="testShowSectionHeader"
+                                                            onchange={handleTestSettingToggle}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:false={hasMasterObject}>
+                            <p class="slds-text-color_weak">{label.noMasterObjectText}</p>
+                        </template>
+                    </lightning-card>
+
+                    <template if:true={hasTestRecord}>
+                        <div class="slds-var-m-top_medium">
+                            <c-h8-flow-form-render-component form-name={selectedForm}
+                                                            record-id={testRecordId}
+                                                            sections-to-not-display={testSectionsToNotDisplay}
+                                                            live-validation={testLiveValidation}
+                                                            show-section-validation-panel={testShowSectionValidationPanel}
+                                                            show-no-validation-errors-found={testShowNoValidationErrorsFound}
+                                                            show-section-header={testShowSectionHeader}>
+                            </c-h8-flow-form-render-component>
+                        </div>
+                    </template>
+                </template>
+            </template>
+        </div>
+        </lightning-tab>
+        <lightning-tab label={label.flowExplorerTabLabel} icon-name="standard:flow" value="flowExplorer" onactive={handleTabActive}>
+            <div>
+                <c-h8-flow-explorer onopenform={handleOpenFormFromFlowExplorer}></c-h8-flow-explorer>
+            </div>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

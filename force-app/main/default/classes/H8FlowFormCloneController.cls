@@ -23,7 +23,7 @@ public with sharing class H8FlowFormCloneController {
     * @description          method to pull in the actual metadata
     **/
     private static void getFlowFormsMetadata(){
-        flowForms = !Test.isRunningTest() ? [SELECT Id, MasterLabel, DeveloperName, Type__c, Status__c, Validation_Flow_API_Name__c FROM H8_Flow_Form__mdt] : testFlowForms;
+        flowForms = !Test.isRunningTest() ? [SELECT Id, MasterLabel, DeveloperName, Type__c, Status__c, Validation_Flow_API_Name__c, MasterObject__r.QualifiedAPIName FROM H8_Flow_Form__mdt] : testFlowForms;
     }
 
     /**
@@ -37,11 +37,13 @@ public with sharing class H8FlowFormCloneController {
         generator.writeStartArray();
         for(H8_Flow_Form__mdt flowForm : flowForms){
             generator.writeStartObject();
+                generator.writeStringField('id', null != flowForm.Id ? String.valueOf(flowForm.Id) : '');
                 generator.writeStringField('masterLabel', flowForm.MasterLabel);
                 generator.writeStringField('developerName', flowForm.DeveloperName);
                 generator.writeStringField('type', null != flowForm.Type__c ? flowForm.Type__c : '');
                 generator.writeStringField('status', null != flowForm.Status__c ? flowForm.Status__c : '');
                 generator.writeStringField('validationFlowAPIName', null != flowForm.Validation_Flow_API_Name__c ? flowForm.Validation_Flow_API_Name__c : '');
+                generator.writeStringField('masterObject', null != flowForm.MasterObject__r ? flowForm.MasterObject__r.QualifiedAPIName : '');
             generator.writeEndObject();
         }
         generator.writeEndArray();

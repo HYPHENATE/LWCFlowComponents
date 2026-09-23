@@ -841,6 +841,477 @@
                     ]
     },
     {
+        "className":  "H8FlowFormManagerController",
+        "description":  "controller class to support the flow form management page - lists a form's sections and each section's validations, and resolves the FlowRecord's Lightning record URL for a section's flow",
+        "apiVersion":  "67.0",
+        "sharing":  "with",
+        "methods":  [
+                        {
+                            "methodName":  "getFormSections",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "formDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "queryFormSections",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "formDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<H8_Flow_Form_Section__mdt>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getSectionValidations",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "sectionDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "querySectionValidations",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "sectionDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<H8_Flow_Form_Section_Validation__mdt>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getFlowRecordUrl",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "flowApiName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "getFlowRecordId",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "flowApiName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getFlowUsage",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "flowApiName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "queryFlowUsageSections",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "flowApiName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<H8_Flow_Form_Section__mdt>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "queryFlowUsageForms",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "flowApiName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<H8_Flow_Form__mdt>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getUsedFlows",
+                            "description":  "",
+                            "inputVariables":  [
+
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "queryUsedFlows",
+                            "description":  "",
+                            "inputVariables":  [
+
+                               ],
+                            "outputVariables":  [
+                                    "List<FlowUsageOption>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateUsedFlowsResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "flows",
+                                       "type":  "List<FlowUsageOption>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateFlowUsageResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "sectionUsages",
+                                       "type":  "List<H8_Flow_Form_Section__mdt>"
+                                   },
+                                   {
+                                       "name":  "formUsages",
+                                       "type":  "List<H8_Flow_Form__mdt>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getIsProductionOrg",
+                            "description":  "",
+                            "inputVariables":  [
+
+                               ],
+                            "outputVariables":  [
+                                    "Boolean"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "queryIsProductionOrg",
+                            "description":  "",
+                            "inputVariables":  [
+
+                               ],
+                            "outputVariables":  [
+                                    "Boolean"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getFormCustomFields",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "formDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "queryFormCustomFields",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "formDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<CustomFieldValue>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "getSectionCustomFieldsForForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "formDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "public"
+                        },
+                        {
+                            "methodName":  "querySectionCustomFieldsForForm",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "formDeveloperName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "Map<String, List<CustomFieldValue>>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateSectionCustomFieldsForFormResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "fieldsBySectionDeveloperName",
+                                       "type":  "Map<String, List<CustomFieldValue>>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "deriveCustomFieldApiNames",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "allFieldApiNames",
+                                       "type":  "Set<String>"
+                                   },
+                                   {
+                                       "name":  "knownFieldApiNames",
+                                       "type":  "Set<String>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<String>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "buildCustomFieldValues",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "objectApiName",
+                                       "type":  "String"
+                                   },
+                                   {
+                                       "name":  "fieldApiNames",
+                                       "type":  "List<String>"
+                                   },
+                                   {
+                                       "name":  "developerName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "List<CustomFieldValue>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "buildCustomFieldValuesForDeveloperNames",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "objectApiName",
+                                       "type":  "String"
+                                   },
+                                   {
+                                       "name":  "fieldApiNames",
+                                       "type":  "List<String>"
+                                   },
+                                   {
+                                       "name":  "developerNames",
+                                       "type":  "List<String>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "Map<String, List<CustomFieldValue>>"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "validateApiName",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "apiName",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "void"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "formatCustomFieldValue",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "record",
+                                       "type":  "SObject"
+                                   },
+                                   {
+                                       "name":  "fieldApiName",
+                                       "type":  "String"
+                                   },
+                                   {
+                                       "name":  "describeResult",
+                                       "type":  "Schema.DescribeFieldResult"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "CustomFieldValue"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateCustomFieldsResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "customFields",
+                                       "type":  "List<CustomFieldValue>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateSectionsResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "sections",
+                                       "type":  "List<H8_Flow_Form_Section__mdt>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "resolveSectionDisplayName",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "section",
+                                       "type":  "H8_Flow_Form_Section__mdt"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "generateValidationsResponse",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "validations",
+                                       "type":  "List<H8_Flow_Form_Section_Validation__mdt>"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "nullSafe",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "value",
+                                       "type":  "String"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "String"
+                                ],
+                            "visibility":  "private"
+                        },
+                        {
+                            "methodName":  "nullSafe",
+                            "description":  "",
+                            "inputVariables":  [
+                                   {
+                                       "name":  "value",
+                                       "type":  "Decimal"
+                                   }
+                               ],
+                            "outputVariables":  [
+                                    "Decimal"
+                                ],
+                            "visibility":  "private"
+                        }
+                    ]
+    },
+    {
+        "className":  "H8FlowFormManagerControllerTest",
+        "description":  "H8FlowFormManagerController test class",
+        "apiVersion":  "67.0",
+        "sharing":  "none",
+        "methods":  [
+
+                    ]
+    },
+    {
         "className":  "H8FlowFormPageValidation",
         "description":  "Apex controller for display page level validation errors within a flow",
         "apiVersion":  "66.0",

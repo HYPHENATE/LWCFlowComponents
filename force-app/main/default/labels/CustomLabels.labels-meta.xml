@@ -121,6 +121,94 @@
         <value>Your new Form Name must be unique!</value>
     </labels>
     <labels>
+        <fullName>H8FormCloneModalTitle</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneModalTitle</shortDescription>
+        <value>Clone Form</value>
+    </labels>
+    <labels>
+        <fullName>H8FormCloneModalCloseButtonLabel</fullName>
+        <categories>FormCloneComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormCloneModalCloseButtonLabel</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageModalTitle</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageModalTitle</shortDescription>
+        <value>Where Is This Flow Used?</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageLoadingText</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageLoadingText</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageFormColumnLabel</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageFormColumnLabel</shortDescription>
+        <value>Form</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageSectionColumnLabel</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageSectionColumnLabel</shortDescription>
+        <value>Section</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageTypeColumnLabel</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageTypeColumnLabel</shortDescription>
+        <value>Usage Type</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageNoUsagesText</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageNoUsagesText</shortDescription>
+        <value>This flow is not currently used by any form or section.</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageCloseButtonLabel</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageCloseButtonLabel</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageErrorLoadingToastTitle</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageErrorLoadingToastTitle</shortDescription>
+        <value>Error loading flow usage</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowUsageErrorText</fullName>
+        <categories>FlowUsageModal</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowUsageErrorText</shortDescription>
+        <value>Something went wrong loading flow usage. Please try again.</value>
+    </labels>
+    <labels>
         <fullName>H8FormCloneLoadingSpinnerText</fullName>
         <categories>FormCloneComponent</categories>
         <language>en_US</language>
@@ -825,5 +913,589 @@
         <protected>true</protected>
         <shortDescription>Value Label</shortDescription>
         <value>Value</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormSelectionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormSelectionLabel</shortDescription>
+        <value>Select a Form</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormSelectionPlaceholder</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormSelectionPlaceholder</shortDescription>
+        <value>Search for a form...</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerLoadingSpinnerText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerLoadingSpinnerText</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSectionsCardTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSectionsCardTitle</shortDescription>
+        <value>Sections</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerNoSectionsText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerNoSectionsText</shortDescription>
+        <value>This form has no sections.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSelectFormHelpText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSelectFormHelpText</shortDescription>
+        <value>Select a form above to view its sections.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSectionOrderColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSectionOrderColumnLabel</shortDescription>
+        <value>Order</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSectionNameColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSectionNameColumnLabel</shortDescription>
+        <value>Section</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSectionFlowApiNameColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSectionFlowApiNameColumnLabel</shortDescription>
+        <value>Flow API Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationsCardTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationsCardTitle</shortDescription>
+        <value>Section Validations</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationsEmptyText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationsEmptyText</shortDescription>
+        <value>This section has no validations.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSelectSectionHelpText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSelectSectionHelpText</shortDescription>
+        <value>Select a section above to view its validations.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationFieldColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationFieldColumnLabel</shortDescription>
+        <value>Field API Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationDataTypeColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationDataTypeColumnLabel</shortDescription>
+        <value>Data Type</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationValueColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationValueColumnLabel</shortDescription>
+        <value>Validation Value</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationErrorMessageColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationErrorMessageColumnLabel</shortDescription>
+        <value>Custom Error Message</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationDisabledColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationDisabledColumnLabel</shortDescription>
+        <value>Disabled</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationNameColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationNameColumnLabel</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationPageColumnLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationPageColumnLabel</shortDescription>
+        <value>Page</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFlowValidationsTableTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFlowValidationsTableTitle</shortDescription>
+        <value>Flow Validations</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFieldValidationsTableTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFieldValidationsTableTitle</shortDescription>
+        <value>Field Validations</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormInfoSectionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormInfoSectionLabel</shortDescription>
+        <value>Form -</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerInformationAccordionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerInformationAccordionLabel</shortDescription>
+        <value>Information</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerCustomAccordionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerCustomAccordionLabel</shortDescription>
+        <value>Local Custom Form Fields</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormExplorerTabLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormExplorerTabLabel</shortDescription>
+        <value>Form Explorer</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFlowExplorerTabLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFlowExplorerTabLabel</shortDescription>
+        <value>Flow Explorer</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerSearchLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerSearchLabel</shortDescription>
+        <value>Select a Flow</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerSearchPlaceholder</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerSearchPlaceholder</shortDescription>
+        <value>Search for a flow...</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerNoFlowsFoundText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerNoFlowsFoundText</shortDescription>
+        <value>No flows found.</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerSelectFlowHelpText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerSelectFlowHelpText</shortDescription>
+        <value>Select a flow above to see every form and section where it's used.</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerErrorLoadingFlowsToastTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerErrorLoadingFlowsToastTitle</shortDescription>
+        <value>Error Loading Flows</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerUsageCardTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerUsageCardTitle</shortDescription>
+        <value>Where Used</value>
+    </labels>
+    <labels>
+        <fullName>H8FlowExplorerOpenFlowButtonLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FlowExplorerOpenFlowButtonLabel</shortDescription>
+        <value>Open Flow</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerErrorLoadingCustomFieldsToastTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerErrorLoadingCustomFieldsToastTitle</shortDescription>
+        <value>Error Loading Custom Fields</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormTypeLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormTypeLabel</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormStatusLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormStatusLabel</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormDeveloperNameLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormDeveloperNameLabel</shortDescription>
+        <value>Developer Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormValidationFlowApiNameLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormValidationFlowApiNameLabel</shortDescription>
+        <value>Validation Flow API Name</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormMasterObjectLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormMasterObjectLabel</shortDescription>
+        <value>Master Object</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerMetadataSetupUrlPrefix</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerMetadataSetupUrlPrefix</shortDescription>
+        <value>/lightning/setup/CustomMetadata/page?address=%2F</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerViewMetadataLinkLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerViewMetadataLinkLabel</shortDescription>
+        <value>View Metadata</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerOpenFlowNewWindowAltText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerOpenFlowNewWindowAltText</shortDescription>
+        <value>Opens the flow in a new window</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerOpenMetadataNewWindowAltText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerOpenMetadataNewWindowAltText</shortDescription>
+        <value>Opens the metadata record in a new window</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSectionIconAltText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSectionIconAltText</shortDescription>
+        <value>Section Icon</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestModeTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestModeTitle</shortDescription>
+        <value>Test -</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerBackToFormManagementLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerBackToFormManagementLabel</shortDescription>
+        <value>Back to Form Management</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestModeWarningText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestModeWarningText</shortDescription>
+        <value>This is a live test, not a preview. Any values entered below will be saved to the selected record, and any active validation flows will run for real.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestModeWarningAssistiveText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestModeWarningAssistiveText</shortDescription>
+        <value>Warning</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerProductionWarningText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerProductionWarningText</shortDescription>
+        <value>WARNING: THIS IS A PRODUCTION ORG. Any values entered below will be saved to the selected record, and any active validation flows will run for real. Only continue if you intend to test against live production data.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerProductionWarningAssistiveText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerProductionWarningAssistiveText</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestRecordSearchLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestRecordSearchLabel</shortDescription>
+        <value>Search for a Record</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestRecordSearchPlaceholder</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestRecordSearchPlaceholder</shortDescription>
+        <value>Search...</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestSettingsButtonAltText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestSettingsButtonAltText</shortDescription>
+        <value>Test Settings</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerLiveValidationToggleLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerLiveValidationToggleLabel</shortDescription>
+        <value>Live Validation</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerShowSectionValidationPanelToggleLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerShowSectionValidationPanelToggleLabel</shortDescription>
+        <value>Show Section Validation Panel</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerShowNoValidationErrorsFoundToggleLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerShowNoValidationErrorsFoundToggleLabel</shortDescription>
+        <value>Show No Validation Errors Found</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerShowSectionHeaderToggleLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerShowSectionHeaderToggleLabel</shortDescription>
+        <value>Show Section Header</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerNoMasterObjectText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerNoMasterObjectText</shortDescription>
+        <value>This form has no Master Object configured. Set the Master Object on the form to enable testing.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerFormTypeFilterLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerFormTypeFilterLabel</shortDescription>
+        <value>Filter by Type</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerAllTypesOptionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerAllTypesOptionLabel</shortDescription>
+        <value>All Types</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerNoFormsFoundText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerNoFormsFoundText</shortDescription>
+        <value>No forms found</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestSectionActionAltText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestSectionActionAltText</shortDescription>
+        <value>Test</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerWhereUsedActionAltText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerWhereUsedActionAltText</shortDescription>
+        <value>Where Used</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerWhereUsedLinkLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerWhereUsedLinkLabel</shortDescription>
+        <value>Where Used</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerCloneActionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerCloneActionLabel</shortDescription>
+        <value>Clone</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerTestActionLabel</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerTestActionLabel</shortDescription>
+        <value>Test</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerErrorLoadingFormsToastTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerErrorLoadingFormsToastTitle</shortDescription>
+        <value>Error loading forms</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerErrorLoadingSectionsToastTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerErrorLoadingSectionsToastTitle</shortDescription>
+        <value>Error loading sections</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerErrorLoadingValidationsToastTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerErrorLoadingValidationsToastTitle</shortDescription>
+        <value>Error loading validations</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerErrorOpeningFlowToastTitle</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerErrorOpeningFlowToastTitle</shortDescription>
+        <value>Error opening flow</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerSectionsErrorText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerSectionsErrorText</shortDescription>
+        <value>Something went wrong loading sections for this form. Please try again.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerValidationsErrorText</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerValidationsErrorText</shortDescription>
+        <value>Something went wrong loading validations for this section. Please try again.</value>
+    </labels>
+    <labels>
+        <fullName>H8FormManagerUnknownErrorToastMessage</fullName>
+        <categories>FormManagerComponent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>H8FormManagerUnknownErrorToastMessage</shortDescription>
+        <value>An unknown error has occurred.</value>
     </labels>
 </CustomLabels>

@@ -8,86 +8,90 @@
 <template>
 
   <template if:false={allowEdit}>
-    <lightning-datatable 
-            key-field="Id"
-            data={data}
-            columns={columns}
-            hide-checkbox-column
-            row-number-offset={offSet}
-            show-row-number-column
-            suppress-bottom-bar>
-    </lightning-datatable> 
+    <div class="data-table-scroll-container">
+      <lightning-datatable
+              key-field="Id"
+              data={data}
+              columns={columns}
+              hide-checkbox-column
+              row-number-offset={offSet}
+              show-row-number-column
+              suppress-bottom-bar>
+      </lightning-datatable>
+    </div>
   </template>
 
   <template if:true={allowEdit}>
-    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
-      <thead>
-        <tr class="slds-line-height_reset">
-          <template for:each={columns} for:item="column">
-            <th key={column.label} scope="col">
-              <div class="slds-truncate" title={column.label}>{column.label}</div>
-            </th>
-          </template>
-          <template if:true={allowRowDeletion}>
-            <th scope="col">
-              <div class="slds-truncate slds-align_absolute-center" title={actionsLabel}>{actionsLabel}</div>
-            </th>
-          </template>
-        </tr>
-      </thead>
+    <div class="data-table-scroll-container">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+          <tr class="slds-line-height_reset">
+            <template for:each={columns} for:item="column">
+              <th key={column.label} scope="col">
+                <div class="slds-truncate" title={column.label}>{column.label}</div>
+              </th>
+            </template>
+            <template if:true={allowRowDeletion}>
+              <th scope="col">
+                <div class="slds-truncate slds-align_absolute-center" title={actionsLabel}>{actionsLabel}</div>
+              </th>
+            </template>
+          </tr>
+        </thead>
 
-      <tbody>
-        <template for:each={editData} for:item="record">
-          <c-custom-lightning-data-table-row
-              key={record.id}
-              record-id={record.id}
-              row-delete-enabled={allowRowDeletion}
-              row-data={record}
-              picklist-meta={picklistMeta}
-              read-only-fields={readOnlyFields}
-              onrowdeleted={handleRowDelete}
-              onrowupdated={handleRowUpdate}>
-          </c-custom-lightning-data-table-row>
-        </template>
-      </tbody>
-
-      <tfoot if:true={showTotalsRow}>
-        <tr>
-          <template for:each={footerRow} for:item="cell">
-            <td key={cell.key} class="slds-text-align_left" style="padding-left: 1rem;">
-              <strong>
-                <template if:true={cell.isTotal}>
-                  <template if:true={cell.isCurrency}>
-                    <lightning-formatted-number
-                      value={cell.value}
-                      format-style="currency"
-                      currency-code={currencyCode}
-                      minimum-fraction-digits={cell.scale}
-                      maximum-fraction-digits={cell.scale}>
-                    </lightning-formatted-number>
-                  </template>
-                  <template if:true={cell.isNumber}>
-                    <lightning-formatted-number
-                      value={cell.value}
-                      minimum-fraction-digits={cell.scale}
-                      maximum-fraction-digits={cell.scale}>
-                    </lightning-formatted-number>
-                  </template>
-                  <template if:true={cell.isPercent}>
-                    <lightning-formatted-number
-                      value={cell.percentDisplayValue}
-                      format-style="percent"
-                      minimum-fraction-digits={cell.scale}
-                      maximum-fraction-digits={cell.scale}>
-                    </lightning-formatted-number>
-                  </template>
-                </template>
-              </strong>
-            </td>
+        <tbody>
+          <template for:each={editData} for:item="record">
+            <c-custom-lightning-data-table-row
+                key={record.id}
+                record-id={record.id}
+                row-delete-enabled={allowRowDeletion}
+                row-data={record}
+                picklist-meta={picklistMeta}
+                read-only-fields={readOnlyFields}
+                onrowdeleted={handleRowDelete}
+                onrowupdated={handleRowUpdate}>
+            </c-custom-lightning-data-table-row>
           </template>
-        </tr>
-      </tfoot>
-    </table>
+        </tbody>
+
+        <tfoot if:true={showTotalsRow}>
+          <tr>
+            <template for:each={footerRow} for:item="cell">
+              <td key={cell.key} class="slds-text-align_left" style="padding-left: 1rem;">
+                <strong>
+                  <template if:true={cell.isTotal}>
+                    <template if:true={cell.isCurrency}>
+                      <lightning-formatted-number
+                        value={cell.value}
+                        format-style="currency"
+                        currency-code={currencyCode}
+                        minimum-fraction-digits={cell.scale}
+                        maximum-fraction-digits={cell.scale}>
+                      </lightning-formatted-number>
+                    </template>
+                    <template if:true={cell.isNumber}>
+                      <lightning-formatted-number
+                        value={cell.value}
+                        minimum-fraction-digits={cell.scale}
+                        maximum-fraction-digits={cell.scale}>
+                      </lightning-formatted-number>
+                    </template>
+                    <template if:true={cell.isPercent}>
+                      <lightning-formatted-number
+                        value={cell.percentDisplayValue}
+                        format-style="percent"
+                        minimum-fraction-digits={cell.scale}
+                        maximum-fraction-digits={cell.scale}>
+                      </lightning-formatted-number>
+                    </template>
+                  </template>
+                </strong>
+              </td>
+            </template>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
 
     <div class="slds-clearfix">
       <div class="slds-float_right">

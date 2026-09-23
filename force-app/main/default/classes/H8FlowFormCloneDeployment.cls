@@ -26,7 +26,7 @@ public with sharing class H8FlowFormCloneDeployment {
         getMasterLabels();
 
         H8_Flow_Form__mdt sourceForm = !Test.isRunningTest() ?[
-            SELECT Id, DeveloperName, MasterLabel, Type__c, Status__c, Validation_Flow_API_Name__c,
+            SELECT Id, DeveloperName, MasterLabel, Type__c, Status__c, Validation_Flow_API_Name__c, MasterObject__c,
                 (SELECT DeveloperName, MasterLabel, Flow_API_Name__c, Icon_Name__c, Order__c, Use_Custom_Label__c, H8_Flow_Form__c,
                     (SELECT DeveloperName, MasterLabel, CustomErrorMessage__c, DataType__c, Disabled__c, FieldAPIName__c,
                             FlowValidationType__c, IsFlowValidation__c, Order__c, Page__c, QuestionName__c, Use_Custom_Label__c, Validation_Value__c
@@ -44,7 +44,8 @@ public with sharing class H8FlowFormCloneDeployment {
         newMetadata.values = new List<Metadata.CustomMetadataValue>{
             buildCMDTValue('Type__c', sourceForm.Type__c, 'String'),
             buildCMDTValue('Status__c', sourceForm.Status__c, 'String'),
-            buildCMDTValue('Validation_Flow_API_Name__c', sourceForm.Validation_Flow_API_Name__c, 'String')
+            buildCMDTValue('Validation_Flow_API_Name__c', sourceForm.Validation_Flow_API_Name__c, 'String'),
+            buildCMDTValue('MasterObject__c', sourceForm.MasterObject__c, 'String')
         };
 
         Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
