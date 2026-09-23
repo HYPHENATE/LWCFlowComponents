@@ -1,1 +1,15 @@
-/** css here */
+/* Flow screens lay components out in flex columns. Without min-width: 0 here, a flex item
+   can't shrink below its content's intrinsic width, so a wide table forces the whole column
+   (and the screen) to grow instead of scrolling internally. */
+:host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.data-table-scroll-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}

@@ -1,0 +1,74 @@
+<template>
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="flow-search-input">{label.searchLabel}</label>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div class={flowComboboxClass}>
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input type="text"
+                            id="flow-search-input"
+                            class="slds-input slds-combobox__input"
+                            placeholder={label.searchPlaceholder}
+                            value={flowSearchTerm}
+                            disabled={isLoadingFlows}
+                            autocomplete="off"
+                            role="combobox"
+                            aria-expanded={isFlowDropdownExpanded}
+                            aria-controls="flow-search-listbox"
+                            aria-activedescendant={highlightedFlowOptionId}
+                            aria-autocomplete="list"
+                            oninput={handleFlowSearchInput}
+                            onfocus={handleFlowSearchFocus}
+                            onblur={handleFlowSearchBlur}
+                            onkeydown={handleFlowSearchKeydown} />
+                        <lightning-icon icon-name="utility:search" size="x-small" class="slds-input__icon slds-input__icon_right"></lightning-icon>
+                    </div>
+                    <div class="slds-dropdown slds-dropdown_fluid" role="listbox">
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation" id="flow-search-listbox">
+                            <template if:true={hasFilteredFlowOptions}>
+                                <template for:each={flowOptionsForDisplay} for:item="option">
+                                    <li key={option.value} role="presentation" class="slds-listbox__item">
+                                        <div id={option.id}
+                                            class={option.optionClass}
+                                            role="option"
+                                            aria-selected={option.isHighlighted}
+                                            data-value={option.value}
+                                            onmousedown={handleFlowOptionSelect}>
+                                            <span class="slds-media__body">
+                                                <span class="slds-truncate">{option.label}</span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </template>
+                            </template>
+                            <template if:false={hasFilteredFlowOptions}>
+                                <li class="slds-listbox__item">
+                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small">
+                                        <span class="slds-media__body slds-text-color_weak">{label.noFlowsFoundText}</span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template if:false={hasSelectedFlow}>
+        <div class="slds-align_absolute-center slds-is-relative slds-var-m-top_medium" style="height:5rem">
+            <p class="slds-text-color_weak">{label.selectFlowHelpText}</p>
+        </div>
+    </template>
+
+    <template if:true={hasSelectedFlow}>
+        <lightning-card icon-name="standard:flow" title={label.usageCardTitle} variant="narrow" class="slds-var-m-top_medium">
+            <lightning-button slot="actions"
+                            label={label.openFlowButtonLabel}
+                            icon-name="utility:new_window"
+                            onclick={handleOpenFlow}>
+            </lightning-button>
+            <c-h8-flow-usage-table flow-api-name={selectedFlowApiName} onopenform={handleOpenFormFromUsage}></c-h8-flow-usage-table>
+        </lightning-card>
+    </template>
+</template>

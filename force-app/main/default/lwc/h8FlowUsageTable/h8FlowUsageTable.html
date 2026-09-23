@@ -1,0 +1,28 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="slds-align_absolute-center slds-is-relative" style="height:5rem">
+            <lightning-spinner alternative-text={label.loadingText} size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+        <template if:true={hasError}>
+            <p class="slds-text-color_error">{label.errorText}</p>
+        </template>
+        <template if:false={hasError}>
+            <template if:true={hasUsages}>
+                <lightning-datatable key-field="key"
+                                    data={usagesForDatatable}
+                                    columns={columns}
+                                    sorted-by={sortedBy}
+                                    sorted-direction={sortedDirection}
+                                    onsort={handleSort}
+                                    onrowaction={handleRowAction}
+                                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template if:false={hasUsages}>
+                <p class="slds-text-color_weak">{label.noUsagesText}</p>
+            </template>
+        </template>
+    </template>
+</template>

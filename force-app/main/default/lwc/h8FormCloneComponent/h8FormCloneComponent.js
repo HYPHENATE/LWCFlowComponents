@@ -1,4 +1,4 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import flowForms from '@salesforce/apex/H8FlowFormCloneController.getFlowForms';
 import cloneFlowForm from '@salesforce/apex/H8FlowFormCloneDeployment.cloneFlowForm';
@@ -6,6 +6,8 @@ import checkDeploymentStatus from '@salesforce/apex/H8FlowFormCloneStatus.checkD
 import labels from './labels';
 
 export default class H8FormCloneComponent extends LightningElement {
+    @api initialSourceDeveloperName;
+
     isLoading = true;
     availabeFlowForms = [];
     selectedForm;
@@ -29,20 +31,41 @@ export default class H8FormCloneComponent extends LightningElement {
         }
     }
 
+    pollTimeoutId;
+
     connectedCallback(){
         this.fetchFlowForms();
+    }
+
+    disconnectedCallback(){
+        this.clearPollTimeout();
+    }
+
+    clearPollTimeout(){
+        if (this.pollTimeoutId) {
+            clearTimeout(this.pollTimeoutId);
+            this.pollTimeoutId = undefined;
+        }
     }
 
     fetchFlowForms() {
         flowForms({})
         .then((results) => {
-            let parsedResults = JSON.parse(results);
+            const parsedResults = JSON.parse(results);
             this.availabeFlowForms = parsedResults.forms;
             this.isLoading = false;
+            this.applyInitialSelection();
         })
         .catch((error) => {
             this.showToast(labels.errorGettingFormToastMessage, error?.body?.message || labels.unknownErrorToastMessage, 'error');
         });
+    }
+
+    applyInitialSelection(){
+        if (this.initialSourceDeveloperName && this.availabeFlowForms.some(form => form.developerName === this.initialSourceDeveloperName)) {
+            this.selectedForm = this.initialSourceDeveloperName;
+            this.formSelected = true;
+        }
     }
 
     handleRefresh(){
@@ -113,10 +136,11 @@ export default class H8FormCloneComponent extends LightningElement {
     }
 
     handleQueryDeploymentProcess(){
+        this.clearPollTimeout();
         const check = () => {
             if (this.isCloning) {
                 this.handleCheckDeploymentStatus();
-                setTimeout(check, 5000);
+                this.pollTimeoutId = setTimeout(check, 5000);
             }
         };
         check();
@@ -149,6 +173,7 @@ export default class H8FormCloneComponent extends LightningElement {
     }
 
     handleResetPage(){
+        this.clearPollTimeout();
         this.isLoading = true;
         this.fetchFlowForms();
         this.newFormName = undefined;

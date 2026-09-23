@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>Dedicated page for managing flow forms - browse a form's sections in order, view section validations, and open the flow for a section directly.</description>
+    <masterLabel>Hyphen8 - Flow Form Manager</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__Tab</target>
+    </targets>
+</LightningComponentBundle>

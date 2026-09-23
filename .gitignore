@@ -32,6 +32,10 @@ node_modules             # Node.js (LWC, Prettier)
 coverage/                # LWC coverage information
 .localdevserver/         # SFDX/LWC dev
 
+Skills/
+UserStories/
+Releases/
+
 
 
 .pmdCache                # pmd cache file

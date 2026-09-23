@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <description>Search/typeahead across every flow referenced by any form or section, showing where the selected flow is used. Used as the Flow Explorer tab on the Flow Form Manager page.</description>
+</LightningComponentBundle>

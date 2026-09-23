@@ -1,0 +1,18 @@
+.production-warning {
+    background-color: var(--slds-g-color-palette-red-40, #c23934);
+    border: var(--slds-g-sizing-border-2, 2px) solid var(--slds-g-color-palette-red-15, #530000);
+    color: var(--slds-g-color-surface-1, #ffffff);
+    font-weight: var(--slds-g-font-weight-7, 700);
+    font-size: 1.05rem;
+    padding: var(--slds-g-spacing-3, 0.75rem) var(--slds-g-spacing-4, 1rem);
+}
+
+.production-warning h2 {
+    color: var(--slds-g-color-surface-1, #ffffff);
+    font-weight: var(--slds-g-font-weight-7, 700);
+    text-transform: uppercase;
+}
+
+.test-mode-warning {
+    font-weight: var(--slds-g-font-weight-6, 600);
+}
