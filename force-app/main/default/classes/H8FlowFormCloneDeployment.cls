@@ -26,7 +26,7 @@ public with sharing class H8FlowFormCloneDeployment {
         getMasterLabels();
 
         H8_Flow_Form__mdt sourceForm = !Test.isRunningTest() ?[
-            SELECT Id, DeveloperName, MasterLabel, Type__c, Status__c, Validation_Flow_API_Name__c, MasterObject__c,
+            SELECT Id, DeveloperName, MasterLabel, Type__c, Status__c, Validation_Flow_API_Name__c, MasterObject__c, MasterObject__r.QualifiedApiName,
                 (SELECT DeveloperName, MasterLabel, Flow_API_Name__c, Icon_Name__c, Order__c, Use_Custom_Label__c, H8_Flow_Form__c,
                     (SELECT DeveloperName, MasterLabel, CustomErrorMessage__c, DataType__c, Disabled__c, FieldAPIName__c,
                             FlowValidationType__c, IsFlowValidation__c, Order__c, Page__c, QuestionName__c, Use_Custom_Label__c, Validation_Value__c
@@ -45,7 +45,7 @@ public with sharing class H8FlowFormCloneDeployment {
             buildCMDTValue('Type__c', sourceForm.Type__c, 'String'),
             buildCMDTValue('Status__c', sourceForm.Status__c, 'String'),
             buildCMDTValue('Validation_Flow_API_Name__c', sourceForm.Validation_Flow_API_Name__c, 'String'),
-            buildCMDTValue('MasterObject__c', sourceForm.MasterObject__c, 'String')
+            buildCMDTValue('MasterObject__c', getMasterObjectApiName(sourceForm), 'String')
         };
 
         Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
@@ -124,9 +124,22 @@ public with sharing class H8FlowFormCloneDeployment {
     }
 
     /**
+    * @description          MasterObject__c is an EntityDefinition relationship, for custom objects the field
+    *                       value returns the durable Id (01I...) which the metadata deploy rejects, so use the API name
+    * @param                sourceForm
+    * @return               String
+    **/
+    private static String getMasterObjectApiName(H8_Flow_Form__mdt sourceForm){
+        if(null != sourceForm.MasterObject__r && String.isNotBlank(sourceForm.MasterObject__r.QualifiedApiName)){
+            return sourceForm.MasterObject__r.QualifiedApiName;
+        }
+        return sourceForm.MasterObject__c;
+    }
+
+    /**
     * @description          helper to ensure the developer name is unique
-    * @param                newName 
-    * @param                originalName 
+    * @param                newName
+    * @param                originalName
     * @return               String 
     **/
     private static String getUniqueName(String newName, String originalName){

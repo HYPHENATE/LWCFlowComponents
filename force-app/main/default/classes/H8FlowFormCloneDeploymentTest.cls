@@ -43,7 +43,26 @@ public class H8FlowFormCloneDeploymentTest {
         Test.stopTest();
     }
 
-    @isTest 
+    @isTest
+    static void masterObjectEntityDefinitionTest(){
+        H8FlowFormCloneDeployment.testFormValidations = new List<H8_Flow_Form_Section_Validation__mdt>();
+        H8FlowFormCloneDeployment.testFormSections = new List<H8_Flow_Form_Section__mdt>();
+
+        H8FlowFormCloneDeployment.testForm = (H8_Flow_Form__mdt)new MockMetaManager('H8_Flow_Form__mdt')
+            .addFieldValue('MasterLabel', 'TestShareObjectKeyReferece')
+            .addFieldValue('DeveloperName', 'TestShareObjectKeyReferece')
+            .addFieldValue('Type__c', 'Application')
+            .addFieldValue('Status__c', 'ACTIVE')
+            .addEntityDefinition('MasterObject__c', 'Account')
+            .getSingleMockMetaData();
+
+        Test.startTest();
+            Id asyncJobId = H8FlowFormCloneDeployment.cloneFlowForm('TestShareObjectKeyReferece','NewForm', 'NewForm');
+            System.assertEquals(asyncJobId, UserInfo.getUserId(), 'we expect these ids to match');
+        Test.stopTest();
+    }
+
+    @isTest
     static void fullTest(){
 
         List<H8_Flow_Form_Section_Validation__mdt> testFlowSectionsValidations = new List<H8_Flow_Form_Section_Validation__mdt>();
