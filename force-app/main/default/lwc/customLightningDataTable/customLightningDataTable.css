@@ -13,3 +13,10 @@
     max-width: 100%;
     overflow-x: auto;
 }
+
+/* Room for an open picklist dropdown (SLDS dropdown max height is ~18.5rem). The negative
+   margin cancels the padding so content below the table doesn't jump while it's open. */
+.data-table-scroll-container.picklist-active {
+    padding-bottom: 19rem;
+    margin-bottom: -19rem;
+}

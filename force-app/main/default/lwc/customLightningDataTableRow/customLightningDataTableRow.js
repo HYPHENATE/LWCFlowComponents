@@ -79,6 +79,16 @@ export default class CustomLightningDataTableRow extends LightningElement {
     }));
   }
 
+  // The parent's horizontal scroll container clips the combobox dropdown, so let it know
+  // when a picklist is active and it needs to make room below the table.
+  picklistFocus() {
+    this.dispatchEvent(new CustomEvent('picklistfocus'));
+  }
+
+  picklistBlur() {
+    this.dispatchEvent(new CustomEvent('picklistblur'));
+  }
+
   deleteRow() {
     this.dispatchEvent(new CustomEvent('rowdeleted', { detail: { detail: this.recordId } }));
   }

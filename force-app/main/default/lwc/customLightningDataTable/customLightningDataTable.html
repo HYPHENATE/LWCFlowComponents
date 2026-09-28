@@ -22,7 +22,7 @@
   </template>
 
   <template if:true={allowEdit}>
-    <div class="data-table-scroll-container">
+    <div class={editTableContainerClass}>
       <table class="slds-table slds-table_cell-buffer slds-table_bordered">
         <thead>
           <tr class="slds-line-height_reset">
@@ -49,7 +49,9 @@
                 picklist-meta={picklistMeta}
                 read-only-fields={readOnlyFields}
                 onrowdeleted={handleRowDelete}
-                onrowupdated={handleRowUpdate}>
+                onrowupdated={handleRowUpdate}
+                onpicklistfocus={handlePicklistFocus}
+                onpicklistblur={handlePicklistBlur}>
             </c-custom-lightning-data-table-row>
           </template>
         </tbody>

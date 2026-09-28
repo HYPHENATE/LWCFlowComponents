@@ -6,4 +6,9 @@ This package comes with an example inactive flow associated with it, this flow i
 Installation and configuration moved to MSTeams Wiki
 
 # Apex Tools
-sf package install --package 04tQB000002Df93YAC --wait 10 --publish-wait 10
+sf package install --package {latestPackageId} --wait 10 --publish-wait 10
+
+
+sf package version create --package "Hyphen8LabsFlowComponents" --installation-key-bypass --wait 60 --target-dev-hub H8DevHub --code-coverage
+
+sf package version promote --package {{versionPackageId}} --target-dev-hub {{devHubAlias}}
