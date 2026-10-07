@@ -62,7 +62,8 @@ public without sharing class H8FlowFileUploadController {
             List<ContentVersion> contentVersionUpdates = new List<ContentVersion>();
             for(ContentVersion contentVersion:contentVersions){
                 for(H8_File_Upload_Configuration_Field__mdt fieldUpdates:childFieldUpdates){
-                    contentVersion.put(fieldUpdates.Custom_Field__r.QualifiedAPIName, fieldUpdates.Value__c);
+                    String fieldName = fieldUpdates.Custom_Field__r.QualifiedAPIName;
+                    contentVersion.put(fieldName, convertValue(fieldName, fieldUpdates.Value__c));
                 }
                 if(null != configurationRecord.OverrideFileName__c){
                     contentVersion.Title = configurationRecord.OverrideFileName__c;
@@ -70,6 +71,53 @@ public without sharing class H8FlowFileUploadController {
                 contentVersionUpdates.add(contentVersion);
             }
             update contentVersionUpdates;
+        }
+    }
+
+    /**
+    * @description                  method to convert the metadata text value into the type of the target content version field
+    * @param                        fieldName
+    * @param                        value
+    * @return                       Object
+    **/
+    private static Object convertValue(String fieldName, String value){
+        Schema.DisplayType fieldType = Schema.SObjectType.ContentVersion.fields.getMap().get(fieldName).getDescribe().getType();
+        return convertValue(fieldType, value);
+    }
+
+    /**
+    * @description                  method to convert a text value into the given field type
+    * @param                        fieldType
+    * @param                        value
+    * @return                       Object
+    **/
+    @TestVisible
+    private static Object convertValue(Schema.DisplayType fieldType, String value){
+        if(String.isBlank(value)){
+            return null;
+        }
+        switch on fieldType {
+            when BOOLEAN {
+                return Boolean.valueOf(value.trim());
+            }
+            when INTEGER {
+                return Integer.valueOf(value.trim());
+            }
+            when LONG {
+                return Long.valueOf(value.trim());
+            }
+            when DOUBLE, CURRENCY, PERCENT {
+                return Decimal.valueOf(value.trim());
+            }
+            when DATE {
+                return Date.valueOf(value.trim());
+            }
+            when DATETIME {
+                return Datetime.valueOf(value.trim());
+            }
+            when else {
+                return value;
+            }
         }
     }
 
