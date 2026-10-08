@@ -59,10 +59,24 @@ public without sharing class H8FlowFileUploadController {
     private static void fileValuesSet(){
         List<H8_File_Upload_Configuration_Field__mdt> childFieldUpdates = configurationRecord.H8_File_Upload_Configuration_Fields__r;
         if(childFieldUpdates.size() > 0){
+            Map<String, Object> fieldValues = new Map<String, Object>();
+            List<Apex_Log__c> errorLogs = new List<Apex_Log__c>();
+            for(H8_File_Upload_Configuration_Field__mdt fieldUpdates:childFieldUpdates){
+                String fieldName = fieldUpdates.Custom_Field__r.QualifiedAPIName;
+                try{
+                    fieldValues.put(fieldName, convertValue(fieldName, fieldUpdates.Value__c));
+                } catch(Exception e){
+                    errorLogs.add(ApexLogger.buildApexErrorLog('H8FlowFileUploadController', 'Error converting value \'' + fieldUpdates.Value__c + '\' for field ' + fieldName + ': ' + e.getMessage(), false));
+                }
+            }
+            if(!errorLogs.isEmpty()){
+                insert errorLogs;
+            }
+
             List<ContentVersion> contentVersionUpdates = new List<ContentVersion>();
             for(ContentVersion contentVersion:contentVersions){
-                for(H8_File_Upload_Configuration_Field__mdt fieldUpdates:childFieldUpdates){
-                    contentVersion.put(fieldUpdates.Custom_Field__r.QualifiedAPIName, fieldUpdates.Value__c);
+                for(String fieldName:fieldValues.keySet()){
+                    contentVersion.put(fieldName, fieldValues.get(fieldName));
                 }
                 if(null != configurationRecord.OverrideFileName__c){
                     contentVersion.Title = configurationRecord.OverrideFileName__c;
@@ -70,6 +84,53 @@ public without sharing class H8FlowFileUploadController {
                 contentVersionUpdates.add(contentVersion);
             }
             update contentVersionUpdates;
+        }
+    }
+
+    /**
+    * @description                  method to convert the metadata text value into the type of the target content version field
+    * @param                        fieldName
+    * @param                        value
+    * @return                       Object
+    **/
+    private static Object convertValue(String fieldName, String value){
+        Schema.DisplayType fieldType = Schema.SObjectType.ContentVersion.fields.getMap().get(fieldName).getDescribe().getType();
+        return convertValue(fieldType, value);
+    }
+
+    /**
+    * @description                  method to convert a text value into the given field type
+    * @param                        fieldType
+    * @param                        value
+    * @return                       Object
+    **/
+    @TestVisible
+    private static Object convertValue(Schema.DisplayType fieldType, String value){
+        if(String.isBlank(value)){
+            return null;
+        }
+        switch on fieldType {
+            when BOOLEAN {
+                return Boolean.valueOf(value.trim());
+            }
+            when INTEGER {
+                return Integer.valueOf(value.trim());
+            }
+            when LONG {
+                return Long.valueOf(value.trim());
+            }
+            when DOUBLE, CURRENCY, PERCENT {
+                return Decimal.valueOf(value.trim());
+            }
+            when DATE {
+                return Date.valueOf(value.trim());
+            }
+            when DATETIME {
+                return Datetime.valueOf(value.trim());
+            }
+            when else {
+                return value;
+            }
         }
     }
 

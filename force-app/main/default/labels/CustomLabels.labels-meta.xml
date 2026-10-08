@@ -65,6 +65,14 @@
         <value>Cancel</value>
     </labels>
     <labels>
+        <fullName>H8FFUCFieldConvertError</fullName>
+        <categories>CustomFlowComponents</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>H8FFUCFieldConvertError</shortDescription>
+        <value>Error converting field type: </value>
+    </labels>
+    <labels>
         <fullName>H8FFUCLoadingSpinnerLabel</fullName>
         <categories>CustomFlowComponents</categories>
         <language>en_US</language>

@@ -4,7 +4,7 @@
  * @last modified on  : 31/10/2024
  * @last modified by  : daniel@hyphen8.com
 **/
-@isTest
+@IsTest
 public class H8FlowFileUploadControllerTest {
     
     static TestRecordSource testRecordSource = new TestRecordSource();
@@ -12,7 +12,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test where no files are present
     **/
-    @isTest
+    @IsTest
     static void getFilesNoFilesPresent(){
         Test.startTest();
             String files = H8FlowFileUploadController.getExistingFiles(new List<String>());
@@ -25,7 +25,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test where files are present
     **/
-    @isTest
+    @IsTest
     static void getFilesFilesPresent(){
 
         ContentVersion contentVersion = new ContentVersion();
@@ -50,7 +50,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test where docid is present
     **/
-    @isTest
+    @IsTest
     static void deleteDocIdPresent(){
         ContentVersion contentVersion = new ContentVersion();
         contentVersion.title = 'Test';
@@ -67,7 +67,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test where wrong type of id is provided
     **/
-    @isTest
+    @IsTest
     static void deleteDocIdWrong(){
         Test.startTest();
             try {
@@ -81,7 +81,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test updating a file with no recordId or configuration
     **/
-    @isTest 
+    @IsTest 
     static void testUpdateNoRecordIdConfiguration(){
         ContentVersion contentVersion = new ContentVersion();
         contentVersion.title = 'Test';
@@ -101,7 +101,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test updating a record with a recordId and no configuration
     **/
-    @isTest 
+    @IsTest 
     static void testUpdateWithRecordIdNoConfiguration(){
         Account account = (Account)testRecordSource.getObject(Account.sObjectType) 
         .asVariant('FormValidation')
@@ -125,7 +125,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test with a record and also configuration
     **/
-    @isTest 
+    @IsTest 
     static void testUpdateWithRecordIdAndConfiguration(){
         Account account = (Account)testRecordSource.getObject(Account.sObjectType) 
         .asVariant('FormValidation')
@@ -170,7 +170,7 @@ public class H8FlowFileUploadControllerTest {
     /**
     * @description          test with no record but has configuration
     **/
-    @isTest 
+    @IsTest 
     static void testUpdateNoRecordIdWithConfiguration(){
         
         ContentVersion contentVersion = new ContentVersion();
@@ -207,5 +207,289 @@ public class H8FlowFileUploadControllerTest {
             Assert.areEqual(1, links.size(), 'we expect to have a link created');
             Assert.areEqual('Sample File', [SELECT Description FROM ContentVersion WHERE Id=:contentVersion.Id LIMIT 1].Description, 'this must match');
         Test.stopTest();
+    }
+
+    /**
+     * @description          test invalid field configuration is logged once per field and does not block valid fields
+     **/
+    @IsTest
+    static void testUpdateWithInvalidFieldConfiguration() {
+        List<ContentVersion> contentVersions = new List<ContentVersion>();
+        for (Integer i = 0; i < 2; i++) {
+            ContentVersion contentVersion = new ContentVersion();
+            contentVersion.title = 'Test' + i;
+            contentVersion.PathOnClient = 'Test' + i + '.jpg';
+            contentVersion.versionData = EncodingUtil.base64Decode('Test Content');
+            contentVersions.add(contentVersion);
+        }
+        insert contentVersions;
+
+        List<String> contentDocumentIds = new List<String>();
+        for (ContentVersion contentVersion : [
+            SELECT ContentDocumentId
+            FROM ContentVersion
+            WHERE Id IN :contentVersions
+        ]) {
+            contentDocumentIds.add(contentVersion.ContentDocumentId);
+        }
+
+        List<H8_File_Upload_Configuration_Field__mdt> childList = new List<H8_File_Upload_Configuration_Field__mdt>();
+        childList.addAll(buildConfigurationField('ValidField', 'Description', 'Sample File'));
+        childList.addAll(buildConfigurationField('MissingField', 'Does_Not_Exist__c', 'true'));
+        childList.addAll(buildConfigurationField('InvalidNumber', 'ContentSize', 'not a number'));
+
+        List<H8_File_Upload_Configuration__mdt> testRecords = (List<H8_File_Upload_Configuration__mdt>) new MockMetaManager('H8_File_Upload_Configuration__mdt')
+            .addFieldValue('MasterLabel', 'TestRecord')
+            .addFieldValue('DeveloperName', 'TestRecord')
+            .addFieldValue('ShareType__c', 'AllUsers')
+            .addFieldValue('Share_Type__c', 'I')
+            .addChildren('H8_File_Upload_Configuration_Fields__r', childList)
+            .getListMockMetaData();
+
+        H8FlowFileUploadController.testConfigurationRecord = testRecords[0];
+
+        Test.startTest();
+        H8FlowFileUploadController.updateFileData(contentDocumentIds, 'Bank_File', null);
+        Test.stopTest();
+
+        for (ContentVersion contentVersion : [
+            SELECT Description
+            FROM ContentVersion
+            WHERE Id IN :contentVersions
+        ]) {
+            Assert.areEqual(
+                'Sample File',
+                contentVersion.Description,
+                'valid field should still be set when other fields fail'
+            );
+        }
+
+        List<Apex_Log__c> logs = [SELECT Class_Name__c, Errors__c FROM Apex_Log__c];
+        Assert.areEqual(2, logs.size(), 'we expect one log per invalid field, not per file');
+        String allErrors = '';
+        for (Apex_Log__c log : logs) {
+            Assert.areEqual(
+                'H8FlowFileUploadController',
+                log.Class_Name__c,
+                'class name must be set'
+            );
+            allErrors += log.Errors__c;
+        }
+        Assert.isTrue(allErrors.contains('Does_Not_Exist__c'), 'log should name the missing field');
+        Assert.isTrue(allErrors.contains('ContentSize'), 'log should name the field with the invalid value');
+        Assert.isTrue(allErrors.contains('not a number'), 'log should include the invalid value');
+    }
+
+    /**
+     * @description          helper to build a mock file upload configuration field
+     * @param                name
+     * @param                fieldName
+     * @param                value
+     * @return               List<H8_File_Upload_Configuration_Field__mdt>
+     **/
+    private static List<H8_File_Upload_Configuration_Field__mdt> buildConfigurationField(String name, String fieldName, String value) {
+        return (List<H8_File_Upload_Configuration_Field__mdt>) new MockMetaManager('H8_File_Upload_Configuration_Field__mdt')
+            .addFieldValue('MasterLabel', name)
+            .addFieldValue('DeveloperName', name)
+            .addEntityDefinition('Content_Version_Object__c', 'ContentVersion')
+            .addFieldDefinition('Custom_Field__c', fieldName)
+            .addFieldValue('Value__c', value)
+            .addFieldValue('Id', name)
+            .getListMockMetaData();
+    }
+
+    /**
+     * @description          test conversion of text values to checkbox values
+     **/
+    @IsTest
+    static void testConvertValueBoolean() {
+        Assert.areEqual(
+            true,
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.BOOLEAN,
+                'true'
+            ),
+            'true should convert to Boolean true'
+        );
+        Assert.areEqual(
+            true,
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.BOOLEAN,
+                ' TRUE '
+            ),
+            'conversion should ignore case and whitespace'
+        );
+        Assert.areEqual(
+            false,
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.BOOLEAN,
+                'false'
+            ),
+            'false should convert to Boolean false'
+        );
+        Assert.isInstanceOfType(
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.BOOLEAN,
+                'true'
+            ),
+            Boolean.class,
+            'value must be a Boolean'
+        );
+    }
+
+    /**
+     * @description          test conversion of text values to number values
+     **/
+    @IsTest
+    static void testConvertValueNumbers() {
+        Object integerValue = H8FlowFileUploadController.convertValue(
+            Schema.DisplayType.INTEGER,
+            '42'
+        );
+        Assert.isInstanceOfType(
+            integerValue,
+            Integer.class,
+            'value must be an Integer'
+        );
+        Assert.areEqual(42, integerValue, 'integer must match');
+
+        Object longValue = H8FlowFileUploadController.convertValue(
+            Schema.DisplayType.LONG,
+            '9999999999'
+        );
+        Assert.isInstanceOfType(longValue, Long.class, 'value must be a Long');
+        Assert.areEqual(9999999999L, longValue, 'long must match');
+
+        for (
+            Schema.DisplayType decimalType : new List<Schema.DisplayType>{
+                Schema.DisplayType.DOUBLE,
+                Schema.DisplayType.CURRENCY,
+                Schema.DisplayType.PERCENT
+            }
+        ) {
+            Object decimalValue = H8FlowFileUploadController.convertValue(
+                decimalType,
+                '12.5'
+            );
+            Assert.isInstanceOfType(
+                decimalValue,
+                Decimal.class,
+                decimalType + ' value must be a Decimal'
+            );
+            Assert.areEqual(
+                12.5,
+                decimalValue,
+                decimalType + ' value must match'
+            );
+        }
+    }
+
+    /**
+     * @description          test conversion of text values to date and datetime values
+     **/
+    @IsTest
+    static void testConvertValueDates() {
+        Object dateValue = H8FlowFileUploadController.convertValue(
+            Schema.DisplayType.DATE,
+            '2026-10-07'
+        );
+        Assert.isInstanceOfType(dateValue, Date.class, 'value must be a Date');
+        Assert.areEqual(
+            Date.newInstance(2026, 10, 7),
+            dateValue,
+            'date must match'
+        );
+
+        Object datetimeValue = H8FlowFileUploadController.convertValue(
+            Schema.DisplayType.DATETIME,
+            '2026-10-07 14:30:00'
+        );
+        Assert.isInstanceOfType(
+            datetimeValue,
+            Datetime.class,
+            'value must be a Datetime'
+        );
+        Assert.areEqual(
+            Datetime.newInstance(2026, 10, 7, 14, 30, 0),
+            datetimeValue,
+            'datetime must match'
+        );
+    }
+
+    /**
+     * @description          test text and picklist values are left as strings
+     **/
+    @IsTest
+    static void testConvertValueText() {
+        for (
+            Schema.DisplayType textType : new List<Schema.DisplayType>{
+                Schema.DisplayType.STRING,
+                Schema.DisplayType.TEXTAREA,
+                Schema.DisplayType.PICKLIST
+            }
+        ) {
+            Object textValue = H8FlowFileUploadController.convertValue(
+                textType,
+                'Sample Value'
+            );
+            Assert.isInstanceOfType(
+                textValue,
+                String.class,
+                textType + ' value must be a String'
+            );
+            Assert.areEqual(
+                'Sample Value',
+                textValue,
+                textType + ' value must match'
+            );
+        }
+    }
+
+    /**
+     * @description          test blank values convert to null for any type
+     **/
+    @IsTest
+    static void testConvertValueBlank() {
+        Assert.isNull(
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.BOOLEAN,
+                ''
+            ),
+            'blank checkbox value should be null'
+        );
+        Assert.isNull(
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.DOUBLE,
+                null
+            ),
+            'null number value should be null'
+        );
+        Assert.isNull(
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.STRING,
+                '   '
+            ),
+            'whitespace text value should be null'
+        );
+    }
+
+    /**
+     * @description          test invalid values for the field type throw an exception
+     **/
+    @IsTest
+    static void testConvertValueInvalid() {
+        Boolean exceptionThrown = false;
+        try {
+            H8FlowFileUploadController.convertValue(
+                Schema.DisplayType.INTEGER,
+                'not a number'
+            );
+        } catch (TypeException e) {
+            exceptionThrown = true;
+        }
+        Assert.isTrue(
+            exceptionThrown,
+            'invalid number should throw a TypeException'
+        );
     }
 }
