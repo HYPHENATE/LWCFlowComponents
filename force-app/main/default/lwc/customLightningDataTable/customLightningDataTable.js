@@ -283,6 +283,24 @@ export default class CustomLightningDataTable extends LightningElement {
     if (this.allowEdit) this.refreshOutputs();
   }
 
+  // overflow-x: auto forces overflow-y to auto as well, so a picklist dropdown near the bottom
+  // of the table gets clipped. While a picklist is focused, give the scroll container extra room.
+  picklistActive = false;
+
+  get editTableContainerClass() {
+    return this.picklistActive
+      ? 'data-table-scroll-container picklist-active'
+      : 'data-table-scroll-container';
+  }
+
+  handlePicklistFocus() {
+    this.picklistActive = true;
+  }
+
+  handlePicklistBlur() {
+    this.picklistActive = false;
+  }
+
   handleRowUpdate(event) {
     const rowId = event.detail.recordId;
     const rowData = event.detail.rowData;
