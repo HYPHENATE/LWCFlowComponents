@@ -210,6 +210,95 @@ public class H8FlowFileUploadControllerTest {
     }
 
     /**
+     * @description          test invalid field configuration is logged once per field and does not block valid fields
+     **/
+    @IsTest
+    static void testUpdateWithInvalidFieldConfiguration() {
+        List<ContentVersion> contentVersions = new List<ContentVersion>();
+        for (Integer i = 0; i < 2; i++) {
+            ContentVersion contentVersion = new ContentVersion();
+            contentVersion.title = 'Test' + i;
+            contentVersion.PathOnClient = 'Test' + i + '.jpg';
+            contentVersion.versionData = EncodingUtil.base64Decode('Test Content');
+            contentVersions.add(contentVersion);
+        }
+        insert contentVersions;
+
+        List<String> contentDocumentIds = new List<String>();
+        for (ContentVersion contentVersion : [
+            SELECT ContentDocumentId
+            FROM ContentVersion
+            WHERE Id IN :contentVersions
+        ]) {
+            contentDocumentIds.add(contentVersion.ContentDocumentId);
+        }
+
+        List<H8_File_Upload_Configuration_Field__mdt> childList = new List<H8_File_Upload_Configuration_Field__mdt>();
+        childList.addAll(buildConfigurationField('ValidField', 'Description', 'Sample File'));
+        childList.addAll(buildConfigurationField('MissingField', 'Does_Not_Exist__c', 'true'));
+        childList.addAll(buildConfigurationField('InvalidNumber', 'ContentSize', 'not a number'));
+
+        List<H8_File_Upload_Configuration__mdt> testRecords = (List<H8_File_Upload_Configuration__mdt>) new MockMetaManager('H8_File_Upload_Configuration__mdt')
+            .addFieldValue('MasterLabel', 'TestRecord')
+            .addFieldValue('DeveloperName', 'TestRecord')
+            .addFieldValue('ShareType__c', 'AllUsers')
+            .addFieldValue('Share_Type__c', 'I')
+            .addChildren('H8_File_Upload_Configuration_Fields__r', childList)
+            .getListMockMetaData();
+
+        H8FlowFileUploadController.testConfigurationRecord = testRecords[0];
+
+        Test.startTest();
+        H8FlowFileUploadController.updateFileData(contentDocumentIds, 'Bank_File', null);
+        Test.stopTest();
+
+        for (ContentVersion contentVersion : [
+            SELECT Description
+            FROM ContentVersion
+            WHERE Id IN :contentVersions
+        ]) {
+            Assert.areEqual(
+                'Sample File',
+                contentVersion.Description,
+                'valid field should still be set when other fields fail'
+            );
+        }
+
+        List<Apex_Log__c> logs = [SELECT Class_Name__c, Errors__c FROM Apex_Log__c];
+        Assert.areEqual(2, logs.size(), 'we expect one log per invalid field, not per file');
+        String allErrors = '';
+        for (Apex_Log__c log : logs) {
+            Assert.areEqual(
+                'H8FlowFileUploadController',
+                log.Class_Name__c,
+                'class name must be set'
+            );
+            allErrors += log.Errors__c;
+        }
+        Assert.isTrue(allErrors.contains('Does_Not_Exist__c'), 'log should name the missing field');
+        Assert.isTrue(allErrors.contains('ContentSize'), 'log should name the field with the invalid value');
+        Assert.isTrue(allErrors.contains('not a number'), 'log should include the invalid value');
+    }
+
+    /**
+     * @description          helper to build a mock file upload configuration field
+     * @param                name
+     * @param                fieldName
+     * @param                value
+     * @return               List<H8_File_Upload_Configuration_Field__mdt>
+     **/
+    private static List<H8_File_Upload_Configuration_Field__mdt> buildConfigurationField(String name, String fieldName, String value) {
+        return (List<H8_File_Upload_Configuration_Field__mdt>) new MockMetaManager('H8_File_Upload_Configuration_Field__mdt')
+            .addFieldValue('MasterLabel', name)
+            .addFieldValue('DeveloperName', name)
+            .addEntityDefinition('Content_Version_Object__c', 'ContentVersion')
+            .addFieldDefinition('Custom_Field__c', fieldName)
+            .addFieldValue('Value__c', value)
+            .addFieldValue('Id', name)
+            .getListMockMetaData();
+    }
+
+    /**
      * @description          test conversion of text values to checkbox values
      **/
     @IsTest

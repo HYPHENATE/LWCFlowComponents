@@ -59,11 +59,24 @@ public without sharing class H8FlowFileUploadController {
     private static void fileValuesSet(){
         List<H8_File_Upload_Configuration_Field__mdt> childFieldUpdates = configurationRecord.H8_File_Upload_Configuration_Fields__r;
         if(childFieldUpdates.size() > 0){
+            Map<String, Object> fieldValues = new Map<String, Object>();
+            List<Apex_Log__c> errorLogs = new List<Apex_Log__c>();
+            for(H8_File_Upload_Configuration_Field__mdt fieldUpdates:childFieldUpdates){
+                String fieldName = fieldUpdates.Custom_Field__r.QualifiedAPIName;
+                try{
+                    fieldValues.put(fieldName, convertValue(fieldName, fieldUpdates.Value__c));
+                } catch(Exception e){
+                    errorLogs.add(ApexLogger.buildApexErrorLog('H8FlowFileUploadController', 'Error converting value \'' + fieldUpdates.Value__c + '\' for field ' + fieldName + ': ' + e.getMessage(), false));
+                }
+            }
+            if(!errorLogs.isEmpty()){
+                insert errorLogs;
+            }
+
             List<ContentVersion> contentVersionUpdates = new List<ContentVersion>();
             for(ContentVersion contentVersion:contentVersions){
-                for(H8_File_Upload_Configuration_Field__mdt fieldUpdates:childFieldUpdates){
-                    String fieldName = fieldUpdates.Custom_Field__r.QualifiedAPIName;
-                    contentVersion.put(fieldName, convertValue(fieldName, fieldUpdates.Value__c));
+                for(String fieldName:fieldValues.keySet()){
+                    contentVersion.put(fieldName, fieldValues.get(fieldName));
                 }
                 if(null != configurationRecord.OverrideFileName__c){
                     contentVersion.Title = configurationRecord.OverrideFileName__c;
