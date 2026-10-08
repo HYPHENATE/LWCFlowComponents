@@ -17,7 +17,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "66.0",
   "packageAliases": {
-    "Hyphen8 Apex Tools": "04tQB000000M5dlYAC",
+    "Hyphen8 Apex Tools": "04tQB000002fWQzYAM",
     "Hyphen8LabsFlowComponents": "0Ho67000000TN5qCAG",
     "Hyphen8LabsFlowComponents@1.0.0-1": "04t67000000SalGAAS",
     "Hyphen8LabsFlowComponents@1.1.0-1": "04t67000000xoEUAAY",
